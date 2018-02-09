@@ -39,4 +39,4 @@ GITHUB_TOKEN=<ADD YOUR GITHUB USER OAUTH TOKEN>
 `gatsby develop`
 
 ### Publishing
-`yarn pub
+`yarn publish`
