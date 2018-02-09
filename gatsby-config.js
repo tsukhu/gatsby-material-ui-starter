@@ -31,6 +31,8 @@ module.exports = {
           organization(login: $author) {
             description
             websiteUrl
+            avatarUrl
+            name
             repositories(first: 100, orderBy: {field: STARGAZERS , direction:DESC}) {
               totalCount
               edges {
