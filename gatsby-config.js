@@ -2,7 +2,7 @@ const dotenv = require(`dotenv`);
 dotenv.config();
 module.exports = {
   siteMetadata: {
-    title: `Pandas Eating Lots`
+    title: `ERS Technology Office`
   },
   plugins: [
     {

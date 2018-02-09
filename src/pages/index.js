@@ -14,7 +14,7 @@ export default ({ data }) => {
   const getContributors = contributors => {
     return contributors
       .map(edge => {
-        console.log(edge.node.name, edge.node.login);
+      //  console.log(edge.node.name, edge.node.login);
         return edge.node.name ? edge.node.name : edge.node.login;
       })
       .join(',');
@@ -51,7 +51,7 @@ export default ({ data }) => {
       {orgData.websiteUrl}
       <ul>
         {reposdata.map(repo => (
-          <li>
+          <li key={repo.name} >
             {repo.name} , {repo.forkCount} , {repo.stars}, {repo.contributors} ,  {repo.language.name}
           </li>
         ))}
