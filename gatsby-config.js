@@ -26,18 +26,45 @@ module.exports = {
         token: `${process.env.GITHUB_TOKEN}`,
         variables: {},
         graphQLQuery: `
-        query {
-          viewer {
-            name
-             repositories(affiliations:ORGANIZATION_MEMBER last: 50) {
-               nodes {
-                 name
-                description
-               }
-             }
-           }
+        query ($author: String="") {
+
+          organization(login: $author) {
+            description
+            websiteUrl
+            repositories(first: 100, orderBy: {field: STARGAZERS , direction:DESC}) {
+              totalCount
+              edges {
+                node {
+                  name
+                  descriptionHTML
+                  stargazers(first: 50){
+                    totalCount
+                  }
+                  forkCount
+                  isFork
+                  createdAt
+                  homepageUrl
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                  collaborators(first: 50,affiliation: DIRECT) {
+                    edges {
+                      node {
+                        name
+                        login
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }        
+        `,
+        variables: {
+          author: "ERS-HCL"
         }
-        `
       }
     }
   ]
