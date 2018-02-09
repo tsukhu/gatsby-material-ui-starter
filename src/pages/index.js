@@ -15,7 +15,7 @@ export default ({ data }) => {
     return contributors
       .map(edge => {
       //  console.log(edge.node.name, edge.node.login);
-        return edge.node.name ? edge.node.name : edge.node.login;
+        return (edge.node.name && edge.node.name.trim() !== '')? edge.node.name : edge.node.login;
       })
       .join(',');
   };
@@ -45,7 +45,27 @@ export default ({ data }) => {
       <g.H1 display={'inline-block'} borderBottom={'1px solid'}>
         GitHub Projects
       </g.H1>
-      <br />
+      <h4>
+      {data.allMarkdownRemark.totalCount} Posts
+      </h4>
+      {data.allMarkdownRemark.edges.map(({ node }) =>
+        <div key={node.id}>
+          <Link
+            to={node.fields.slug}
+            css={{ textDecoration: `none`, color: `inherit` }}
+          >
+
+            <g.H3 marginBottom={rhythm(1 / 4)}>
+              {node.frontmatter.title}{" "}
+              <g.Span color="#BBB">— {node.frontmatter.date}</g.Span>
+            </g.H3>
+            <p>
+              {node.excerpt}
+            </p>
+          </Link>
+        </div>
+      )}
+      <hr />
       {orgData.description}
       <br />
       {orgData.websiteUrl}
@@ -82,6 +102,22 @@ export default ({ data }) => {
 
 export const query = graphql`
   query IndexQuery {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+            totalCount
+            edges {
+              node {
+                id
+                frontmatter {
+                  title
+                  date(formatString: "DD MMMM, YYYY")
+                }
+                fields {
+                  slug
+                }
+                excerpt
+              }
+            }
+          }
     allGithubData {
       edges {
         node {
