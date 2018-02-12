@@ -41,7 +41,7 @@ class RepoList extends React.Component {
     });
     return (
       <div>
-        <h3>Repository count : {repositories.totalCount} </h3>
+        <h4>{repositories.totalCount} Repositories</h4>
         <table className={styles.table}>
           <tr className={styles.table}>
             <th className={styles.th}>Repository</th>
