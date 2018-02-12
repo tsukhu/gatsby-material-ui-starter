@@ -10,6 +10,7 @@ export default ({ data }) => {
         Announcements and Posts
       </g.H2>
       <BlogPosts markDown={data.allMarkdownRemark} />
+      <hr/>
       <RepoList githubData={data.allGithubData}/>
 
     </div>

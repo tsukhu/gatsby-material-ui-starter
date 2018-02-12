@@ -39,25 +39,24 @@ class RepoList extends React.Component {
         language: getPrimaryLanguage(repo.node.primaryLanguage)
       };
     });
-
     return (
       <div>
+        <h3>Repository count : {repositories.totalCount} </h3>
         <table className={styles.table}>
           <tr className={styles.table}>
             <th className={styles.th}>Repository</th>
             <th className={styles.th}>Authors</th>
             <th className={styles.th}>Language</th>
-            <th className={styles.th}>Fork Count</th>
             <th className={styles.th}>Stars</th>
+            <th className={styles.th}>Fork Count</th>
           </tr>
           {reposdata.map(repo => (
-            <tr>
-              <td className={styles.td} key={repo.name}>{repo.name}</td>
-              <td className={styles.td} key={repo.contributors}>{repo.contributors}</td>
-              <td className={styles.td} key={repo.language.name}>{repo.language.name}</td>              
-              <td className={styles.td} key={repo.forkCount}>{repo.forkCount}</td>
-              <td className={styles.td} key={repo.stars}>{repo.stars}</td>
-
+            <tr key={repo.name}>
+              <td className={styles.td} >{repo.name}</td>
+              <td className={styles.td} >{repo.contributors}</td>
+              <td className={styles.td} >{repo.language.name}</td>              
+              <td className={styles.td} >{repo.stars}</td>
+              <td className={styles.td} >{repo.forkCount}</td>
             </tr>
           ))}
         </table>
