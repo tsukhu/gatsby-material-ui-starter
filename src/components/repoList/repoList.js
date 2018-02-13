@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './repoList.module.css';
+const moment = require('moment-timezone');
+moment.tz.setDefault('UTC');
 
 class RepoList extends React.Component {
   render() {
@@ -36,27 +38,30 @@ class RepoList extends React.Component {
         forkCount: repo.node.forkCount,
         stars: repo.node.stargazers.totalCount,
         contributors: getContributors(repo.node.collaborators.edges),
-        language: getPrimaryLanguage(repo.node.primaryLanguage)
+        language: getPrimaryLanguage(repo.node.primaryLanguage),
+        updatedAt: moment(repo.node.updatedAt).format('Do MMM YYYY')
       };
     });
     return (
       <div>
-        <h4>{repositories.totalCount} Repositories</h4>
+        <h4>{repositories.totalCount} Repositories as on {moment().format('Do MMM YYYY HH:MM A z')}</h4>
         <table className={styles.table}>
           <tr className={styles.table}>
             <th className={styles.th}>Repository</th>
             <th className={styles.th}>Authors</th>
             <th className={styles.th}>Language</th>
             <th className={styles.th}>Stars</th>
-            <th className={styles.th}>Fork Count</th>
+            <th className={styles.th}>Forks</th>
+            <th className={styles.th}>Last Updated</th>
           </tr>
           {reposdata.map(repo => (
             <tr key={repo.name}>
-              <td className={styles.td} >{repo.name}</td>
-              <td className={styles.td} >{repo.contributors}</td>
-              <td className={styles.td} >{repo.language.name}</td>              
-              <td className={styles.td} >{repo.stars}</td>
-              <td className={styles.td} >{repo.forkCount}</td>
+              <td className={styles.td}>{repo.name}</td>
+              <td className={styles.td}>{repo.contributors}</td>
+              <td className={styles.td}>{repo.language.name}</td>
+              <td className={styles.td}>{repo.stars}</td>
+              <td className={styles.td}>{repo.forkCount}</td>
+              <td className={styles.td}>{repo.updatedAt}</td>
             </tr>
           ))}
         </table>

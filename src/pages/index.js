@@ -52,6 +52,7 @@ export const query = graphql`
                     forkCount
                     isFork
                     createdAt
+                    updatedAt
                     homepageUrl
                     collaborators {
                       edges {

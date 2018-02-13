@@ -45,6 +45,7 @@ module.exports = {
                   forkCount
                   isFork
                   createdAt
+                  updatedAt
                   homepageUrl
                   primaryLanguage {
                     name
