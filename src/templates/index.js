@@ -50,6 +50,7 @@ export const query = graphql`
                     updatedAt
                     pushedAt
                     homepageUrl
+                    url
                     collaborators {
                       edges {
                         node {

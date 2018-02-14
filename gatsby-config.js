@@ -48,6 +48,7 @@ module.exports = {
                   updatedAt
                   pushedAt
                   homepageUrl
+                  url
                   primaryLanguage {
                     name
                     color
