@@ -1,5 +1,5 @@
 .pagination {
-    display: inline-block;
+    display: flex;
     overflow: hidden;
     width: 100%;
     align-content: center;
@@ -11,6 +11,21 @@
 
 a {
     padding-left: 15px;
+}
+
+p {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.post {
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
+  }
+
+.post:hover {
+    background-color: rgb(237, 230, 230);
 }
 
 span {

@@ -34,16 +34,17 @@ export class BlogPosts extends Component {
          Announcements and Posts ({this.props.totalCount})
         </g.H3>
         {group.map(({ node }) => (
-          <div key={node.id}>
+          <div key={node.id}  className={styles.post}>
             <Link
               to={node.fields.slug}
               css={{ textDecoration: `none`, color: `inherit` }}
             >
-              <g.H4 marginBottom={rhythm(1 / 4)}>
+              <g.H4
+                marginBottom={rhythm(1 / 4)}>
                 {node.frontmatter.title}{' '}
                 <g.Span color="#BBB">— {node.frontmatter.date}</g.Span>
               </g.H4>
-              <p>{node.excerpt}</p>
+              <p className={styles.p}>{node.excerpt}</p>
             </Link>
           </div>
         ))}
