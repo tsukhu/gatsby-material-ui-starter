@@ -46,6 +46,7 @@ module.exports = {
                   isFork
                   createdAt
                   updatedAt
+                  pushedAt
                   homepageUrl
                   primaryLanguage {
                     name

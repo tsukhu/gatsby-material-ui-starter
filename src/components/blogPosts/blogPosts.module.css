@@ -1,0 +1,29 @@
+.pagination {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    align-content: center;
+    color: black;
+    padding: 5px 5px;
+    padding-left: 15px;
+    text-decoration: none;
+}
+
+a {
+    padding-left: 15px;
+}
+
+span {
+    padding-left: 15px;
+}
+
+.pagination Link.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination Link:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+}

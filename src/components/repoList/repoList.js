@@ -39,21 +39,24 @@ class RepoList extends React.Component {
         stars: repo.node.stargazers.totalCount,
         contributors: getContributors(repo.node.collaborators.edges),
         language: getPrimaryLanguage(repo.node.primaryLanguage),
-        updatedAt: moment(repo.node.updatedAt).format('Do MMM YYYY')
+        pushedAt: moment(repo.node.pushedAt).format('Do MMM YYYY')
       };
     });
     return (
       <div>
         <h4>{repositories.totalCount} Repositories as on {moment().format('Do MMM YYYY HH:MM A z')}</h4>
         <table className={styles.table}>
+        <thead>
           <tr className={styles.table}>
             <th className={styles.th}>Repository</th>
             <th className={styles.th}>Authors</th>
             <th className={styles.th}>Language</th>
             <th className={styles.th}>Stars</th>
             <th className={styles.th}>Forks</th>
-            <th className={styles.th}>Last Updated</th>
+            <th className={styles.th}>Last Push</th>
           </tr>
+          </thead>
+          <tbody>
           {reposdata.map(repo => (
             <tr key={repo.name}>
               <td className={styles.td}>{repo.name}</td>
@@ -61,9 +64,10 @@ class RepoList extends React.Component {
               <td className={styles.td}>{repo.language.name}</td>
               <td className={styles.td}>{repo.stars}</td>
               <td className={styles.td}>{repo.forkCount}</td>
-              <td className={styles.td}>{repo.updatedAt}</td>
+              <td className={styles.td}>{repo.pushedAt}</td>
             </tr>
           ))}
+          </tbody>
         </table>
       </div>
     );
