@@ -1,18 +1,13 @@
 import React from 'react';
-import g from 'glamorous';
 import BlogPosts from '../components/blogPosts/blogPosts';
 import RepoList from '../components/repoList/repoList';
 
-export default ({ data }) => {
+export default ({ data, pathContext }) => {
   return (
     <div>
-      <g.H2 display={'inline-block'} borderBottom={'1px solid'}>
-        Announcements and Posts
-      </g.H2>
-      <BlogPosts markDown={data.allMarkdownRemark} />
-      <hr/>
-      <RepoList githubData={data.allGithubData}/>
-
+      <BlogPosts totalCount={data.allMarkdownRemark.totalCount} pathContext={pathContext} />
+      <hr />
+      <RepoList githubData={data.allGithubData} />
     </div>
   );
 };
@@ -53,6 +48,7 @@ export const query = graphql`
                     isFork
                     createdAt
                     updatedAt
+                    pushedAt
                     homepageUrl
                     collaborators {
                       edges {
