@@ -1,5 +1,5 @@
 .project {
-  display: grid;
+  display: inline-block;
   align-content: initial;
   margin: 0 auto 0 auto;
 }
@@ -9,7 +9,6 @@
 }
 
 .description {
-  grid: 1;
   padding-left: 15px;
 }
 

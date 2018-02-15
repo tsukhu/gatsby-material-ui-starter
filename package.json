@@ -9,6 +9,7 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -r \"https://github.com/ERS-HCL/ers-hcl.github.io.git\" -d public -b master"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "dotenv": "^5.0.0",
     "gatsby": "^1.9.158",
     "gatsby-link": "^1.6.34",
@@ -19,9 +20,9 @@
     "gatsby-source-github-api": "^0.0.3",
     "gatsby-transformer-remark": "^1.7.31",
     "glamorous": "^4.11.4",
+    "material-ui": "^0.20.0",
     "moment": "^2.20.1",
     "moment-timezone": "^0.5.14",
-    "react-burger-menu": "^2.2.3",
     "react-github-fork-ribbon": "^0.5.1",
     "react-responsive": "^4.0.4",
     "react-table": "^6.7.6",
