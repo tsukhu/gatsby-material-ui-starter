@@ -25,6 +25,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             node {
               id
               frontmatter {
+                author
                 title
                 date(formatString: "DD MMMM, YYYY")
               }
