@@ -30,9 +30,9 @@ export class BlogPosts extends Component {
     const isLastPage = index == pageCount;
     return (
       <div>
-        <g.H3 display={'inline-block'} borderBottom={'1px solid'}>
+        <g.H4 display={'inline-block'} borderBottom={'1px solid'} padding={'15px 5px'} >
          Announcements and Posts ({this.props.totalCount})
-        </g.H3>
+        </g.H4>
         {group.map(({ node }) => (
           <div key={node.id}  className={styles.post}>
             <Link

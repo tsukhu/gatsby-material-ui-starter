@@ -2,7 +2,10 @@ const dotenv = require(`dotenv`);
 dotenv.config();
 module.exports = {
   siteMetadata: {
-    title: `ERS Technology Office`
+    title: `Open Source @HCL-ERS`,
+    maintainedBy: `Maintained by ERS Technology Office`,
+    poweredBy: `GatsbyJS`,
+    githubProject: `https://github.com/ERS-HCL/gatsby-demo-app`
   },
   plugins: [
     {
