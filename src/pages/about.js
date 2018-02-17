@@ -7,11 +7,9 @@ const About = props => (
     <div className={styles.description}>
       <h2 className={styles.username}>{props.data.name}</h2>
       <p className={styles.username}>{props.data.maintainedBy}</p>
-      <p className={styles.username}>Powered By: props.data.poweredBy}</p>
+      <p className={styles.username}>Powered By: {props.data.poweredBy}</p>
       <p className={styles.username}>
-        <a href={props.data.githubProject} target="_blank">
-          Github repo{' '}
-        </a>
+        <a href={props.data.githubProject} target="_blank">Github repo</a>
       </p>
       <p className={styles.excerpt}>{props.data.description}</p>
     </div>
