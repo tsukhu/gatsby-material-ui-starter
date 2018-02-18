@@ -1,13 +1,21 @@
 import React from 'react';
-import BlogPosts from '../components/blogPosts/blogPosts';
-import RepoList from '../components/repoList/repoList';
+import Home from '../components/home/home';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 
 export default ({ data, pathContext }) => {
+  const content = {
+    blogPosts: {
+      totalCount: data.allMarkdownRemark.totalCount,
+      pathContext: pathContext
+    },
+    githubData: data.allGithubData
+  };
   return (
     <div>
-      <BlogPosts totalCount={data.allMarkdownRemark.totalCount} pathContext={pathContext} />
-      <hr />
-      <RepoList githubData={data.allGithubData} />
+      <Route
+        path="/"
+        render={routeProps => <Home {...routeProps} {...content} />}
+      />
     </div>
   );
 };
