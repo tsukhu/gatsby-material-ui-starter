@@ -16,9 +16,11 @@ const withMaterialUI = ComposedComponent => {
   class HOC extends Component {
     render() {
       const muiTheme = getMuiTheme({
+        fontFamily: 'Roboto, sans-serif',
         appBar: {
-          height: 50
-        }
+          height: 50,
+        },
+
       });
       return (
         <div>

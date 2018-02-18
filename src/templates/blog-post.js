@@ -1,4 +1,5 @@
 import React from "react";
+import styles from './blog-post.module.css';
 
 export default ({ data }) => {
   const post = data.markdownRemark;
@@ -7,8 +8,8 @@ export default ({ data }) => {
     author=<h4>Author: {post.frontmatter.author}</h4>;
   }
   return (
-    <div>
-      <h1>{post.frontmatter.title}</h1>
+    <div className={styles.Post}>
+      <h3>{post.frontmatter.title}</h3>
       {author}
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
     </div>

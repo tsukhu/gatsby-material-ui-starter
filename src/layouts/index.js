@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import 'typeface-roboto';
 import React from 'react';
 import { rhythm } from '../utils/typography';
 import g from 'glamorous';

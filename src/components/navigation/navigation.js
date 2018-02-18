@@ -4,21 +4,21 @@ import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import Link from 'gatsby-link';
-import {white} from 'material-ui/styles/colors';
+import { white } from 'material-ui/styles/colors';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 
 const style = {
-    paper: {
-      display: 'inline-block',
-      float: 'left',
-      margin: '16px 32px 16px 0',
-    },
-    rightIcon: {
-      textAlign: 'center',
-      lineHeight: '24px',
-    },
-  };
+  paper: {
+    display: 'inline-block',
+    float: 'left',
+    margin: '16px 32px 16px 0'
+  },
+  rightIcon: {
+    textAlign: 'center',
+    lineHeight: '24px'
+  }
+};
 class Navigation extends Component {
   state = {
     open: false
@@ -31,12 +31,13 @@ class Navigation extends Component {
     return (
       <div>
         <AppBar
+          style={{ color: white, fontSize: '14px' }}
           title={this.props.title}
           onLeftIconButtonClick={this.handleToggle}
           iconElementRight={
             <MenuItem
-              primaryText="About"
-              style={{color: white}}
+              primaryText="ABOUT"
+              style={{ color: white, fontSize: '14px' }}
               containerElement={<Link to="/about/" />}
             />
           }
@@ -47,19 +48,18 @@ class Navigation extends Component {
           open={this.state.open}
           onRequestChange={open => this.setState({ open })}
         >
-
-          <MenuItem 
-          onClick={this.handleClose} 
-          primaryText="Home"  
-          leftIcon={<ActionHome />}
-          containerElement={<Link to="/" />}/>
-          <MenuItem 
-          primaryText="About" 
-          onClick={this.handleClose}
-          leftIcon={<ActionInfo />}
-          containerElement={<Link to="/about/" />}
+          <MenuItem
+            onClick={this.handleClose}
+            primaryText="Home"
+            leftIcon={<ActionHome />}
+            containerElement={<Link to="/" />}
           />
-
+          <MenuItem
+            primaryText="About"
+            onClick={this.handleClose}
+            leftIcon={<ActionInfo />}
+            containerElement={<Link to="/about/" />}
+          />
         </Drawer>
       </div>
     );
