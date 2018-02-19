@@ -21,12 +21,13 @@ One of the challenges we face is to get a view of the open source contributions 
     2 Make sure to have these with the extension .md
     3 See the existing samples for details about the expected format. 
         * Primarily we expect a 'title' property.
-        * Also the first paragrah is used as a short discription of the post.
+        * Also the first paragraph is used as a short discription of the post.
 
 ### Future additions (in Progress)
 
 * Kanban data from the organization projects
 * Each repository specific detailed page
+* Excel source based separate pages
 
 ## Configurataion
 
@@ -47,4 +48,4 @@ GITHUB_TOKEN=<ADD YOUR GITHUB USER OAUTH TOKEN>
 
 ### Publishing
 
-`yarn publish`
+`npm publish`

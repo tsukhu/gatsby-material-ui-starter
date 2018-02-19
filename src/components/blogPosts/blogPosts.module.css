@@ -9,6 +9,20 @@
     text-decoration: none;
 }
 
+.H4 {
+    display: 'inline-block';
+    border-bottom: 1px solid;
+    padding: 15px 5px;
+}
+
+.Margin {
+    margin-bottom: auto;
+}
+
+.PostSpan {
+    color: #BBB
+}
+
 a {
     padding-left: 15px;
 }
