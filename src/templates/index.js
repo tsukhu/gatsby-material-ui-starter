@@ -8,7 +8,8 @@ export default ({ data, pathContext }) => {
       totalCount: data.allMarkdownRemark.totalCount,
       pathContext: pathContext
     },
-    githubData: data.allGithubData
+    githubData: data.allGithubData,
+    buildTime: data.site.buildTime
   };
   return (
     <div>
@@ -22,6 +23,9 @@ export default ({ data, pathContext }) => {
 
 export const query = graphql`
   query IndexQuery {
+    site {
+      buildTime
+    }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
       totalCount
       edges {

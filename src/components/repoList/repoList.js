@@ -98,7 +98,7 @@ class RepoList extends React.Component {
       <div>
         <h4>
           {repositories.totalCount} Repositories as on{' '}
-          {moment().format('Do MMM YYYY HH:MM A z')}
+          {moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z')}
         </h4>
         <ReactTable
           data={reposdata}

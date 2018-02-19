@@ -11,7 +11,7 @@ class Home extends Component {
           pathContext={this.props.blogPosts.pathContext}
         />
         <hr />
-        <RepoList githubData={this.props.githubData} />
+        <RepoList githubData={this.props.githubData} buildTime={this.props.buildTime}/>
       </div>
     );
   }
