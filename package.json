@@ -6,7 +6,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "deploy": "gatsby build --prefix-paths && gh-pages -r \"https://github.com/ERS-HCL/ers-hcl.github.io.git\" -d public -b master"
+    "deploy": "gatsby build --prefix-paths && gh-pages -r \"https://${GITHUB_TOKEN}@github.com/ERS-HCL/ers-hcl.github.io.git\" -d public -b master"
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
