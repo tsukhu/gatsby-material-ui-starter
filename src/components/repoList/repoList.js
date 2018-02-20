@@ -4,12 +4,14 @@ import ReactTable from 'react-table';
 import Chip from 'material-ui/Chip';
 import BlockContainer from '../blockContainer/blockContainer';
 import 'react-table/react-table.css';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 const moment = require('moment-timezone');
 moment.tz.setDefault('UTC');
 const chipStyles = {
   chip: {
-    margin: 4,
+    margin: 4
   },
   wrapper: {
     display: 'flex',
@@ -18,29 +20,32 @@ const chipStyles = {
 };
 
 const Project = props => {
-  console.log(props.topics);
-  const chips = (props.topics)?props.topics.map( topic => {
-    return <Chip style={chipStyles.chip}>{topic}</Chip>
-  }):null;
-  console.log(chips);
+  const chips = props.topics
+    ? props.topics.map(topic => {
+        return <Chip style={chipStyles.chip} key={topic}>{topic}</Chip>;
+      })
+    : null;
   return (
-  <div className={styles.project}>
-    <h5 className={styles.name}>
-      <a href={props.url} target="_blank">
-        {props.name}
-      </a>
-      <div style={chipStyles.wrapper}>
-        {chips}
-      </div>
-    </h5>
-    <div className={styles.description}>
-      <p
-        className={styles.excerpt}
-        dangerouslySetInnerHTML={{ __html: props.excerpt }}
+    <Card>
+      <CardHeader
+        title={props.name}
+        subtitle={(props.license)?props.license:''}
       />
-    </div>
-  </div>
-)
+      <CardText>
+        <div style={chipStyles.wrapper}>{chips}</div>
+        <p dangerouslySetInnerHTML={{ __html: props.excerpt }}
+         />
+      </CardText>
+      <CardActions>
+        <FlatButton
+          href={props.url}
+          target="_blank"
+          label="GitHub Link"
+          secondary={true}
+        />
+      </CardActions>
+    </Card>
+  );
 };
 
 class RepoList extends React.Component {
@@ -121,10 +126,10 @@ class RepoList extends React.Component {
         descriptionHTML: repo.node.descriptionHTML,
         homepageUrl: repo.node.homepageUrl,
         url: repo.node.url,
-        topics: getTopics(repo.node.repositoryTopics.edges)
+        topics: getTopics(repo.node.repositoryTopics.edges),
+        license: repo.node.license
       };
     });
-    console.log(reposdata);
     return (
       <div>
         <h4>
@@ -136,7 +141,6 @@ class RepoList extends React.Component {
           columns={columns}
           defaultPageSize={20}
           SubComponent={row => {
-            console.log(row);
             return (
               <BlockContainer>
                 <Project
@@ -145,6 +149,8 @@ class RepoList extends React.Component {
                   avatar=""
                   excerpt={row.original.descriptionHTML}
                   topics={row.original.topics}
+                  language={row.original.language}
+                  license={row.original.license}
                 />
               </BlockContainer>
             );

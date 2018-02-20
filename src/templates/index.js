@@ -56,6 +56,7 @@ export const query = graphql`
                   node {
                     name
                     descriptionHTML
+                    license
                     forkCount
                     isFork
                     createdAt

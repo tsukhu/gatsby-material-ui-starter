@@ -42,6 +42,7 @@ module.exports = {
                 node {
                   name
                   descriptionHTML
+                  license
                   stargazers(first: 50){
                     totalCount
                   }
