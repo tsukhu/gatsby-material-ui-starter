@@ -1,5 +1,9 @@
 # gatsby-demo-app
 
+[![Build Status](https://travis-ci.org/ERS-HCL/gatsby-demo-app.svg?branch=master)](https://travis-ci.org/ERS-HCL/gatsby-demo-app)
+
+---
+
 This is a Gatsby Demo App that will be used to create a static web app to report the github organization , users and project details and statistics.
 
 ## Overall Objective
