@@ -45,6 +45,15 @@ module.exports = {
                   stargazers(first: 50){
                     totalCount
                   }
+                  repositoryTopics(first:20){
+                    edges{
+                      node{
+                        topic {
+                          name
+                        }
+                      }
+                    }
+                  }
                   forkCount
                   isFork
                   createdAt

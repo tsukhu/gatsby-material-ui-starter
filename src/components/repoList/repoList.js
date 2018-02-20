@@ -1,22 +1,47 @@
 import React from 'react';
 import styles from './repoList.module.css';
 import ReactTable from 'react-table';
+import Chip from 'material-ui/Chip';
 import BlockContainer from '../blockContainer/blockContainer';
 import 'react-table/react-table.css';
 
 const moment = require('moment-timezone');
 moment.tz.setDefault('UTC');
+const chipStyles = {
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  }
+};
 
-const Project = props => (
+const Project = props => {
+  console.log(props.topics);
+  const chips = (props.topics)?props.topics.map( topic => {
+    return <Chip style={chipStyles.chip}>{topic}</Chip>
+  }):null;
+  console.log(chips);
+  return (
   <div className={styles.project}>
-  <h5 className={styles.name}><a href={props.url} target="_blank" >{props.name}</a></h5>
+    <h5 className={styles.name}>
+      <a href={props.url} target="_blank">
+        {props.name}
+      </a>
+      <div style={chipStyles.wrapper}>
+        {chips}
+      </div>
+    </h5>
     <div className={styles.description}>
-      <p className={styles.excerpt}>
-        <div dangerouslySetInnerHTML={{ __html: props.excerpt }} />
-      </p>
+      <p
+        className={styles.excerpt}
+        dangerouslySetInnerHTML={{ __html: props.excerpt }}
+      />
     </div>
   </div>
-);
+)
+};
 
 class RepoList extends React.Component {
   render() {
@@ -59,6 +84,11 @@ class RepoList extends React.Component {
       websiteUrl: org.websiteUrl
     };
     const repositories = org.repositories;
+    const getTopics = edges => {
+      return edges.map(edge => {
+        return edge.node.topic.name;
+      });
+    };
     const getContributors = contributors => {
       return contributors
         .map(edge => {
@@ -90,10 +120,11 @@ class RepoList extends React.Component {
         pushedAt: moment(repo.node.pushedAt).format('Do MMM YYYY'),
         descriptionHTML: repo.node.descriptionHTML,
         homepageUrl: repo.node.homepageUrl,
-        url: repo.node.url
+        url: repo.node.url,
+        topics: getTopics(repo.node.repositoryTopics.edges)
       };
     });
-
+    console.log(reposdata);
     return (
       <div>
         <h4>
@@ -113,6 +144,7 @@ class RepoList extends React.Component {
                   url={row.original.url}
                   avatar=""
                   excerpt={row.original.descriptionHTML}
+                  topics={row.original.topics}
                 />
               </BlockContainer>
             );

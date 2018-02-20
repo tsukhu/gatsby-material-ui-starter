@@ -63,6 +63,15 @@ export const query = graphql`
                     pushedAt
                     homepageUrl
                     url
+                    repositoryTopics {
+                      edges {
+                        node {
+                          topic {
+                            name
+                          }
+                        }
+                      }
+                    }
                     collaborators {
                       edges {
                         node {
