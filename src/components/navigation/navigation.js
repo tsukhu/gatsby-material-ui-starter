@@ -7,6 +7,7 @@ import Link from 'gatsby-link';
 import { white } from 'material-ui/styles/colors';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionInfo from 'material-ui/svg-icons/action/info';
+import ActionAccountBox from 'material-ui/svg-icons/action/account-box';
 
 const style = {
   paper: {
@@ -57,7 +58,7 @@ class Navigation extends Component {
           <MenuItem
             primaryText="Projects"
             onClick={this.handleClose}
-            leftIcon={<ActionInfo />}
+            leftIcon={<ActionAccountBox />}
             containerElement={<Link to="/projects/" />}
           />
           <MenuItem
