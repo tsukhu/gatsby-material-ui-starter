@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
-// import g from 'glamorous';
 import Link from 'gatsby-link';
-// import { rhythm } from '../../utils/typography';
 import styles from './blogPosts.module.css';
-
-const NavLink = props => {
-  if (!props.test) {
-    return (
-      <Link
-        to={props.url}
-        activeStyle={{
-          color: 'red'
-        }}
-      >
-        {props.text}
-      </Link>
-    );
-  } else {
-    return <span>{props.text}</span>;
-  }
-};
+import PostPagination from './postPagination/postPagination';
+import PostHeader from './postHeader/postHeader';
 
 export class BlogPosts extends Component {
   render() {
@@ -30,9 +13,9 @@ export class BlogPosts extends Component {
     const isLastPage = index == pageCount;
     return (
       <div>
-        <h4 className={styles.H4}>
-         Announcements and Posts ({this.props.totalCount})
-        </h4>
+        <PostHeader
+          totalCount={this.props.totalCount}
+        />
         {group.map(({ node }) => (
           <div key={node.id}  className={styles.post}>
             <Link
@@ -48,13 +31,14 @@ export class BlogPosts extends Component {
             </Link>
           </div>
         ))}
-        <div className={styles.pagination}>
-          <small>
-            Page {index}/{pageCount}
-            <NavLink test={isFirstPage} url={previousUrl} text="<<" />
-            <NavLink test={isLastPage} url={nextUrl} text=">>" />
-          </small>
-        </div>
+        <PostPagination 
+          index={index}
+          pageCount={pageCount}
+          isFirstPage={isFirstPage}
+          isLastPage={isLastPage}
+          nextUrl={nextUrl}
+          previousUrl={previousUrl}
+        />
       </div>
     );
   }
