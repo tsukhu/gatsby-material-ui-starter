@@ -4,6 +4,7 @@ import ReactTable from 'react-table';
 import BlockContainer from '../blockContainer/blockContainer';
 import 'react-table/react-table.css';
 import ProjectCard from '../projectCard/projectCard';
+import PageHeader from '../pageHeader/pageHeader';
 
 const moment = require('moment-timezone');
 moment.tz.setDefault('UTC');
@@ -90,12 +91,12 @@ class RepoList extends React.Component {
         license: repo.node.license
       };
     });
+    const pageHeader=+repositories.totalCount + ' Repositories as on ' +  moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z');
     return (
       <div>
-        <h4>
-          {repositories.totalCount} Repositories as on{' '}
-          {moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z')}
-        </h4>
+        <PageHeader
+          text={pageHeader}
+        />
         <ReactTable
           data={reposdata}
           columns={columns}

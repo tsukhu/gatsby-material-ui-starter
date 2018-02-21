@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import styles from './blogPosts.module.css';
 import PostPagination from './postPagination/postPagination';
-import PostHeader from './postHeader/postHeader';
+import PageHeader from '../pageHeader/pageHeader';
 
 export class BlogPosts extends Component {
   render() {
@@ -11,10 +11,11 @@ export class BlogPosts extends Component {
     const nextUrl = (index + 1).toString();
     const isFirstPage = index - 1 === 0;
     const isLastPage = index == pageCount;
+    const pageHeader = 'Announcements and Posts ' + '(' + this.props.totalCount + ')';
     return (
       <div>
-        <PostHeader
-          totalCount={this.props.totalCount}
+        <PageHeader
+          text={pageHeader}
         />
         {group.map(({ node }) => (
           <div key={node.id}  className={styles.post}>
