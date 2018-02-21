@@ -1,52 +1,12 @@
 import React from 'react';
 import styles from './repoList.module.css';
 import ReactTable from 'react-table';
-import Chip from 'material-ui/Chip';
 import BlockContainer from '../blockContainer/blockContainer';
 import 'react-table/react-table.css';
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import ProjectCard from '../projectCard/projectCard';
 
 const moment = require('moment-timezone');
 moment.tz.setDefault('UTC');
-const chipStyles = {
-  chip: {
-    margin: 4
-  },
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-};
-
-const Project = props => {
-  const chips = props.topics
-    ? props.topics.map(topic => {
-        return <Chip style={chipStyles.chip} key={topic}>{topic}</Chip>;
-      })
-    : null;
-  return (
-    <Card>
-      <CardHeader
-        title={props.name}
-        subtitle={(props.license)?props.license:''}
-      />
-      <CardText>
-        <div style={chipStyles.wrapper}>{chips}</div>
-        <p dangerouslySetInnerHTML={{ __html: props.excerpt }}
-         />
-      </CardText>
-      <CardActions>
-        <FlatButton
-          href={props.url}
-          target="_blank"
-          label="GitHub Link"
-          secondary={true}
-        />
-      </CardActions>
-    </Card>
-  );
-};
 
 class RepoList extends React.Component {
   render() {
@@ -143,7 +103,7 @@ class RepoList extends React.Component {
           SubComponent={row => {
             return (
               <BlockContainer>
-                <Project
+                <ProjectCard
                   name={row.original.name}
                   url={row.original.url}
                   avatar=""
