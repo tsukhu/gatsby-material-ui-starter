@@ -7,6 +7,8 @@ import { Toolbar, ToolbarGroup ,ToolbarTitle } from 'material-ui/Toolbar';
 
 const PostPagination = (props) => {
     const pageInfo= 'Page ' +props.index + '/' + +props.pageCount;
+    const firstElement = (!props.isFirstPage)?<Link to={props.previousUrl}/>:<Link to='/'/>;
+    const nextElement = (!props.isLastPage)?<Link to={props.nextUrl}/>:<Link to={+props.pageCount}/>;
     return (
             <Toolbar>
                 <ToolbarTitle text={pageInfo}/>
@@ -16,14 +18,14 @@ const PostPagination = (props) => {
                     label="Prev" 
                     icon={<ChevronLeft />}
                     disabled={props.isFirstPage}
-                    containerElement={<Link to={props.previousUrl}/>}/>
+                    containerElement={firstElement}/>
                 <FlatButton
                     primary key="next" 
                     label="Next" 
                     icon={<ChevronRight />} 
                     labelPosition="before"
                     disabled={props.isLastPage}
-                    containerElement={<Link to={props.nextUrl}/>}/>
+                    containerElement={nextElement}/>
                 </ToolbarGroup>
             </Toolbar>
     );
