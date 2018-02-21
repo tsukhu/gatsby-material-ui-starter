@@ -36,9 +36,9 @@ class Navigation extends Component {
           onLeftIconButtonClick={this.handleToggle}
           iconElementRight={
             <MenuItem
-              primaryText="ABOUT"
+              primaryText="PROJECTS"
               style={{ color: white, fontSize: '14px' }}
-              containerElement={<Link to="/about/" />}
+              containerElement={<Link to="/projects/" />}
             />
           }
         />
@@ -53,6 +53,12 @@ class Navigation extends Component {
             primaryText="Home"
             leftIcon={<ActionHome />}
             containerElement={<Link to="/" />}
+          />
+          <MenuItem
+            primaryText="Projects"
+            onClick={this.handleClose}
+            leftIcon={<ActionInfo />}
+            containerElement={<Link to="/projects/" />}
           />
           <MenuItem
             primaryText="About"

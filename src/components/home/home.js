@@ -10,8 +10,8 @@ class Home extends Component {
           totalCount={this.props.blogPosts.totalCount}
           pathContext={this.props.blogPosts.pathContext}
         />
-        <hr />
-        <RepoList githubData={this.props.githubData} buildTime={this.props.buildTime}/>
+        {/* <hr />
+        <RepoList githubData={this.props.githubData} buildTime={this.props.buildTime}/> */}
       </div>
     );
   }
