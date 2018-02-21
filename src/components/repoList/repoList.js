@@ -122,7 +122,7 @@ class RepoList extends React.Component {
         stars: repo.node.stargazers.totalCount,
         contributors: getContributors(repo.node.collaborators.edges),
         language: getPrimaryLanguage(repo.node.primaryLanguage),
-        pushedAt: moment(repo.node.pushedAt).format('Do MMM YYYY'),
+        pushedAt: moment(repo.node.pushedAt).from(this.props.buildTime),
         descriptionHTML: repo.node.descriptionHTML,
         homepageUrl: repo.node.homepageUrl,
         url: repo.node.url,
