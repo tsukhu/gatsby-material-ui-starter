@@ -23,8 +23,23 @@ class RepoList extends React.Component {
       {
         id: 'LanguageName',
         Header: 'Language',
-        maxWidth: 120,
-        accessor: d => d.language.name // Custom value accessors!
+        maxWidth: 170,
+        accessor: d => d.language.name, // Custom value accessors!
+        Cell: row => {
+          return (
+            <span>
+              <span
+                style={{
+                  color: row.original.language.color,
+                  transition: 'all .3s ease'
+                }}
+              >
+                &#x25cf;
+              </span>{' '}
+              {row.original.language.name}
+            </span>
+          );
+        }
       },
       {
         Header: 'Stars',
@@ -91,14 +106,23 @@ class RepoList extends React.Component {
         license: repo.node.license
       };
     });
-    const pageHeader=+repositories.totalCount + ' Repositories as on ' +  moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z');
+    const pageHeader =
+      +repositories.totalCount +
+      ' Repositories as on ' +
+      moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z');
     return (
       <div>
-        <PageHeader
-          text={pageHeader}
-        />
+        <PageHeader text={pageHeader} />
         <ReactTable
+          getTheadThProps={(state, rowInfo, column) => {
+            return {
+              style: {
+                fontWeight: 'bold'
+              }
+            };
+          }}
           data={reposdata}
+          className="-striped -highlight"
           columns={columns}
           defaultPageSize={20}
           SubComponent={row => {
