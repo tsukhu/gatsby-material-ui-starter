@@ -8,6 +8,7 @@ import { white } from 'material-ui/styles/colors';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import ActionAccountBox from 'material-ui/svg-icons/action/account-box';
+import ActionBookmark from 'material-ui/svg-icons/action/bookmark';
 
 const style = {
   paper: {
@@ -61,6 +62,12 @@ class Navigation extends Component {
             leftIcon={<ActionAccountBox />}
             containerElement={<Link to="/projects/" />}
           />
+          <MenuItem
+            primaryText="Publications"
+            onClick={this.handleClose}
+            leftIcon={<ActionBookmark />}
+            containerElement={<Link to="/publications/" />}
+          />          
           <MenuItem
             primaryText="About"
             onClick={this.handleClose}
