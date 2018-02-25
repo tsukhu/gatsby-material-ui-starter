@@ -9,7 +9,8 @@ const chipStyles = {
     },
     wrapper: {
       display: 'flex',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
+      paddingBottom: '5px',
     }
   };
   

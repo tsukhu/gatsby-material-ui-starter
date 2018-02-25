@@ -14,10 +14,10 @@ class Publications extends React.Component {
         Header: 'Title',
         accessor: 'title' //d => d.name
       },
-      {
-        Header: 'URL',
-        accessor: 'url' // String-based value accessors!
-      },
+      // {
+      //   Header: 'URL',
+      //   accessor: 'url' // String-based value accessors!
+      // },
       {
         Header: 'Author',
         accessor: 'author' // String-based value accessors!
@@ -115,46 +115,6 @@ class Publications extends React.Component {
           }}
         />
       </div>
-
-      // <div>
-      //   <table>
-      //     <thead>
-      //       <tr>
-      //         <th colSpan="2">Publications and Events</th>
-      //       </tr>
-      //       <tr>
-      //         <th>Title</th>
-      //         <th>URL</th>
-      //         <th>Author</th>
-      //         <th>Team</th>
-      //         <th>Domain</th>
-      //         <th>Category</th>
-      //         <th>Forum</th>
-      //         <th>PublishDate</th>
-      //         <th>Likes</th>
-      //         <th>Views</th>
-      //         <th>Comments</th>
-      //       </tr>
-      //     </thead>
-      //     <tbody>
-      //       {data1.map((row, i) => (
-      //         <tr key={`${row.node.id} ${i}`}>
-      //           <td>{row.node.Title}</td>
-      //           <td>{row.node.URL}</td>
-      //           <td>{row.node.Author}</td>
-      //           <td>{row.node.Team}</td>
-      //           <td>{row.node.Area}</td>
-      //           <td>{row.node.Category}</td>
-      //           <td>{row.node.Forum}</td>
-      //           <td>{row.node.PublishDate}</td>
-      //           <td>{row.node.Likes}</td>
-      //           <td>{row.node.Views}</td>
-      //           <td>{row.node.Comments}</td>
-      //         </tr>
-      //       ))}
-      //     </tbody>
-      //   </table>
-      // </div>
     );
   }
 }
