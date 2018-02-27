@@ -22,7 +22,7 @@ const AboutCard = props => {
         />
         <CardText>
           <p>Powered by: {props.data.poweredBy}</p>
-          <p>{props.data.description}></p>
+          <p>{props.data.description}</p>
         </CardText>
         <CardActions>
           <FlatButton
