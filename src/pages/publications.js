@@ -44,7 +44,9 @@ class Publications extends React.Component {
       },
       {
         Header: 'Published On',
-        accessor: 'publishedOn' // String-based value accessors!
+        accessor: 'publishedOn', // String-based value accessors!
+        sort: 'desc',
+        Cell: props => <span>{moment.utc(props.value).format('DD-MM-YYYY')}</span>
       },
       {
         Header: 'Likes',
@@ -76,7 +78,7 @@ class Publications extends React.Component {
           team: repo.node.Team,
           domain: repo.node.Area,
           excerpt: repo.node.Excerpt,
-          publishedOn: moment(repo.node.PublishedOn).format('MM-DD-YYYY'),
+          publishedOn: repo.node.PublishedOn,
           likes: repo.node.Likes,
           views: repo.node.Views,
           comments: repo.node.Comments
