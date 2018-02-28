@@ -24,7 +24,8 @@ class Publications extends React.Component {
       },
       {
         Header: 'Team',
-        accessor: 'team' // String-based value accessors!
+        accessor: 'team', // String-based value accessors!
+        maxWidth: 80
       },
       {
         Header: 'Domain',
@@ -46,18 +47,19 @@ class Publications extends React.Component {
         Header: 'Published On',
         accessor: 'publishedOn', // String-based value accessors!
         sort: 'desc',
+        minWidth: 120,
         Cell: props => <span>{moment.utc(props.value).format('DD-MM-YYYY')}</span>
       },
       {
         Header: 'Likes',
         accessor: 'likes', // String-based value accessors!
-        maxWidth: 80,
+        maxWidth: 90,
         Cell: props => <span className="number">{props.value}</span> // Custom cell components!
       },
       {
         Header: 'Views',
         accessor: 'views', // String-based value accessors!
-        maxWidth: 80,
+        maxWidth: 90,
         Cell: props => <span className="number">{props.value}</span> // Custom cell components!
       },
       {

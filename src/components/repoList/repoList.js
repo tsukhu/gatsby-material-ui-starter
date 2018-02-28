@@ -11,6 +11,7 @@ moment.tz.setDefault('UTC');
 
 class RepoList extends React.Component {
   render() {
+    const buildTime = this.props.buildTime;
     const columns = [
       {
         Header: 'Repository',
@@ -56,7 +57,8 @@ class RepoList extends React.Component {
       {
         Header: 'Last Push',
         maxWidth: 120,
-        accessor: 'pushedAt' // String-based value accessors!
+        accessor: 'pushedAt', // String-based value accessors!
+        Cell: props => <span>{moment.utc(props.value).from(buildTime)}</span>
       }
     ];
     const org = this.props.githubData.edges[0].node.data.organization;
@@ -98,7 +100,7 @@ class RepoList extends React.Component {
         stars: repo.node.stargazers.totalCount,
         contributors: getContributors(repo.node.collaborators.edges),
         language: getPrimaryLanguage(repo.node.primaryLanguage),
-        pushedAt: moment(repo.node.pushedAt).from(this.props.buildTime),
+        pushedAt: repo.node.pushedAt,
         descriptionHTML: repo.node.descriptionHTML,
         homepageUrl: repo.node.homepageUrl,
         url: repo.node.url,
