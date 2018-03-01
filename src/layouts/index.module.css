@@ -4,3 +4,23 @@
   padding: 2px;
   padding-top: 1px;
 }
+
+/* on both */
+html,
+body {
+  overflow-x: hidden;
+}
+body {
+  background: #f8f8f8;
+}
+section {
+  box-sizing: border-box; /* or not */
+  margin: 0 auto;
+  max-width: 960px;
+  background: white;
+  padding: 0.25px;
+  padding-top: 0.25px;
+  -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}

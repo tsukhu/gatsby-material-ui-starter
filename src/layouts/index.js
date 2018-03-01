@@ -7,13 +7,15 @@ import React from 'react';
 import withMui from '../components/withMUI/withMUI';
 import Navigation from '../components/navigation/navigation';
 import Ribbon from '../components/ribbon/ribbon';
-import styles from './index.module.css'
+import styles from './index.module.css';
 const Index = ({ children, data }) => {
   return (
-    <div className={styles.Layout}    >
-      <Navigation title={data.site.siteMetadata.title} />
-      <Ribbon />
-      {children()}
+    <div className={styles.body}>
+      <section>
+        <Navigation title={data.site.siteMetadata.title} />
+        <Ribbon />
+        {children()}
+      </section>
     </div>
   );
 };
