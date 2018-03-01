@@ -3,6 +3,7 @@ import Link from 'gatsby-link';
 import styles from './blogPosts.module.css';
 import PostPagination from './postPagination/postPagination';
 import PageHeader from '../pageHeader/pageHeader';
+import SimpleCard from '../simpleCard/simpleCard';
 
 export class BlogPosts extends Component {
   render() {
@@ -19,7 +20,13 @@ export class BlogPosts extends Component {
         />
         {group.map(({ node }) => (
           <div key={node.id}  className={styles.post}>
-            <Link
+          <SimpleCard 
+            date={node.frontmatter.date}
+            excerpt={node.excerpt}
+            title={node.frontmatter.title}
+            url={node.fields.slug}
+          />
+            {/* <Link
               to={node.fields.slug}
               css={{ textDecoration: `none`, color: `inherit` }}
             >
@@ -29,7 +36,7 @@ export class BlogPosts extends Component {
                 <span className={styles.PostSpan} color="#BBB">— {node.frontmatter.date}</span>
               </h4>
               <p className={styles.p}>{node.excerpt}</p>
-            </Link>
+            </Link> */}
           </div>
         ))}
         <PostPagination 

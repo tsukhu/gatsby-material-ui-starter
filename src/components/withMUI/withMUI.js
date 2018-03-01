@@ -5,6 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import injectTabEventPlugin from 'react-tap-event-plugin';
 import {white} from 'material-ui/styles/colors';
+import { Small } from 'glamorous';
 
 try {
   injectTabEventPlugin();
@@ -20,7 +21,10 @@ const withMaterialUI = ComposedComponent => {
         appBar: {
           height: 50,
         },
-
+        toolbar: {
+          titleFontSize: 'small',
+          height: 40
+        }
       });
       return (
         <div>

@@ -87,7 +87,7 @@ class Publications extends React.Component {
         };
       }
     );
-    const pageHeader = +totalCount + ' Publications & Events';
+    const pageHeader = 'Publications & Events '+ '(' + +totalCount + ')';
     return (
       <div>
         <PageHeader text={pageHeader} />
