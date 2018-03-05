@@ -1,6 +1,6 @@
 .Layout {
   margin: 0 auto;
-  max-width: 960px;
+  max-width: 1024px;
   padding: 2px;
   padding-top: 1px;
 }
@@ -11,12 +11,13 @@ body {
   overflow-x: hidden;
 }
 body {
-  background: #f8f8f8;
+  background: url('../assets/images/background.png');
+  background-size: cover;
 }
 section {
   box-sizing: border-box; /* or not */
   margin: 0 auto;
-  max-width: 960px;
+  max-width: 1024px;
   background: white;
   padding: 0.25px;
   padding-top: 0.25px;
