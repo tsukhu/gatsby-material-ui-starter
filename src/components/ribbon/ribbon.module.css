@@ -1,0 +1,58 @@
+/**
+ * Demo Code
+ * Courtesy : https://github.com/tholman/github-corners/blob/master/css/styles.css
+  * Author: Tim Holman
+ */
+
+.githubCorner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(-25deg);
+  }
+
+  40% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(-25deg);
+  }
+
+  80% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .githubCorner:hover .octo-arm {
+    animation: none;
+  }
+
+  .githubCorner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+.SVGStyle {
+  fill: #151513;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+}
+
+.SVGPath {
+    transform-origin: 130px 106px;
+}
