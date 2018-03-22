@@ -15,18 +15,18 @@ const GithubStats = props => {
   return (
     <div>
       <GitCards list={all} title={'Top 10 (All Languages)' + buildTimeSuffix} showLang={true} />
-      <GitCards list={java} title={'Top 10 (Java Projects)' + buildTimeSuffix} showLang={false} />
+      <GitCards list={java} title={'Top 10 (Java Projects)' + buildTimeSuffix} showLang={true} />
       <GitCards
         list={javascript}
         title={'Top 10 (JavaScript Projects)' + buildTimeSuffix}
-        showLang={false}
+        showLang={true}
       />
-      <GitCards list={css} title={'Top 10 (CSS Projects)' + buildTimeSuffix} showLang={false} />
-      <GitCards list={html} title={'Top 10 (HTML Projects)' + buildTimeSuffix} showLang={false} />
+      <GitCards list={css} title={'Top 10 (CSS Projects)' + buildTimeSuffix} showLang={true} />
+      <GitCards list={html} title={'Top 10 (HTML Projects)' + buildTimeSuffix} showLang={true} />
       <GitCards
         list={typescript}
         title={'Top 10 (TypeScript Projects)'}
-        showLang={false}
+        showLang={true}
       />
     </div>
   )
