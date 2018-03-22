@@ -1,108 +1,36 @@
 import React from 'react'
-import Home from '../components/home/home'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
+import GithubStats from '../components/githubStats/githubStats'
 
-export default ({ data, pathContext }) => {
-  const content = {
-    blogPosts: {
-      totalCount: data.allMarkdownRemark.totalCount,
-      pathContext: pathContext
-    },
-    githubData: data.allGithubData,
-    buildTime: data.site.buildTime
-  }
+export default ({ data }) => {
   return (
-    <div>
-      <Route
-        path="/"
-        render={routeProps => <Home {...routeProps} {...content} />}
-      />
-    </div>
+    <GithubStats
+      githubData={data.allGithubData}
+      buildTime={data.site.buildTime}
+    />
   )
 }
 
 export const query = graphql`
-  query IndexQuery {
+  query GithubStatsQuery {
     site {
       buildTime
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      totalCount
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            date(formatString: "DD MMMM, YYYY")
-          }
-          fields {
-            slug
-          }
-          excerpt
-        }
-      }
     }
     allGithubData {
       edges {
         node {
           data {
-            organization {
-              description
-              websiteUrl
-              avatarUrl
-              repositories {
-                totalCount
-                edges {
-                  node {
-                    name
-                    descriptionHTML
-                    license
-                    forkCount
-                    isFork
-                    createdAt
-                    updatedAt
-                    pushedAt
-                    homepageUrl
-                    url
-                    repositoryTopics {
-                      edges {
-                        node {
-                          topic {
-                            name
-                          }
-                        }
-                      }
-                    }
-                    collaborators {
-                      edges {
-                        node {
-                          name
-                          login
-                        }
-                      }
-                    }
-                    stargazers {
-                      totalCount
-                    }
-                    isFork
-                    primaryLanguage {
-                      name
-                      color
-                    }
-                    homepageUrl
-                  }
-                }
-              }
-            }
             all {
               repositoryCount
               edges {
                 node {
+                  name
                   url
                   description
                   descriptionHTML
                   owner {
                     login
+                    avatarUrl
                   }
                   primaryLanguage {
                     name
@@ -119,10 +47,12 @@ export const query = graphql`
               edges {
                 node {
                   url
+                  name
                   description
                   descriptionHTML
                   owner {
                     login
+                    avatarUrl
                   }
                   primaryLanguage {
                     name
@@ -139,10 +69,12 @@ export const query = graphql`
               edges {
                 node {
                   url
+                  name
                   description
                   descriptionHTML
                   owner {
                     login
+                    avatarUrl
                   }
                   primaryLanguage {
                     name
@@ -159,10 +91,12 @@ export const query = graphql`
               edges {
                 node {
                   url
+                  name
                   description
                   descriptionHTML
                   owner {
                     login
+                    avatarUrl
                   }
                   primaryLanguage {
                     name
@@ -179,10 +113,12 @@ export const query = graphql`
               edges {
                 node {
                   url
+                  name
                   description
                   descriptionHTML
                   owner {
                     login
+                    avatarUrl
                   }
                   primaryLanguage {
                     name
@@ -199,10 +135,12 @@ export const query = graphql`
               edges {
                 node {
                   url
+                  name
                   description
                   descriptionHTML
                   owner {
                     login
+                    avatarUrl
                   }
                   primaryLanguage {
                     name

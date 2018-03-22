@@ -8,6 +8,7 @@ import { white } from 'material-ui/styles/colors';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import ActionAccountBox from 'material-ui/svg-icons/action/account-box';
+import ActionLanguage from 'material-ui/svg-icons/action/language'
 import ActionBookmark from 'material-ui/svg-icons/action/bookmark';
 
 const style = {
@@ -67,6 +68,12 @@ class Navigation extends Component {
             onClick={this.handleClose}
             leftIcon={<ActionBookmark />}
             containerElement={<Link to="/publications/" />}
+          />
+          <MenuItem
+            primaryText="Github Stats"
+            onClick={this.handleClose}
+            leftIcon={<ActionLanguage />}
+            containerElement={<Link to="/githubStats/" />}
           />          
           <MenuItem
             primaryText="About"

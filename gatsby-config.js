@@ -31,7 +31,150 @@ module.exports = {
         variables: {},
         graphQLQuery: `
         query ($author: String="") {
-
+          all: search(query: "stars:>50000", type: REPOSITORY, first: 10) {
+            repositoryCount
+            edges {
+              node {
+                ... on Repository {
+                  name
+                  owner {
+                    login
+                    avatarUrl
+                  }
+                  url
+                  description
+                  descriptionHTML
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                }
+              }
+            }
+          }
+          typescript: search(query: "stars:>3000 language:TypeScript", type: REPOSITORY, first: 10) {
+            repositoryCount
+            edges {
+              node {
+                ... on Repository {
+                  name
+                  owner {
+                    login
+                    avatarUrl
+                  }
+                  url
+                  description
+                  descriptionHTML
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                }
+              }
+            }
+          }
+          css: search(query: "stars:>3000 language:CSS", type: REPOSITORY, first: 10) {
+            repositoryCount
+            edges {
+              node {
+                ... on Repository {
+                  name
+                  owner {
+                    login
+                    avatarUrl
+                  }
+                  url
+                  description
+                  descriptionHTML
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                }
+              }
+            }
+          }
+          html: search(query: "stars:>3000 language:HTML", type: REPOSITORY, first: 10) {
+            repositoryCount
+            edges {
+              node {
+                ... on Repository {
+                  name
+                  owner {
+                    login
+                    avatarUrl
+                  }
+                  url
+                  description
+                  descriptionHTML
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                }
+              }
+            }
+          }
+          javascript: search(query: "stars:>3000 language:JavaScript", type: REPOSITORY, first: 10) {
+            repositoryCount
+            edges {
+              node {
+                ... on Repository {
+                  name
+                  owner {
+                    login
+                    avatarUrl
+                  }
+                  url
+                  description
+                  descriptionHTML
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                }
+              }
+            }
+          }
+          java: search(query: "stars:>3000 language:Java", type: REPOSITORY, first: 10) {
+            repositoryCount
+            edges {
+              node {
+                ... on Repository {
+                  name
+                  owner {
+                    login
+                    avatarUrl
+                  }
+                  url
+                  description
+                  descriptionHTML
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                  stargazers {
+                    totalCount
+                  }
+                }
+              }
+            }
+          }                
           organization(login: $author) {
             description
             websiteUrl
