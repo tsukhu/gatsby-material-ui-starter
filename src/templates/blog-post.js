@@ -1,5 +1,23 @@
 import React from "react";
-import styles from './blog-post.module.css';
+import Paper from 'material-ui/Paper'
+
+const styles = {
+  root: {
+    display: 'flex',
+    alignContent: 'center',
+  },
+  paper: {
+    margin: 5,
+    padding: 10,
+    height: '100%',
+    minHeight: '100vh',
+    display: 'block',
+    transitionEnabled: true,
+    backgroundColor: 'white',
+    alignContent: 'center',
+    alignItems: 'center'
+  }
+}
 
 export default ({ data }) => {
   const post = data.markdownRemark;
@@ -8,11 +26,11 @@ export default ({ data }) => {
     author=<h4>Author: {post.frontmatter.author}</h4>;
   }
   return (
-    <div className={styles.Post}>
+    <Paper style={styles.paper} zDepth={2}>
       <h3>{post.frontmatter.title}</h3>
       {author}
       <div dangerouslySetInnerHTML={{ __html: post.html }} />
-    </div>
+    </Paper>
   );
 };
 

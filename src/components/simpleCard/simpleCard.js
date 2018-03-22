@@ -4,6 +4,15 @@ import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import Link from 'gatsby-link';
 
+
+const styles = {
+  card: {
+    width: '100%',
+    margin: 5,
+    alignContent: 'center'
+  }
+}
+
 /*
  * date,excert,title,url are inputs
  */
@@ -11,7 +20,8 @@ function SimpleCard(props) {
 
   return (
     <div>
-      <Card expanded={false}>
+      <Card expanded={false} 
+      style={styles.card} >
         <CardHeader
           title={props.title}
           subtitle={props.date}

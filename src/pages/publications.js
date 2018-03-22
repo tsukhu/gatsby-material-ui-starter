@@ -7,6 +7,25 @@ import PageHeader from '../components/pageHeader/pageHeader';
 const moment = require('moment-timezone');
 moment.tz.setDefault('UTC');
 
+import Paper from 'material-ui/Paper'
+
+const paperStyles = {
+  root: {
+    display: 'flex',
+    alignContent: 'center',
+  },
+  paper: {
+    margin: 5,
+    padding: 10,
+    display: 'block',
+    height: '100%',
+    minHeight: '100vh',
+    transitionEnabled: true,
+    alignContent: 'center',
+    alignItems: 'center'
+  }
+}
+
 class Publications extends React.Component {
   render() {
     const columns = [
@@ -89,7 +108,7 @@ class Publications extends React.Component {
     );
     const pageHeader = 'Publications & Events '+ '(' + +totalCount + ')';
     return (
-      <div>
+      <Paper style={paperStyles.paper} zDepth={1}>
         <PageHeader text={pageHeader} />
         <ReactTable
           getTheadThProps={(state, rowInfo, column) => {
@@ -118,7 +137,7 @@ class Publications extends React.Component {
             );
           }}
         />
-      </div>
+      </Paper>
     );
   }
 }

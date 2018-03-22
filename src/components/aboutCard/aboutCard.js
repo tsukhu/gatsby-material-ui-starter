@@ -1,9 +1,13 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
-const chipStyles = {
+const styles = {
     chip: {
       margin: 4
+    },
+    card: {
+      height: '100%',
+      minHeight: '100vh',
     },
     wrapper: {
       display: 'flex',
@@ -14,7 +18,7 @@ const chipStyles = {
   
 const AboutCard = props => {
     return (
-      <Card>
+      <Card style={styles.card}>
         <CardHeader
           title={props.data.name}
           subtitle={props.data.maintainedBy}

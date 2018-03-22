@@ -5,12 +5,23 @@ import ChevronLeft from 'material-ui/svg-icons/navigation/chevron-left';
 import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
 import { Toolbar, ToolbarGroup ,ToolbarTitle } from 'material-ui/Toolbar';
 
+const styles = {
+    card: {
+      width: '100%',
+      margin: 5,
+      alignContent: 'center',
+      backgroundColor: 'white',
+      borderRadius: 5,
+      shadowRadius: 5
+    }
+  }
+
 const PostPagination = (props) => {
     const pageInfo= 'Page ' +props.index + '/' + +props.pageCount;
     const firstElement = (!props.isFirstPage)?<Link to={props.previousUrl}/>:<Link to='/'/>;
     const nextElement = (!props.isLastPage)?<Link to={props.nextUrl}/>:<Link to={+props.pageCount}/>;
     return (
-            <Toolbar>
+            <Toolbar style={styles.card}>
                 <ToolbarTitle text={pageInfo}/>
                 <ToolbarGroup>
                 <FlatButton 

@@ -5,6 +5,8 @@ import PostPagination from './postPagination/postPagination';
 import PageHeader from '../pageHeader/pageHeader';
 import SimpleCard from '../simpleCard/simpleCard';
 
+
+
 export class BlogPosts extends Component {
   render() {
     const { group, index, first, last, pageCount } = this.props.pathContext;
@@ -26,17 +28,6 @@ export class BlogPosts extends Component {
             title={node.frontmatter.title}
             url={node.fields.slug}
           />
-            {/* <Link
-              to={node.fields.slug}
-              css={{ textDecoration: `none`, color: `inherit` }}
-            >
-              <h4
-                className={styles.Margin}>
-                {node.frontmatter.title}{' '}
-                <span className={styles.PostSpan} color="#BBB">— {node.frontmatter.date}</span>
-              </h4>
-              <p className={styles.p}>{node.excerpt}</p>
-            </Link> */}
           </div>
         ))}
         <PostPagination 
