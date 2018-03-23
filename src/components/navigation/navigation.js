@@ -15,7 +15,9 @@ const style = {
   paper: {
     display: 'inline-block',
     float: 'left',
-    margin: '16px 32px 16px 0'
+    margin: '16px 32px 16px 0',
+    borderRadius: 5,
+    shadowRadius: 5
   },
   rightIcon: {
     textAlign: 'center',

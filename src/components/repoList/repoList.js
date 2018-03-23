@@ -20,7 +20,9 @@ const paperStyles = {
     minHeight: '100vh',
     transitionEnabled: true,
     alignContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 5,
+    shadowRadius: 5
   }
 }
 
@@ -131,7 +133,7 @@ class RepoList extends React.Component {
       ' Repositories as on ' +
       moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z');
     return (
-      <Paper style={paperStyles.paper} zDepth={1}>
+      <Paper style={paperStyles.paper} zDepth={2}>
         <PageHeader text={pageHeader} />
         <ReactTable
           getTheadThProps={(state, rowInfo, column) => {

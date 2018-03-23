@@ -12,7 +12,9 @@ const styles = {
       alignContent: 'center',
       backgroundColor: 'white',
       borderRadius: 5,
-      shadowRadius: 5
+      shadowRadius: 5,
+      border: '1px grey',
+      boxShadow: '3px 3px 3px rgba(68,68,68,0.6)'
     }
   }
 

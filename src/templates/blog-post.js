@@ -15,7 +15,9 @@ const styles = {
     transitionEnabled: true,
     backgroundColor: 'white',
     alignContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 5,
+    shadowRadius: 5
   }
 }
 

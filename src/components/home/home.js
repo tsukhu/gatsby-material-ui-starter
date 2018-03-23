@@ -13,13 +13,15 @@ const styles = {
     transitionEnabled: true,
     backgroundColor: '#F2F6F7',
     alignContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 5,
+    shadowRadius: 5
   }
 }
 class Home extends Component {
   render() {
     return (
-      <Paper style={styles.paper} zDepth={1}>
+      <Paper style={styles.paper} zDepth={2}>
           <BlogPosts
             totalCount={this.props.blogPosts.totalCount}
             pathContext={this.props.blogPosts.pathContext}

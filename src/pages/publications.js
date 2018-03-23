@@ -22,7 +22,9 @@ const paperStyles = {
     minHeight: '100vh',
     transitionEnabled: true,
     alignContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 5,
+    shadowRadius: 5
   }
 }
 

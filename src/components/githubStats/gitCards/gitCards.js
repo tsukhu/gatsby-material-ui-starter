@@ -36,7 +36,9 @@ const styles = {
     display: 'flex',
     display: 'inline-block',
     transitionEnabled: true,
-    backgroundColor: '#F2F6F7'
+    backgroundColor: '#F2F6F7',
+    borderRadius: 5,
+    shadowRadius: 5
   },
   card: {
     display: 'flex',
