@@ -1,37 +1,19 @@
-import React from 'react';
-import styles from './repoList.module.css';
-import ReactTable from 'react-table';
-import BlockContainer from '../blockContainer/blockContainer';
-import 'react-table/react-table.css';
-import ProjectCard from '../projectCard/projectCard';
-import PageHeader from '../pageHeader/pageHeader';
+import React from 'react'
+import styles from './repoList.module.css'
+import ReactTable from 'react-table'
+import BlockContainer from '../blockContainer/blockContainer'
+import 'react-table/react-table.css'
+import ProjectCard from '../projectCard/projectCard'
+import PageHeader from '../pageHeader/pageHeader'
 import Paper from 'material-ui/Paper'
+import { listPageStyles } from '../../utils/accessibility'
 
-const paperStyles = {
-  root: {
-    display: 'flex',
-    alignContent: 'center',
-  },
-  paper: {
-    margin: 5,
-    padding: 10,
-    display: 'block',
-    height: '100%',
-    minHeight: '100vh',
-    transitionEnabled: true,
-    alignContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    shadowRadius: 5
-  }
-}
-
-const moment = require('moment-timezone');
-moment.tz.setDefault('UTC');
+const moment = require('moment-timezone')
+moment.tz.setDefault('UTC')
 
 class RepoList extends React.Component {
   render() {
-    const buildTime = this.props.buildTime;
+    const buildTime = this.props.buildTime
     const columns = [
       {
         Header: 'Repository',
@@ -59,7 +41,7 @@ class RepoList extends React.Component {
               </span>{' '}
               {row.original.language.name}
             </span>
-          );
+          )
         }
       },
       {
@@ -80,27 +62,27 @@ class RepoList extends React.Component {
         accessor: 'pushedAt', // String-based value accessors!
         Cell: props => <span>{moment.utc(props.value).from(buildTime)}</span>
       }
-    ];
-    const org = this.props.githubData.edges[0].node.data.organization;
+    ]
+    const org = this.props.githubData.edges[0].node.data.organization
     const orgData = {
       description: org.description,
       websiteUrl: org.websiteUrl
-    };
-    const repositories = org.repositories;
+    }
+    const repositories = org.repositories
     const getTopics = edges => {
       return edges.map(edge => {
-        return edge.node.topic.name;
-      });
-    };
+        return edge.node.topic.name
+      })
+    }
     const getContributors = contributors => {
       return contributors
         .map(edge => {
           return edge.node.name && edge.node.name.trim() !== ''
             ? edge.node.name
-            : edge.node.login;
+            : edge.node.login
         })
-        .join(',');
-    };
+        .join(',')
+    }
     const getPrimaryLanguage = primaryLanguage => {
       return primaryLanguage
         ? {
@@ -110,8 +92,8 @@ class RepoList extends React.Component {
         : {
             name: 'na',
             color: 'black'
-          };
-    };
+          }
+    }
 
     const reposdata = repositories.edges.map(repo => {
       return {
@@ -126,22 +108,29 @@ class RepoList extends React.Component {
         url: repo.node.url,
         topics: getTopics(repo.node.repositoryTopics.edges),
         license: repo.node.license
-      };
-    });
+      }
+    })
     const pageHeader =
       +repositories.totalCount +
       ' Repositories as on ' +
-      moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z');
+      moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z')
     return (
-      <Paper style={paperStyles.paper} zDepth={2}>
+      <Paper style={listPageStyles.paper} zDepth={2}>
         <PageHeader text={pageHeader} />
         <ReactTable
+          getProps={(state, rowInfo, column) => {
+            return {
+              style: {
+                backgroundColor: 'white'
+              }
+            }
+          }}
           getTheadThProps={(state, rowInfo, column) => {
             return {
               style: {
                 fontWeight: 'bold'
               }
-            };
+            }
           }}
           data={reposdata}
           className="-striped -highlight"
@@ -160,12 +149,12 @@ class RepoList extends React.Component {
                   license={row.original.license}
                 />
               </BlockContainer>
-            );
+            )
           }}
         />
       </Paper>
-    );
+    )
   }
 }
 
-export default RepoList;
+export default RepoList

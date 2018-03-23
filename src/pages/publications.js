@@ -1,32 +1,14 @@
-import React from 'react';
+import React from 'react'
 // import styles from './publications.module.css';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
-import PublicationCard from '../components/publicationCard/publicationCard';
-import PageHeader from '../components/pageHeader/pageHeader';
-const moment = require('moment-timezone');
-moment.tz.setDefault('UTC');
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
+import PublicationCard from '../components/publicationCard/publicationCard'
+import PageHeader from '../components/pageHeader/pageHeader'
+import { listPageStyles } from '../utils/accessibility'
+const moment = require('moment-timezone')
+moment.tz.setDefault('UTC')
 
 import Paper from 'material-ui/Paper'
-
-const paperStyles = {
-  root: {
-    display: 'flex',
-    alignContent: 'center',
-  },
-  paper: {
-    margin: 5,
-    padding: 10,
-    display: 'block',
-    height: '100%',
-    minHeight: '100vh',
-    transitionEnabled: true,
-    alignContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    shadowRadius: 5
-  }
-}
 
 class Publications extends React.Component {
   render() {
@@ -69,7 +51,9 @@ class Publications extends React.Component {
         accessor: 'publishedOn', // String-based value accessors!
         sort: 'desc',
         minWidth: 120,
-        Cell: props => <span>{moment.utc(props.value).format('DD-MM-YYYY')}</span>
+        Cell: props => (
+          <span>{moment.utc(props.value).format('DD-MM-YYYY')}</span>
+        )
       },
       {
         Header: 'Likes',
@@ -87,8 +71,8 @@ class Publications extends React.Component {
         Header: 'Comments',
         accessor: 'comments'
       }
-    ];
-    const totalCount = this.props.data.allPublicationsXlsxSheet1.totalCount;
+    ]
+    const totalCount = this.props.data.allPublicationsXlsxSheet1.totalCount
     const reposdata = this.props.data.allPublicationsXlsxSheet1.edges.map(
       repo => {
         return {
@@ -105,20 +89,27 @@ class Publications extends React.Component {
           likes: repo.node.Likes,
           views: repo.node.Views,
           comments: repo.node.Comments
-        };
+        }
       }
-    );
-    const pageHeader = 'Publications & Events '+ '(' + +totalCount + ')';
+    )
+    const pageHeader = 'Publications & Events ' + '(' + +totalCount + ')'
     return (
-      <Paper style={paperStyles.paper} zDepth={1}>
+      <Paper style={listPageStyles.paper} zDepth={1}>
         <PageHeader text={pageHeader} />
         <ReactTable
+          getProps={(state, rowInfo, column) => {
+            return {
+              style: {
+                backgroundColor: 'white'
+              }
+            }
+          }}
           getTheadThProps={(state, rowInfo, column) => {
             return {
               style: {
                 fontWeight: 'bold'
               }
-            };
+            }
           }}
           data={reposdata}
           className="-striped -highlight"
@@ -136,15 +127,15 @@ class Publications extends React.Component {
                 team={row.original.team}
                 category={row.original.category}
               />
-            );
+            )
           }}
         />
       </Paper>
-    );
+    )
   }
 }
 
-export default Publications;
+export default Publications
 
 export const PublicationsQuery = graphql`
   query PublicationsQuery {
@@ -170,4 +161,4 @@ export const PublicationsQuery = graphql`
       }
     }
   }
-`;
+`

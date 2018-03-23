@@ -25,3 +25,35 @@ export const getCorrectTextColor = hex => {
     return '#ffffff'
   }
 }
+
+export const homePageStyles = {
+  paper: {
+    margin: 5,
+    padding: 10,
+    display: 'block',
+    height: '100%',
+    minHeight: '100vh',
+    transitionEnabled: true,
+    backgroundColor: '#F2F6F7',
+    alignContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    shadowRadius: 5
+  }
+}
+
+export const listPageStyles = {
+  paper: {
+    margin: 5,
+    padding: 10,
+    display: 'block',
+    height: '100%',
+    minHeight: '100vh',
+    transitionEnabled: true,
+    backgroundColor: '#F2F6F7',
+    alignContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    shadowRadius: 5
+  }
+}
