@@ -43,10 +43,6 @@ class Publications extends React.Component {
         accessor: 'forum' // String-based value accessors!
       },
       {
-        Header: 'Domain',
-        accessor: 'domain' // String-based value accessors!
-      },
-      {
         Header: 'Published On',
         accessor: 'publishedOn', // String-based value accessors!
         sort: 'desc',
