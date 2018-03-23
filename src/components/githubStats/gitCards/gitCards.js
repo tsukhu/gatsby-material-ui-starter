@@ -66,7 +66,7 @@ const GitCards = props => {
       <Paper style={styles.paper} zDepth={1}>
         <Subheader style={styles.subheader}>{props.title}</Subheader>
         {list.map(repo => (
-          <Paper style={styles.paper} zDepth={2}>
+          <Paper style={styles.paper} zDepth={2} key={repo.node.name}>
             <Card style={styles.card}>
               <CardHeader
                 title={repo.node.name}

@@ -11,23 +11,50 @@ const GithubStats = props => {
   const css = props.githubData.edges[0].node.data.css.edges
   const html = props.githubData.edges[0].node.data.html.edges
   const typescript = props.githubData.edges[0].node.data.typescript.edges
-  const buildTimeSuffix = ' as on ' + moment(props.buildTime).format('Do MMM YYYY HH:MM A z');
+  const buildTimeSuffix =
+    ' as on ' + moment(props.buildTime).format('Do MMM YYYY HH:MM A z')
+  const cardList = [
+    {
+      id: 'all',
+      list: all,
+      title: 'Top 10 (All Languages)' + buildTimeSuffix,
+      showLang: true
+    },
+    {
+      id: 'javascript',
+      list: javascript,
+      title: 'Top 10 (JavaScript Projects)' + buildTimeSuffix,
+      showLang: true
+    },
+    {
+      id: 'css',
+      list: css,
+      title: 'Top 10 (CSS Projects)' + buildTimeSuffix,
+      showLang: true
+    },
+    {
+      id: 'html',
+      list: html,
+      title: 'Top 10 (HTML Projects)' + buildTimeSuffix,
+      showLang: true
+    },
+    {
+      id: 'typescript',
+      list: typescript,
+      title: 'Top 10 (TypeScript Projects)' + buildTimeSuffix,
+      showLang: true
+    }
+  ]
   return (
     <div>
-      <GitCards list={all} title={'Top 10 (All Languages)' + buildTimeSuffix} showLang={true} />
-      <GitCards list={java} title={'Top 10 (Java Projects)' + buildTimeSuffix} showLang={true} />
-      <GitCards
-        list={javascript}
-        title={'Top 10 (JavaScript Projects)' + buildTimeSuffix}
-        showLang={true}
-      />
-      <GitCards list={css} title={'Top 10 (CSS Projects)' + buildTimeSuffix} showLang={true} />
-      <GitCards list={html} title={'Top 10 (HTML Projects)' + buildTimeSuffix} showLang={true} />
-      <GitCards
-        list={typescript}
-        title={'Top 10 (TypeScript Projects)'}
-        showLang={true}
-      />
+      {cardList.map(card => (
+        <GitCards
+          list={card.list}
+          title={card.title}
+          showLang={card.showLang}
+          key={card.id}
+        />
+      ))}
     </div>
   )
 }
