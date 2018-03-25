@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 const styles = {
     chip: {
       margin: 4
@@ -29,7 +29,7 @@ const AboutCard = props => {
           <p>{props.data.description}</p>
         </CardText>
         <CardActions>
-          <FlatButton
+          <Button
             href={props.data.githubProject}
             target="_blank"
             label="GITHUB LINK"

@@ -1,7 +1,7 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 const defaultAvatar='https://avatars2.githubusercontent.com/u/32506169?v=4';
 const chipStyles = {
     chip: {
@@ -32,7 +32,7 @@ const PublicationCard = props => {
           <p>{props.excerpt}</p>
         </CardText>
         <CardActions>
-          <FlatButton
+          <Button
             href={props.url}
             target="_blank"
             label="PUBLICATION LINK"

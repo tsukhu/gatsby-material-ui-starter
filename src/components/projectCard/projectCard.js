@@ -1,7 +1,7 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 
 const chipStyles = {
     chip: {
@@ -32,7 +32,7 @@ const ProjectCard = props => {
            />
         </CardText>
         <CardActions>
-          <FlatButton
+          <Button
             href={props.url}
             target="_blank"
             label="GitHub Link"

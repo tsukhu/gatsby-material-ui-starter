@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import styles from './pageHeader.module.css';
-import Subheader from 'material-ui/Subheader';
+import ListSubheader from 'material-ui/List/ListSubheader';
 import { getCorrectTextColor } from '../../utils/accessibility'
 
 
@@ -14,7 +14,7 @@ const headerStyles = {
 const PageHeader = props => {
   return (
     <div className={styles.PageHeader}>
-       <Subheader style={headerStyles.subheader}>{props.text}</Subheader>      
+       <ListSubheader style={headerStyles.subheader}>{props.text}</ListSubheader>      
     </div>
   );
 };

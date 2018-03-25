@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'gatsby-link';
-import FlatButton from 'material-ui/FlatButton';
-import ChevronLeft from 'material-ui/svg-icons/navigation/chevron-left';
-import ChevronRight from 'material-ui/svg-icons/navigation/chevron-right';
+import Button from 'material-ui/Button';
+import ChevronLeft from 'material-ui-icons/ChevronLeft';
+import ChevronRight from 'material-ui-icons/ChevronRight';
 import { Toolbar, ToolbarGroup ,ToolbarTitle } from 'material-ui/Toolbar';
 
 const styles = {
@@ -26,13 +26,13 @@ const PostPagination = (props) => {
             <Toolbar style={styles.card}>
                 <ToolbarTitle text={pageInfo}/>
                 <ToolbarGroup>
-                <FlatButton 
+                <Button 
                     primary key="prev" 
                     label="Prev" 
                     icon={<ChevronLeft />}
                     disabled={props.isFirstPage}
                     containerElement={firstElement}/>
-                <FlatButton
+                <Button
                     primary key="next" 
                     label="Next" 
                     icon={<ChevronRight />} 

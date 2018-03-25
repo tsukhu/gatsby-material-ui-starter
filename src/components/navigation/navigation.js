@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import Menu, { MenuItem } from 'material-ui/Menu';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
 import Link from 'gatsby-link';
-import { white } from 'material-ui/styles/colors';
-import ActionHome from 'material-ui/svg-icons/action/home';
-import ActionInfo from 'material-ui/svg-icons/action/info';
-import ActionAccountBox from 'material-ui/svg-icons/action/account-box';
-import ActionLanguage from 'material-ui/svg-icons/action/language'
-import ActionBookmark from 'material-ui/svg-icons/action/bookmark';
+import { white } from 'material-ui/colors';
+import Home from 'material-ui-icons/Home';
+import Info from 'material-ui-icons/Home';
+import AccountBox from 'material-ui-icons/AccountBox';
+import Language from 'material-ui-icons/Language';
+import Bookmark from 'material-ui-icons/Bookmark';
 
 const style = {
   paper: {
@@ -56,31 +56,31 @@ class Navigation extends Component {
           <MenuItem
             onClick={this.handleClose}
             primaryText="Home"
-            leftIcon={<ActionHome />}
+            leftIcon={<Home />}
             containerElement={<Link to="/" />}
           />
           <MenuItem
             primaryText="Projects"
             onClick={this.handleClose}
-            leftIcon={<ActionAccountBox />}
+            leftIcon={<AccountBox />}
             containerElement={<Link to="/projects/" />}
           />
           <MenuItem
             primaryText="Publications"
             onClick={this.handleClose}
-            leftIcon={<ActionBookmark />}
+            leftIcon={<Bookmark />}
             containerElement={<Link to="/publications/" />}
           />
           <MenuItem
             primaryText="Github Stats"
             onClick={this.handleClose}
-            leftIcon={<ActionLanguage />}
+            leftIcon={<Language />}
             containerElement={<Link to="/githubStats/" />}
           />          
           <MenuItem
             primaryText="About"
             onClick={this.handleClose}
-            leftIcon={<ActionInfo />}
+            leftIcon={<Info />}
             containerElement={<Link to="/about/" />}
           />
         </Drawer>

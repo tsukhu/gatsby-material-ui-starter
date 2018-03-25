@@ -1,28 +1,16 @@
 import React from 'react'
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText
-} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton'
-import Subheader from 'material-ui/Subheader'
-import ToggleStar from 'material-ui/svg-icons/toggle/star'
-import ActionLanguage from 'material-ui/svg-icons/action/language'
+import ListSubheader from 'material-ui/List/ListSubheader';
+import Star from 'material-ui-icons/Star';
+import Language from 'material-ui-icons/Language';
 import Paper from 'material-ui/Paper'
 import Chip from 'material-ui/Chip'
 import Avatar from 'material-ui/Avatar'
-import {
-  blue300,
-  indigo900,
-  orange200,
-  deepOrange300,
-  pink400,
-  purple500,
-} from 'material-ui/styles/colors';
+import indigo from 'material-ui/colors/purple';
+import orange from 'material-ui/colors/red';
 import { getCorrectTextColor } from '../../../utils/accessibility'
 
 
@@ -66,7 +54,7 @@ const GitCards = props => {
   return (
     <div style={styles.root}>
       <Paper style={styles.paper} zDepth={1}>
-        <Subheader style={styles.subheader}>{props.title}</Subheader>
+        <ListSubheader style={styles.subheader}>{props.title}</ListSubheader>
         {list.map(repo => (
           <Paper style={styles.paper} zDepth={2} key={repo.node.name}>
             <Card style={styles.card}>
@@ -78,9 +66,9 @@ const GitCards = props => {
               <CardText>
                 <Chip style={styles.chip}>
                   <Avatar 
-                  icon={<ToggleStar/>} 
-                  color={orange200}
-                  backgroundColor={indigo900}/>
+                  icon={<Star/>} 
+                  color={orange[200]}
+                  backgroundColor={indigo[900]}/>
                   {repo.node.stargazers.totalCount}
                 </Chip>
                 {props.showLang && repo.node.primaryLanguage ? (
@@ -89,8 +77,8 @@ const GitCards = props => {
                     backgroundColor={repo.node.primaryLanguage.color}
                     labelColor={getCorrectTextColor(repo.node.primaryLanguage.color)}
                   >
-                    <Avatar icon={<ActionLanguage />} 
-                    color={indigo900}/>
+                    <Avatar icon={<Language />} 
+                    color={indigo[900]}/>
                     {repo.node.primaryLanguage.name}
                   </Chip>
                 ) : null}
@@ -101,7 +89,7 @@ const GitCards = props => {
                 />
               </CardText>
               <CardActions>
-                <FlatButton
+                <Button
                   href={repo.node.url}
                   target="_blank"
                   label="GITHUB LINK"

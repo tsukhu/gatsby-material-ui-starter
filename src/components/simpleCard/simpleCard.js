@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import Link from 'gatsby-link';
-
+import React from 'react'
+import PropTypes from 'prop-types'
+import Card, { CardActions, CardContent } from 'material-ui/Card'
+import Button from 'material-ui/Button'
+import Typography from 'material-ui/Typography'
+import Link from 'gatsby-link'
 
 const styles = {
   card: {
@@ -17,20 +17,18 @@ const styles = {
  * date,excert,title,url are inputs
  */
 function SimpleCard(props) {
-
   return (
     <div>
-      <Card expanded={false} 
-      style={styles.card} >
-        <CardHeader
-          title={props.title}
-          subtitle={props.date}
-        />
-        <CardText>
-          <p>{props.excerpt}</p>
-        </CardText>
+      <Card expanded={false} style={styles.card}>
+        <CardContent>
+          <Typography variant="headline" component="h2">
+            {props.title}
+          </Typography>
+          <Typography color="textSecondary">{props.date}</Typography>
+          <Typography component="p">{props.excerpt}</Typography>
+        </CardContent>
         <CardActions>
-          <FlatButton
+          <Button
             containerElement={<Link to={props.url} />}
             label="Learn More"
             secondary={true}
@@ -39,8 +37,7 @@ function SimpleCard(props) {
         </CardActions>
       </Card>
     </div>
-  );
+  )
 }
 
-
-export default SimpleCard;
+export default SimpleCard

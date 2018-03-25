@@ -1,11 +1,8 @@
 
 import React, { Component } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import { MuiThemeProvider, createMuiTheme }  from 'material-ui/styles';
 import injectTabEventPlugin from 'react-tap-event-plugin';
-import {white} from 'material-ui/styles/colors';
-import { Small } from 'glamorous';
+import white from 'material-ui/colors';
 
 try {
   injectTabEventPlugin();
@@ -16,7 +13,7 @@ try {
 const withMaterialUI = ComposedComponent => {
   class HOC extends Component {
     render() {
-      const muiTheme = getMuiTheme({
+      const muiTheme = createMuiTheme({
         fontFamily: 'Roboto, sans-serif',
         appBar: {
           height: 50,
@@ -28,7 +25,7 @@ const withMaterialUI = ComposedComponent => {
       });
       return (
         <div>
-          <MuiThemeProvider muiTheme={muiTheme}>
+          <MuiThemeProvider theme={muiTheme}>
             <ComposedComponent {...this.props} />
           </MuiThemeProvider>
         </div>
