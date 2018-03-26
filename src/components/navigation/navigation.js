@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
 import Menu, { MenuItem } from 'material-ui/Menu'
-import Paper from 'material-ui/Paper'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
@@ -28,17 +27,6 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
-  },
-  paper: {
-    display: 'inline-block',
-    float: 'left',
-    margin: '16px 32px 16px 0',
-    borderRadius: 5,
-    shadowRadius: 5
-  },
-  rightIcon: {
-    textAlign: 'center',
-    lineHeight: '24px'
   }
 }
 class Navigation extends Component {
@@ -71,12 +59,11 @@ class Navigation extends Component {
               {this.props.title}
             </Typography>
             <Button
-              olor="inherit"
+              color="inherit"
+              href="/projects/"
               containerElement={<Link to="/projects/" />}
-              label="PROJECTS"
               secondary={true}
-              size="small"
-            />
+            >PROJECTS</Button>
           </Toolbar>
         </AppBar>
         <Drawer

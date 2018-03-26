@@ -1,9 +1,13 @@
-import Typography from 'typography';
-//import kirkhamTheme from 'typography-theme-kirkham';
-import githubTheme from 'typography-theme-github';
+import createMuiTheme from 'material-ui/styles/createMuiTheme'
 
-githubTheme.headerFontFamily= ['Roboto','Segoe UI','sans-serif'];
-githubTheme.bodyFontFamily= ['Roboto', 'sans-serif'];
-const typography = new Typography(githubTheme);
+import purple from 'material-ui/colors/purple'
+import green from 'material-ui/colors/green'
+import red from 'material-ui/colors/red'
 
-export default typography;
+export default createMuiTheme({
+  palette: {
+    primary: purple,
+    secondary: green,
+    error: red
+  }
+})
