@@ -1,7 +1,7 @@
 import React from 'react'
-import Card, { CardActions, CardContent } from 'material-ui/Card';
+import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
+import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton'
 import ListSubheader from 'material-ui/List/ListSubheader';
 import Star from 'material-ui-icons/Star';
@@ -60,10 +60,10 @@ const GitCards = props => {
             <Card style={styles.card}>
               <CardHeader
                 title={repo.node.name}
-                subtitle={repo.node.owner.login}
+                subheader={repo.node.owner.login}
                 avatar={repo.node.owner.avatarUrl}
               />
-              <CardText>
+              <CardContent>
                 <Chip style={styles.chip}>
                   <Avatar 
                   icon={<Star/>} 
@@ -87,7 +87,7 @@ const GitCards = props => {
                     __html: repo.node.descriptionHTML
                   }}
                 />
-              </CardText>
+              </CardContent>
               <CardActions>
                 <Button
                   href={repo.node.url}

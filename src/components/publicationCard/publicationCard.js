@@ -1,6 +1,7 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
+import Card, { CardActions, CardHeader, CartContext } from 'material-ui/Card'
+import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button';
 const defaultAvatar='https://avatars2.githubusercontent.com/u/32506169?v=4';
 const chipStyles = {
@@ -20,17 +21,17 @@ const PublicationCard = props => {
       <Card>
         <CardHeader
           title={props.title}
-          subtitle={props.author}
+          subheader={props.author}
           avatar={avatar}
         />
-        <CardText>
+        <CardContent>
           <div style={chipStyles.wrapper}>
           <Chip style={chipStyles.chip}>{props.domain}</Chip>
           <Chip style={chipStyles.chip}>{props.team}</Chip>
           <Chip style={chipStyles.chip}>{props.category}</Chip>
           </div>
-          <p>{props.excerpt}</p>
-        </CardText>
+          <Typography component="p">{props.excerpt}</Typography>
+        </CardContent>
         <CardActions>
           <Button
             href={props.url}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import styles from './pageHeader.module.css';
 import ListSubheader from 'material-ui/List/ListSubheader';
 import { getCorrectTextColor } from '../../utils/accessibility'
