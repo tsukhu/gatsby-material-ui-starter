@@ -9,7 +9,7 @@ export default ({ data }) => {
     author=<h4>Author: {post.frontmatter.author}</h4>;
   }
   return (
-    <Paper style={listPageStyles.paper} zDepth={2}>
+    <Paper style={listPageStyles.paper} elevation={2}>
       <h3>{post.frontmatter.title}</h3>
       {author}
       <div dangerouslySetInnerHTML={{ __html: post.html }} />

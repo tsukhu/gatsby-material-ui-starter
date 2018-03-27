@@ -115,13 +115,14 @@ class RepoList extends React.Component {
       ' Repositories as on ' +
       moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z')
     return (
-      <Paper style={listPageStyles.paper} zDepth={2}>
+      <Paper style={listPageStyles.paper} elevation={2}>
         <PageHeader text={pageHeader} />
         <ReactTable
           getProps={(state, rowInfo, column) => {
             return {
               style: {
-                backgroundColor: 'white'
+                backgroundColor: 'white',
+                fontFamily: 'Roboto, sans-serif',
               }
             }
           }}

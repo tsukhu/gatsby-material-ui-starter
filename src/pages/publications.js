@@ -90,13 +90,14 @@ class Publications extends React.Component {
     )
     const pageHeader = 'Publications & Events ' + '(' + +totalCount + ')'
     return (
-      <Paper style={listPageStyles.paper} zDepth={1}>
+      <Paper style={listPageStyles.paper} elevation={1}>
         <PageHeader text={pageHeader} />
         <ReactTable
           getProps={(state, rowInfo, column) => {
             return {
               style: {
-                backgroundColor: 'white'
+                backgroundColor: 'white',
+                fontFamily: 'Roboto, sans-serif',
               }
             }
           }}

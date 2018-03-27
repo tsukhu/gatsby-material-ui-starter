@@ -1,6 +1,6 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
-import Card, { CardActions, CardHeader, CartContext } from 'material-ui/Card'
+import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button';
 const defaultAvatar='https://avatars2.githubusercontent.com/u/32506169?v=4';
@@ -36,9 +36,7 @@ const PublicationCard = props => {
           <Button
             href={props.url}
             target="_blank"
-            label="PUBLICATION LINK"
-            secondary={true}
-          />
+          >PUBLICATION LINK</Button>
         </CardActions>
       </Card>
     );

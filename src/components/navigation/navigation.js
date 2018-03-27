@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Drawer from 'material-ui/Drawer'
-import Menu, { MenuItem } from 'material-ui/Menu'
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import AppBar from 'material-ui/AppBar'
 import Toolbar from 'material-ui/Toolbar'
 import Typography from 'material-ui/Typography'
@@ -10,6 +10,7 @@ import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui-icons/Menu'
 import Link from 'gatsby-link'
+import Divider from 'material-ui/Divider'
 import { white } from 'material-ui/colors'
 import Home from 'material-ui-icons/Home'
 import Info from 'material-ui-icons/Home'
@@ -19,7 +20,7 @@ import Bookmark from 'material-ui-icons/Bookmark'
 
 const styles = {
   root: {
-    flexGrow: 1
+    flex: 1
   },
   flex: {
     flex: 1
@@ -27,6 +28,12 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  list: {
+    width: 250
+  },
+  fullList: {
+    width: 'auto'
   }
 }
 class Navigation extends Component {
@@ -60,48 +67,68 @@ class Navigation extends Component {
             </Typography>
             <Button
               color="inherit"
-              href="/projects/"
-              containerElement={<Link to="/projects/" />}
-              secondary={true}
-            >PROJECTS</Button>
+              component={Link} to="/projects"
+            >
+              PROJECTS
+            </Button>
           </Toolbar>
         </AppBar>
-        <Drawer
-          docked={false}
-          width={200}
-          open={this.state.open}
-          onRequestChange={open => this.setState({ open })}
-        >
-          <MenuItem
-            onClick={this.handleClose}
-            primaryText="Home"
-            leftIcon={<Home />}
-            containerElement={<Link to="/" />}
-          />
-          <MenuItem
-            primaryText="Projects"
-            onClick={this.handleClose}
-            leftIcon={<AccountBox />}
-            containerElement={<Link to="/projects/" />}
-          />
-          <MenuItem
-            primaryText="Publications"
-            onClick={this.handleClose}
-            leftIcon={<Bookmark />}
-            containerElement={<Link to="/publications/" />}
-          />
-          <MenuItem
-            primaryText="Github Stats"
-            onClick={this.handleClose}
-            leftIcon={<Language />}
-            containerElement={<Link to="/githubStats/" />}
-          />
-          <MenuItem
-            primaryText="About"
-            onClick={this.handleClose}
-            leftIcon={<Info />}
-            containerElement={<Link to="/about/" />}
-          />
+        <Drawer open={this.state.open} onClose={this.handleToggle}>
+          <div className={classes.list}>
+            <List component="nav">
+              <ListItem
+                button
+                onClick={this.handleClose}
+                component={Link} to="/"
+              >
+                <ListItemIcon>
+                  <Home />
+                </ListItemIcon>
+                <ListItemText primary="Home" />
+              </ListItem>
+              <ListItem
+                button
+                component={Link} to="/projects"
+                onClick={this.handleClose}
+              >
+                <ListItemIcon>
+                  <AccountBox />
+                </ListItemIcon>
+                <ListItemText primary="Projects" />
+              </ListItem>
+              <ListItem
+                button
+                component={Link} to="/publications/"
+                onClick={this.handleClose}
+              >
+                <ListItemIcon>
+                  <Bookmark />
+                </ListItemIcon>
+                <ListItemText primary="Publications" />
+              </ListItem>
+              <ListItem
+                button
+                component={Link} to="/githubStats/"
+                onClick={this.handleClose}
+              >
+                <ListItemIcon>
+                  <Language />
+                </ListItemIcon>
+                <ListItemText primary="Github Stats" />
+              </ListItem>
+
+              <ListItem
+                button
+                component={Link} to="/about/"
+                onClick={this.handleClose}
+              >
+                <ListItemIcon>
+                  <Info />
+                </ListItemIcon>
+                <ListItemText primary="About" />
+              </ListItem>
+            </List>
+          </div>
         </Drawer>
       </div>
     )

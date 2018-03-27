@@ -19,7 +19,7 @@ const styles = {
 function SimpleCard(props) {
   return (
     <div>
-      <Card expanded={false} style={styles.card}>
+      <Card style={styles.card}>
         <CardContent>
           <Typography variant="headline" component="h2">
             {props.title}
@@ -29,11 +29,9 @@ function SimpleCard(props) {
         </CardContent>
         <CardActions>
           <Button
-            containerElement={<Link to={props.url} />}
-            label="Learn More"
-            secondary={true}
+            href={props.url}
             size="small"
-          />
+          >Learn More</Button>
         </CardActions>
       </Card>
     </div>

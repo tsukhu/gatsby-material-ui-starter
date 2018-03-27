@@ -7,7 +7,7 @@ import { homePageStyles } from '../../utils/accessibility'
 class Home extends Component {
   render() {
     return (
-      <Paper style={homePageStyles.paper} zDepth={2}>
+      <Paper style={homePageStyles.paper} elevation={2}>
           <BlogPosts
             totalCount={this.props.blogPosts.totalCount}
             pathContext={this.props.blogPosts.pathContext}

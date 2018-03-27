@@ -35,9 +35,7 @@ const AboutCard = props => {
         <Button
           href={props.data.githubProject}
           target="_blank"
-          label="GITHUB LINK"
-          secondary={true}
-        />
+        >GITHUB LINK</Button>
       </CardActions>
     </Card>
   )

@@ -18,12 +18,6 @@ module.exports = {
     `gatsby-transformer-excel`,
     `gatsby-transformer-remark`,
     {
-      resolve: 'gatsby-plugin-material-ui',
-      options: {
-        pathToTheme: 'src/utils/typography',
-      },
-    },
-    {
       resolve: `gatsby-source-github-api`,
       options: {
         token: `${process.env.GITHUB_TOKEN}`,

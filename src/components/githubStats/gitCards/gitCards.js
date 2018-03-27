@@ -53,10 +53,10 @@ const GitCards = props => {
   const list = props.list
   return (
     <div style={styles.root}>
-      <Paper style={styles.paper} zDepth={1}>
+      <Paper style={styles.paper} elevation={1}>
         <ListSubheader style={styles.subheader}>{props.title}</ListSubheader>
         {list.map(repo => (
-          <Paper style={styles.paper} zDepth={2} key={repo.node.name}>
+          <Paper style={styles.paper} elevation={2} key={repo.node.name}>
             <Card style={styles.card}>
               <CardHeader
                 title={repo.node.name}
@@ -92,9 +92,7 @@ const GitCards = props => {
                 <Button
                   href={repo.node.url}
                   target="_blank"
-                  label="GITHUB LINK"
-                  secondary={true}
-                />
+                >GITHUB LINK</Button>
               </CardActions>
             </Card>
           </Paper>

@@ -4,6 +4,7 @@ import React from 'react';
 
 import Navigation from '../components/navigation/navigation';
 import Ribbon from '../components/ribbon/ribbon';
+import withMui from '../components/withMUI/withMUI';
 import styles from './index.module.css';
 const Index = ({ children, data }) => {
   return (
@@ -17,7 +18,7 @@ const Index = ({ children, data }) => {
   );
 };
 
-export default Index;
+export default withMui(Index);
 export const query = graphql`
   query LayoutQuery {
     site {

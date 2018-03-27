@@ -1,6 +1,6 @@
 import React from 'react';
 import Chip from 'material-ui/Chip';
-import Card, { CardActions, CardHeader, CartContext } from 'material-ui/Card'
+import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button';
 
@@ -38,9 +38,7 @@ const ProjectCard = props => {
           <Button
             href={props.url}
             target="_blank"
-            label="GitHub Link"
-            secondary={true}
-          />
+          >GitHub Link</Button>
         </CardActions>
       </Card>
     );
