@@ -29,8 +29,9 @@ function SimpleCard(props) {
         </CardContent>
         <CardActions>
           <Button
-            href={props.url}
             size="small"
+            color="primary"
+            component={Link} to={props.url}
           >Learn More</Button>
         </CardActions>
       </Card>

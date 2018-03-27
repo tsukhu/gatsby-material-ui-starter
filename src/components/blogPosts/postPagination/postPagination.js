@@ -51,10 +51,10 @@ const PostPagination = props => {
         </Typography>
         <Button
           className={classes.button}
-          variant="raised"
           size="small"
           disabled={props.isFirstPage}
           component={Link} to={firstElement}
+          color="primary"
         >
           <ChevronLeft
             className={classNames(classes.leftIcon, classes.iconSmall)}
@@ -63,10 +63,10 @@ const PostPagination = props => {
         </Button>
         <Button
           className={classes.button}
-          variant="raised"
           size="small"
           disabled={props.isLastPage}
           component={Link} to={nextElement}
+          color="primary"
         >
           <ChevronRight
             className={classNames(classes.leftIcon, classes.iconSmall)}

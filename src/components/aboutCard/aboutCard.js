@@ -1,30 +1,51 @@
 import React from 'react'
-import Card, { CardActions, CardHeader, CartContext } from 'material-ui/Card'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
+import Avatar from 'material-ui/Avatar'
 import Button from 'material-ui/Button'
-const styles = {
-  chip: {
-    margin: 4
-  },
+
+const styles = theme => ({
   card: {
-    height: '100%',
-    minHeight: '100vh'
+    width: '100%',
+    margin: 5,
+    minHeight: '100vh',
+    alignContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    shadowRadius: 5,
+    border: '1px grey',
+    boxShadow: '3px 3px 3px rgba(68,68,68,0.6)'
   },
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    paddingBottom: '5px'
+  flex: {
+    flex: 1
+  },
+  button: {
+    margin: theme.spacing.unit
+  },
+  leftIcon: {
+    marginRight: theme.spacing.unit
+  },
+  rightIcon: {
+    marginLeft: theme.spacing.unit
+  },
+  iconSmall: {
+    fontSize: 20
   }
-}
+})
 
 const AboutCard = props => {
+  const { classes } = props
   return (
-    <Card style={styles.card}>
-      <CardHeader
-        title={props.data.name}
-        subheader={props.data.maintainedBy}
-        avatar={props.data.avatarUrl}
-      />
+    <Card className={classes.card}>
+    <CardHeader
+    avatar={
+      <Avatar alt="Remy Sharp" src={props.data.avatarUrl} className={classes.avatar} />
+    }
+    title={props.data.name}
+    subheader={props.data.maintainedBy}
+  />
       <CardContent>
         <Typography component="p">
           Powered by: {props.data.poweredBy}
@@ -35,10 +56,15 @@ const AboutCard = props => {
         <Button
           href={props.data.githubProject}
           target="_blank"
-        >GITHUB LINK</Button>
+          size="small" color="primary">
+        GITHUB LINK</Button>
       </CardActions>
     </Card>
   )
 }
 
-export default AboutCard
+AboutCard.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(AboutCard)
