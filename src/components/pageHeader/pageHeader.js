@@ -1,20 +1,20 @@
 import React from 'react';
-import { Toolbar, ToolbarTitle } from 'material-ui/Toolbar';
 import styles from './pageHeader.module.css';
-import Subheader from 'material-ui/Subheader';
+import ListSubheader from 'material-ui/List/ListSubheader';
 import { getCorrectTextColor } from '../../utils/accessibility'
+import blueGrey from 'material-ui/colors/blueGrey'
 
 
 const headerStyles = {
   subheader: {
-    color: getCorrectTextColor('#ACB7FE')
+    color: getCorrectTextColor(blueGrey[50])
   }
 }
 
 const PageHeader = props => {
   return (
     <div className={styles.PageHeader}>
-       <Subheader style={headerStyles.subheader}>{props.text}</Subheader>      
+       <ListSubheader style={headerStyles.subheader}>{props.text.toUpperCase()}</ListSubheader>      
     </div>
   );
 };

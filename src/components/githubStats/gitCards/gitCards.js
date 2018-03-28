@@ -1,60 +1,95 @@
 import React from 'react'
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardMedia,
-  CardTitle,
-  CardText
-} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
-import IconButton from 'material-ui/IconButton'
-import Subheader from 'material-ui/Subheader'
-import ToggleStar from 'material-ui/svg-icons/toggle/star'
-import ActionLanguage from 'material-ui/svg-icons/action/language'
-import Paper from 'material-ui/Paper'
 import Chip from 'material-ui/Chip'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import ReactHtmlParser from 'react-html-parser'
+import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
+import Typography from 'material-ui/Typography'
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton'
+import ListSubheader from 'material-ui/List/ListSubheader';
+import Star from 'material-ui-icons/Star';
+import Language from 'material-ui-icons/Language';
+import Paper from 'material-ui/Paper'
 import Avatar from 'material-ui/Avatar'
-import {
-  blue300,
-  indigo900,
-  orange200,
-  deepOrange300,
-  pink400,
-  purple500,
-} from 'material-ui/styles/colors';
+import indigo from 'material-ui/colors/indigo';
+import green from 'material-ui/colors/green';
+import deepOrange from 'material-ui/colors/deepOrange';
+import blueGrey from 'material-ui/colors/blueGrey'
 import { getCorrectTextColor } from '../../../utils/accessibility'
 
-
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex',
-    display: 'inline-block'
+    theme: 'inherit'
   },
   paper: {
     margin: 10,
-    display: 'flex',
     display: 'inline-block',
     transitionEnabled: true,
-    backgroundColor: '#F2F6F7',
+    backgroundColor: blueGrey[50],
     borderRadius: 5,
-    shadowRadius: 5
+    shadowRadius: 5,
+    theme: 'inherit'
   },
   card: {
     display: 'flex',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+    flex:1,
+    flexDirection: 'column',
     flexWrap: 'wrap',
+    theme: 'inherit',
     maxWidth: 300,
-    minHeight: 220
+    minHeight: 304
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)'
+  },
+  title: {
+    marginBottom: 16,
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
+  },
+  indigoChip: {
+    margin: theme.spacing.unit,
+    backgroundColor: indigo[900],
+    color: '#E0E0E0',
+  },
+  orangeAvatar: {
+    margin: 0,
+    color: '#fff',
+    backgroundColor: deepOrange[500],
   },
   chip: {
+    margin: theme.spacing.unit
+  },
+  wrapper: {
     display: 'flex',
-    margin: 4,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    paddingBottom: '5px'
+  },
+  avatar: {
+    margin: 10
+  },
+  greenAvatar: {
+    margin: 0,
+    color: '#fff',
+    backgroundColor: green[500],
+  },
+  bigAvatar: {
+    width: 60,
+    height: 60
   },
   subheader: {
     color: getCorrectTextColor('#ACB7FE')
   }
-}
+})
+
 /**
  *
  * @param {*} props (list : Repo list to be displayed,
@@ -62,51 +97,47 @@ const styles = {
  *                   showLang: whether the language propery needs to be shown)
  */
 const GitCards = props => {
+  const { classes } = props
   const list = props.list
   return (
-    <div style={styles.root}>
-      <Paper style={styles.paper} zDepth={1}>
-        <Subheader style={styles.subheader}>{props.title}</Subheader>
+    <div className={classes.root}>
+      <Paper className={classes.paper}  elevation={1}>
+        <ListSubheader className={classes.subheader}>{props.title.toUpperCase()}</ListSubheader>
         {list.map(repo => (
-          <Paper style={styles.paper} zDepth={2} key={repo.node.name}>
-            <Card style={styles.card}>
+          <Paper className={classes.paper} elevation={2} key={repo.node.name}>
+            <Card className={classes.card}>
               <CardHeader
                 title={repo.node.name}
-                subtitle={repo.node.owner.login}
-                avatar={repo.node.owner.avatarUrl}
+                subheader={repo.node.owner.login}
+                avatar={
+                  <Avatar alt="Remy Sharp" src={repo.node.owner.avatarUrl} className={classes.avatar} />
+                }
               />
-              <CardText>
-                <Chip style={styles.chip}>
-                  <Avatar 
-                  icon={<ToggleStar/>} 
-                  color={orange200}
-                  backgroundColor={indigo900}/>
-                  {repo.node.stargazers.totalCount}
-                </Chip>
+
+              
+              <CardContent>
+              <Chip 
+              label={repo.node.stargazers.totalCount} 
+              className={classes.chip}
+              avatar={ <Avatar className={classes.orangeAvatar} ><Star/></Avatar> }
+              />
                 {props.showLang && repo.node.primaryLanguage ? (
                   <Chip
-                    style={styles.chip}
-                    backgroundColor={repo.node.primaryLanguage.color}
-                    labelColor={getCorrectTextColor(repo.node.primaryLanguage.color)}
-                  >
-                    <Avatar icon={<ActionLanguage />} 
-                    color={indigo900}/>
-                    {repo.node.primaryLanguage.name}
-                  </Chip>
+                  label={repo.node.primaryLanguage.name}
+                  className={classes.chip}
+                    avatar={ <Avatar className={classes.greenAvatar}><Language /></Avatar> }
+                  />
                 ) : null}
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: repo.node.descriptionHTML
-                  }}
-                />
-              </CardText>
+                <Typography component="div">{ReactHtmlParser(repo.node.descriptionHTML)}</Typography>
+                
+                
+              </CardContent>
               <CardActions>
-                <FlatButton
+                <Button
                   href={repo.node.url}
                   target="_blank"
-                  label="GITHUB LINK"
-                  secondary={true}
-                />
+                  color="primary"
+                >GITHUB LINK</Button>
               </CardActions>
             </Card>
           </Paper>
@@ -116,4 +147,10 @@ const GitCards = props => {
   )
 }
 
-export default GitCards
+
+GitCards.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles, { withTheme: true })(GitCards)
+

@@ -17,13 +17,6 @@ module.exports = {
     },
     `gatsby-transformer-excel`,
     `gatsby-transformer-remark`,
-    `gatsby-plugin-glamor`,
-    {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography`
-      }
-    },
     {
       resolve: `gatsby-source-github-api`,
       options: {

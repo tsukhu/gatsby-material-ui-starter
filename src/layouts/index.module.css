@@ -1,14 +1,15 @@
 .Layout {
   margin: 0 auto;
-  max-width: 1024px;
   padding: 2px;
   padding-top: 1px;
+  display: flex;
 }
 
 /* on both */
 html,
 body {
   overflow-x: hidden;
+  display: flex;
 }
 body {
   background: url('../assets/images/background.png');
@@ -17,7 +18,7 @@ body {
 section {
   box-sizing: border-box; /* or not */
   margin: 0 auto;
-  max-width: 1024px;
+  /* max-width: 1024px; */
   background: white;
   padding: 0.25px;
   padding-top: 0.25px;

@@ -18,7 +18,7 @@ export class BlogPosts extends Component {
     return (
       <div>
         <PageHeader
-          text={pageHeader}
+          text={pageHeader.toUpperCase()}
         />
         {group.map(({ node }) => (
           <div key={node.id}  className={styles.post}>
