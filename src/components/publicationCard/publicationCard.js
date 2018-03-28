@@ -10,7 +10,11 @@ const defaultAvatar = 'https://avatars2.githubusercontent.com/u/32506169?v=4'
 
 const styles = theme => ({
   card: {
-    minWidth: 245
+    display: 'flex',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    flexWrap: 'wrap'
   },
   bullet: {
     display: 'inline-block',

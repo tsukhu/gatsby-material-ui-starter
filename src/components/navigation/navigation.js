@@ -17,6 +17,7 @@ import Info from 'material-ui-icons/Home'
 import AccountBox from 'material-ui-icons/AccountBox'
 import Language from 'material-ui-icons/Language'
 import Bookmark from 'material-ui-icons/Bookmark'
+import Code from 'material-ui-icons/Code'
 
 const styles = {
   root: {
@@ -65,12 +66,16 @@ class Navigation extends Component {
             >
               {this.props.title}
             </Typography>
-            <Button
-              color="inherit"
-              component={Link} to="/projects"
-            >
+            <Button color="inherit" component={Link} to="/projects">
               PROJECTS
             </Button>
+            <IconButton
+              href="//github.com/ERS-HCL/gatsby-demo-app"
+              target="_blank"
+              color="inherit"
+            >
+              <Code />
+            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer open={this.state.open} onClose={this.handleToggle}>
@@ -79,7 +84,8 @@ class Navigation extends Component {
               <ListItem
                 button
                 onClick={this.handleClose}
-                component={Link} to="/"
+                component={Link}
+                to="/"
               >
                 <ListItemIcon>
                   <Home />
@@ -88,7 +94,8 @@ class Navigation extends Component {
               </ListItem>
               <ListItem
                 button
-                component={Link} to="/projects"
+                component={Link}
+                to="/projects"
                 onClick={this.handleClose}
               >
                 <ListItemIcon>
@@ -98,7 +105,8 @@ class Navigation extends Component {
               </ListItem>
               <ListItem
                 button
-                component={Link} to="/publications/"
+                component={Link}
+                to="/publications/"
                 onClick={this.handleClose}
               >
                 <ListItemIcon>
@@ -108,7 +116,8 @@ class Navigation extends Component {
               </ListItem>
               <ListItem
                 button
-                component={Link} to="/githubStats/"
+                component={Link}
+                to="/githubStats/"
                 onClick={this.handleClose}
               >
                 <ListItemIcon>
@@ -119,7 +128,8 @@ class Navigation extends Component {
 
               <ListItem
                 button
-                component={Link} to="/about/"
+                component={Link}
+                to="/about/"
                 onClick={this.handleClose}
               >
                 <ListItemIcon>
