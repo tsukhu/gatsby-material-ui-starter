@@ -36,7 +36,7 @@ export default ({ data }) => {
     <Card className={styles.card}>
       <CardHeader title={post.frontmatter.title} subheader={author} />
       <CardContent className={styles.divStyle}>
-      <Typography component="p">
+      <Typography component="div">
       { ReactHtmlParser(post.html) }
       </Typography>
       </CardContent>

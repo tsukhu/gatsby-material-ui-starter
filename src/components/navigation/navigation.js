@@ -19,7 +19,7 @@ import Language from 'material-ui-icons/Language'
 import Bookmark from 'material-ui-icons/Bookmark'
 import Code from 'material-ui-icons/Code'
 
-const styles = {
+const styles = theme => ({
   root: {
     flex: 1
   },
@@ -36,7 +36,7 @@ const styles = {
   fullList: {
     width: 'auto'
   }
-}
+})
 class Navigation extends Component {
   state = {
     open: false
@@ -49,7 +49,7 @@ class Navigation extends Component {
     const { classes } = this.props
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" color="secondary">
           <Toolbar>
             <IconButton
               className={classes.menuButton}
@@ -60,11 +60,11 @@ class Navigation extends Component {
               <MenuIcon />
             </IconButton>
             <Typography
-              variant="title"
+              variant="body1"
               color="inherit"
               className={classes.flex}
             >
-              {this.props.title}
+              {this.props.title.toUpperCase()}
             </Typography>
             <Button color="inherit" component={Link} to="/projects">
               PROJECTS
@@ -149,4 +149,4 @@ Navigation.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Navigation)
+export default withStyles(styles, { withTheme: true })(Navigation)

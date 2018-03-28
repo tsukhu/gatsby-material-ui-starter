@@ -81,4 +81,4 @@ PublicationCard.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(PublicationCard)
+export default withStyles(styles, { withTheme: true })(PublicationCard)

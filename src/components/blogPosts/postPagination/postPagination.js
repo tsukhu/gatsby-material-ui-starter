@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import Link from 'gatsby-link'
 import Button from 'material-ui/Button'
 import classNames from 'classnames'
@@ -39,21 +39,22 @@ const styles = theme => ({
 
 const PostPagination = props => {
   const { classes } = props
-  const pageInfo = 'Page ' + props.index + '/' + +props.pageCount
-  const firstElement = !props.isFirstPage ? props.previousUrl : "/"
-  const nextElement = !props.isLastPage ? props.nextUrl : "/"
-  
+  const pageInfo = 'PAGE ' + '(' + props.index + '/' + +props.pageCount + ')'
+  const firstElement = !props.isFirstPage ? props.previousUrl : '/'
+  const nextElement = !props.isLastPage ? props.nextUrl : '/'
+
   return (
     <div className={classes.card}>
       <Toolbar>
-        <Typography variant="title" color="inherit" className={classes.flex}>
+        <Typography variant="caption" color="inherit" className={classes.flex}>
           {pageInfo}
         </Typography>
         <Button
           className={classes.button}
           size="small"
           disabled={props.isFirstPage}
-          component={Link} to={firstElement}
+          component={Link}
+          to={firstElement}
           color="primary"
         >
           <ChevronLeft
@@ -65,7 +66,8 @@ const PostPagination = props => {
           className={classes.button}
           size="small"
           disabled={props.isLastPage}
-          component={Link} to={nextElement}
+          component={Link}
+          to={nextElement}
           color="primary"
         >
           <ChevronRight
@@ -82,4 +84,4 @@ PostPagination.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(PostPagination)
+export default withStyles(styles, { withTheme: true })(PostPagination)
