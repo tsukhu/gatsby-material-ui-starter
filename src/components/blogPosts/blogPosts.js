@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
-import styles from './blogPosts.module.css';
+// import styles from './blogPosts.module.css';
 import PostPagination from './postPagination/postPagination';
 import PageHeader from '../pageHeader/pageHeader';
 import SimpleCard from '../simpleCard/simpleCard';
@@ -21,7 +21,7 @@ export class BlogPosts extends Component {
           text={pageHeader.toUpperCase()}
         />
         {group.map(({ node }) => (
-          <div key={node.id}  className={styles.post}>
+          <div key={node.id}>
           <SimpleCard 
             date={node.frontmatter.date}
             excerpt={node.excerpt}

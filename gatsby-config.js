@@ -15,8 +15,8 @@ module.exports = {
         path: `${__dirname}/src/`
       }
     },
-    `gatsby-transformer-excel`,
     `gatsby-transformer-remark`,
+    `gatsby-transformer-excel`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
