@@ -2,7 +2,6 @@ import 'babel-polyfill'
 import 'typeface-roboto'
 import React, { Component } from 'react'
 import Navigation from '../components/navigation/navigation'
-import Ribbon from '../components/ribbon/ribbon'
 import withMui from '../components/withMUI/withMUI'
 import Spinner from '../components/Spinner/Snipper'
 // import styles from './index.module.css';
