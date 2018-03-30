@@ -15,6 +15,7 @@
     "gatsby": "^1.9.201",
     "gatsby-link": "^1.6.37",
     "gatsby-paginate": "^1.0.12",
+    "gatsby-plugin-google-fonts": "0.0.4",
     "gatsby-plugin-manifest": "^1.0.15",
     "gatsby-plugin-offline": "^1.0.15",
     "gatsby-source-filesystem": "^1.5.20",

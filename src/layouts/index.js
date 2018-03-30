@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import 'typeface-roboto'
+// import 'typeface-roboto'
 import React, { Component } from 'react'
 import Navigation from '../components/navigation/navigation'
 import withMui from '../components/withMUI/withMUI'
