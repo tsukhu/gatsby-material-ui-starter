@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
 import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
-import { listPageStyles } from '../../utils/accessibility'
 import Typography from 'material-ui/Typography'
 import Avatar from 'material-ui/Avatar'
 import Button from 'material-ui/Button'
+import blueGrey from 'material-ui/colors/blueGrey'
 
 const styles = theme => ({
   card: {
@@ -33,13 +33,27 @@ const styles = theme => ({
   },
   iconSmall: {
     fontSize: 20
+  },
+  paper: {
+    margin: 5,
+    padding: 10,
+    display: 'block',
+    height: '100%',
+    minHeight: '100vh',
+    transitionEnabled: true,
+    backgroundColor: blueGrey[50],
+    alignContent: 'center',
+    alignItems: 'center',
+    rounded: true,
+    borderRadius: 5,
+    shadowRadius: 5
   }
 })
 
 const AboutCard = props => {
   const { classes } = props
   return (
-    <Paper style={listPageStyles.paper} elevation={2}>
+    <Paper className={classes.paper} elevation={2}>
       <Card className={classes.card}>
         <CardHeader
           avatar={

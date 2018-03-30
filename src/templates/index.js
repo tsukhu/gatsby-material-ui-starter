@@ -13,10 +13,7 @@ export default ({ data, pathContext }) => {
   }
   return (
     <div>
-      <Route
-        path="/"
-        render={routeProps => <Home {...routeProps} {...content} />}
-      />
+    <Home {...content} />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import blueGrey from 'material-ui/colors/blueGrey'
+
 
 export const getCorrectTextColor = hex => {
   const threshold = 130 /* about half of 256. Lower threshold equals more dark text on dark background  */
@@ -28,35 +28,4 @@ export const getCorrectTextColor = hex => {
   }
 }
 
-export const homePageStyles = {
-  paper: {
-    margin: 5,
-    padding: 10,
-    display: 'block',
-    height: '100%',
-    minHeight: '100vh',
-    transitionEnabled: true,
-    backgroundColor: blueGrey[50],
-    alignContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    shadowRadius: 5
-  }
-}
 
-export const listPageStyles = {
-  paper: {
-    margin: 5,
-    padding: 10,
-    display: 'block',
-    height: '100%',
-    minHeight: '100vh',
-    transitionEnabled: true,
-    backgroundColor: blueGrey[50],
-    alignContent: 'center',
-    alignItems: 'center',
-    rounded: true,
-    borderRadius: 5,
-    shadowRadius: 5
-  }
-}

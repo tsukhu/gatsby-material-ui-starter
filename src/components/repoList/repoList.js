@@ -1,18 +1,38 @@
 import React from 'react'
-import styles from './repoList.module.css'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+//import styles from './repoList.module.css'
 import ReactTable from 'react-table'
 import BlockContainer from '../blockContainer/blockContainer'
 import 'react-table/react-table.css'
 import ProjectCard from '../projectCard/projectCard'
 import PageHeader from '../pageHeader/pageHeader'
 import Paper from 'material-ui/Paper'
-import { listPageStyles } from '../../utils/accessibility'
+import blueGrey from 'material-ui/colors/blueGrey'
 
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
+const styles = theme => ({
+  paper: {
+    margin: 5,
+    padding: 10,
+    display: 'block',
+    height: '100%',
+    minHeight: '100vh',
+    transitionEnabled: true,
+    backgroundColor: blueGrey[50],
+    alignContent: 'center',
+    alignItems: 'center',
+    rounded: true,
+    borderRadius: 5,
+    shadowRadius: 5
+  }
+})
+
 class RepoList extends React.Component {
   render() {
+    const { classes } = this.props
     const buildTime = this.props.buildTime
     const columns = [
       {
@@ -115,7 +135,7 @@ class RepoList extends React.Component {
       ' Repositories as on ' +
       moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z')
     return (
-      <Paper style={listPageStyles.paper} elevation={2}>
+      <Paper className={classes.paper} elevation={2}>
         <PageHeader text={pageHeader} />
         <ReactTable
           getProps={(state, rowInfo, column) => {
@@ -158,4 +178,8 @@ class RepoList extends React.Component {
   }
 }
 
-export default RepoList
+RepoList.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles, { withTheme: true })(RepoList)

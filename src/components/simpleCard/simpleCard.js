@@ -1,25 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import Button from 'material-ui/Button'
 import Typography from 'material-ui/Typography'
 import Link from 'gatsby-link'
 
-const styles = {
+const styles = theme => ({
   card: {
     width: '100%',
     margin: 5,
     alignContent: 'center'
   }
-}
+})
 
 /*
  * date,excert,title,url are inputs
  */
-function SimpleCard(props) {
+const SimpleCard= (props) => {
+  const { classes } = props
   return (
     <div>
-      <Card style={styles.card}>
+      <Card className={classes.card}>
         <CardContent>
           <Typography variant="headline" component="h2">
             {props.title}
@@ -39,4 +41,8 @@ function SimpleCard(props) {
   )
 }
 
-export default SimpleCard
+SimpleCard.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles, { withTheme: true })(SimpleCard)

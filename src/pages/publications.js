@@ -1,26 +1,42 @@
 import React from 'react'
-// import styles from './publications.module.css';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import PublicationCard from '../components/publicationCard/publicationCard'
 import PageHeader from '../components/pageHeader/pageHeader'
-import { listPageStyles } from '../utils/accessibility'
+import blueGrey from 'material-ui/colors/blueGrey'
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
 import Paper from 'material-ui/Paper'
 
+const styles = theme => ({
+  paper: {
+    margin: 5,
+    padding: 10,
+    display: 'block',
+    height: '100%',
+    minHeight: '100vh',
+    transitionEnabled: true,
+    backgroundColor: blueGrey[50],
+    alignContent: 'center',
+    alignItems: 'center',
+    rounded: true,
+    borderRadius: 5,
+    shadowRadius: 5
+  }
+})
+
 class Publications extends React.Component {
+  
   render() {
+    const { classes } = this.props
     const columns = [
       {
         Header: 'Title',
         accessor: 'title' //d => d.name
       },
-      // {
-      //   Header: 'URL',
-      //   accessor: 'url' // String-based value accessors!
-      // },
       {
         Header: 'Author',
         accessor: 'author' // String-based value accessors!
@@ -90,7 +106,7 @@ class Publications extends React.Component {
     )
     const pageHeader = 'Publications & Events ' + '(' + +totalCount + ')'
     return (
-      <Paper style={listPageStyles.paper} elevation={2}>
+      <Paper className={classes.paper} elevation={2}>
         <PageHeader text={pageHeader} />
         <ReactTable
           getProps={(state, rowInfo, column) => {
@@ -132,7 +148,11 @@ class Publications extends React.Component {
   }
 }
 
-export default Publications
+Publications.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles, { withTheme: true })(Publications)
 
 export const PublicationsQuery = graphql`
   query PublicationsQuery {
