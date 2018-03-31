@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
-// import styles from './blogPosts.module.css';
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 import PostPagination from './postPagination/postPagination';
 import PageHeader from '../pageHeader/pageHeader';
 import SimpleCard from '../simpleCard/simpleCard';
 
-
+const styles = theme => ({
+  card: {
+    alignSelf: 'auto',
+    flex:'1 1 auto',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    theme: 'inherit',
+    margin: 5,
+    alignContent: 'center',
+    }
+})
 
 export class BlogPosts extends Component {
   render() {
+    const { classes } = this.props
     const { group, index, first, last, pageCount } = this.props.pathContext;
     const previousUrl = index - 1 == 1 ? '' : (index - 1).toString();
     const nextUrl = (index + 1).toString();
@@ -16,7 +28,7 @@ export class BlogPosts extends Component {
     const isLastPage = index == pageCount;
     const pageHeader = 'Announcements and Posts ' + '(' + this.props.totalCount + ')';
     return (
-      <div>
+      <div className={classes.card}>
         <PageHeader
           text={pageHeader.toUpperCase()}
         />
@@ -43,4 +55,8 @@ export class BlogPosts extends Component {
   }
 }
 
-export default BlogPosts;
+BlogPosts.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles, { withTheme: true })(BlogPosts)

@@ -8,9 +8,12 @@ import Link from 'gatsby-link'
 
 const styles = theme => ({
   card: {
-    width: '100%',
     margin: 5,
-    alignContent: 'center'
+    alignContent: 'center',
+    borderRadius: 5,
+    shadowRadius: 5,
+    border: '1px grey',
+    boxShadow: '3px 3px 3px rgba(68,68,68,0.6)'
   }
 })
 

@@ -9,11 +9,7 @@ import blueGrey from 'material-ui/colors/blueGrey'
 
 const styles = theme => ({
   paper: {
-    margin: 5,
-    padding: 10,
-    display: 'block',
-    height: '100%',
-    minHeight: '100vh',
+    display: 'flex',
     transitionEnabled: true,
     backgroundColor: blueGrey[50],
     alignContent: 'center',
