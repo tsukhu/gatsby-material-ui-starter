@@ -31,7 +31,7 @@ const GitHubIcon = (props) => (
 
 const styles = theme => ({
   root: {
-    flex: 1
+    flexGrow: 1,
   },
   flex: {
     flex: 1
@@ -48,16 +48,26 @@ const styles = theme => ({
   }
 })
 class Navigation extends Component {
+
   state = {
-    open: false
+    open: false,
+    loaded: false
   }
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      loaded: true
+    })
+  }
+
 
   handleToggle = () => this.setState({ open: !this.state.open })
   handleClose = () => this.setState({ open: false })
 
   render() {
     const { classes } = this.props
-    return (
+    return this.state.loaded ? (
       <div className={classes.root}>
         <AppBar position="static" color="secondary">
           <Toolbar>
@@ -162,7 +172,7 @@ class Navigation extends Component {
           </div>
         </Drawer>
       </div>
-    )
+    ):(<div></div>)
   }
 }
 

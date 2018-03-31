@@ -8,7 +8,7 @@ import Spinner from '../components/Spinner/Snipper'
 // import styles from './index.module.css';
 class Index extends Component {
   state = {
-    loaded: false
+    loaded: true
   }
 
   componentDidMount() {
@@ -19,6 +19,7 @@ class Index extends Component {
   }
 
   render() {
+    const { location, children } = this.props
     return this.state.loaded ? (
       <div>
         <Helmet
@@ -28,7 +29,10 @@ class Index extends Component {
           <meta name="twitter:site" content="@TarunKumarSukhu" />
           <meta name="og:type" content="website" />
           <meta name="og:site_name" content="ERS-HCL" />
-          <meta name="Description" content="ERS-HCL Open Source initiative static website"/>
+          <meta
+            name="Description"
+            content="ERS-HCL Open Source initiative static website"
+          />
           <meta property="og:url" content="https://ers-hcl.github.io/" />
           <meta
             property="og:description"

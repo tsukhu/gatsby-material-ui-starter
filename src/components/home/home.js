@@ -20,16 +20,27 @@ const styles = theme => ({
   }
 })
 class Home extends Component {
+
+  state = {
+    loaded: false
+  }
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      loaded: true
+    })
+  }
   render() {
     const { classes } = this.props
-    return (
+    return this.state.loaded ? (
       <Paper className={classes.paper} elevation={2}>
           <BlogPosts
             totalCount={this.props.blogPosts.totalCount}
             pathContext={this.props.blogPosts.pathContext}
           />
         </Paper>
-    )
+    ): <div></div>
   }
 }
 
