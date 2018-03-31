@@ -37,13 +37,15 @@ const styles = theme => ({
   paper: {
     margin: 5,
     padding: 10,
-    display: 'block',
+    display: 'flex',
     height: '100%',
     minHeight: '100vh',
     transitionEnabled: true,
     backgroundColor: blueGrey[50],
-    alignContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
     rounded: true,
     borderRadius: 5,
     shadowRadius: 5

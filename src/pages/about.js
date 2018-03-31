@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './about.module.css';
+// import styles from './about.module.css';
 import AboutCard from '../components/aboutCard/aboutCard';
 
 export default ({ data }) => {
@@ -14,7 +14,7 @@ export default ({ data }) => {
     githubProject: data.site.siteMetadata.githubProject
   };
   return (
-    <div className={styles.About}>
+    <div>
       <AboutCard data={orgData} />
       </div>
   );

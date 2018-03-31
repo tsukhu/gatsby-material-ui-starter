@@ -15,7 +15,8 @@ const styles = theme => ({
     alignContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    shadowRadius: 5
+    shadowRadius: 5,
+    margin: 5
   }
 })
 class Home extends Component {
