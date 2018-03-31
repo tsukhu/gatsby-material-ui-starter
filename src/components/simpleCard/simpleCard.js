@@ -37,6 +37,7 @@ const SimpleCard= (props) => {
             size="small"
             color="primary"
             component={Link} to={props.url}
+            aria-label={props.title}
           >Learn More</Button>
         </CardActions>
       </Card>
