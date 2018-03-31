@@ -76,7 +76,7 @@ class Navigation extends Component {
             >
               {this.props.title.toUpperCase()}
             </Typography>
-            <Button color="inherit" component={Link} to="/projects">
+            <Button color="inherit" component={Link} to="/projects" aria-label='ERS-HCL projects'>
               PROJECTS
             </Button>
             <IconButton
@@ -101,7 +101,8 @@ class Navigation extends Component {
                 button
                 onClick={this.handleClose}
                 component={Link}
-                to="/"
+                to="/" 
+                aria-label='Home Page'
               >
                 <ListItemIcon>
                   <Home />

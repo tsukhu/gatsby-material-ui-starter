@@ -10,7 +10,10 @@ import blueGrey from 'material-ui/colors/blueGrey'
 
 const styles = theme => ({
   card: {
-    width: '100%',
+    alignSelf: 'auto',
+    flex:'1 1 auto',
+    flexDirection: 'column',
+    theme: 'inherit',
     margin: 5,
     alignContent: 'center',
     backgroundColor: 'white',
