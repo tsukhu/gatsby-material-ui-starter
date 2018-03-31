@@ -64,7 +64,7 @@ const ProjectCard = props => {
         {ReactHtmlParser(props.excerpt)}
       </CardContent>
       <CardActions>
-        <Button href={props.url} target="_blank" color="primary">
+        <Button href={props.url} target="_blank" color="primary" rel="noopener">
           GitHub Link
         </Button>
       </CardActions>

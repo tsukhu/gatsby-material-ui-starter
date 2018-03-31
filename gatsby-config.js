@@ -30,7 +30,7 @@ module.exports = {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: "HCL ERS Static Site",
-        short_name: "ERS Open Source",
+        short_name: "ERS OSS",
         description: "ERS Open Source",
         start_url: "/",
         background_color: "#f7f0eb",

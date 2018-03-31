@@ -68,7 +68,7 @@ const PublicationCard = props => {
           <Typography component="p">{props.excerpt}</Typography>
         </CardContent>
         <CardActions>
-          <Button href={props.url} target="_blank" size="small" color="primary">
+          <Button href={props.url} target="_blank" size="small" color="primary" rel="noopener">
             PUBLICATION LINK
           </Button>
         </CardActions>

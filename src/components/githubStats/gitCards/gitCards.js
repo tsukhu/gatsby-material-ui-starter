@@ -3,6 +3,7 @@ import Chip from 'material-ui/Chip'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import ReactHtmlParser from 'react-html-parser'
+import PageHeader from '../../pageHeader/pageHeader'
 import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button';
@@ -102,7 +103,7 @@ const GitCards = props => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}  elevation={1}>
-        <ListSubheader className={classes.subheader}>{props.title.toUpperCase()}</ListSubheader>
+        <PageHeader text={props.title.toUpperCase()} />
         {list.map(repo => (
           <Paper className={classes.paper} elevation={2} key={repo.node.name}>
             <Card className={classes.card}>
@@ -136,7 +137,9 @@ const GitCards = props => {
                 <Button
                   href={repo.node.url}
                   target="_blank"
-                  color="primary"
+                  color="primary" 
+                  rel="noopener" 
+                  rel="noopener"
                 >GITHUB LINK</Button>
               </CardActions>
             </Card>

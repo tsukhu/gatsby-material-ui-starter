@@ -28,6 +28,7 @@ class Index extends Component {
           <meta name="twitter:site" content="@TarunKumarSukhu" />
           <meta name="og:type" content="website" />
           <meta name="og:site_name" content="ERS-HCL" />
+          <meta name="Description" content="ERS-HCL Open Source initiative static website"/>
           <meta property="og:url" content="https://ers-hcl.github.io/" />
           <meta
             property="og:description"

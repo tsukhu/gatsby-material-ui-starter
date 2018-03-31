@@ -77,7 +77,8 @@ const AboutCard = props => {
             href={props.data.githubProject}
             target="_blank"
             size="small"
-            color="primary"
+            color="primary" 
+            rel="noopener"
           >
             GITHUB LINK
           </Button>
