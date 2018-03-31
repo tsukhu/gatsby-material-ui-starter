@@ -8,14 +8,15 @@ module.exports = {
     githubProject: `https://github.com/ERS-HCL/gatsby-demo-app`
   },
   plugins: [
-    {
-      resolve: `gatsby-plugin-google-fonts`,
-      options: {
-        fonts: [
-          `Roboto`
-        ]
-      }
-    },
+    `gatsby-plugin-react-helmet`,
+    // {
+    //   resolve: `gatsby-plugin-google-fonts`,
+    //   options: {
+    //     fonts: [
+    //       `Roboto`
+    //     ]
+    //   }
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {

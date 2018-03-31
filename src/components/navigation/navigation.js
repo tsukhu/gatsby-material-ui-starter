@@ -73,6 +73,9 @@ class Navigation extends Component {
               href="//github.com/ERS-HCL/gatsby-demo-app"
               target="_blank"
               color="inherit"
+              toolkit="Source Gatsby Site"
+              touch={true}
+              name={'Github source'}  
             >
               <Code />
             </IconButton>
