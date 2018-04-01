@@ -51,7 +51,7 @@ class Navigation extends Component {
 
   state = {
     open: false,
-    loaded: false
+    loaded: true
   }
 
   componentDidMount() {

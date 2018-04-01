@@ -22,7 +22,7 @@ const styles = theme => ({
 class Home extends Component {
 
   state = {
-    loaded: false
+    loaded: true
   }
 
   componentDidMount() {

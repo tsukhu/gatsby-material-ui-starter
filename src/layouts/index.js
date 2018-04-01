@@ -8,7 +8,7 @@ import Spinner from '../components/Spinner/Snipper'
 // import styles from './index.module.css';
 class Index extends Component {
   state = {
-    loaded: true
+    loaded: false
   }
 
   componentDidMount() {
