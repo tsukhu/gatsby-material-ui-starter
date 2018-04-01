@@ -1,5 +1,5 @@
+import 'typeface-roboto'
 import 'babel-polyfill'
-// import 'typeface-roboto'
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import Navigation from '../components/navigation/navigation'
