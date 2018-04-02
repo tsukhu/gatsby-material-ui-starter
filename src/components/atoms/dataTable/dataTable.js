@@ -26,7 +26,7 @@ import FilterListIcon from 'material-ui-icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
 import ChallengeForm from '../challengeForm/challengeForm'
 import SearchBox from '../searchBox/searchBox'
-import { List } from 'immutable' 
+import { List } from 'immutable'
 
 let counter = 0
 function createData(
@@ -526,21 +526,28 @@ class EnhancedTable extends React.Component {
 
   handleFormSubmit = (event, formData) => {
    
-    // const { selected, data } = this.state
-    // const newData = data.find(item => item.id === selected[0])
-    // formData.filter(item => (item.id === ))
-    // for (let key in newData) {
-    //   if (key === formData.id) {
+    const { selected, data } = this.state
+    // Immutable List
+    const newData = List(data)
+  
+    // Map formData to data list
+    newData.map(item => {
+      if (item.id === selected[0]){
+        for (let key in item){
+          if (key !== 'id') {
+            const entry = formData.filter(data => data.id === key)
+           item[key] = entry[0].value
+          } else {
+            item
+          }
 
-    //   }
-    // }
-    // console.log(newData,formData)
-    // // const newData = data.map(item => ((item.id === selected[0])? (
-    // //   item.map(key => ke) 
-    // // ): item))
-
-    
-    this.setState({ editing: false })
+        }
+      } else {
+        item
+      }
+    })
+   
+    this.setState({ editing: false , data: newData.toArray() })
   }
 
   handleFormCancel = (event) => {
