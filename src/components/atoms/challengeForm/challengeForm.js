@@ -8,6 +8,7 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import PageHeader from '../../pageHeader/pageHeader'
 import blueGrey from 'material-ui/colors/blueGrey'
+import Button from 'material-ui/Button'
 
 const styles = theme => ({
   container: {
@@ -33,6 +34,9 @@ const styles = theme => ({
   },
   menu: {
     width: 200
+  },
+  button: {
+    alignItems: 'flex-end',
   }
 })
 
@@ -50,69 +54,46 @@ class ChallengeForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   state = {
-    searchText: '',
-    formElementsArray: []
+    challengeForm: []
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log('A name was submitted: ' + this.state.searchText)
   }
 
   handleChange = (event, inputIdentifier) => {
-    // const updatedFormElement = updateObject(
-    //   this.state.formElementsArray[inputIdentifier],
-    //   {
-    //     value: event.target.value
-    //   }
-    // )
+    const updatedFormElement = this.state.challengeForm.map(field => {
+      if (field.id === inputIdentifier) field.value = event.target.value
+      return field
+    })
 
-    // const updatedOrderForm = updateObject(this.state.formElementsArray, {
-    //   [inputIdentifier]: updatedFormElement
-    // })
-
-    // this.setState({
-    //   formElementsArray: updatedOrderForm
-    // })
+    this.setState({
+      challengeForm: updatedFormElement
+    })
   }
-  
+
+  componentWillMount() {
+    const { selectedRow } = this.props
+    this.setState({
+      challengeForm: selectedRow
+    })
+  }
 
   render() {
-    const { classes, selectedRow, columnData } = this.props
-    const formElementsArray = []
-    for (let key in selectedRow) {
-      if (key !== 'id') {
-        let colData = []
+    const { classes, selectedRow, handleFormSubmit, handleFormCancel } = this.props
 
-        colData = columnData.filter(data => {
-          return data.id === key
-        })
-        console.log(colData[0])
-        if (colData === undefined) {
-          colData[0] = {
-            type: 'text',
-            helperText: 'Enter Value'
-          }
-        }
-        formElementsArray.push({
-          id: key,
-          value: selectedRow[key],
-          type: colData[0].type,
-          helperText: colData[0].helperText
-        })
-      }
-    }
-
-    const formFields = formElementsArray.map(field => (
+    const formFields = selectedRow.map(field => (
       <TextField
         id={field.id}
-        label={field.id}
-        value={field.value}
+        label={field.id.toUpperCase()}
+        defaultValue={field.value}
         type={field.type}
+        autoComplete="name"
         className={classes.textField}
         helperText={field.helperText}
         margin="normal"
         key={field.id}
+        onChange={event => this.handleChange(event, field.id)}
       />
     ))
     return (
@@ -125,6 +106,24 @@ class ChallengeForm extends React.Component {
           onSubmit={this.handleSubmit}
         >
           {formFields}
+          <div
+            onClick={event =>
+              handleFormSubmit(event, this.state.challengeForm)
+            }
+          >
+            <Button color="primary" className={classes.button}>
+              UPDATE
+            </Button>
+          </div>
+          <div
+          onClick={event =>
+            handleFormCancel(event)
+          }
+        >
+          <Button color="primary" className={classes.button}>
+            CANCEL
+          </Button>
+        </div>
         </form>
       </Paper>
     )

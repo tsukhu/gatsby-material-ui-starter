@@ -26,6 +26,7 @@ import FilterListIcon from 'material-ui-icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
 import ChallengeForm from '../challengeForm/challengeForm'
 import SearchBox from '../searchBox/searchBox'
+import { List } from 'immutable' 
 
 let counter = 0
 function createData(
@@ -35,7 +36,7 @@ function createData(
   domain,
   status,
   priority,
-  githubURL,
+  githubURL
 ) {
   counter += 1
   return {
@@ -46,7 +47,7 @@ function createData(
     domain,
     status,
     priority,
-    githubURL,
+    githubURL
   }
 }
 
@@ -75,18 +76,38 @@ const columnData = [
     type: 'text',
     helperText: 'Challenge Name'
   },
-  { id: 'domain', numeric: false, disablePadding: false, label: 'Domain',
-  type: 'text',
-  helperText: 'Domain' },
-  { id: 'status', numeric: false, disablePadding: false, label: 'Status',
-  type: 'text',
-  helperText: 'Status' },
-  { id: 'priority', numeric: false, disablePadding: false, label: 'Priority',
-  type: 'text',
-  helperText: 'Priority' },
-  { id: 'githubURL', numeric: false, disablePadding: false, label: 'githubURL',
-  type: 'text',
-  helperText: 'Github URL' }
+  {
+    id: 'domain',
+    numeric: false,
+    disablePadding: false,
+    label: 'Domain',
+    type: 'text',
+    helperText: 'Domain'
+  },
+  {
+    id: 'status',
+    numeric: false,
+    disablePadding: false,
+    label: 'Status',
+    type: 'text',
+    helperText: 'Status'
+  },
+  {
+    id: 'priority',
+    numeric: false,
+    disablePadding: false,
+    label: 'Priority',
+    type: 'text',
+    helperText: 'Priority'
+  },
+  {
+    id: 'githubURL',
+    numeric: false,
+    disablePadding: false,
+    label: 'githubURL',
+    type: 'text',
+    helperText: 'Github URL'
+  }
 ]
 
 class EnhancedTableHead extends React.Component {
@@ -179,7 +200,7 @@ const toolbarStyles = theme => ({
 })
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, onClickEdit, onClickAdd, onClickSearch } = props
+  const { numSelected, classes, onClickEdit, onClickAdd, onClickSearch, onClickDelete } = props
 
   return (
     <Toolbar
@@ -193,7 +214,7 @@ let EnhancedTableToolbar = props => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography color="inherit" variant="subheading"></Typography>
+          <Typography color="inherit" variant="subheading" />
         )}
       </div>
       <div className={classes.spacer} />
@@ -206,7 +227,7 @@ let EnhancedTableToolbar = props => {
               </IconButton>
             </Tooltip>
             <Tooltip title="Delete">
-              <IconButton aria-label="Delete">
+              <IconButton aria-label="Delete" onClick={onClickDelete}>
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
@@ -430,8 +451,31 @@ class EnhancedTable extends React.Component {
     }
     let newSelected = []
     if (selected.indexOf(id) !== 0) newSelected.push(id)
-    const currentItem = data.find( item => item.id === id)
-    this.setState({ selected: newSelected , selectedRow: currentItem })
+    const currentItem = data.find(item => item.id === id)
+    const formElementsArray = []
+    for (let key in currentItem) {
+      if (key !== 'id') {
+        let colData = []
+
+        colData = columnData.filter(data => {
+          return data.id === key
+        })
+        if (colData === undefined) {
+          colData[0] = {
+            type: 'text',
+            helperText: 'Enter Value'
+          }
+        }
+        formElementsArray.push({
+          id: key,
+          value: currentItem[key],
+          type: colData[0].type,
+          helperText: colData[0].helperText
+        })
+      }
+    }
+
+    this.setState({ selected: newSelected, selectedRow: formElementsArray })
   }
 
   handleChangePage = (event, page) => {
@@ -448,7 +492,31 @@ class EnhancedTable extends React.Component {
   }
 
   handleAddClick = event => {
-    console.log('Add called!')
+    const { data } = this.state
+
+    const newData = List(data).push(createData(
+      'A new row',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      ''
+    ))
+    console.log(data,newData)
+    this.setState({ data : newData.toArray() })
+  }
+
+  handleDeleteClick = (event) => {
+    const { selected, data } = this.state
+    
+    console.log(selected,selected[0])
+    const newData = data.filter( item => (item.id !== selected[0]))
+    console.log(newData)
+    this.setState({ data: newData, selected: [] })
+    console.log('Delete called!')
   }
 
   handleSearchClick = event => {
@@ -456,24 +524,62 @@ class EnhancedTable extends React.Component {
     this.setState({ filter: !filter })
   }
 
+  handleFormSubmit = (event, formData) => {
+   
+    // const { selected, data } = this.state
+    // const newData = data.find(item => item.id === selected[0])
+    // formData.filter(item => (item.id === ))
+    // for (let key in newData) {
+    //   if (key === formData.id) {
+
+    //   }
+    // }
+    // console.log(newData,formData)
+    // // const newData = data.map(item => ((item.id === selected[0])? (
+    // //   item.map(key => ke) 
+    // // ): item))
+
+    
+    this.setState({ editing: false })
+  }
+
+  handleFormCancel = (event) => {
+    this.setState({ editing: false })
+  }
+
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
     const { classes } = this.props
-    const { data, order, orderBy, selected, rowsPerPage, page,selectedRow } = this.state
+    const {
+      data,
+      order,
+      orderBy,
+      selected,
+      rowsPerPage,
+      page,
+      selectedRow
+    } = this.state
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
     return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
-          {this.state.editing === true ? <ChallengeForm selectedRow={selectedRow} columnData={columnData}/> : null}
+          {this.state.editing === true ? (
+            <ChallengeForm
+              selectedRow={selectedRow}
+              handleFormCancel={this.handleFormCancel}
+              handleFormSubmit={this.handleFormSubmit}
+            />
+          ) : null}
           {this.state.filter === true ? <SearchBox /> : null}
           <EnhancedTableToolbar
             numSelected={selected.length}
             onClickEdit={this.handleEditClick}
             onClickAdd={this.handleAddClick}
             onClickSearch={this.handleSearchClick}
+            onClickDelete={this.handleDeleteClick}
           />
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
