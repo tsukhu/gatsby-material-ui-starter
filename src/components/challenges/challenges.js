@@ -5,7 +5,6 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import PageHeader from '../pageHeader/pageHeader'
 import blueGrey from 'material-ui/colors/blueGrey'
-import SearchBox from '../atoms/searchBox/searchBox'
 import EnhancedTable from '../atoms/dataTable/dataTable'
 
 const styles = theme => ({
@@ -31,7 +30,6 @@ function Challenges(props) {
     <div>
       <Paper className={classes.paper} elevation={4}>
         <PageHeader text="Challenges" />
-        <SearchBox />
         <EnhancedTable />
       </Paper>
     </div>

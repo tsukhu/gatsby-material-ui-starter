@@ -2,6 +2,8 @@ import React from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
+
+import blueGrey from 'material-ui/colors/blueGrey'
 import Table, {
   TableBody,
   TableCell,
@@ -19,28 +21,72 @@ import IconButton from 'material-ui/IconButton'
 import Tooltip from 'material-ui/Tooltip'
 import DeleteIcon from 'material-ui-icons/Delete'
 import EditIcon from 'material-ui-icons/Edit'
+import AddIcon from 'material-ui-icons/Add'
 import FilterListIcon from 'material-ui-icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
+import ChallengeForm from '../challengeForm/challengeForm'
+import SearchBox from '../searchBox/searchBox'
 
 let counter = 0
-function createData(name, description, contributor, domain, status ,priority, githubURL) {
+function createData(
+  name,
+  description,
+  contributor,
+  domain,
+  status,
+  priority,
+  githubURL,
+) {
   counter += 1
-  return { id: counter, name, description, contributor, domain, status,priority,githubURL }
+  return {
+    id: counter,
+    name,
+    description,
+    contributor,
+    domain,
+    status,
+    priority,
+    githubURL,
+  }
 }
 
 const columnData = [
   {
     id: 'name',
     numeric: false,
-    disablePadding: true,
-    label: 'Name'
+    disablePadding: false,
+    label: 'Name',
+    type: 'text',
+    helperText: 'Challenge Name'
   },
-  { id: 'description', numeric: false, disablePadding: false, label: 'Description' },
-  { id: 'contributor', numeric: false, disablePadding: false, label: 'Contributor' },
-  { id: 'domain', numeric: false, disablePadding: false, label: 'Domain' },
-  { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
-  { id: 'priority', numeric: false, disablePadding: false, label: 'Priority' },
-  { id: 'githubURL', numeric: false, disablePadding: false, label: 'githubURL' }
+  {
+    id: 'description',
+    numeric: false,
+    disablePadding: false,
+    label: 'Description',
+    type: 'text',
+    helperText: 'Description'
+  },
+  {
+    id: 'contributor',
+    numeric: false,
+    disablePadding: false,
+    label: 'Contributor',
+    type: 'text',
+    helperText: 'Challenge Name'
+  },
+  { id: 'domain', numeric: false, disablePadding: false, label: 'Domain',
+  type: 'text',
+  helperText: 'Domain' },
+  { id: 'status', numeric: false, disablePadding: false, label: 'Status',
+  type: 'text',
+  helperText: 'Status' },
+  { id: 'priority', numeric: false, disablePadding: false, label: 'Priority',
+  type: 'text',
+  helperText: 'Priority' },
+  { id: 'githubURL', numeric: false, disablePadding: false, label: 'githubURL',
+  type: 'text',
+  helperText: 'Github URL' }
 ]
 
 class EnhancedTableHead extends React.Component {
@@ -133,7 +179,7 @@ const toolbarStyles = theme => ({
 })
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes } = props
+  const { numSelected, classes, onClickEdit, onClickAdd, onClickSearch } = props
 
   return (
     <Toolbar
@@ -147,7 +193,7 @@ let EnhancedTableToolbar = props => {
             {numSelected} selected
           </Typography>
         ) : (
-          <Typography variant="title">Challenges</Typography>
+          <Typography color="inherit" variant="subheading"></Typography>
         )}
       </div>
       <div className={classes.spacer} />
@@ -155,7 +201,7 @@ let EnhancedTableToolbar = props => {
         {numSelected > 0 ? (
           <div>
             <Tooltip title="Edit">
-              <IconButton aria-label="Edit">
+              <IconButton aria-label="Edit" onClick={onClickEdit}>
                 <EditIcon />
               </IconButton>
             </Tooltip>
@@ -166,11 +212,18 @@ let EnhancedTableToolbar = props => {
             </Tooltip>
           </div>
         ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="Filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
+          <div>
+            <Tooltip title="Add">
+              <IconButton aria-label="Add" onClick={onClickAdd}>
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Filter list">
+              <IconButton aria-label="Filter list" onClick={onClickSearch}>
+                <FilterListIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
         )}
       </div>
     </Toolbar>
@@ -186,11 +239,24 @@ EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar)
 
 const styles = theme => ({
   root: {
-    width: '100%',
     marginTop: theme.spacing.unit * 3
   },
+  paper: {
+    margin: 5,
+    padding: 10,
+    display: 'block',
+    height: '100%',
+    minHeight: '100vh',
+    transitionEnabled: true,
+    backgroundColor: 'white',
+    alignContent: 'center',
+    alignItems: 'center',
+    rounded: true,
+    borderRadius: 5,
+    shadowRadius: 5
+  },
   table: {
-    minWidth: 800
+    flex: '1 1 auto'
   },
   tableWrapper: {
     overflowX: 'auto'
@@ -203,25 +269,134 @@ class EnhancedTable extends React.Component {
 
     this.state = {
       order: 'asc',
-      orderBy: 'calories',
+      orderBy: 'name',
       selected: [],
       data: [
-        createData('Angular Challenge', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('ReactJS ', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('VueJS', 'description 1','contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('StoryBook', 'description 1','contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('Microservices', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('Java', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('GraphQL', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('Node JS', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('Andriod','description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('TerraForm', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('Kafka', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('Spring Boot 2', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
-        createData('Cypress.io', 'description 1', 'contributor1', 'domain1','in-progress','High','http://www.github.com/ERS-HCL/xxx'),
+        createData(
+          'Angular Challenge',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx',
+          'text',
+          'Description'
+        ),
+        createData(
+          'ReactJS ',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'VueJS',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'StoryBook',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'Microservices',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'Java',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'GraphQL',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'Node JS',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'Andriod',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'TerraForm',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'Kafka',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'Spring Boot 2',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        ),
+        createData(
+          'Cypress.io',
+          'description 1',
+          'contributor1',
+          'domain1',
+          'in-progress',
+          'High',
+          'http://www.github.com/ERS-HCL/xxx'
+        )
       ].sort((a, b) => (a.name < b.name ? -1 : 1)),
       page: 0,
-      rowsPerPage: 5
+      rowsPerPage: 5,
+      editing: false,
+      filter: false,
+      selectedRow: null
     }
   }
 
@@ -242,33 +417,21 @@ class EnhancedTable extends React.Component {
   }
 
   handleSelectAllClick = (event, checked) => {
-    // if (checked) {
-    //   this.setState({ selected: this.state.data.map(n => n.id) })
-    //   return
-    // }
+    const { editing } = this.state
+    if (editing) return
     this.setState({ selected: [] })
   }
 
   handleClick = (event, id) => {
-    const { selected } = this.state
-    const selectedIndex = selected.indexOf(id)
-    let newSelected = []
-    /* 
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id)
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1))
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1))
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      )
+    const { selected, editing, data } = this.state
+
+    if (editing) {
+      return
     }
-    console.log(selectedIndex, newSelected, selected.slice(selectedIndex + 1)) */
-    newSelected.push(id)
-    this.setState({ selected: newSelected })
+    let newSelected = []
+    if (selected.indexOf(id) !== 0) newSelected.push(id)
+    const currentItem = data.find( item => item.id === id)
+    this.setState({ selected: newSelected , selectedRow: currentItem })
   }
 
   handleChangePage = (event, page) => {
@@ -279,82 +442,105 @@ class EnhancedTable extends React.Component {
     this.setState({ rowsPerPage: event.target.value })
   }
 
+  handleEditClick = event => {
+    const { editing } = this.state
+    this.setState({ editing: !editing })
+  }
+
+  handleAddClick = event => {
+    console.log('Add called!')
+  }
+
+  handleSearchClick = event => {
+    const { filter } = this.state
+    this.setState({ filter: !filter })
+  }
+
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
     const { classes } = this.props
-    const { data, order, orderBy, selected, rowsPerPage, page } = this.state
+    const { data, order, orderBy, selected, rowsPerPage, page,selectedRow } = this.state
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
 
     return (
-      <Paper className={classes.root}>
-        <EnhancedTableToolbar numSelected={selected.length} />
-        <div className={classes.tableWrapper}>
-          <Table className={classes.table}>
-            <EnhancedTableHead
-              numSelected={selected.length}
-              order={order}
-              orderBy={orderBy}
-              onSelectAllClick={this.handleSelectAllClick}
-              onRequestSort={this.handleRequestSort}
-              rowCount={data.length}
-            />
-            <TableBody>
-              {data
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(n => {
-                  const isSelected = this.isSelected(n.id)
-                  return (
-                    <TableRow
-                      hover
-                      onClick={event => this.handleClick(event, n.id)}
-                      role="checkbox"
-                      aria-checked={isSelected}
-                      tabIndex={-1}
-                      key={n.id}
-                      selected={isSelected}
-                    >
-                      <TableCell padding="checkbox">
-                        <Checkbox checked={isSelected} />
-                      </TableCell>
-                      <TableCell padding="none">{n.name}</TableCell>
-                      <TableCell padding="none">{n.description}</TableCell>
-                      <TableCell padding="none">{n.contributor}</TableCell>                      
-                      <TableCell padding="none">{n.domain}</TableCell>
-                      <TableCell padding="none">{n.priority}</TableCell>
-                      <TableCell padding="none">{n.status}</TableCell>                      
-                      <TableCell padding="none">{n.githubURL}</TableCell>
-                    </TableRow>
-                  )
-                })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 49 * emptyRows }}>
-                  <TableCell colSpan={6} />
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          {this.state.editing === true ? <ChallengeForm selectedRow={selectedRow} columnData={columnData}/> : null}
+          {this.state.filter === true ? <SearchBox /> : null}
+          <EnhancedTableToolbar
+            numSelected={selected.length}
+            onClickEdit={this.handleEditClick}
+            onClickAdd={this.handleAddClick}
+            onClickSearch={this.handleSearchClick}
+          />
+          <div className={classes.tableWrapper}>
+            <Table className={classes.table}>
+              <EnhancedTableHead
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onSelectAllClick={this.handleSelectAllClick}
+                onRequestSort={this.handleRequestSort}
+                rowCount={data.length}
+              />
+              <TableBody>
+                {data
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map(n => {
+                    const isSelected = this.isSelected(n.id)
+                    return (
+                      <TableRow
+                        hover
+                        onClick={event => this.handleClick(event, n.id)}
+                        role="checkbox"
+                        aria-checked={isSelected}
+                        tabIndex={-1}
+                        key={n.id}
+                        selected={isSelected}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox checked={isSelected} />
+                        </TableCell>
+                        <TableCell padding="none">{n.name}</TableCell>
+                        <TableCell padding="none">{n.description}</TableCell>
+                        <TableCell padding="none">{n.contributor}</TableCell>
+                        <TableCell padding="none">{n.domain}</TableCell>
+                        <TableCell padding="none">{n.priority}</TableCell>
+                        <TableCell padding="none">{n.status}</TableCell>
+                        <TableCell padding="none">{n.githubURL}</TableCell>
+                      </TableRow>
+                    )
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow style={{ height: 49 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+              <TableFooter>
+                <TableRow>
+                  <TablePagination
+                    colSpan={6}
+                    count={data.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    backIconButtonProps={{
+                      'aria-label': 'Previous Page'
+                    }}
+                    nextIconButtonProps={{
+                      'aria-label': 'Next Page'
+                    }}
+                    onChangePage={this.handleChangePage}
+                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                  />
                 </TableRow>
-              )}
-            </TableBody>
-            <TableFooter>
-              <TableRow>
-                <TablePagination
-                  colSpan={6}
-                  count={data.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  backIconButtonProps={{
-                    'aria-label': 'Previous Page'
-                  }}
-                  nextIconButtonProps={{
-                    'aria-label': 'Next Page'
-                  }}
-                  onChangePage={this.handleChangePage}
-                  onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                />
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </div>
-      </Paper>
+              </TableFooter>
+            </Table>
+          </div>
+        </Paper>
+      </div>
     )
   }
 }

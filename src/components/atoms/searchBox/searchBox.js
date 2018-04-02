@@ -10,7 +10,9 @@ const styles = theme => ({
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    backgroundColor: grey[50]
+    backgroundColor: 'white',
+    alignItems: 'center',
+    border: '1px grey'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -33,9 +35,8 @@ class SearchBox extends React.Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    console.log('A name was submitted: ' + this.state.searchText);
- 
+    event.preventDefault()
+    console.log('A name was submitted: ' + this.state.searchText)
   }
 
   handleChange = name => event => {
@@ -48,17 +49,19 @@ class SearchBox extends React.Component {
     const { classes } = this.props
 
     return (
-      <form className={classes.container} noValidate autoComplete="on" onSubmit={this.handleSubmit}>
-        <TextField
-          id="search"
-          label="Search"
-          type="search"
-          className={classes.textField}
-          helperText="Search by domain"
-          onChange={this.handleChange('search')}
-          margin="normal"
-        />
-      </form>
+      <div className={classes.container}>
+        <form noValidate autoComplete="on" onSubmit={this.handleSubmit}>
+          <TextField
+            id="search"
+            label="Search"
+            type="search"
+            className={classes.textField}
+            helperText="Search by domain"
+            onChange={this.handleChange('search')}
+            margin="normal"
+          />
+        </form>
+      </div>
     )
   }
 }

@@ -94,12 +94,8 @@ class Navigation extends Component {
               target="_blank" 
               rel="noopener"
               color="inherit"
-              toolkit="Source Gatsby Site"
-              touch={true}
               aria-label='Github source'
-              tooltip="Github source"
-              tooltipPosition="bottom-right"
-            >
+              >
             <GitHubIcon/>
             </IconButton>
           </Toolbar>
