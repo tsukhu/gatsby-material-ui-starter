@@ -9,6 +9,7 @@ import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button'
 import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui-icons/Menu'
+import Explore from 'material-ui-icons/Explore'
 import Link from 'gatsby-link'
 import Divider from 'material-ui/Divider'
 import { white } from 'material-ui/colors'
@@ -151,7 +152,18 @@ class Navigation extends Component {
                 </ListItemIcon>
                 <ListItemText primary="Github Stats" />
               </ListItem>
-
+              <ListItem
+              button
+              component={Link}
+              to="/challenges/"
+              onClick={this.handleClose}
+              aria-label='All github challenges'
+            >
+              <ListItemIcon>
+                <Explore />
+              </ListItemIcon>
+              <ListItemText primary="Challenges" />
+            </ListItem>
               <ListItem
                 button
                 component={Link}
