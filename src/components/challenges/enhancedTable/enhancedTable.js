@@ -12,6 +12,7 @@ import Table, {
 import Paper from 'material-ui/Paper'
 import Checkbox from 'material-ui/Checkbox'
 import ChallengeForm from '../challengeForm/challengeForm'
+import LoginForm from '../loginForm/loginForm'
 import SearchBox from '../searchBox/searchBox'
 import { List } from 'immutable'
 import Snackbar from 'material-ui/Snackbar'
@@ -65,7 +66,9 @@ class EnhancedTable extends React.Component {
       isLoggedIn: false,
       isLoggingIn: false,
       isLoading: false,
-      showSnackbar: false
+      showLogin: false,
+      showSnackbar: false,
+      snackBarMessage: ''
     }
     this.dbItems = ref.child('data')
   }
@@ -236,13 +239,29 @@ class EnhancedTable extends React.Component {
   }
 
   handleLoginClick = event => {
-    this.setState({ isLoggingIn: true })
-    login('test@gmail.com', 'testpwd')
-    .catch(err => {
-      this.setState({ isLoggingIn: false })
-    })
+    this.setState({ showLogin: true })
+    //showLogin
+    // this.setState({ isLoggingIn: true })
+    // login('test@gmail.com', 'testpwd')
+    // .catch(err => {
+    //   this.setState({ isLoggingIn: false })
+    // })
   }
 
+  handleLoginSubmit = event => {
+    this.setState({ showLogin: false, isLoggingIn: true })
+    login(event.username, event.password)
+    .then(
+      data => {
+        console.log(data)
+        this.setState({ showSnackbar: true , snackBarMessage: data.email + ' Logged In' })
+      }
+    )
+    .catch(err => {
+      this.setState({ isLoggingIn: false })
+      this.setState({ showSnackbar: true , snackBarMessage: 'Invalid Username/Password' })
+    })
+  }
   handleLogOutClick = event => {
     logout()
   }
@@ -251,7 +270,7 @@ class EnhancedTable extends React.Component {
     ref
       .child('data')
       .set(this.state.data)
-      .then(() => this.setState({ showSnackbar: true }))
+      .then(() => this.setState({ showSnackbar: true , snackBarMessage: 'Data saved !!' }))
   }
 
   handleCloseSnackBar = () => {
@@ -274,7 +293,9 @@ class EnhancedTable extends React.Component {
       isLoggedIn,
       isLoggingIn,
       isLoading,
-      showSnackbar
+      showSnackbar,
+      snackBarMessage,
+      showLogin
     } = this.state
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
@@ -286,12 +307,15 @@ class EnhancedTable extends React.Component {
         SnackbarContentProps={{
           'aria-describedby': 'message-id'
         }}
-        message={<span id="message-id">Data saved !!</span>}
+        message={<span id="message-id">{snackBarMessage}</span>}
       />
     ) : null
+
+    const loginForm = showLogin ? (<LoginForm handleLoginSubmit={this.handleLoginSubmit} open={showLogin}/>): null
     return (
       <div className={classes.root}>
         {snackBar}
+        {loginForm}
         <Paper className={classes.paper}>
           {this.state.editing === true ? (
             <ChallengeForm
