@@ -240,12 +240,6 @@ class EnhancedTable extends React.Component {
 
   handleLoginClick = event => {
     this.setState({ showLogin: true })
-    //showLogin
-    // this.setState({ isLoggingIn: true })
-    // login('test@gmail.com', 'testpwd')
-    // .catch(err => {
-    //   this.setState({ isLoggingIn: false })
-    // })
   }
 
   handleLoginSubmit = event => {
@@ -253,7 +247,6 @@ class EnhancedTable extends React.Component {
     login(event.username, event.password)
     .then(
       data => {
-        console.log(data)
         this.setState({ showSnackbar: true , snackBarMessage: data.email + ' Logged In' })
       }
     )
