@@ -5,7 +5,7 @@ import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import PageHeader from '../pageHeader/pageHeader'
 import blueGrey from 'material-ui/colors/blueGrey'
-import EnhancedTable from '../atoms/dataTable/dataTable'
+import EnhancedTable from './enhancedTable/enhancedTable'
 
 const styles = theme => ({
   paper: {

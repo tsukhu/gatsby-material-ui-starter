@@ -1,296 +1,25 @@
 import React from 'react'
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
-
-import blueGrey from 'material-ui/colors/blueGrey'
 import Table, {
   TableBody,
   TableCell,
   TableFooter,
   TableHead,
   TablePagination,
-  TableRow,
-  TableSortLabel
+  TableRow
 } from 'material-ui/Table'
-import Toolbar from 'material-ui/Toolbar'
-import Typography from 'material-ui/Typography'
 import Paper from 'material-ui/Paper'
 import Checkbox from 'material-ui/Checkbox'
-import IconButton from 'material-ui/IconButton'
-import Tooltip from 'material-ui/Tooltip'
-import DeleteIcon from 'material-ui-icons/Delete'
-import EditIcon from 'material-ui-icons/Edit'
-import AddIcon from 'material-ui-icons/Add'
-import FilterListIcon from 'material-ui-icons/FilterList'
-import { lighten } from 'material-ui/styles/colorManipulator'
 import ChallengeForm from '../challengeForm/challengeForm'
 import SearchBox from '../searchBox/searchBox'
 import { List } from 'immutable'
-import Button from 'material-ui/Button'
 import Snackbar from 'material-ui/Snackbar'
 import { ref, firebaseAuth } from '../../../utils/firebase'
 import { login, logout } from '../../../utils/auth'
-const uuidv4 = require('uuid/v4')
-
-let counter = 0
-function createData(
-  name,
-  description,
-  contributor,
-  domain,
-  status,
-  priority,
-  githubURL
-) {
-  counter += 1
-  return {
-    id: uuidv4(),
-    name,
-    description,
-    contributor,
-    domain,
-    status,
-    priority,
-    githubURL
-  }
-}
-
-const columnData = [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: false,
-    label: 'Name',
-    type: 'text',
-    helperText: 'Challenge Name'
-  },
-  {
-    id: 'description',
-    numeric: false,
-    disablePadding: false,
-    label: 'Description',
-    type: 'text',
-    helperText: 'Description'
-  },
-  {
-    id: 'contributor',
-    numeric: false,
-    disablePadding: false,
-    label: 'Contributor',
-    type: 'text',
-    helperText: 'Challenge Name'
-  },
-  {
-    id: 'domain',
-    numeric: false,
-    disablePadding: false,
-    label: 'Domain',
-    type: 'text',
-    helperText: 'Domain'
-  },
-  {
-    id: 'status',
-    numeric: false,
-    disablePadding: false,
-    label: 'Status',
-    type: 'text',
-    helperText: 'Status'
-  },
-  {
-    id: 'priority',
-    numeric: false,
-    disablePadding: false,
-    label: 'Priority',
-    type: 'text',
-    helperText: 'Priority'
-  },
-  {
-    id: 'githubURL',
-    numeric: false,
-    disablePadding: false,
-    label: 'githubURL',
-    type: 'text',
-    helperText: 'Github URL'
-  }
-]
-
-class EnhancedTableHead extends React.Component {
-  createSortHandler = property => event => {
-    this.props.onRequestSort(event, property)
-  }
-
-  render() {
-    const {
-      onSelectAllClick,
-      order,
-      orderBy,
-      numSelected,
-      rowCount
-    } = this.props
-
-    return (
-      <TableHead>
-        <TableRow>
-          <TableCell padding="checkbox">
-            <Checkbox
-              checked={numSelected === rowCount}
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              onChange={onSelectAllClick}
-            />
-          </TableCell>
-          {columnData.map(column => {
-            return (
-              <TableCell
-                key={column.id}
-                numeric={column.numeric}
-                padding={column.disablePadding ? 'none' : 'default'}
-                sortDirection={orderBy === column.id ? order : false}
-              >
-                <Tooltip
-                  title="Sort"
-                  placement={column.numeric ? 'bottom-end' : 'bottom-start'}
-                  enterDelay={300}
-                >
-                  <TableSortLabel
-                    active={orderBy === column.id}
-                    direction={order}
-                    onClick={this.createSortHandler(column.id)}
-                  >
-                    {column.label}
-                  </TableSortLabel>
-                </Tooltip>
-              </TableCell>
-            )
-          }, this)}
-        </TableRow>
-      </TableHead>
-    )
-  }
-}
-
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.string.isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired
-}
-
-const toolbarStyles = theme => ({
-  root: {
-    paddingRight: theme.spacing.unit
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
-        },
-  spacer: {
-    flex: '1 1 100%'
-  },
-  actions: {
-    flex: '0 0 auto'
-  },
-  actionButtons: {
-    display: 'flex'
-  },
-  title: {
-    flex: '0 0 auto'
-  }
-})
-
-let EnhancedTableToolbar = props => {
-  const {
-    numSelected,
-    classes,
-    onClickEdit,
-    onClickAdd,
-    onClickSearch,
-    onClickDelete,
-    onClickLogin,
-    onClickSave,
-    onClickLogout,
-    isLoggedIn
-  } = props
-
-  const actionButton = isLoggedIn ? (
-    <div className={classes.actionButtons}>
-      <div onClick={onClickSave} className={classes.actionButton}>
-        <Button color="primary">SAVE</Button>
-      </div>
-      <div onClick={onClickLogout} className={classes.actionButton}>
-        <Button color="primary">LOGOUT</Button>
-      </div>
-    </div>
-  ) : (
-    <div onClick={onClickLogin}>
-      <Button color="primary">LOGIN</Button>
-    </div>
-  )
-
-  return (
-    <Toolbar
-      className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0
-      })}
-    >
-      <div className={classes.title}>
-        {numSelected > 0 ? (
-          <Typography color="inherit" variant="subheading">
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography color="inherit" variant="subheading" />
-        )}
-      </div>
-      <div className={classes.spacer} />
-      {actionButton}
-      <div className={classes.actions}>
-        {numSelected > 0 ? (
-          <div>
-            <Tooltip title="Edit">
-              <IconButton aria-label="Edit" onClick={onClickEdit}>
-                <EditIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton aria-label="Delete" onClick={onClickDelete}>
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
-          </div>
-        ) : (
-          <div>
-            <Tooltip title="Add">
-              <IconButton aria-label="Add" onClick={onClickAdd}>
-                <AddIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Filter list">
-              <IconButton aria-label="Filter list" onClick={onClickSearch}>
-                <FilterListIcon />
-              </IconButton>
-            </Tooltip>
-          </div>
-        )}
-      </div>
-    </Toolbar>
-  )
-}
-
-EnhancedTableToolbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  numSelected: PropTypes.number.isRequired
-}
-
-EnhancedTableToolbar = withStyles(toolbarStyles)(EnhancedTableToolbar)
+import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
+import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
+import getColumnData, { createData } from '../metadata'
 
 const styles = theme => ({
   root: {
@@ -327,129 +56,9 @@ class EnhancedTable extends React.Component {
       orderBy: 'name',
       selected: [],
       data: [],
-      // data: [
-      //   createData(
-      //     'Angular Challenge',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx',
-      //     'text',
-      //     'Description'
-      //   ),
-      //   createData(
-      //     'ReactJS ',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'VueJS',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'StoryBook',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'Microservices',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'Java',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'GraphQL',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'Node JS',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'Andriod',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'TerraForm',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'Kafka',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'Spring Boot 2',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   ),
-      //   createData(
-      //     'Cypress.io',
-      //     'description 1',
-      //     'contributor1',
-      //     'domain1',
-      //     'in-progress',
-      //     'High',
-      //     'http://www.github.com/ERS-HCL/xxx'
-      //   )
-      // ].sort((a, b) => (a.name < b.name ? -1 : 1)),
       page: 0,
-      rowsPerPage: 5,
+      rowsPerPage: 15,
+      rowsPerPageOptions: [5,15,25],
       editing: false,
       filter: false,
       selectedRow: null,
@@ -525,7 +134,7 @@ class EnhancedTable extends React.Component {
       if (key !== 'id') {
         let colData = []
 
-        colData = columnData.filter(data => {
+        colData = getColumnData().filter(data => {
           return data.id === key
         })
         if (colData === undefined) {
@@ -649,6 +258,7 @@ class EnhancedTable extends React.Component {
       orderBy,
       selected,
       rowsPerPage,
+      rowsPerPageOptions,
       page,
       selectedRow,
       isLoggedIn,
@@ -741,6 +351,7 @@ class EnhancedTable extends React.Component {
                     count={data.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
+                    rowsPerPageOptions={rowsPerPageOptions}
                     backIconButtonProps={{
                       'aria-label': 'Previous Page'
                     }}
