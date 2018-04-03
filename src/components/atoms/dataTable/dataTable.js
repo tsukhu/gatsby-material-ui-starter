@@ -29,6 +29,8 @@ import SearchBox from '../searchBox/searchBox'
 import { List } from 'immutable'
 import Button from 'material-ui/Button'
 import Snackbar from 'material-ui/Snackbar'
+import { ref, firebaseAuth } from '../../../utils/firebase'
+import { login, logout } from '../../../utils/auth'
 
 let counter = 0
 function createData(
@@ -193,8 +195,10 @@ const toolbarStyles = theme => ({
     flex: '1 1 100%'
   },
   actions: {
-    color: theme.palette.text.secondary,
     flex: '0 0 auto'
+  },
+  actionButtons: {
+    display: 'flex',
   },
   title: {
     flex: '0 0 auto'
@@ -211,12 +215,18 @@ let EnhancedTableToolbar = props => {
     onClickDelete,
     onClickLogin,
     onClickSave,
+    onClickLogout,
     isLoggedIn
   } = props
 
   const actionButton = isLoggedIn ? (
-    <div onClick={onClickSave}>
-      <Button color="primary">SAVE</Button>
+    <div className={classes.actionButtons}>
+      <div onClick={onClickSave} className={classes.actionButton}>
+        <Button color="primary">SAVE</Button>
+      </div>
+      <div onClick={onClickLogout} className={classes.actionButton}>
+        <Button color="primary">LOGOUT</Button>
+      </div>
     </div>
   ) : (
     <div onClick={onClickLogin}>
@@ -315,127 +325,128 @@ class EnhancedTable extends React.Component {
       order: 'asc',
       orderBy: 'name',
       selected: [],
-      data: [
-        createData(
-          'Angular Challenge',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx',
-          'text',
-          'Description'
-        ),
-        createData(
-          'ReactJS ',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'VueJS',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'StoryBook',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'Microservices',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'Java',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'GraphQL',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'Node JS',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'Andriod',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'TerraForm',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'Kafka',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'Spring Boot 2',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        ),
-        createData(
-          'Cypress.io',
-          'description 1',
-          'contributor1',
-          'domain1',
-          'in-progress',
-          'High',
-          'http://www.github.com/ERS-HCL/xxx'
-        )
-      ].sort((a, b) => (a.name < b.name ? -1 : 1)),
+      data: [],
+      // data: [
+      //   createData(
+      //     'Angular Challenge',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx',
+      //     'text',
+      //     'Description'
+      //   ),
+      //   createData(
+      //     'ReactJS ',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'VueJS',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'StoryBook',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'Microservices',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'Java',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'GraphQL',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'Node JS',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'Andriod',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'TerraForm',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'Kafka',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'Spring Boot 2',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   ),
+      //   createData(
+      //     'Cypress.io',
+      //     'description 1',
+      //     'contributor1',
+      //     'domain1',
+      //     'in-progress',
+      //     'High',
+      //     'http://www.github.com/ERS-HCL/xxx'
+      //   )
+      // ].sort((a, b) => (a.name < b.name ? -1 : 1)),
       page: 0,
       rowsPerPage: 5,
       editing: false,
@@ -444,6 +455,38 @@ class EnhancedTable extends React.Component {
       isLoggedIn: false,
       showSnackbar: false
     }
+    this.dbItems = ref.child('data');
+  }
+
+  componentDidMount() {
+    this.removeListener = firebaseAuth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          isLoggedIn: true
+        })
+      } else {
+        this.setState({
+          isLoggedIn: false
+        })
+      }
+    })
+    this.dbItems.on('value', dataSnapshot => {
+      var items = [];
+
+      dataSnapshot.forEach(function(childSnapshot) {
+        var item = childSnapshot.val();
+        item['.key'] = childSnapshot.key;
+        items.push(item);
+      });
+
+      this.setState({
+        data: items.sort((a, b) => (a.name < b.name ? -1 : 1))
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    this.removeListener()
   }
 
   handleRequestSort = (event, property) => {
@@ -570,11 +613,20 @@ class EnhancedTable extends React.Component {
   }
 
   handleLoginClick = event => {
-    this.setState({ isLoggedIn: !this.state.isLoggedIn })
+    login('test@gmail.com', 'testpwd')
+  }
+
+  handleLogOutClick = event => {
+    logout()
   }
 
   handleSaveClick = event => {
-    this.setState({ showSnackbar: true })
+
+    ref.child('data')
+    .set(this.state.data) 
+    .then(() =>  this.setState({ showSnackbar: true }))
+
+   
   }
 
   handleCloseSnackBar = () => {
@@ -629,6 +681,7 @@ class EnhancedTable extends React.Component {
             onClickDelete={this.handleDeleteClick}
             onClickLogin={this.handleLoginClick}
             onClickSave={this.handleSaveClick}
+            onClickLogout={this.handleLogOutClick}
             isLoggedIn={isLoggedIn}
           />
           <div className={classes.tableWrapper}>
