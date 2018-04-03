@@ -27,6 +27,8 @@ import { lighten } from 'material-ui/styles/colorManipulator'
 import ChallengeForm from '../challengeForm/challengeForm'
 import SearchBox from '../searchBox/searchBox'
 import { List } from 'immutable'
+import Button from 'material-ui/Button'
+import Snackbar from 'material-ui/Snackbar'
 
 let counter = 0
 function createData(
@@ -200,7 +202,27 @@ const toolbarStyles = theme => ({
 })
 
 let EnhancedTableToolbar = props => {
-  const { numSelected, classes, onClickEdit, onClickAdd, onClickSearch, onClickDelete } = props
+  const {
+    numSelected,
+    classes,
+    onClickEdit,
+    onClickAdd,
+    onClickSearch,
+    onClickDelete,
+    onClickLogin,
+    onClickSave,
+    isLoggedIn
+  } = props
+
+  const actionButton = isLoggedIn ? (
+    <div onClick={onClickSave}>
+      <Button color="primary">SAVE</Button>
+    </div>
+  ) : (
+    <div onClick={onClickLogin}>
+      <Button color="primary">LOGIN</Button>
+    </div>
+  )
 
   return (
     <Toolbar
@@ -218,6 +240,7 @@ let EnhancedTableToolbar = props => {
         )}
       </div>
       <div className={classes.spacer} />
+      {actionButton}
       <div className={classes.actions}>
         {numSelected > 0 ? (
           <div>
@@ -417,7 +440,9 @@ class EnhancedTable extends React.Component {
       rowsPerPage: 5,
       editing: false,
       filter: false,
-      selectedRow: null
+      selectedRow: null,
+      isLoggedIn: false,
+      showSnackbar: false
     }
   }
 
@@ -494,26 +519,18 @@ class EnhancedTable extends React.Component {
   handleAddClick = event => {
     const { data } = this.state
 
-    const newData = List(data).push(createData(
-      'A new row',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      '',
-      ''
-    ))
-    console.log(data,newData)
-    this.setState({ data : newData.toArray() })
+    const newData = List(data).push(
+      createData('A new row', '', '', '', '', '', '', '', '')
+    )
+    console.log(data, newData)
+    this.setState({ data: newData.toArray() })
   }
 
-  handleDeleteClick = (event) => {
+  handleDeleteClick = event => {
     const { selected, data } = this.state
-    
-    console.log(selected,selected[0])
-    const newData = data.filter( item => (item.id !== selected[0]))
+
+    console.log(selected, selected[0])
+    const newData = data.filter(item => item.id !== selected[0])
     console.log(newData)
     this.setState({ data: newData, selected: [] })
     console.log('Delete called!')
@@ -525,33 +542,43 @@ class EnhancedTable extends React.Component {
   }
 
   handleFormSubmit = (event, formData) => {
-   
     const { selected, data } = this.state
     // Immutable List
     const newData = List(data)
-  
+
     // Map formData to data list
     newData.map(item => {
-      if (item.id === selected[0]){
-        for (let key in item){
+      if (item.id === selected[0]) {
+        for (let key in item) {
           if (key !== 'id') {
             const entry = formData.filter(data => data.id === key)
-           item[key] = entry[0].value
+            item[key] = entry[0].value
           } else {
             item
           }
-
         }
       } else {
         item
       }
     })
-   
-    this.setState({ editing: false , data: newData.toArray() })
+
+    this.setState({ editing: false, data: newData.toArray() })
   }
 
-  handleFormCancel = (event) => {
+  handleFormCancel = event => {
     this.setState({ editing: false })
+  }
+
+  handleLoginClick = event => {
+    this.setState({ isLoggedIn: !this.state.isLoggedIn })
+  }
+
+  handleSaveClick = event => {
+    this.setState({ showSnackbar: true })
+  }
+
+  handleCloseSnackBar = () => {
+    this.setState({ showSnackbar: false })
   }
 
   isSelected = id => this.state.selected.indexOf(id) !== -1
@@ -565,13 +592,26 @@ class EnhancedTable extends React.Component {
       selected,
       rowsPerPage,
       page,
-      selectedRow
+      selectedRow,
+      isLoggedIn,
+      showSnackbar
     } = this.state
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
-
+    const snackBar = showSnackbar ? (
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        open={showSnackbar}
+        onClose={this.handleCloseSnackBar}
+        SnackbarContentProps={{
+          'aria-describedby': 'message-id'
+        }}
+        message={<span id="message-id">Data saved !!</span>}
+      />
+    ) : null
     return (
       <div className={classes.root}>
+        {snackBar}
         <Paper className={classes.paper}>
           {this.state.editing === true ? (
             <ChallengeForm
@@ -587,6 +627,9 @@ class EnhancedTable extends React.Component {
             onClickAdd={this.handleAddClick}
             onClickSearch={this.handleSearchClick}
             onClickDelete={this.handleDeleteClick}
+            onClickLogin={this.handleLoginClick}
+            onClickSave={this.handleSaveClick}
+            isLoggedIn={isLoggedIn}
           />
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
