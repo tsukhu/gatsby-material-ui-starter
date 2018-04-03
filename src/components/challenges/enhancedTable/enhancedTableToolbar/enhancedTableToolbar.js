@@ -11,7 +11,9 @@ import EditIcon from 'material-ui-icons/Edit'
 import AddIcon from 'material-ui-icons/Add'
 import FilterListIcon from 'material-ui-icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
+import { CircularProgress } from 'material-ui/Progress'
 import Button from 'material-ui/Button'
+import green from 'material-ui/colors/green';
 
 const toolbarStyles = theme => ({
   root: {
@@ -27,6 +29,12 @@ const toolbarStyles = theme => ({
           color: theme.palette.text.primary,
           backgroundColor: theme.palette.secondary.dark
         },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700]
+    }
+  },
   spacer: {
     flex: '1 1 100%'
   },
@@ -36,9 +44,24 @@ const toolbarStyles = theme => ({
   actionButtons: {
     display: 'flex'
   },
+  wrapper: {
+    margin: theme.spacing.unit,
+    position: 'relative'
+  },
   title: {
     flex: '0 0 auto'
-  }
+  },
+  progress: {
+    margin: theme.spacing.unit * 2
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
 })
 
 let EnhancedTableToolbar = props => {
@@ -52,7 +75,9 @@ let EnhancedTableToolbar = props => {
     onClickLogin,
     onClickSave,
     onClickLogout,
-    isLoggedIn
+    isLoggedIn,
+    isLoggingIn,
+    isLoading
   } = props
 
   const actionButton = isLoggedIn ? (
@@ -65,11 +90,22 @@ let EnhancedTableToolbar = props => {
       </div>
     </div>
   ) : (
-    <div onClick={onClickLogin}>
-      <Button color="primary">LOGIN</Button>
+    <div className={classes.wrapper}>
+      <Button
+        color="primary"
+        disabled={isLoggingIn || isLoading}
+        onClick={onClickLogin}
+      >
+        LOGIN
+      </Button>
+      {isLoggingIn && (
+        <CircularProgress size={24} className={classes.buttonProgress} />
+      )}
     </div>
   )
-
+  const dataLoading = isLoading ? (
+    <CircularProgress className={classes.progress} />
+  ) : null
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -85,6 +121,7 @@ let EnhancedTableToolbar = props => {
           <Typography color="inherit" variant="subheading" />
         )}
       </div>
+      {dataLoading}
       <div className={classes.spacer} />
       {actionButton}
       <div className={classes.actions}>

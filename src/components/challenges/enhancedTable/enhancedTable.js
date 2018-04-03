@@ -63,16 +63,20 @@ class EnhancedTable extends React.Component {
       filter: false,
       selectedRow: null,
       isLoggedIn: false,
+      isLoggingIn: false,
+      isLoading: false,
       showSnackbar: false
     }
     this.dbItems = ref.child('data')
   }
 
   componentDidMount() {
+    
     this.removeListener = firebaseAuth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
-          isLoggedIn: true
+          isLoggedIn: true,
+          isLoggingIn: false
         })
       } else {
         this.setState({
@@ -80,17 +84,18 @@ class EnhancedTable extends React.Component {
         })
       }
     })
+    this.setState({ isLoading: true })
     this.dbItems.on('value', dataSnapshot => {
       var items = []
 
       dataSnapshot.forEach(function(childSnapshot) {
         var item = childSnapshot.val()
-        //        item['.key'] = childSnapshot.key;
         items.push(item)
       })
-      console.log(items)
+
       this.setState({
-        data: items.sort((a, b) => (a.name < b.name ? -1 : 1))
+        data: items.sort((a, b) => (a.name < b.name ? -1 : 1)),
+        isLoading: false
       })
     })
   }
@@ -121,7 +126,7 @@ class EnhancedTable extends React.Component {
     this.setState({ selected: [] })
   }
 
-  handleClick = (event, id) => {
+  handleRowClick = (event, id) => {
     const { selected, editing, data } = this.state
     if (editing) {
       return
@@ -230,7 +235,11 @@ class EnhancedTable extends React.Component {
   }
 
   handleLoginClick = event => {
+    this.setState({ isLoggingIn: true })
     login('test@gmail.com', 'testpwd')
+    .catch(err => {
+      this.setState({ isLoggingIn: false })
+    })
   }
 
   handleLogOutClick = event => {
@@ -262,6 +271,8 @@ class EnhancedTable extends React.Component {
       page,
       selectedRow,
       isLoggedIn,
+      isLoggingIn,
+      isLoading,
       showSnackbar
     } = this.state
     const emptyRows =
@@ -299,6 +310,8 @@ class EnhancedTable extends React.Component {
             onClickSave={this.handleSaveClick}
             onClickLogout={this.handleLogOutClick}
             isLoggedIn={isLoggedIn}
+            isLoggingIn={isLoggingIn}
+            isLoading={isLoading}
           />
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
@@ -318,7 +331,7 @@ class EnhancedTable extends React.Component {
                     return (
                       <TableRow
                         hover
-                        onClick={event => this.handleClick(event, n.id)}
+                        onClick={event => this.handleRowClick(event, n.id)}
                         role="checkbox"
                         aria-checked={isSelected}
                         tabIndex={-1}

@@ -31,7 +31,7 @@ class EnhancedTableHead extends React.Component {
         <TableRow>
           <TableCell padding="checkbox">
             <Checkbox
-              checked={numSelected === rowCount}
+              checked={numSelected === rowCount && numSelected > 0}
               indeterminate={numSelected > 0 && numSelected < rowCount}
               onChange={onSelectAllClick}
             />
