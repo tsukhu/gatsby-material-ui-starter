@@ -31,6 +31,7 @@ import Button from 'material-ui/Button'
 import Snackbar from 'material-ui/Snackbar'
 import { ref, firebaseAuth } from '../../../utils/firebase'
 import { login, logout } from '../../../utils/auth'
+const uuidv4 = require('uuid/v4')
 
 let counter = 0
 function createData(
@@ -44,7 +45,7 @@ function createData(
 ) {
   counter += 1
   return {
-    id: counter,
+    id: uuidv4(),
     name,
     description,
     contributor,
@@ -198,7 +199,7 @@ const toolbarStyles = theme => ({
     flex: '0 0 auto'
   },
   actionButtons: {
-    display: 'flex',
+    display: 'flex'
   },
   title: {
     flex: '0 0 auto'
@@ -455,7 +456,7 @@ class EnhancedTable extends React.Component {
       isLoggedIn: false,
       showSnackbar: false
     }
-    this.dbItems = ref.child('data');
+    this.dbItems = ref.child('data')
   }
 
   componentDidMount() {
@@ -471,18 +472,18 @@ class EnhancedTable extends React.Component {
       }
     })
     this.dbItems.on('value', dataSnapshot => {
-      var items = [];
+      var items = []
 
       dataSnapshot.forEach(function(childSnapshot) {
-        var item = childSnapshot.val();
-        item['.key'] = childSnapshot.key;
-        items.push(item);
-      });
-
+        var item = childSnapshot.val()
+        //        item['.key'] = childSnapshot.key;
+        items.push(item)
+      })
+      console.log(items)
       this.setState({
         data: items.sort((a, b) => (a.name < b.name ? -1 : 1))
-      });
-    });
+      })
+    })
   }
 
   componentWillUnmount() {
@@ -513,7 +514,6 @@ class EnhancedTable extends React.Component {
 
   handleClick = (event, id) => {
     const { selected, editing, data } = this.state
-
     if (editing) {
       return
     }
@@ -543,7 +543,13 @@ class EnhancedTable extends React.Component {
       }
     }
 
-    this.setState({ selected: newSelected, selectedRow: formElementsArray })
+    this.setState({
+      selected: newSelected,
+      selectedRow: formElementsArray.sort(
+        (a, b) =>
+          a.id === 'name' ? -1 : b.id === 'name' ? 1 : a.id < b.id ? -1 : 1
+      )
+    })
   }
 
   handleChangePage = (event, page) => {
@@ -565,8 +571,10 @@ class EnhancedTable extends React.Component {
     const newData = List(data).push(
       createData('A new row', '', '', '', '', '', '', '', '')
     )
-    console.log(data, newData)
-    this.setState({ data: newData.toArray() })
+
+    this.setState({
+      data: newData.toArray().sort((a, b) => (a.name < b.name ? -1 : 1))
+    })
   }
 
   handleDeleteClick = event => {
@@ -621,12 +629,10 @@ class EnhancedTable extends React.Component {
   }
 
   handleSaveClick = event => {
-
-    ref.child('data')
-    .set(this.state.data) 
-    .then(() =>  this.setState({ showSnackbar: true }))
-
-   
+    ref
+      .child('data')
+      .set(this.state.data)
+      .then(() => this.setState({ showSnackbar: true }))
   }
 
   handleCloseSnackBar = () => {
