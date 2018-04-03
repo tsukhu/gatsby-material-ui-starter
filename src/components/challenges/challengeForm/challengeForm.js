@@ -7,6 +7,8 @@ import Input, { InputLabel } from 'material-ui/Input'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
 import PageHeader from '../../pageHeader/pageHeader'
+import { FormControl, FormHelperText } from 'material-ui/Form'
+import Select from 'material-ui/Select'
 import blueGrey from 'material-ui/colors/blueGrey'
 import Button from 'material-ui/Button'
 
@@ -15,6 +17,10 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     backgroundColor: 'white'
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
   },
   paper: {
     margin: 5,
@@ -36,7 +42,7 @@ const styles = theme => ({
     width: 200
   },
   button: {
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   }
 })
 
@@ -80,22 +86,48 @@ class ChallengeForm extends React.Component {
   }
 
   render() {
-    const { classes, selectedRow, handleFormSubmit, handleFormCancel } = this.props
+    const {
+      classes,
+      selectedRow,
+      handleFormSubmit,
+      handleFormCancel
+    } = this.props
 
-    const formFields = selectedRow.map(field => (
-      <TextField
-        id={field.id}
-        label={field.id.toUpperCase()}
-        defaultValue={field.value}
-        type={field.type}
-        autoComplete="name"
-        className={classes.textField}
-        helperText={field.helperText}
-        margin="normal"
-        key={field.id}
-        onChange={event => this.handleChange(event, field.id)}
-      />
-    ))
+    const formFields = selectedRow.map(
+      field =>
+        field.type === 'select' ? (
+          <FormControl className={classes.formControl} key={field.id}>
+            <InputLabel htmlFor={field.id}>{field.id.toUpperCase()}</InputLabel>
+            <Select
+              native
+              value={field.value}
+              onChange={event => this.handleChange(event, field.id)}
+              inputProps={{
+                id: field.id
+              }}
+            >
+              {field.options.map(option => (
+              <option value={option.value} key={option.name}>
+                {option.name}
+              </option>
+              ))}
+            </Select>
+          </FormControl>
+        ) : (
+          <TextField
+            id={field.id}
+            label={field.id.toUpperCase()}
+            defaultValue={field.value}
+            type={field.type}
+            autoComplete="name"
+            className={classes.textField}
+            helperText={field.helperText}
+            margin="normal"
+            key={field.id}
+            onChange={event => this.handleChange(event, field.id)}
+          />
+        )
+    )
     return (
       <Paper className={classes.paper} elevation={4}>
         <PageHeader text="Edit" />
@@ -107,23 +139,17 @@ class ChallengeForm extends React.Component {
         >
           {formFields}
           <div
-            onClick={event =>
-              handleFormSubmit(event, this.state.challengeForm)
-            }
+            onClick={event => handleFormSubmit(event, this.state.challengeForm)}
           >
             <Button color="primary" className={classes.button}>
               UPDATE
             </Button>
           </div>
-          <div
-          onClick={event =>
-            handleFormCancel(event)
-          }
-        >
-          <Button color="primary" className={classes.button}>
-            CANCEL
-          </Button>
-        </div>
+          <div onClick={event => handleFormCancel(event)}>
+            <Button color="primary" className={classes.button}>
+              CANCEL
+            </Button>
+          </div>
         </form>
       </Paper>
     )

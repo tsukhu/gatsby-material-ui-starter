@@ -152,7 +152,8 @@ class EnhancedTable extends React.Component {
           id: key,
           value: currentItem[key],
           type: colData[0].type,
-          helperText: colData[0].helperText
+          helperText: colData[0].helperText,
+          options: colData[0].options? colData[0].options: []
         })
       }
     }
@@ -345,8 +346,8 @@ class EnhancedTable extends React.Component {
                         <TableCell padding="none">{n.description}</TableCell>
                         <TableCell padding="none">{n.contributor}</TableCell>
                         <TableCell padding="none">{n.domain}</TableCell>
-                        <TableCell padding="none">{n.priority}</TableCell>
                         <TableCell padding="none">{n.status}</TableCell>
+                        <TableCell padding="none">{n.priority}</TableCell>
                         <TableCell padding="none">{n.githubURL}</TableCell>
                       </TableRow>
                     )

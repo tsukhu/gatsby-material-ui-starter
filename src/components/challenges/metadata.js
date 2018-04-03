@@ -59,7 +59,13 @@ const getColumnData = () => { return [
     numeric: false,
     disablePadding: false,
     label: 'Status',
-    type: 'text',
+    type: 'select',
+    options: [
+      { name: 'None' , value: '' },
+      { name: 'Backlog' , value: 'Backlog Item' },
+      { name: 'In Progress' , value: 'In Progress' },
+      { name: 'Done' , value: 'Done' },
+     ],
     helperText: 'Status'
   },
   {
@@ -67,7 +73,13 @@ const getColumnData = () => { return [
     numeric: false,
     disablePadding: false,
     label: 'Priority',
-    type: 'text',
+    type: 'select',
+    options: [
+      { name: 'None' , value: '' },
+      { name: 'High' , value: 'High' },
+      { name: 'Medium' , value: 'Medium' },
+      { name: 'Low' , value: 'Low' },
+     ],
     helperText: 'Priority'
   },
   {
