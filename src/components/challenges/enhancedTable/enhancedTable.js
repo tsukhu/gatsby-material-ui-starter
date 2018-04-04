@@ -71,7 +71,8 @@ class EnhancedTable extends React.Component {
       snackBarMessage: '',
       user: null,
       isEditable: false, // Check is row is editable or not
-      isAdmin: false
+      isAdmin: false,
+      filterText: null
     }
     this.dbItems = ref.child('data')
   }
@@ -351,6 +352,20 @@ class EnhancedTable extends React.Component {
     this.setState({ showSnackbar: false })
   }
 
+  handleClearFilter = () => {
+    this.setState({ filterText: null })
+  }
+
+  handleSearchFilter = (filter) => {
+   
+    this.setState({ filterText: filter })
+    
+  }
+
+  applyfilter = (item) => {
+    return (this.state.filterText?item.name.toLowerCase().includes(this.state.filterText.toLowerCase()):true)
+  }
+
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
@@ -407,7 +422,7 @@ class EnhancedTable extends React.Component {
               handleFormSubmit={this.handleFormSubmit}
             />
           ) : null}
-          {this.state.filter === true ? <SearchBox /> : null}
+          {this.state.filter === true ? <SearchBox handleSearch={this.handleSearchFilter} searchText={this.state.filterText}/> : null}
           <EnhancedTableToolbar
             numSelected={selected.length}
             onClickEdit={this.handleEditClick}
@@ -435,6 +450,7 @@ class EnhancedTable extends React.Component {
               />
               <TableBody>
                 {data
+                  .filter(item => this.applyfilter(item))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
                     const isSelected = this.isSelected(n.id)

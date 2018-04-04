@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import Paper from 'material-ui/Paper'
+import Button from 'material-ui/Button';
+import SearchIcon from 'material-ui-icons/Search';
 import Typography from 'material-ui/Typography'
 import PageHeader from '../../pageHeader/pageHeader'
 import blueGrey from 'material-ui/colors/blueGrey'
@@ -14,6 +16,9 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     backgroundColor: 'white'
+  },
+  button: {
+    margin: theme.spacing.unit,
   },
   paper: {
     margin: 5,
@@ -29,7 +34,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 400
+    minWidth: 250
   },
   menu: {
     width: 200
@@ -43,7 +48,14 @@ class SearchBox extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   state = {
-    searchText: ''
+    text: ''
+  }
+
+  componentWillMount() {
+    const { searchText } = this.props
+    this.setState({
+      text: searchText
+    })
   }
 
   handleSubmit(event) {
@@ -53,27 +65,40 @@ class SearchBox extends React.Component {
 
   handleChange = name => event => {
     this.setState({
-      searchText: event.target.value
+      text: event.target.value
     })
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, handleSearch,searchText } = this.props
 
     return (
       <Paper className={classes.paper} elevation={4}>
         <PageHeader text="Filter" />
         <div className={classes.container}>
-          <form noValidate autoComplete="on" onSubmit={this.handleSubmit}>
+          <form noValidate autoComplete="on" onSubmit={event => {
+            event.preventDefault()
+            handleSearch(this.state.text)}
+          }>
             <TextField
               id="search"
               label="Filter Text"
               type="search"
+              defaultValue={searchText}
               className={classes.textField}
-              helperText="Search by domain"
+              helperText="Search"
               onChange={this.handleChange('search')}
               margin="normal"
             />
+            <Button
+              variant="fab"
+              color="primary"
+              aria-label="search"
+              className={classes.button}
+              onClick={event => handleSearch(this.state.searchText)}
+            >
+              <SearchIcon />
+            </Button>
           </form>
         </div>
       </Paper>
