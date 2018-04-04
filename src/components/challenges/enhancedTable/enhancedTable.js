@@ -363,7 +363,10 @@ class EnhancedTable extends React.Component {
   }
 
   applyfilter = (item) => {
-    return (this.state.filterText?item.name.toLowerCase().includes(this.state.filterText.toLowerCase()):true)
+    return (this.state.filterText?(
+      item.name.toLowerCase().includes(this.state.filterText.toLowerCase()) ||
+      item.description.toLowerCase().includes(this.state.filterText.toLowerCase())
+    ):true)
   }
 
   isSelected = id => this.state.selected.indexOf(id) !== -1
@@ -410,6 +413,8 @@ class EnhancedTable extends React.Component {
         open={showLogin}
       />
     ) : null
+
+    const newData = data.filter(item => this.applyfilter(item))
     return (
       <div className={classes.root}>
         {snackBar}
@@ -449,8 +454,7 @@ class EnhancedTable extends React.Component {
                 rowCount={data.length}
               />
               <TableBody>
-                {data
-                  .filter(item => this.applyfilter(item))
+                {newData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
                     const isSelected = this.isSelected(n.id)
@@ -487,7 +491,7 @@ class EnhancedTable extends React.Component {
                 <TableRow>
                   <TablePagination
                     colSpan={6}
-                    count={data.length}
+                    count={newData.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     rowsPerPageOptions={rowsPerPageOptions}
