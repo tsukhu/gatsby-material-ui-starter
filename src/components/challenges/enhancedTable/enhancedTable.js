@@ -17,7 +17,7 @@ import SearchBox from '../searchBox/searchBox'
 import { List } from 'immutable'
 import Snackbar from 'material-ui/Snackbar'
 import { ref, firebaseAuth } from '../../../utils/firebase'
-import { login, logout } from '../../../utils/auth'
+import { login, logout, createUser } from '../../../utils/auth'
 import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
 import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
 import getColumnData, { createData } from '../metadata'
@@ -59,7 +59,7 @@ class EnhancedTable extends React.Component {
       data: [],
       page: 0,
       rowsPerPage: 15,
-      rowsPerPageOptions: [5,15,25],
+      rowsPerPageOptions: [5, 15, 25],
       editing: false,
       filter: false,
       selectedRow: null,
@@ -68,22 +68,34 @@ class EnhancedTable extends React.Component {
       isLoading: false,
       showLogin: false,
       showSnackbar: false,
-      snackBarMessage: ''
+      snackBarMessage: '',
+      user: null,
+      isEditable: false, // Check is row is editable or not
+      isAdmin: false
     }
     this.dbItems = ref.child('data')
   }
 
   componentDidMount() {
-    
     this.removeListener = firebaseAuth().onAuthStateChanged(user => {
       if (user) {
+        let isAdmin = false
+        if (user.email === 'opensource@hcl.com') {
+          isAdmin = true
+        }
         this.setState({
+          user: user,
+          isAdmin: isAdmin,
           isLoggedIn: true,
-          isLoggingIn: false
+          isLoggingIn: false,
+          selected: []
         })
       } else {
         this.setState({
-          isLoggedIn: false
+          user: null,
+          isAdmin: false,
+          isLoggedIn: false,
+          selected: []
         })
       }
     })
@@ -130,19 +142,31 @@ class EnhancedTable extends React.Component {
   }
 
   handleRowClick = (event, id) => {
-    const { selected, editing, data } = this.state
-    if (editing) {
+    const { selected, editing, data, isLoggedIn } = this.state
+    if (editing || !isLoggedIn) {
       return
     }
     let newSelected = []
     if (selected.indexOf(id) !== 0) newSelected.push(id)
     const currentItem = data.find(item => item.id === id)
+
+    const formElementsArray = this.transformRowToForm(currentItem)
+    this.setState({
+      selected: newSelected,
+      selectedRow: formElementsArray.sort(
+        (a, b) =>
+          a.id === 'name' ? -1 : b.id === 'name' ? 1 : a.id < b.id ? -1 : 1
+      )
+    })
+  }
+
+  transformRowToForm = currentItem => {
     const formElementsArray = []
     for (let key in currentItem) {
       if (key !== 'id') {
         let colData = []
 
-        colData = getColumnData().filter(data => {
+        colData = getColumnData(this.state.isAdmin).filter(data => {
           return data.id === key
         })
         if (colData === undefined) {
@@ -156,18 +180,11 @@ class EnhancedTable extends React.Component {
           value: currentItem[key],
           type: colData[0].type,
           helperText: colData[0].helperText,
-          options: colData[0].options? colData[0].options: []
+          options: colData[0].options ? colData[0].options : []
         })
       }
     }
-
-    this.setState({
-      selected: newSelected,
-      selectedRow: formElementsArray.sort(
-        (a, b) =>
-          a.id === 'name' ? -1 : b.id === 'name' ? 1 : a.id < b.id ? -1 : 1
-      )
-    })
+    return formElementsArray
   }
 
   handleChangePage = (event, page) => {
@@ -185,25 +202,30 @@ class EnhancedTable extends React.Component {
 
   handleAddClick = event => {
     const { data } = this.state
+    // Create new row
+    const newRow = createData(this.state.user.email)
+    const newData = List(data).push(newRow)
 
-    const newData = List(data).push(
-      createData('A new row', '', '', '', '', '', '', '', '')
+    // Update data state as well as
+    // select newly created row
+    // call edit on the row
+    this.setState(
+      {
+        data: newData.toArray().sort((a, b) => (a.name < b.name ? -1 : 1))
+      },
+      function() {
+        this.handleRowClick(null, newRow.id)
+        this.handleEditClick(null)
+      }
     )
-
-    this.setState({
-      data: newData.toArray().sort((a, b) => (a.name < b.name ? -1 : 1))
-    })
   }
 
   handleDeleteClick = event => {
     const { selected, data } = this.state
 
-    console.log(selected, selected[0])
     const newData = data.filter(item => item.id !== selected[0])
-    console.log(newData)
     this.setState({ data: newData, selected: [] })
-    console.log('Delete called!')
-  }
+    }
 
   handleSearchClick = event => {
     const { filter } = this.state
@@ -231,7 +253,7 @@ class EnhancedTable extends React.Component {
       }
     })
 
-    this.setState({ editing: false, data: newData.toArray() })
+    this.setState({ editing: false, data: newData.toArray(), selected: [] })
   }
 
   handleFormCancel = event => {
@@ -242,19 +264,53 @@ class EnhancedTable extends React.Component {
     this.setState({ showLogin: true })
   }
 
+  handleLoginCancel = event => {
+    this.setState({ showLogin: false, isLoggingIn: false })
+  }
+
   handleLoginSubmit = event => {
     this.setState({ showLogin: false, isLoggingIn: true })
-    login(event.username, event.password)
-    .then(
-      data => {
-        this.setState({ showSnackbar: true , snackBarMessage: data.email + ' Logged In' })
-      }
-    )
-    .catch(err => {
-      this.setState({ isLoggingIn: false })
-      this.setState({ showSnackbar: true , snackBarMessage: 'Invalid Username/Password' })
-    })
+    if (event.usertype === 'new') {
+      this.loginNewUser(event.username, event.password)
+    } else {
+      this.loginExistingUser(event.username, event.password)
+    }
   }
+
+  loginNewUser = (username, password) => {
+    createUser(username, password)
+      .then(data => {
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: data.email + ' Logged In'
+        })
+      })
+      .catch(err => {
+        this.setState({ isLoggingIn: false })
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: 'Invalid Username/Password'
+        })
+      })
+  }
+
+  loginExistingUser = (username, password) => {
+    login(username, password)
+      .then(data => {
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: data.email + ' Logged In'
+        })
+      })
+      .catch(err => {
+        this.setState({ isLoggingIn: false })
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: 'Invalid Username/Password'
+        })
+      })
+  }
+
   handleLogOutClick = event => {
     logout()
   }
@@ -263,7 +319,9 @@ class EnhancedTable extends React.Component {
     ref
       .child('data')
       .set(this.state.data)
-      .then(() => this.setState({ showSnackbar: true , snackBarMessage: 'Data saved !!' }))
+      .then(() =>
+        this.setState({ showSnackbar: true, snackBarMessage: 'Data saved !!' })
+      )
   }
 
   handleCloseSnackBar = () => {
@@ -275,6 +333,8 @@ class EnhancedTable extends React.Component {
   render() {
     const { classes } = this.props
     const {
+      user,
+      isAdmin,
       data,
       order,
       orderBy,
@@ -304,7 +364,13 @@ class EnhancedTable extends React.Component {
       />
     ) : null
 
-    const loginForm = showLogin ? (<LoginForm handleLoginSubmit={this.handleLoginSubmit} open={showLogin}/>): null
+    const loginForm = showLogin ? (
+      <LoginForm
+        handleLoginSubmit={this.handleLoginSubmit}
+        handleLoginCancel={this.handleLoginCancel}
+        open={showLogin}
+      />
+    ) : null
     return (
       <div className={classes.root}>
         {snackBar}

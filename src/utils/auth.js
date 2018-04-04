@@ -8,3 +8,7 @@ export function logout() {
 export function login(email, pw) {
   return firebaseAuth().signInWithEmailAndPassword(email, pw)
 }
+
+export function createUser (email, pw) {
+  return firebaseAuth().createUserWithEmailAndPassword(email, pw)
+}

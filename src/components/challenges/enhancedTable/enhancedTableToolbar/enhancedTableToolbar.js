@@ -13,7 +13,7 @@ import FilterListIcon from 'material-ui-icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
 import { CircularProgress } from 'material-ui/Progress'
 import Button from 'material-ui/Button'
-import green from 'material-ui/colors/green';
+import green from 'material-ui/colors/green'
 
 const toolbarStyles = theme => ({
   root: {
@@ -60,8 +60,8 @@ const toolbarStyles = theme => ({
     top: '50%',
     left: '50%',
     marginTop: -12,
-    marginLeft: -12,
-  },
+    marginLeft: -12
+  }
 })
 
 let EnhancedTableToolbar = props => {
@@ -83,14 +83,19 @@ let EnhancedTableToolbar = props => {
   const actionButton = isLoggedIn ? (
     <div className={classes.actionButtons}>
       <div onClick={onClickSave} className={classes.actionButton}>
-        <Button color="primary">SAVE</Button>
+        <Tooltip title="Save to database">
+          <Button color="primary">SAVE</Button>
+        </Tooltip>
       </div>
       <div onClick={onClickLogout} className={classes.actionButton}>
-        <Button color="primary">LOGOUT</Button>
+        <Tooltip title="Logout User">
+          <Button color="primary">LOGOUT</Button>
+        </Tooltip>
       </div>
     </div>
   ) : (
     <div className={classes.wrapper}>
+    <Tooltip title="Login (New/Existing)">
       <Button
         color="primary"
         disabled={isLoggingIn || isLoading}
@@ -98,6 +103,7 @@ let EnhancedTableToolbar = props => {
       >
         LOGIN
       </Button>
+      </Tooltip>
       {isLoggingIn && (
         <CircularProgress size={24} className={classes.buttonProgress} />
       )}
@@ -125,7 +131,7 @@ let EnhancedTableToolbar = props => {
       <div className={classes.spacer} />
       {actionButton}
       <div className={classes.actions}>
-        {numSelected > 0 ? (
+        {numSelected > 0 && isLoggedIn === true ? (
           <div>
             <Tooltip title="Edit">
               <IconButton aria-label="Edit" onClick={onClickEdit}>
@@ -140,11 +146,13 @@ let EnhancedTableToolbar = props => {
           </div>
         ) : (
           <div>
-            <Tooltip title="Add">
-              <IconButton aria-label="Add" onClick={onClickAdd}>
-                <AddIcon />
-              </IconButton>
-            </Tooltip>
+            {isLoggedIn === true && (
+              <Tooltip title="Add">
+                <IconButton aria-label="Add" onClick={onClickAdd}>
+                  <AddIcon />
+                </IconButton>
+              </Tooltip>
+            )}
             <Tooltip title="Filter list">
               <IconButton aria-label="Filter list" onClick={onClickSearch}>
                 <FilterListIcon />

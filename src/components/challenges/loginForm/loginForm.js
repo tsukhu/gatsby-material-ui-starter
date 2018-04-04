@@ -1,18 +1,42 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Radio, { RadioGroup } from 'material-ui/Radio'
 import Button from 'material-ui/Button'
 import TextField from 'material-ui/TextField'
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle
+  DialogTitle,
+  withMobileDialog
 } from 'material-ui/Dialog'
+import {
+  FormLabel,
+  FormControl,
+  FormControlLabel,
+  FormHelperText
+} from 'material-ui/Form'
 
-export default class LoginForm extends React.Component {
+const styles = theme => ({
+  root: {
+    display: 'flex'
+  },
+  formControl: {
+    margin: theme.spacing.unit * 3
+  },
+  group: {
+    flex: '0 0 auto',
+    margin: `${theme.spacing.unit}px 0`
+  }
+})
+
+class LoginForm extends React.Component {
   state = {
     open: false,
     username: '',
-    password: ''
+    password: '',
+    usertype: 'existing'
   }
 
   componentWillMount() {
@@ -40,20 +64,30 @@ export default class LoginForm extends React.Component {
 
   handleClose = () => {
     this.setState({ open: false })
+    this.props.handleLoginCancel()
   }
 
   handleLogin = () => {
     this.setState({ open: false })
-    this.props.handleLoginSubmit({username: this.state.username, password: this.state.password})
+    this.props.handleLoginSubmit({
+      username: this.state.username,
+      password: this.state.password,
+      usertype: this.state.usertype
+    })
   }
 
   handleSubmit(event) {
     event.preventDefault()
   }
 
+  handleChange = event => {
+    this.setState({ usertype: event.target.value })
+  }
+
   render() {
+    const { fullScreen, classes } = this.props
     return (
-      <div>
+      <div className={classes.root}>
         <Button onClick={this.handleClickOpen}>Open form dialog</Button>
         <Dialog
           open={this.state.open}
@@ -62,12 +96,33 @@ export default class LoginForm extends React.Component {
         >
           <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
           <DialogContent>
-            <DialogContentText>Provide Login Credentials</DialogContentText>
-            <form
-              noValidate
-              autoComplete="on"
-              onSubmit={this.handleSubmit}
+            <FormControl
+              component="fieldset"
+              required
+              className={classes.formControl}
             >
+              <FormLabel component="legend">Existing or New User</FormLabel>
+              <RadioGroup
+                aria-label="usertype"
+                name="usertype1"
+                className={classes.group}
+                value={this.state.usertype}
+                onChange={this.handleChange}
+              >
+                <FormControlLabel
+                  value="existing"
+                  control={<Radio />}
+                  label="Existing User"
+                />
+                <FormControlLabel
+                  value="new"
+                  control={<Radio />}
+                  label="New User"
+                />
+              </RadioGroup>
+            </FormControl>
+            <DialogContentText>Provide Login Credentials</DialogContentText>
+            <form noValidate autoComplete="on" onSubmit={this.handleSubmit}>
               <TextField
                 autoFocus
                 margin="dense"
@@ -102,3 +157,10 @@ export default class LoginForm extends React.Component {
     )
   }
 }
+
+LoginForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  fullScreen: PropTypes.bool.isRequired
+}
+
+export default withStyles(styles)(withMobileDialog()(LoginForm))

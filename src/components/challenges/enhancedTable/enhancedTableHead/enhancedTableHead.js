@@ -36,7 +36,7 @@ class EnhancedTableHead extends React.Component {
               onChange={onSelectAllClick}
             />
           </TableCell>
-          {getColumnData().map(column => {
+          {getColumnData(false).map(column => {
             return (
               <TableCell
                 key={column.id}

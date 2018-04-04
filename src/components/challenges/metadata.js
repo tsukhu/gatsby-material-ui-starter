@@ -1,95 +1,103 @@
 const uuidv4 = require('uuid/v4')
 
 export const createData = (
-  name,
-  description,
-  contributor,
-  domain,
-  status,
-  priority,
-  githubURL
+  contributor
 ) => {
   return {
     id: uuidv4(),
-    name,
-    description,
+    name: 'A New Challenge',
+    description: '',
     contributor,
-    domain,
-    status,
-    priority,
-    githubURL
+    domain: 'Other',
+    status: 'Approval Pending',
+    priority: 'Medium',
+    githubURL: null
   }
 }
 
-const getColumnData = () => { return [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: false,
-    label: 'Name',
-    type: 'text',
-    helperText: 'Challenge Name'
-  },
-  {
-    id: 'description',
-    numeric: false,
-    disablePadding: false,
-    label: 'Description',
-    type: 'text',
-    helperText: 'Description'
-  },
-  {
-    id: 'contributor',
-    numeric: false,
-    disablePadding: false,
-    label: 'Contributor',
-    type: 'text',
-    helperText: 'Challenge Name'
-  },
-  {
-    id: 'domain',
-    numeric: false,
-    disablePadding: false,
-    label: 'Domain',
-    type: 'text',
-    helperText: 'Domain'
-  },
-  {
-    id: 'status',
-    numeric: false,
-    disablePadding: false,
-    label: 'Status',
-    type: 'select',
-    options: [
-      { name: 'None' , value: '' },
-      { name: 'Backlog' , value: 'Backlog Item' },
-      { name: 'In Progress' , value: 'In Progress' },
-      { name: 'Done' , value: 'Done' },
-     ],
-    helperText: 'Status'
-  },
-  {
-    id: 'priority',
-    numeric: false,
-    disablePadding: false,
-    label: 'Priority',
-    type: 'select',
-    options: [
-      { name: 'None' , value: '' },
-      { name: 'High' , value: 'High' },
-      { name: 'Medium' , value: 'Medium' },
-      { name: 'Low' , value: 'Low' },
-     ],
-    helperText: 'Priority'
-  },
-  {
-    id: 'githubURL',
-    numeric: false,
-    disablePadding: false,
-    label: 'githubURL',
-    type: 'text',
-    helperText: 'Github URL'
-  }
-]}
+const getColumnData = isAdmin => {
+  return [
+    {
+      id: 'name',
+      numeric: false,
+      disablePadding: false,
+      label: 'Name',
+      type: 'text',
+      helperText: 'Challenge Name'
+    },
+    {
+      id: 'description',
+      numeric: false,
+      disablePadding: false,
+      label: 'Description',
+      type: 'text',
+      helperText: 'Description'
+    },
+    {
+      id: 'contributor',
+      numeric: false,
+      disablePadding: false,
+      label: 'Contributor',
+      type: 'email',
+      helperText: 'contributor email'
+    },
+    {
+      id: 'domain',
+      numeric: false,
+      disablePadding: false,
+      label: 'Domain',
+      type: 'select',
+      options: [
+        { name: 'WebUI', value: 'Web UI' },
+        { name: 'Microservices', value: 'Microservices' },
+        { name: 'Analytics', value: 'Analytics' },
+        { name: 'DevOps', value: 'DevOps' },
+        { name: 'Security', value: 'Security' },
+        { name: 'Cloud', value: 'Cloud' },
+        { name: 'Mobility', value: 'Mobility' },
+        { name: 'Other', value: 'Other' }
+      ],
+      helperText: 'Technology Domain'
+    },
+    {
+      id: 'status',
+      numeric: false,
+      disablePadding: false,
+      label: 'Status',
+      type: 'select',
+      options: isAdmin
+        ? [
+            { name: 'ApprovalPending', value: 'Approval Pending' },
+            { name: 'Backlog', value: 'Backlog Item' },
+            { name: 'In Progress', value: 'In Progress' },
+            { name: 'Done', value: 'Done' }
+          ]
+        : [{ name: 'ApprovalPending', value: 'Approval Pending' }],
+      helperText: 'Status'
+    },
+    {
+      id: 'priority',
+      numeric: false,
+      disablePadding: false,
+      label: 'Priority',
+      type: 'select',
+      options: [
+        { name: 'None', value: 'None' },
+        { name: 'High', value: 'High' },
+        { name: 'Medium', value: 'Medium' },
+        { name: 'Low', value: 'Low' }
+      ],
+      helperText: 'Priority'
+    },
+    {
+      id: 'githubURL',
+      numeric: false,
+      disablePadding: false,
+      label: 'githubURL',
+      type: 'text',
+      helperText: 'Github URL'
+    }
+  ]
+}
 
 export default getColumnData
