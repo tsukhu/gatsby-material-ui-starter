@@ -39,6 +39,7 @@ const getColumnData = isAdmin => {
       disablePadding: false,
       label: 'Contributor',
       type: 'email',
+      disabled: isAdmin? false:true,
       helperText: 'contributor email'
     },
     {
@@ -73,6 +74,7 @@ const getColumnData = isAdmin => {
             { name: 'Done', value: 'Done' }
           ]
         : [{ name: 'ApprovalPending', value: 'Approval Pending' }],
+      disabled: isAdmin? false:true,
       helperText: 'Status'
     },
     {

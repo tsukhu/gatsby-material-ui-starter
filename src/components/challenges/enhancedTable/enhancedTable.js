@@ -149,15 +149,37 @@ class EnhancedTable extends React.Component {
     let newSelected = []
     if (selected.indexOf(id) !== 0) newSelected.push(id)
     const currentItem = data.find(item => item.id === id)
+    const isEditable = this.checkEditStatus(currentItem)
 
     const formElementsArray = this.transformRowToForm(currentItem)
     this.setState({
       selected: newSelected,
+      isEditable: isEditable,
       selectedRow: formElementsArray.sort(
         (a, b) =>
           a.id === 'name' ? -1 : b.id === 'name' ? 1 : a.id < b.id ? -1 : 1
       )
     })
+  }
+
+  checkEditStatus = currentItem => {
+    const { isAdmin, user } = this.state
+    // If you are not an admin
+    // Then you cannot edit any one else's content
+    // and for your content you cannot edit any other entry except the Approval Pending ones
+    if (!isAdmin) {
+      if (
+        currentItem.contributor !== user.email ||
+        (currentItem.contributor === user.email &&
+          currentItem.status !== 'Approval Pending')
+      ) {
+        return false
+      } else {
+        return true
+      }
+    } else {
+      return true
+    }
   }
 
   transformRowToForm = currentItem => {
@@ -180,6 +202,7 @@ class EnhancedTable extends React.Component {
           value: currentItem[key],
           type: colData[0].type,
           helperText: colData[0].helperText,
+          disabled: colData[0].disabled?colData[0].disabled:false,
           options: colData[0].options ? colData[0].options : []
         })
       }
@@ -225,7 +248,7 @@ class EnhancedTable extends React.Component {
 
     const newData = data.filter(item => item.id !== selected[0])
     this.setState({ data: newData, selected: [] })
-    }
+  }
 
   handleSearchClick = event => {
     const { filter } = this.state
@@ -346,6 +369,7 @@ class EnhancedTable extends React.Component {
       isLoggedIn,
       isLoggingIn,
       isLoading,
+      isEditable,
       showSnackbar,
       snackBarMessage,
       showLogin
@@ -396,6 +420,8 @@ class EnhancedTable extends React.Component {
             isLoggedIn={isLoggedIn}
             isLoggingIn={isLoggingIn}
             isLoading={isLoading}
+            isEditable={isEditable}
+            user={user}
           />
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>

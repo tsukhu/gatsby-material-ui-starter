@@ -96,7 +96,7 @@ class ChallengeForm extends React.Component {
     const formFields = selectedRow.map(
       field =>
         field.type === 'select' ? (
-          <FormControl className={classes.formControl} key={field.id}>
+          <FormControl className={classes.formControl} key={field.id} disabled={field.disabled?field.disabled:false}>
             <InputLabel htmlFor={field.id}>{field.id.toUpperCase()}</InputLabel>
             <Select
               native
@@ -118,6 +118,7 @@ class ChallengeForm extends React.Component {
             id={field.id}
             label={field.id.toUpperCase()}
             defaultValue={field.value}
+            disabled={field.disabled?field.disabled:false}
             type={field.type}
             autoComplete="name"
             className={classes.textField}

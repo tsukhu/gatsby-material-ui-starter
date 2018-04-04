@@ -42,7 +42,8 @@ const toolbarStyles = theme => ({
     flex: '0 0 auto'
   },
   actionButtons: {
-    display: 'flex'
+    display: 'flex',
+    flex: '0 0 auto'
   },
   wrapper: {
     margin: theme.spacing.unit,
@@ -66,6 +67,7 @@ const toolbarStyles = theme => ({
 
 let EnhancedTableToolbar = props => {
   const {
+    user,
     numSelected,
     classes,
     onClickEdit,
@@ -77,9 +79,9 @@ let EnhancedTableToolbar = props => {
     onClickLogout,
     isLoggedIn,
     isLoggingIn,
-    isLoading
+    isLoading,
+    isEditable
   } = props
-
   const actionButton = isLoggedIn ? (
     <div className={classes.actionButtons}>
       <div onClick={onClickSave} className={classes.actionButton}>
@@ -88,21 +90,21 @@ let EnhancedTableToolbar = props => {
         </Tooltip>
       </div>
       <div onClick={onClickLogout} className={classes.actionButton}>
-        <Tooltip title="Logout User">
+        <Tooltip title={user.email}>
           <Button color="primary">LOGOUT</Button>
         </Tooltip>
       </div>
     </div>
   ) : (
     <div className={classes.wrapper}>
-    <Tooltip title="Login (New/Existing)">
-      <Button
-        color="primary"
-        disabled={isLoggingIn || isLoading}
-        onClick={onClickLogin}
-      >
-        LOGIN
-      </Button>
+      <Tooltip title="Login (New/Existing)">
+        <Button
+          color="primary"
+          disabled={isLoggingIn || isLoading}
+          onClick={onClickLogin}
+        >
+          LOGIN
+        </Button>
       </Tooltip>
       {isLoggingIn && (
         <CircularProgress size={24} className={classes.buttonProgress} />
@@ -133,16 +135,20 @@ let EnhancedTableToolbar = props => {
       <div className={classes.actions}>
         {numSelected > 0 && isLoggedIn === true ? (
           <div>
-            <Tooltip title="Edit">
-              <IconButton aria-label="Edit" onClick={onClickEdit}>
-                <EditIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete">
-              <IconButton aria-label="Delete" onClick={onClickDelete}>
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
+            {isEditable && (
+              <div>
+                <Tooltip title="Edit">
+                  <IconButton aria-label="Edit" onClick={onClickEdit}>
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <IconButton aria-label="Delete" onClick={onClickDelete}>
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </div>
+            )}
           </div>
         ) : (
           <div>
