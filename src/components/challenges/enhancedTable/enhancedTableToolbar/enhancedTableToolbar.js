@@ -9,6 +9,7 @@ import Tooltip from 'material-ui/Tooltip'
 import DeleteIcon from 'material-ui-icons/Delete'
 import EditIcon from 'material-ui-icons/Edit'
 import AddIcon from 'material-ui-icons/Add'
+import HelpIcon from 'material-ui-icons/Help'
 import FilterListIcon from 'material-ui-icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
 import { CircularProgress } from 'material-ui/Progress'
@@ -77,10 +78,12 @@ let EnhancedTableToolbar = props => {
     onClickLogin,
     onClickSave,
     onClickLogout,
+    onClickHelp,
     isLoggedIn,
     isLoggingIn,
     isLoading,
-    isEditable
+    isEditable,
+    showHelp
   } = props
   const actionButton = isLoggedIn ? (
     <div className={classes.actionButtons}>
@@ -114,6 +117,7 @@ let EnhancedTableToolbar = props => {
   const dataLoading = isLoading ? (
     <CircularProgress className={classes.progress} />
   ) : null
+  const HelpText = (showHelp ? 'Hide ' : 'Show ') + 'Help'
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -162,6 +166,11 @@ let EnhancedTableToolbar = props => {
             <Tooltip title="Filter list">
               <IconButton aria-label="Filter list" onClick={onClickSearch}>
                 <FilterListIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={HelpText}>
+              <IconButton aria-label="Help doc" onClick={onClickHelp}>
+                <HelpIcon />
               </IconButton>
             </Tooltip>
           </div>

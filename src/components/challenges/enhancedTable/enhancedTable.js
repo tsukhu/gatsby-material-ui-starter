@@ -20,6 +20,7 @@ import { ref, firebaseAuth } from '../../../utils/firebase'
 import { login, logout, createUser } from '../../../utils/auth'
 import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
 import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
+import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData } from '../metadata'
 
 const styles = theme => ({
@@ -75,7 +76,8 @@ class EnhancedTable extends React.Component {
       filterText: null,
       filterDomain: null,
       filterPriority: null,
-      filterStatus: null
+      filterStatus: null,
+      showHelp: false
     }
     this.dbItems = ref.child('data')
   }
@@ -355,6 +357,10 @@ class EnhancedTable extends React.Component {
     this.setState({ showSnackbar: false })
   }
 
+  handleHelpClick = () => {
+    this.setState({ showHelp: !this.state.showHelp})
+  }
+
   handleClearFilter = () => {
     this.setState({ filterText: null })
   }
@@ -428,7 +434,8 @@ class EnhancedTable extends React.Component {
       isEditable,
       showSnackbar,
       snackBarMessage,
-      showLogin
+      showLogin,
+      showHelp
     } = this.state
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
@@ -453,8 +460,11 @@ class EnhancedTable extends React.Component {
     ) : null
 
     const newData = data.filter(item => this.applyfilter(item))
+
+    const helpInfo = showHelp? <HelpInfo />: null
     return (
       <div className={classes.root}>
+        {helpInfo}
         {snackBar}
         {loginForm}
         <Paper className={classes.paper}>
@@ -483,10 +493,12 @@ class EnhancedTable extends React.Component {
             onClickLogin={this.handleLoginClick}
             onClickSave={this.handleSaveClick}
             onClickLogout={this.handleLogOutClick}
+            onClickHelp={this.handleHelpClick}
             isLoggedIn={isLoggedIn}
             isLoggingIn={isLoggingIn}
             isLoading={isLoading}
             isEditable={isEditable}
+            showHelp={showHelp}
             user={user}
           />
           <div className={classes.tableWrapper}>
