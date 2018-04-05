@@ -49,6 +49,7 @@ const getColumnData = isAdmin => {
       label: 'Domain',
       type: 'select',
       options: [
+        { name: 'None', value: 'None' },
         { name: 'WebUI', value: 'Web UI' },
         { name: 'Microservices', value: 'Microservices' },
         { name: 'Analytics', value: 'Analytics' },
@@ -68,6 +69,7 @@ const getColumnData = isAdmin => {
       type: 'select',
       options: isAdmin
         ? [
+            { name: 'None', value: 'None' },
             { name: 'ApprovalPending', value: 'Approval Pending' },
             { name: 'Backlog', value: 'Backlog Item' },
             { name: 'In Progress', value: 'In Progress' },

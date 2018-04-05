@@ -72,7 +72,10 @@ class EnhancedTable extends React.Component {
       user: null,
       isEditable: false, // Check is row is editable or not
       isAdmin: false,
-      filterText: null
+      filterText: null,
+      filterDomain: null,
+      filterPriority: null,
+      filterStatus: null
     }
     this.dbItems = ref.child('data')
   }
@@ -203,7 +206,7 @@ class EnhancedTable extends React.Component {
           value: currentItem[key],
           type: colData[0].type,
           helperText: colData[0].helperText,
-          disabled: colData[0].disabled?colData[0].disabled:false,
+          disabled: colData[0].disabled ? colData[0].disabled : false,
           options: colData[0].options ? colData[0].options : []
         })
       }
@@ -356,17 +359,41 @@ class EnhancedTable extends React.Component {
     this.setState({ filterText: null })
   }
 
-  handleSearchFilter = (filter) => {
-   
-    this.setState({ filterText: filter })
-    
+  handleSearchFilter = filter => {
+    this.setState({
+      filterText: filter.text,
+      filterDomain: filter.domain,
+      filterPriority: filter.priority,
+      filterStatus: filter.status
+    })
   }
 
-  applyfilter = (item) => {
-    return (this.state.filterText?(
-      item.name.toLowerCase().includes(this.state.filterText.toLowerCase()) ||
-      item.description.toLowerCase().includes(this.state.filterText.toLowerCase())
-    ):true)
+  applyfilter = item => {
+    const isTextFiltered = this.state.filterText
+      ? item.name.toLowerCase().includes(this.state.filterText.toLowerCase()) ||
+        item.description
+          .toLowerCase()
+          .includes(this.state.filterText.toLowerCase())
+      : true
+
+    const isDomainFiltered = this.state.filterDomain
+      ? item.domain
+          .toLowerCase()
+          .includes(this.state.filterDomain.toLowerCase())
+      : true
+
+      const isPriorityFiltered = this.state.filterPriority
+      ? item.priority
+          .toLowerCase()
+          .includes(this.state.filterPriority.toLowerCase())
+      : true
+
+      const isStatusFiltered = this.state.filterStatus
+      ? item.status
+          .toLowerCase()
+          .includes(this.state.filterStatus.toLowerCase())
+      : true
+    return isTextFiltered && isDomainFiltered && isPriorityFiltered && isStatusFiltered
   }
 
   isSelected = id => this.state.selected.indexOf(id) !== -1
@@ -427,7 +454,15 @@ class EnhancedTable extends React.Component {
               handleFormSubmit={this.handleFormSubmit}
             />
           ) : null}
-          {this.state.filter === true ? <SearchBox handleSearch={this.handleSearchFilter} searchText={this.state.filterText}/> : null}
+          {this.state.filter === true ? (
+            <SearchBox
+              handleSearch={this.handleSearchFilter}
+              searchText={this.state.filterText}
+              searchDomain={this.state.filterDomain}
+              searchPriority={this.state.filterPriority} 
+              searchStatus={this.state.filterStatus}
+            />
+          ) : null}
           <EnhancedTableToolbar
             numSelected={selected.length}
             onClickEdit={this.handleEditClick}
