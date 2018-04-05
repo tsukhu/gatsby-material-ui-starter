@@ -516,6 +516,7 @@ class EnhancedTable extends React.Component {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
                     const isSelected = this.isSelected(n.id)
+                    const mailTo = "mailto:"+n.contributor+"?Subject="+n.name
                     return (
                       <TableRow
                         hover
@@ -531,11 +532,11 @@ class EnhancedTable extends React.Component {
                         </TableCell>
                         <TableCell padding="none">{n.name}</TableCell>
                         <TableCell padding="none">{n.description}</TableCell>
-                        <TableCell padding="none">{n.contributor}</TableCell>
+                        <TableCell padding="none"><a href={mailTo} target="_top">{n.contributor}</a></TableCell>
                         <TableCell padding="none">{n.domain}</TableCell>
                         <TableCell padding="none">{n.status}</TableCell>
                         <TableCell padding="none">{n.priority}</TableCell>
-                        <TableCell padding="none">{n.githubURL}</TableCell>
+                        <TableCell padding="none"><a href={n.githubURL} target="_blank">{n.githubURL}</a></TableCell>
                       </TableRow>
                     )
                   })}
