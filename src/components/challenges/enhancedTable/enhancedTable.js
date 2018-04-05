@@ -382,18 +382,29 @@ class EnhancedTable extends React.Component {
           .includes(this.state.filterDomain.toLowerCase())
       : true
 
-      const isPriorityFiltered = this.state.filterPriority
+    const isPriorityFiltered = this.state.filterPriority
       ? item.priority
           .toLowerCase()
           .includes(this.state.filterPriority.toLowerCase())
       : true
 
-      const isStatusFiltered = this.state.filterStatus
+    const isStatusFiltered = this.state.filterStatus
       ? item.status
           .toLowerCase()
           .includes(this.state.filterStatus.toLowerCase())
       : true
-    return isTextFiltered && isDomainFiltered && isPriorityFiltered && isStatusFiltered
+
+    const isApprovalPendingFiltered = this.state.isLoggedIn
+      ? true
+      : !item.status.toLowerCase().includes('Approval Pending'.toLowerCase())
+
+    return (
+      isTextFiltered &&
+      isDomainFiltered &&
+      isPriorityFiltered &&
+      isStatusFiltered &&
+      isApprovalPendingFiltered
+    )
   }
 
   isSelected = id => this.state.selected.indexOf(id) !== -1
@@ -459,7 +470,7 @@ class EnhancedTable extends React.Component {
               handleSearch={this.handleSearchFilter}
               searchText={this.state.filterText}
               searchDomain={this.state.filterDomain}
-              searchPriority={this.state.filterPriority} 
+              searchPriority={this.state.filterPriority}
               searchStatus={this.state.filterStatus}
             />
           ) : null}
