@@ -83,15 +83,16 @@ let EnhancedTableToolbar = props => {
     isLoggingIn,
     isLoading,
     isEditable,
+    isDirty,
     showHelp
   } = props
   const actionButton = isLoggedIn ? (
     <div className={classes.actionButtons}>
-      <div onClick={onClickSave} className={classes.actionButton}>
+      {isDirty && <div onClick={onClickSave} className={classes.actionButton}>
         <Tooltip title="Save to database">
           <Button color="primary">SAVE</Button>
         </Tooltip>
-      </div>
+      </div>}
       <div onClick={onClickLogout} className={classes.actionButton}>
         <Tooltip title={user.email}>
           <Button color="primary">LOGOUT</Button>

@@ -23,6 +23,7 @@ const getColumnData = isAdmin => {
       disablePadding: false,
       label: 'Name',
       type: 'text',
+      multiline: true,
       helperText: 'Challenge Name'
     },
     {
@@ -31,6 +32,7 @@ const getColumnData = isAdmin => {
       disablePadding: false,
       label: 'Description',
       type: 'text',
+      multiline: true,
       helperText: 'Description'
     },
     {

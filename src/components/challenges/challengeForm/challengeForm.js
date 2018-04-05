@@ -121,6 +121,7 @@ class ChallengeForm extends React.Component {
             disabled={field.disabled?field.disabled:false}
             type={field.type}
             autoComplete="name"
+            multiline={field.multiline?field.multiline:false}
             className={classes.textField}
             helperText={field.helperText}
             margin="normal"

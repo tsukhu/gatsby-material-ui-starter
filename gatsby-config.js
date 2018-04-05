@@ -5,6 +5,7 @@ module.exports = {
     title: `Open Source @HCL-ERS`,
     maintainedBy: `Maintained by ERS Technology Office`,
     poweredBy: `GatsbyJS`,
+    contributors: `Tarun Sukhu<tsukhu@hcl.com>`,
     githubProject: `https://github.com/ERS-HCL/gatsby-demo-app`
   },
   plugins: [

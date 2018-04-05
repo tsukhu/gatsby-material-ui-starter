@@ -44,7 +44,7 @@ const styles = theme => ({
 })
 
 function getSteps() {
-  return ['Login / Register', 'Add a new Challenge', 'Edit existing challenges', 'Global View']
+  return ['Login / Register', 'Add a new Challenge', 'Edit existing challenges', 'Save', 'Global View']
 }
 
 function getStepContent(step) {
@@ -61,6 +61,9 @@ function getStepContent(step) {
       return `You can only modify your own entries which are with status set to 'Approval Pending'`
     
     case 3:
+      return `Use the 'SAVE' Button to push your changes and make it available for review to the administrator`
+    
+    case 4:
       return `Once approved these challenges will appear in the list for everyone to view`
 
     default:

@@ -75,6 +75,9 @@ const AboutCard = props => {
           <Typography component="p">
             Powered by: {props.data.poweredBy}
           </Typography>
+          <Typography component="p">
+           Contributors: {props.data.contributors}
+          </Typography>
           <Typography component="p">{props.data.description}</Typography>
         </CardContent>
         <CardActions>

@@ -11,6 +11,7 @@ export default ({ data }) => {
     name: org.name,
     maintainedBy: data.site.siteMetadata.maintainedBy,
     poweredBy: data.site.siteMetadata.poweredBy,
+    contributors: data.site.siteMetadata.contributors,
     githubProject: data.site.siteMetadata.githubProject
   };
   return (
@@ -28,6 +29,7 @@ export const query = graphql`
         maintainedBy
         poweredBy
         githubProject
+        contributors
       }
     }
     allGithubData {

@@ -77,7 +77,8 @@ class EnhancedTable extends React.Component {
       filterDomain: null,
       filterPriority: null,
       filterStatus: null,
-      showHelp: false
+      showHelp: false,
+      dirty: false
     }
     this.dbItems = ref.child('data')
   }
@@ -207,6 +208,7 @@ class EnhancedTable extends React.Component {
           id: key,
           value: currentItem[key],
           type: colData[0].type,
+          multiline: colData[0].multiline? colData[0].multiline: false,
           helperText: colData[0].helperText,
           disabled: colData[0].disabled ? colData[0].disabled : false,
           options: colData[0].options ? colData[0].options : []
@@ -253,7 +255,7 @@ class EnhancedTable extends React.Component {
     const { selected, data } = this.state
 
     const newData = data.filter(item => item.id !== selected[0])
-    this.setState({ data: newData, selected: [] })
+    this.setState({ data: newData, selected: [] , dirty: true })
   }
 
   handleSearchClick = event => {
@@ -282,7 +284,7 @@ class EnhancedTable extends React.Component {
       }
     })
 
-    this.setState({ editing: false, data: newData.toArray(), selected: [] })
+    this.setState({ editing: false, data: newData.toArray(), selected: [] , dirty: true})
   }
 
   handleFormCancel = event => {
@@ -435,7 +437,8 @@ class EnhancedTable extends React.Component {
       showSnackbar,
       snackBarMessage,
       showLogin,
-      showHelp
+      showHelp,
+      dirty
     } = this.state
     const emptyRows =
       rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage)
@@ -498,6 +501,7 @@ class EnhancedTable extends React.Component {
             isLoggingIn={isLoggingIn}
             isLoading={isLoading}
             isEditable={isEditable}
+            isDirty={dirty}
             showHelp={showHelp}
             user={user}
           />
