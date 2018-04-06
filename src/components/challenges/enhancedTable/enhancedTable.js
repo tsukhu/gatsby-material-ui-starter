@@ -20,8 +20,10 @@ import { ref, firebaseAuth } from '../../../utils/firebase'
 import { login, logout, createUser } from '../../../utils/auth'
 import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
 import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
+import MaterialList, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
 import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData } from '../metadata'
+import cyan from 'material-ui/colors/cyan'
 
 const styles = theme => ({
   root: {
@@ -46,6 +48,12 @@ const styles = theme => ({
   },
   tableWrapper: {
     overflowX: 'auto'
+  },
+  gitUrl: {
+    theme: 'inherit',
+    '&:hover': {
+      backgroundColor: cyan[200]
+    }
   }
 })
 
@@ -208,7 +216,7 @@ class EnhancedTable extends React.Component {
           id: key,
           value: currentItem[key],
           type: colData[0].type,
-          multiline: colData[0].multiline? colData[0].multiline: false,
+          multiline: colData[0].multiline ? colData[0].multiline : false,
           helperText: colData[0].helperText,
           disabled: colData[0].disabled ? colData[0].disabled : false,
           options: colData[0].options ? colData[0].options : []
@@ -255,7 +263,7 @@ class EnhancedTable extends React.Component {
     const { selected, data } = this.state
 
     const newData = data.filter(item => item.id !== selected[0])
-    this.setState({ data: newData, selected: [] , dirty: true })
+    this.setState({ data: newData, selected: [], dirty: true })
   }
 
   handleSearchClick = event => {
@@ -284,7 +292,12 @@ class EnhancedTable extends React.Component {
       }
     })
 
-    this.setState({ editing: false, data: newData.toArray(), selected: [] , dirty: true})
+    this.setState({
+      editing: false,
+      data: newData.toArray(),
+      selected: [],
+      dirty: true
+    })
   }
 
   handleFormCancel = event => {
@@ -360,7 +373,7 @@ class EnhancedTable extends React.Component {
   }
 
   handleHelpClick = () => {
-    this.setState({ showHelp: !this.state.showHelp})
+    this.setState({ showHelp: !this.state.showHelp })
   }
 
   handleClearFilter = () => {
@@ -463,8 +476,20 @@ class EnhancedTable extends React.Component {
     ) : null
 
     const newData = data.filter(item => this.applyfilter(item))
-
-    const helpInfo = showHelp? <HelpInfo />: null
+    const getURLs = urlData => {
+      const urls = { urlData }
+      
+      return urls.urlData
+        ? 
+        urls.urlData.split(',').map(data => (
+           
+              <ListItem component="a" dense href={data} target="_blank" key={data} className={classes.gitUrl}>
+                <ListItemText primary={data} />
+              </ListItem>
+        ))
+        : null
+    }
+    const helpInfo = showHelp ? <HelpInfo /> : null
     return (
       <div className={classes.root}>
         {helpInfo}
@@ -520,7 +545,8 @@ class EnhancedTable extends React.Component {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
                     const isSelected = this.isSelected(n.id)
-                    const mailTo = "mailto:"+n.contributor+"?Subject="+n.name
+                    const mailTo =
+                      'mailto:' + n.contributor + '?Subject=' + n.name
                     return (
                       <TableRow
                         hover
@@ -536,11 +562,17 @@ class EnhancedTable extends React.Component {
                         </TableCell>
                         <TableCell padding="none">{n.name}</TableCell>
                         <TableCell padding="none">{n.description}</TableCell>
-                        <TableCell padding="none"><a href={mailTo} target="_top">{n.contributor}</a></TableCell>
+                        <TableCell padding="none">
+                          <a href={mailTo} target="_top">
+                            {n.contributor}
+                          </a>
+                        </TableCell>
                         <TableCell padding="none">{n.domain}</TableCell>
                         <TableCell padding="none">{n.status}</TableCell>
                         <TableCell padding="none">{n.priority}</TableCell>
-                        <TableCell padding="none"><a href={n.githubURL} target="_blank">{n.githubURL}</a></TableCell>
+                        <TableCell padding="none">
+                          {getURLs(n.githubURL)}
+                        </TableCell>
                       </TableRow>
                     )
                   })}

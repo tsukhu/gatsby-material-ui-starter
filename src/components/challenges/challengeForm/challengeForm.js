@@ -92,7 +92,6 @@ class ChallengeForm extends React.Component {
       handleFormSubmit,
       handleFormCancel
     } = this.props
-
     const formFields = selectedRow.map(
       field =>
         field.type === 'select' ? (

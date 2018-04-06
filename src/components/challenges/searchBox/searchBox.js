@@ -71,7 +71,7 @@ class SearchBox extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log('A name was submitted: ' + this.state.searchText)
+  //  console.log('A name was submitted: ' + this.state.searchText)
   }
 
   handleChange = name => event => {
