@@ -20,7 +20,12 @@ import { ref, firebaseAuth } from '../../../utils/firebase'
 import { login, logout, createUser } from '../../../utils/auth'
 import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
 import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
-import MaterialList, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List'
+import ChallengeHeader from '../challengeHeader/challengeHeader'
+import MaterialList, {
+  ListItem,
+  ListItemIcon,
+  ListItemText
+} from 'material-ui/List'
 import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData } from '../metadata'
 import cyan from 'material-ui/colors/cyan'
@@ -365,11 +370,19 @@ class EnhancedTable extends React.Component {
     ref
       .child('data')
       .set(this.state.data)
-      .catch( err => {
-        this.setState({ showSnackbar: true, snackBarMessage: 'Failed to save data !!' , isSaving: false })
+      .catch(err => {
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: 'Failed to save data !!',
+          isSaving: false
+        })
       })
       .then(() =>
-        this.setState({ showSnackbar: true, snackBarMessage: 'Data saved !!' , isSaving: false })
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: 'Data saved !!',
+          isSaving: false
+        })
       )
   }
 
@@ -484,20 +497,26 @@ class EnhancedTable extends React.Component {
     const newData = data.filter(item => this.applyfilter(item))
     const getURLs = urlData => {
       const urls = { urlData }
-      
+
       return urls.urlData
-        ? 
-        urls.urlData.split(',').map(data => (
-           
-              <ListItem component="a" dense href={data} target="_blank" key={data} className={classes.gitUrl}>
-                <ListItemText primary={data} />
-              </ListItem>
-        ))
+        ? urls.urlData.split(',').map(data => (
+            <ListItem
+              component="a"
+              dense
+              href={data}
+              target="_blank"
+              key={data}
+              className={classes.gitUrl}
+            >
+              <ListItemText primary={data} />
+            </ListItem>
+          ))
         : null
     }
     const helpInfo = showHelp ? <HelpInfo /> : null
     return (
       <div className={classes.root}>
+        <ChallengeHeader />
         {helpInfo}
         {snackBar}
         {loginForm}
@@ -530,7 +549,7 @@ class EnhancedTable extends React.Component {
             onClickHelp={this.handleHelpClick}
             isLoggedIn={isLoggedIn}
             isLoggingIn={isLoggingIn}
-            isSaving={isSaving} 
+            isSaving={isSaving}
             isLoading={isLoading}
             isEditable={isEditable}
             isDirty={dirty}
