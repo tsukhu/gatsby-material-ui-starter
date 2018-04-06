@@ -12,12 +12,17 @@ import Table, {
 import Paper from 'material-ui/Paper'
 import Checkbox from 'material-ui/Checkbox'
 import ChallengeForm from '../challengeForm/challengeForm'
-import LoginForm from '../loginForm/loginForm'
 import SearchBox from '../searchBox/searchBox'
 import { List } from 'immutable'
 import Snackbar from 'material-ui/Snackbar'
 import { ref, firebaseAuth } from '../../../utils/firebase'
-import { login, logout, createUser } from '../../../utils/auth'
+import {
+  login,
+  logout,
+  createUser,
+  loginOauth,
+  loginOAuth
+} from '../../../utils/auth'
 import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
 import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
 import ChallengeHeader from '../challengeHeader/challengeHeader'
@@ -27,8 +32,9 @@ import MaterialList, {
   ListItemText
 } from 'material-ui/List'
 import HelpInfo from '../helpInfo/helpInfo'
-import getColumnData, { createData } from '../metadata'
+import getColumnData, { createData, getAdminUsers } from '../metadata'
 import cyan from 'material-ui/colors/cyan'
+import { get } from 'https'
 
 const styles = theme => ({
   root: {
@@ -53,8 +59,8 @@ const styles = theme => ({
   },
   row: {
     '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
+      backgroundColor: theme.palette.background.default
+    }
   },
   tableWrapper: {
     overflowX: 'auto'
@@ -76,6 +82,7 @@ class EnhancedTable extends React.Component {
       orderBy: 'name',
       selected: [],
       data: [],
+      adminUsers: [],
       page: 0,
       rowsPerPage: 15,
       rowsPerPageOptions: [5, 15, 25],
@@ -100,22 +107,53 @@ class EnhancedTable extends React.Component {
       dirty: false
     }
     this.dbItems = ref.child('data')
+    this.authItems = ref.child('admin')
   }
 
   componentDidMount() {
     this.removeListener = firebaseAuth().onAuthStateChanged(user => {
       if (user) {
         let isAdmin = false
-        if (user.email === 'opensource@hcl.com') {
-          isAdmin = true
+        if (user.email === undefined) user.email = user.displayName
+
+        // if (user.email === 'opensource@hcl.com') {
+        //   isAdmin = true
+        // }
+        if (this.state.adminUsers.length === 0) {
+          this.authItems.on('value', dataSnapshot => {
+            var items = []
+
+            dataSnapshot.forEach(function(childSnapshot) {
+              var item = childSnapshot.val()
+              items.push(item)
+            })
+
+            this.setState(
+              {
+                adminUsers: items
+              },
+              () => {
+                isAdmin = this.isAdminUser(user.email)
+                this.setState({
+                  user: user,
+                  isAdmin: isAdmin,
+                  isLoggedIn: true,
+                  isLoggingIn: false,
+                  selected: []
+                })
+              }
+            )
+          })
+        } else {
+          isAdmin = this.isAdminUser(user.email)
+          this.setState({
+            user: user,
+            isAdmin: isAdmin,
+            isLoggedIn: true,
+            isLoggingIn: false,
+            selected: []
+          })
         }
-        this.setState({
-          user: user,
-          isAdmin: isAdmin,
-          isLoggedIn: true,
-          isLoggingIn: false,
-          selected: []
-        })
       } else {
         this.setState({
           user: null,
@@ -126,6 +164,7 @@ class EnhancedTable extends React.Component {
       }
     })
     this.setState({ isLoading: true })
+
     this.dbItems.on('value', dataSnapshot => {
       var items = []
 
@@ -143,6 +182,22 @@ class EnhancedTable extends React.Component {
 
   componentWillUnmount() {
     this.removeListener()
+  }
+
+  isAdminUser = email => {
+    const adminUsers = this.state.adminUsers
+
+    const emailMatch =
+      adminUsers.filter(user => {
+        return user.email.toLowerCase().includes(email.toLowerCase())
+      }).length > 0
+
+    const displayNameMatch =
+      adminUsers.filter(user => {
+        return user.displayName.toLowerCase().includes(email.toLowerCase())
+      }).length > 0
+
+    return emailMatch || displayNameMatch
   }
 
   handleRequestSort = (event, property) => {
@@ -316,28 +371,36 @@ class EnhancedTable extends React.Component {
   }
 
   handleLoginClick = event => {
-    this.setState({ showLogin: true })
-  }
+    loginOAuth()
+      .then(data => {
+        const username = data.additionalUserInfo.profile.email
+          ? data.additionalUserInfo.profile.email
+          : data.additionalUserInfo.profile.login
 
-  handleLoginCancel = event => {
-    this.setState({ showLogin: false, isLoggingIn: false })
-  }
-
-  handleLoginSubmit = event => {
-    this.setState({ showLogin: false, isLoggingIn: true })
-    if (event.usertype === 'new') {
-      this.loginNewUser(event.username, event.password)
-    } else {
-      this.loginExistingUser(event.username, event.password)
-    }
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: username + ' Logged In'
+        })
+      })
+      .catch(err => {
+        this.setState({ isLoggingIn: false })
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: 'Invalid Username/Password'
+        })
+      })
   }
 
   loginNewUser = (username, password) => {
     createUser(username, password)
       .then(data => {
+        const username = data.additionalUserInfo.profile.email
+          ? data.additionalUserInfo.profile.email
+          : data.additionalUserInfo.profile.login
+
         this.setState({
           showSnackbar: true,
-          snackBarMessage: data.email + ' Logged In'
+          snackBarMessage: username + ' Logged In'
         })
       })
       .catch(err => {
@@ -349,22 +412,6 @@ class EnhancedTable extends React.Component {
       })
   }
 
-  loginExistingUser = (username, password) => {
-    login(username, password)
-      .then(data => {
-        this.setState({
-          showSnackbar: true,
-          snackBarMessage: data.email + ' Logged In'
-        })
-      })
-      .catch(err => {
-        this.setState({ isLoggingIn: false })
-        this.setState({
-          showSnackbar: true,
-          snackBarMessage: 'Invalid Username/Password'
-        })
-      })
-  }
 
   handleLogOutClick = event => {
     logout()
@@ -491,14 +538,6 @@ class EnhancedTable extends React.Component {
       />
     ) : null
 
-    const loginForm = showLogin ? (
-      <LoginForm
-        handleLoginSubmit={this.handleLoginSubmit}
-        handleLoginCancel={this.handleLoginCancel}
-        open={showLogin}
-      />
-    ) : null
-
     const newData = data.filter(item => this.applyfilter(item))
     const getURLs = urlData => {
       const urls = { urlData }
@@ -524,7 +563,6 @@ class EnhancedTable extends React.Component {
         <ChallengeHeader />
         {helpInfo}
         {snackBar}
-        {loginForm}
         <Paper className={classes.paper}>
           {this.state.editing === true ? (
             <ChallengeForm

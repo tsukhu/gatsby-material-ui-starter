@@ -51,9 +51,8 @@ function getStepContent(step) {
   switch (step) {
     case 0:
       return `To contribute to this list you need to first login.
-              Click on the 'Login' button to either use an existing userId or
-              create a new one. Please use your organization email Id only.
-              Both new and existing users are logged on providing the credentials `
+              Click on the 'Login' button. This relies on the github OAuth permissions to be enabled.
+              When prompted grant the required permissions`
     case 1:
       return `Use the '+' Button to create a new challenge. Note: The new challenges are added with 
               status 'Approval Pending'`

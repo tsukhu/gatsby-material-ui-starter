@@ -15,6 +15,16 @@ export const createData = (
   }
 }
 
+export const getAdminUsers = () => {
+  return [
+    { email: 'tksukhu@gmail.com' , displayName: 'Tarun Sukhu'},
+    { email: 'mot@hcl.com' , displayName: 'suneev'},
+    { email: 'opensource@hcl.com' , displayName: 'HCLERS'},
+    { email: 'vinodmr@hcl.com', displayName:'Vinod Kumar'},
+    { email: 'kumar.s@hcl.com', displayName: 'Kumar S' }
+  ]
+}
+
 const getColumnData = isAdmin => {
   return [
     {

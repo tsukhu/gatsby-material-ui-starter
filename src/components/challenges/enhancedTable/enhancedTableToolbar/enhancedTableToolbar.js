@@ -13,6 +13,7 @@ import HelpIcon from 'material-ui-icons/Help'
 import FilterListIcon from 'material-ui-icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
 import { CircularProgress } from 'material-ui/Progress'
+import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button'
 import green from 'material-ui/colors/green'
 
@@ -52,6 +53,9 @@ const toolbarStyles = theme => ({
   },
   title: {
     flex: '0 0 auto'
+  },
+  avatar: {
+    margin: 1,
   },
   progress: {
     margin: theme.spacing.unit * 2
@@ -106,6 +110,7 @@ let EnhancedTableToolbar = props => {
           <Button color="primary">LOGOUT</Button>
         </Tooltip>
       </div>
+      <Avatar alt="Remy Sharp" src={user.photoURL} className={classes.avatar} />
     </div>
   ) : (
     <div className={classes.wrapper}>
