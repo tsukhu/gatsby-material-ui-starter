@@ -81,6 +81,7 @@ let EnhancedTableToolbar = props => {
     onClickHelp,
     isLoggedIn,
     isLoggingIn,
+    isSaving,
     isLoading,
     isEditable,
     isDirty,
@@ -88,12 +89,19 @@ let EnhancedTableToolbar = props => {
   } = props
   const actionButton = isLoggedIn ? (
     <div className={classes.actionButtons}>
-      {isDirty && <div onClick={onClickSave} className={classes.actionButton}>
-        <Tooltip title="Save to database">
-          <Button color="primary">SAVE</Button>
-        </Tooltip>
-      </div>}
-      <div onClick={onClickLogout} className={classes.actionButton}>
+      {isDirty && (
+        <div onClick={onClickSave} className={classes.wrapper}>
+          <Tooltip title="Save to database">
+            <Button color="primary" disabled={isSaving}>
+              SAVE
+            </Button>
+          </Tooltip>
+          {isSaving && (
+            <CircularProgress size={24} className={classes.buttonProgress} />
+          )}
+        </div>
+      )}
+      <div onClick={onClickLogout} className={classes.wrapper}>
         <Tooltip title={user.email}>
           <Button color="primary">LOGOUT</Button>
         </Tooltip>

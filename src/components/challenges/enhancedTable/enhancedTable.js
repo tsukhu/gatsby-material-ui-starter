@@ -74,6 +74,7 @@ class EnhancedTable extends React.Component {
       selectedRow: null,
       isLoggedIn: false,
       isLoggingIn: false,
+      isSaving: false,
       isLoading: false,
       showLogin: false,
       showSnackbar: false,
@@ -360,11 +361,15 @@ class EnhancedTable extends React.Component {
   }
 
   handleSaveClick = event => {
+    this.setState({ isSaving: true })
     ref
       .child('data')
       .set(this.state.data)
+      .catch( err => {
+        this.setState({ showSnackbar: true, snackBarMessage: 'Failed to save data !!' , isSaving: false })
+      })
       .then(() =>
-        this.setState({ showSnackbar: true, snackBarMessage: 'Data saved !!' })
+        this.setState({ showSnackbar: true, snackBarMessage: 'Data saved !!' , isSaving: false })
       )
   }
 
@@ -446,6 +451,7 @@ class EnhancedTable extends React.Component {
       isLoggedIn,
       isLoggingIn,
       isLoading,
+      isSaving,
       isEditable,
       showSnackbar,
       snackBarMessage,
@@ -524,6 +530,7 @@ class EnhancedTable extends React.Component {
             onClickHelp={this.handleHelpClick}
             isLoggedIn={isLoggedIn}
             isLoggingIn={isLoggingIn}
+            isSaving={isSaving} 
             isLoading={isLoading}
             isEditable={isEditable}
             isDirty={dirty}
