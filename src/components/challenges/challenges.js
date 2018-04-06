@@ -29,8 +29,7 @@ function Challenges(props) {
   return (
     <div>
       <Paper className={classes.paper} elevation={4}>
-        <PageHeader text="Challenges (Work in Progess)" />
-        <EnhancedTable />
+       <EnhancedTable />
       </Paper>
     </div>
   )
