@@ -51,6 +51,11 @@ const styles = theme => ({
   table: {
     flex: '1 1 auto'
   },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
   tableWrapper: {
     overflowX: 'auto'
   },
@@ -582,6 +587,7 @@ class EnhancedTable extends React.Component {
                         tabIndex={-1}
                         key={n.id}
                         selected={isSelected}
+                        className={classes.row}
                       >
                         <TableCell padding="checkbox">
                           <Checkbox checked={isSelected} />

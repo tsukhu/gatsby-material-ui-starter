@@ -26,7 +26,6 @@ const styles = theme => ({
     shadowRadius: 5
   },
   media: {
-    height: 200
   },
   container: {
     display: 'flex',
