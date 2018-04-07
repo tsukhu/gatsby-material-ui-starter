@@ -1,5 +1,6 @@
-const dotenv = require(`dotenv`);
-dotenv.config();
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+});
 module.exports = {
   siteMetadata: {
     title: `Open Source @HCL-ERS`,
@@ -30,23 +31,23 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: "HCL ERS Static Site",
-        short_name: "ERS OSS",
-        description: "ERS Open Source",
-        start_url: "/",
-        background_color: "#f7f0eb",
-        theme_color: "#a2466c",
-        display: "minimal-ui",
+        name: 'HCL ERS Static Site',
+        short_name: 'ERS OSS',
+        description: 'ERS Open Source',
+        start_url: '/',
+        background_color: '#f7f0eb',
+        theme_color: '#a2466c',
+        display: 'minimal-ui',
         icons: [
           {
-            src: "/logos/logo-192.png",
-            sizes: "192x192",
-            type: "image/png"
+            src: '/logos/logo-192.png',
+            sizes: '192x192',
+            type: 'image/png'
           },
           {
-            src: "/logos/logo-512.png",
-            sizes: "512x512",
-            type: "image/png"
+            src: '/logos/logo-512.png',
+            sizes: '512x512',
+            type: 'image/png'
           }
         ]
       }
@@ -253,9 +254,9 @@ module.exports = {
         }        
         `,
         variables: {
-          author: "ERS-HCL"
+          author: 'ERS-HCL'
         }
       }
     }
   ]
-};
+}
