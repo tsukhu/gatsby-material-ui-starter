@@ -34,15 +34,23 @@ One of the challenges we face is to get a view of the open source contributions 
 * Each repository specific detailed page
 * Excel source based separate pages
 
-## Configurataion
+## Configuration
 
-Create a .env file
-Add the required github configuration details. This will be required for the github project
+Create a .env<.development|.production> file
 
-### Example .env file
+* Add the required github configuration details. This will be required for the github projects and top 10 pages
+* Create a firebase database on the firebase cloud. This will be required for challenges page.
+
+### Example .env<.development|.production> file
 
 ```property
-GITHUB_TOKEN=<ADD YOUR GITHUB USER OAUTH TOKEN> 
+GITHUB_TOKEN=<ADD YOUR GITHUB USER OAUTH TOKEN>
+GATSBY_FIREBASE_API_KEY=<ADD YOUR FIREBASE CREDENTIALS>
+GATSBY_FIREBASE_AUTH_DOMAIN=<ADD YOUR FIREBASE CREDENTIALS>
+GATSBY_FIREBASE_DATABASE_URL=<ADD YOUR FIREBASE CREDENTIALS>
+GATSBY_FIREBASE_PROJECT_ID=<ADD YOUR FIREBASE CREDENTIALS>
+GATSBY_FIREBASE_STORAGE_BUCKET=<ADD YOUR FIREBASE CREDENTIALS>
+GATSBY_FIREBASE_MESSAGING_SENDER_ID=<ADD YOUR FIREBASE CREDENTIALS>
 ```
 
 * Note we need to have the OAuth github API token in place as a prerequisite.
