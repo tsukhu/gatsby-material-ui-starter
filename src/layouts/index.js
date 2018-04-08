@@ -26,6 +26,8 @@ class Index extends Component {
           defaultTitle={`ERS-HCL Github Site`}
           titleTemplate={`%s | ERS-HCL`}
         >
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+
           <meta name="twitter:site" content="@TarunKumarSukhu" />
           <meta name="og:type" content="website" />
           <meta name="og:site_name" content="ERS-HCL" />
