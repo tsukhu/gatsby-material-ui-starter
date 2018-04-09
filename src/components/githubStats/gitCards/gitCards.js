@@ -9,8 +9,8 @@ import Typography from 'material-ui/Typography'
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton'
 import ListSubheader from 'material-ui/List/ListSubheader';
-import Star from 'material-ui-icons/Star';
-import Language from 'material-ui-icons/Language';
+import Star from '@material-ui/icons/Star';
+import Language from '@material-ui/icons/Language';
 import Paper from 'material-ui/Paper'
 import Avatar from 'material-ui/Avatar'
 import indigo from 'material-ui/colors/indigo';
