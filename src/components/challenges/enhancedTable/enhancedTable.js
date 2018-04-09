@@ -34,11 +34,30 @@ import MaterialList, {
 import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData, getAdminUsers } from '../metadata'
 import cyan from 'material-ui/colors/cyan'
+import Chip from 'material-ui/Chip';
+import deepOrange from 'material-ui/colors/deepOrange';
+import blueGrey from 'material-ui/colors/blueGrey';
+import teal from 'material-ui/colors/teal';
 import { get } from 'https'
 
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3
+  },
+  chipLow: {
+    margin: theme.spacing.unit,
+    color: '#fff',
+    backgroundColor: blueGrey[500],
+  },
+  chipMedium: {
+    margin: theme.spacing.unit,
+    color: '#fff',
+    backgroundColor: teal[500],
+  },
+  chipHigh: {
+    margin: theme.spacing.unit,
+    color: '#fff',
+    backgroundColor: deepOrange[500],
   },
   paper: {
     margin: 5,
@@ -616,6 +635,10 @@ class EnhancedTable extends React.Component {
                     const isSelected = this.isSelected(n.id)
                     const mailTo =
                       'mailto:' + n.contributor + '?Subject=' + n.name
+                    const prorityChip =
+                      (n.priority.toLowerCase() === 'high')?<Chip label="H" className={classes.chipHigh} />:
+                      (n.priority.toLowerCase() === 'medium')?<Chip label="M" className={classes.chipMedium} />:
+                      <Chip label="L" className={classes.chipLow} />
                     return (
                       <TableRow
                         hover
@@ -639,7 +662,7 @@ class EnhancedTable extends React.Component {
                         </TableCell>
                         <TableCell padding="none">{n.domain}</TableCell>
                         <TableCell padding="none">{n.status}</TableCell>
-                        <TableCell padding="none">{n.priority}</TableCell>
+                        <TableCell padding="none">{prorityChip}{n.priority}</TableCell>
                         <TableCell padding="none">
                           {getURLs(n.githubURL)}
                         </TableCell>

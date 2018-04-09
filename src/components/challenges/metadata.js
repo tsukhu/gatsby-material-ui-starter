@@ -109,7 +109,7 @@ const getColumnData = isAdmin => {
       id: 'githubURL',
       numeric: false,
       disablePadding: false,
-      label: 'githubURLs',
+      label: 'Github URLs',
       type: 'text',
       multiline: true,
       helperText: 'Comma separated Github URLs'
