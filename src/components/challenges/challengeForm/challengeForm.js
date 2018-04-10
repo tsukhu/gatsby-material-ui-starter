@@ -10,6 +10,7 @@ import PageHeader from '../../pageHeader/pageHeader'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import Select from 'material-ui/Select'
 import blueGrey from 'material-ui/colors/blueGrey'
+import Fade from 'material-ui/transitions/Fade'
 import Button from 'material-ui/Button'
 
 const styles = theme => ({
@@ -95,7 +96,11 @@ class ChallengeForm extends React.Component {
     const formFields = selectedRow.map(
       field =>
         field.type === 'select' ? (
-          <FormControl className={classes.formControl} key={field.id} disabled={field.disabled?field.disabled:false}>
+          <FormControl
+            className={classes.formControl}
+            key={field.id}
+            disabled={field.disabled ? field.disabled : false}
+          >
             <InputLabel htmlFor={field.id}>{field.id.toUpperCase()}</InputLabel>
             <Select
               native
@@ -106,9 +111,9 @@ class ChallengeForm extends React.Component {
               }}
             >
               {field.options.map(option => (
-              <option value={option.value} key={option.name}>
-                {option.name}
-              </option>
+                <option value={option.value} key={option.name}>
+                  {option.name}
+                </option>
               ))}
             </Select>
           </FormControl>
@@ -117,10 +122,10 @@ class ChallengeForm extends React.Component {
             id={field.id}
             label={field.id.toUpperCase()}
             defaultValue={field.value}
-            disabled={field.disabled?field.disabled:false}
+            disabled={field.disabled ? field.disabled : false}
             type={field.type}
             autoComplete="name"
-            multiline={field.multiline?field.multiline:false}
+            multiline={field.multiline ? field.multiline : false}
             className={classes.textField}
             helperText={field.helperText}
             margin="normal"
@@ -130,29 +135,33 @@ class ChallengeForm extends React.Component {
         )
     )
     return (
-      <Paper className={classes.paper} elevation={4}>
-        <PageHeader text="Edit" />
-        <form
-          className={classes.container}
-          noValidate
-          autoComplete="on"
-          onSubmit={this.handleSubmit}
-        >
-          {formFields}
-          <div
-            onClick={event => handleFormSubmit(event, this.state.challengeForm)}
+      <Fade in={true}>
+        <Paper className={classes.paper} elevation={4}>
+          <PageHeader text="Edit" />
+          <form
+            className={classes.container}
+            noValidate
+            autoComplete="on"
+            onSubmit={this.handleSubmit}
           >
-            <Button color="primary" className={classes.button}>
-              UPDATE
-            </Button>
-          </div>
-          <div onClick={event => handleFormCancel(event)}>
-            <Button color="primary" className={classes.button}>
-              CANCEL
-            </Button>
-          </div>
-        </form>
-      </Paper>
+            {formFields}
+            <div
+              onClick={event =>
+                handleFormSubmit(event, this.state.challengeForm)
+              }
+            >
+              <Button color="primary" className={classes.button}>
+                UPDATE
+              </Button>
+            </div>
+            <div onClick={event => handleFormCancel(event)}>
+              <Button color="primary" className={classes.button}>
+                CANCEL
+              </Button>
+            </div>
+          </form>
+        </Paper>
+      </Fade>
     )
   }
 }

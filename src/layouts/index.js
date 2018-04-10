@@ -19,7 +19,7 @@ class Index extends Component {
   }
 
   render() {
-    const { location, children } = this.props
+    const { children } = this.props
     return this.state.loaded ? (
       <div>
         <Helmet
@@ -42,10 +42,10 @@ class Index extends Component {
           />
           <html lang="en" />
         </Helmet>
-        <section>
+        <header>
           <Navigation title={this.props.data.site.siteMetadata.title} />
-          {this.props.children()}
-        </section>
+        </header>
+        {children()}
       </div>
     ) : (
       <div>

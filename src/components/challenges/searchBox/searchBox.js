@@ -10,7 +10,7 @@ import blueGrey from 'material-ui/colors/blueGrey'
 import MenuItem from 'material-ui/Menu/MenuItem'
 import TextField from 'material-ui/TextField'
 import Input, { InputLabel } from 'material-ui/Input'
-
+import Fade from 'material-ui/transitions/Fade'
 import { FormControl, FormHelperText } from 'material-ui/Form'
 import Select from 'material-ui/Select'
 import getColumnData from '../metadata'
@@ -71,7 +71,7 @@ class SearchBox extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-  //  console.log('A name was submitted: ' + this.state.searchText)
+    //  console.log('A name was submitted: ' + this.state.searchText)
   }
 
   handleChange = name => event => {
@@ -82,30 +82,37 @@ class SearchBox extends React.Component {
 
   handleDomainChange = name => event => {
     this.setState({
-      domain: event.target.value === 'None'?'':event.target.value
+      domain: event.target.value === 'None' ? '' : event.target.value
     })
   }
 
   handlePriorityChange = name => event => {
     this.setState({
-      priority: event.target.value === 'None'?'':event.target.value
+      priority: event.target.value === 'None' ? '' : event.target.value
     })
   }
 
   handleStatusChange = name => event => {
     this.setState({
-      status: event.target.value === 'None'?'':event.target.value
+      status: event.target.value === 'None' ? '' : event.target.value
     })
   }
 
   render() {
-    const { classes, handleSearch, searchText,searchDomain,searchPriority, searchStatus } = this.props
+    const {
+      classes,
+      handleSearch,
+      searchText,
+      searchDomain,
+      searchPriority,
+      searchStatus
+    } = this.props
     const domainSearch = (
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-helper">DOMAIN</InputLabel>
         <Select
           native
-          defaultValue={searchDomain?searchDomain:'None'}
+          defaultValue={searchDomain ? searchDomain : 'None'}
           onChange={this.handleDomainChange()}
           input={<Input id="age-native-helper" />}
         >
@@ -125,7 +132,7 @@ class SearchBox extends React.Component {
         <InputLabel htmlFor="priority-native-helper">PRIORITY</InputLabel>
         <Select
           native
-          defaultValue={searchPriority?searchPriority:'None'}
+          defaultValue={searchPriority ? searchPriority : 'None'}
           onChange={this.handlePriorityChange()}
           input={<Input id="priority-native-helper" />}
         >
@@ -145,7 +152,7 @@ class SearchBox extends React.Component {
         <InputLabel htmlFor="status-native-helper">STATUS</InputLabel>
         <Select
           native
-          defaultValue={searchStatus?searchStatus:'None'}
+          defaultValue={searchStatus ? searchStatus : 'None'}
           onChange={this.handleStatusChange()}
           input={<Input id="status-native-helper" />}
         >
@@ -160,42 +167,45 @@ class SearchBox extends React.Component {
       </FormControl>
     )
     return (
-      <Paper className={classes.paper} elevation={4}>
-        <PageHeader text="Filter" />
-        <div className={classes.container}>
-          <form
-            noValidate
-            autoComplete="on"
-            onSubmit={event => {
-              event.preventDefault()
-              handleSearch(this.state)
-            }}
-          >
-            <TextField
-              id="search"
-              label="Filter Text"
-              type="search"
-              defaultValue={searchText}
-              className={classes.textField}
-              helperText="Search"
-              onChange={this.handleChange('search')}
-              margin="normal"
-            />
-            {domainSearch}
-            {prioritySearch}
-            {statusSearch}
-            <Button
-              variant="fab"
-              color="primary"
-              aria-label="search"
-              className={classes.button}
-              onClick={event => handleSearch(this.state)}
+      <Fade in={true}>
+        <Paper className={classes.paper} elevation={4}>
+          <PageHeader text="Filter" />
+
+          <div className={classes.container}>
+            <form
+              noValidate
+              autoComplete="on"
+              onSubmit={event => {
+                event.preventDefault()
+                handleSearch(this.state)
+              }}
             >
-              <SearchIcon />
-            </Button>
-          </form>
-        </div>
-      </Paper>
+              <TextField
+                id="search"
+                label="Filter Text"
+                type="search"
+                defaultValue={searchText}
+                className={classes.textField}
+                helperText="Search"
+                onChange={this.handleChange('search')}
+                margin="normal"
+              />
+              {domainSearch}
+              {prioritySearch}
+              {statusSearch}
+              <Button
+                variant="fab"
+                color="primary"
+                aria-label="search"
+                className={classes.button}
+                onClick={event => handleSearch(this.state)}
+              >
+                <SearchIcon />
+              </Button>
+            </form>
+          </div>
+        </Paper>
+      </Fade>
     )
   }
 }

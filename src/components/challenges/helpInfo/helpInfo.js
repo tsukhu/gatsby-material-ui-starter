@@ -7,6 +7,7 @@ import Stepper, { Step, StepLabel, StepContent } from 'material-ui/Stepper'
 import Button from 'material-ui/Button'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
+import Fade from 'material-ui/transitions/Fade'
 
 const styles = theme => ({
   container: {
@@ -44,7 +45,13 @@ const styles = theme => ({
 })
 
 function getSteps() {
-  return ['Login / Register', 'Add a new Challenge', 'Edit existing challenges', 'Save', 'Global View']
+  return [
+    'Login / Register',
+    'Add a new Challenge',
+    'Edit existing challenges',
+    'Save',
+    'Global View'
+  ]
 }
 
 function getStepContent(step) {
@@ -58,10 +65,10 @@ function getStepContent(step) {
               status 'Approval Pending'`
     case 2:
       return `You can only modify your own entries which are with status set to 'Approval Pending'`
-    
+
     case 3:
       return `Use the 'SAVE' Button to push your changes and make it available for review to the administrator`
-    
+
     case 4:
       return `Once approved these challenges will appear in the list for everyone to view`
 
@@ -99,54 +106,59 @@ class HelpInfo extends React.Component {
     const { activeStep } = this.state
 
     return (
-      <Paper className={classes.paper} elevation={4}>
-        <PageHeader text="Help" />
-        <Typography variant="body1" className={classes.subHeader}>Contributing a new challenge</Typography>
-        <div className={classes.container}>
-       
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((label, index) => {
-              return (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                  <StepContent>
-                    <Typography>{getStepContent(index)}</Typography>
-                    <div className={classes.actionsContainer}>
-                      <div>
-                        <Button
-                          disabled={activeStep === 0}
-                          onClick={this.handleBack}
-                          className={classes.button}
-                        >
-                          Back
-                        </Button>
-                        <Button
-                          variant="raised"
-                          color="primary"
-                          onClick={this.handleNext}
-                          className={classes.button}
-                        >
-                          {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                        </Button>
+      <Fade in={true}>
+        <Paper className={classes.paper} elevation={4}>
+          <PageHeader text="Help" />
+          <Typography variant="body1" className={classes.subHeader}>
+            Contributing a new challenge
+          </Typography>
+          <div className={classes.container}>
+            <Stepper activeStep={activeStep} orientation="vertical">
+              {steps.map((label, index) => {
+                return (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                    <StepContent>
+                      <Typography>{getStepContent(index)}</Typography>
+                      <div className={classes.actionsContainer}>
+                        <div>
+                          <Button
+                            disabled={activeStep === 0}
+                            onClick={this.handleBack}
+                            className={classes.button}
+                          >
+                            Back
+                          </Button>
+                          <Button
+                            variant="raised"
+                            color="primary"
+                            onClick={this.handleNext}
+                            className={classes.button}
+                          >
+                            {activeStep === steps.length - 1
+                              ? 'Finish'
+                              : 'Next'}
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  </StepContent>
-                </Step>
-              )
-            })}
-          </Stepper>
-          {activeStep === steps.length && (
-            <Paper square elevation={0} className={classes.resetContainer}>
-              <Typography>
-                All steps completed - you&quot;re finished
-              </Typography>
-              <Button onClick={this.handleReset} className={classes.button}>
-                Reset
-              </Button>
-            </Paper>
-          )}
-        </div>
-      </Paper>
+                    </StepContent>
+                  </Step>
+                )
+              })}
+            </Stepper>
+            {activeStep === steps.length && (
+              <Paper square elevation={0} className={classes.resetContainer}>
+                <Typography>
+                  All steps completed - you&quot;re finished
+                </Typography>
+                <Button onClick={this.handleReset} className={classes.button}>
+                  Reset
+                </Button>
+              </Paper>
+            )}
+          </div>
+        </Paper>
+      </Fade>
     )
   }
 }
