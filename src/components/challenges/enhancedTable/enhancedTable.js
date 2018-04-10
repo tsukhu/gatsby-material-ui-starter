@@ -348,7 +348,7 @@ class EnhancedTable extends React.Component {
     const { selected, data } = this.state
 
     const newData = data.filter(item => item.id !== selected[0])
-    this.setState({ data: newData, selected: [], dirty: true })
+    this.setState({ data: newData, selected: [], dirty: true , editing: false })
   }
 
   handleSearchClick = event => {
