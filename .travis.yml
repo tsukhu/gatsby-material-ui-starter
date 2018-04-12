@@ -18,4 +18,4 @@ jobs:
   - stage: build
     script:
     - npm install
-    - npm run deploy
+    # - npm run deploy

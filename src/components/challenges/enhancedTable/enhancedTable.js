@@ -35,10 +35,15 @@ import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData, getAdminUsers } from '../metadata'
 import cyan from 'material-ui/colors/cyan'
 import Chip from 'material-ui/Chip'
+import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
+import IconButton from 'material-ui/IconButton'
+import UpVote from '../upvote/upvote'
 import deepOrange from 'material-ui/colors/deepOrange'
 import blueGrey from 'material-ui/colors/blueGrey'
 import teal from 'material-ui/colors/teal'
 import { get } from 'https'
+import * as _ from 'lodash'
 
 const styles = theme => ({
   root: {
@@ -84,6 +89,20 @@ const styles = theme => ({
   tableWrapper: {
     overflowX: 'auto'
   },
+  button: {
+    margin: 0
+  },
+  votes: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 0,
+    padding: 0,
+    alignSelf: 'center',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    alignContent: 'middle',
+    alignItems: 'middle'
+  },
   gitUrl: {
     theme: 'inherit',
     '&:hover': {
@@ -102,16 +121,18 @@ class EnhancedTable extends React.Component {
       selected: [],
       data: [],
       adminUsers: [],
+      votes: [],
+      voteDisplay: [],
       page: 0,
       rowsPerPage: 15,
       rowsPerPageOptions: [5, 15, 25],
-      editing: false,
+      editing: false, // State: Editing data
       filter: false,
       selectedRow: null,
       isLoggedIn: false,
-      isLoggingIn: false,
-      isSaving: false,
-      isLoading: false,
+      isLoggingIn: false, // State: Is Logging in user
+      isSaving: false, // State: Saving data
+      isLoading: false, // State : Is Loading data
       showLogin: false,
       showSnackbar: false,
       snackBarMessage: '',
@@ -126,7 +147,8 @@ class EnhancedTable extends React.Component {
       dirty: false
     }
     this.dbItems = ref.child('data')
-    this.authItems = ref.child('admin')
+    this.dbAuthItems = ref.child('admin')
+    this.dbVotes = ref.child('vote')
   }
 
   componentDidMount() {
@@ -139,7 +161,7 @@ class EnhancedTable extends React.Component {
         //   isAdmin = true
         // }
         if (this.state.adminUsers.length === 0) {
-          this.authItems.on('value', dataSnapshot => {
+          this.dbAuthItems.on('value', dataSnapshot => {
             var items = []
 
             dataSnapshot.forEach(function(childSnapshot) {
@@ -188,7 +210,7 @@ class EnhancedTable extends React.Component {
       var items = []
 
       dataSnapshot.forEach(function(childSnapshot) {
-        var item = childSnapshot.val()
+        const item = childSnapshot.val()
         items.push(item)
       })
 
@@ -196,6 +218,42 @@ class EnhancedTable extends React.Component {
         data: items.sort((a, b) => (a.name < b.name ? -1 : 1)),
         isLoading: false
       })
+    })
+
+    this.dbVotes.on('value', dataSnapshot => {
+      var items = []
+      console.log('New Value received')
+      dataSnapshot.forEach(function(childSnapshot) {
+        var item = childSnapshot.val()
+        items.push(item)
+      })
+      // console.log(items)
+
+      const voteDisplay = []
+      items.forEach(item => {
+        const total = _.reduce(item.votes, (sum, v) => sum + +v.count, 0)
+        voteDisplay.push({
+          id: item.id,
+          total: total
+        })
+      })
+
+        const voteData = this.state.data.map(data => {
+          const voteFilter = this.state.voteDisplay.filter(
+            vote => vote.id === data.id
+          )
+          data.voteCount = voteFilter.length > 0 ? voteFilter[0].total : 0
+          return data
+        })
+
+
+      this.setState(
+        {
+          data: voteData,
+          votes: items, // original db values
+          voteDisplay: voteDisplay // transformed display values
+        })
+        
     })
   }
 
@@ -348,7 +406,7 @@ class EnhancedTable extends React.Component {
     const { selected, data } = this.state
 
     const newData = data.filter(item => item.id !== selected[0])
-    this.setState({ data: newData, selected: [], dirty: true , editing: false })
+    this.setState({ data: newData, selected: [], dirty: true, editing: false })
   }
 
   handleSearchClick = event => {
@@ -478,6 +536,40 @@ class EnhancedTable extends React.Component {
     })
   }
 
+  handleVote = (id, count) => {
+    let votes = this.state.votes.map(item => {
+      if (item.id === id) {
+        let newVoteItem = List(item.votes).toArray()
+        newVoteItem.push({
+          count: count,
+          email: this.state.user.email
+        })
+        //   console.log(newVoteItem)
+        return {
+          id: id,
+          votes: newVoteItem
+        }
+      } else return item
+    })
+
+    if (votes.findIndex(item => item.id === id) === -1) {
+      let newVoteItem = []
+      newVoteItem.push({
+        count: count,
+        email: this.state.user.email
+      })
+      votes.push({
+        id: id,
+        votes: newVoteItem
+      })
+    }
+    // console.log(votes)
+    this.dbVotes.set(votes).catch(err => {
+      console.log('Error saving votes:' + err)
+    })
+    console.log('Count = ' + count, id)
+  }
+
   applyfilter = item => {
     const isTextFiltered = this.state.filterText
       ? item.name.toLowerCase().includes(this.state.filterText.toLowerCase()) ||
@@ -541,6 +633,7 @@ class EnhancedTable extends React.Component {
       snackBarMessage,
       showLogin,
       showHelp,
+      voteDisplay,
       dirty
     } = this.state
     const emptyRows =
@@ -558,6 +651,7 @@ class EnhancedTable extends React.Component {
     ) : null
 
     const newData = data.filter(item => this.applyfilter(item))
+    // console.log(newData)
     const getURLs = urlData => {
       const urls = { urlData }
 
@@ -646,7 +740,6 @@ class EnhancedTable extends React.Component {
                     return (
                       <TableRow
                         hover
-                        onClick={event => this.handleRowClick(event, n.id)}
                         role="checkbox"
                         aria-checked={isSelected}
                         tabIndex={-1}
@@ -655,7 +748,10 @@ class EnhancedTable extends React.Component {
                         className={classes.row}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isSelected} />
+                          <Checkbox
+                            checked={isSelected}
+                            onClick={event => this.handleRowClick(event, n.id)}
+                          />
                         </TableCell>
                         <TableCell padding="none">{n.name}</TableCell>
                         <TableCell padding="none">{n.description}</TableCell>
@@ -672,6 +768,13 @@ class EnhancedTable extends React.Component {
                         </TableCell>
                         <TableCell padding="none">
                           {getURLs(n.githubURL)}
+                        </TableCell>
+                        <TableCell padding="none">
+                          <UpVote
+                            voteCount={n.voteCount}
+                            onVote={this.handleVote}
+                            id={n.id}
+                          />
                         </TableCell>
                       </TableRow>
                     )
