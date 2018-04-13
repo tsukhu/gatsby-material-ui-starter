@@ -26,6 +26,9 @@ const styles = theme => ({
     shadowRadius: 5
   },
   media: {
+    maxWidth:'100% !important',
+    height: 'auto',
+    display: 'block'
   },
   container: {
     display: 'flex',
@@ -54,15 +57,10 @@ class ChallengeHeader extends React.Component {
   render() {
     const { classes } = this.props
     const headerText = `ERS-HCL Challenges`
-    const paragraphText = `Welcome to the technology challenges initiative. 
-                          Given below is the list of existing project challenges at various stages of implementation.`
+    const paragraphText = `Welcome to ERS GitHub Challenges page, Now you can host your own challenge or pick an Open Source challenge . This is an opportunity to demonstrate proficiency in the Technical problem solving skills as well as  learn new technologies. Select one of the domain specific challenges and create a new git repository for that project. Organize your code within that repo -- when you get to a stopping point, commit and push your code and email a link to your repo to 'opensource@hcl.com'`
     return (
      <Card className={classes.card}>
-          <CardMedia
-            className={classes.media}
-            image="/Dash.png"
-            title="Contemplative Reptile"
-          />
+          <img src="/Dash.png" alt="Contemplative Reptile"  className={classes.media}/>
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
               {headerText}
