@@ -46,7 +46,7 @@
   "devDependencies": {
     "gh-pages": "^1.1.0"
   },
-  "version": "1.5.2",
+  "version": "1.7.0",
   "main": "n/a",
   "repository": {
     "type": "git",
