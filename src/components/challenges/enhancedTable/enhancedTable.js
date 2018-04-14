@@ -242,7 +242,7 @@ class EnhancedTable extends React.Component {
           )
         }))
         .value()
-      console.log(voteTransformed)
+ 
       const { data } = this.state
       const mergedVotes = []
       data.forEach(item => {
@@ -258,6 +258,7 @@ class EnhancedTable extends React.Component {
 
       this.setState({
         ...this.state,
+        vote: items,
         data: newData,
         filteredData: newData,
         votesAvailable: true
@@ -292,12 +293,12 @@ class EnhancedTable extends React.Component {
       order = 'asc'
     }
 
-    const data =
+    const filteredData =
       order === 'desc'
-        ? this.state.data.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
-        : this.state.data.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1))
+        ? this.state.filteredData.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
+        : this.state.filteredData.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1))
 
-    this.setState({ data, order, orderBy })
+    this.setState({ filteredData, order, orderBy })
   }
 
   handleSelectAllClick = (event, checked) => {
@@ -401,8 +402,8 @@ class EnhancedTable extends React.Component {
     const filteredData = newData.filter(item => this.applyfilter(item))
     this.setState(
       {
-        data: newData.toArray().sort((a, b) => (a.name < b.name ? -1 : 1)),
-        filteredData: filteredData.toArray().sort((a, b) => (a.name < b.name ? -1 : 1))
+        data: newData,
+        filteredData: filteredData
       },
       function() {
         this.handleRowClick(null, newRow.id)
@@ -556,10 +557,10 @@ class EnhancedTable extends React.Component {
 
   handleUpVote = (id, count) => {
     let refVotes = ref.child('vote')
-
+    // Check if user has previously upvoted
     if (
       this.state.vote.filter(
-        vote => vote.id === id && vote.email === this.state.user.email
+        vote => vote.id === id && vote.email === this.state.user.email && vote.type==='upVote'
       ).length === 0
     ) {
       refVotes
@@ -575,7 +576,7 @@ class EnhancedTable extends React.Component {
       this.setState({
         showSnackbar: true,
         snackBarMessage:
-          'Vote not saved as ,you can up vote or downvote only once'
+          'You can up vote only once per challenge'
       })
     }
   }
@@ -585,7 +586,7 @@ class EnhancedTable extends React.Component {
 
     if (
       this.state.vote.filter(
-        vote => vote.id === id && vote.email === this.state.user.email
+        vote => vote.id === id && vote.email === this.state.user.email && vote.type==='downVote'
       ).length === 0
     ) {
       refVotes
@@ -601,7 +602,7 @@ class EnhancedTable extends React.Component {
       this.setState({
         showSnackbar: true,
         snackBarMessage:
-          'Vote not saved as , you can up vote or downvote only once'
+          'You can downvote only once per challenge'
       })
     }
   }
@@ -752,11 +753,12 @@ class EnhancedTable extends React.Component {
             <Table className={classes.table}>
               <EnhancedTableHead
                 numSelected={selected.length}
+                isLoggedIn={isLoggedIn}
                 order={order}
                 orderBy={orderBy}
                 onSelectAllClick={this.handleSelectAllClick}
                 onRequestSort={this.handleRequestSort}
-                rowCount={filteredData.length}
+                rowCount={filteredData?filteredData.length:0}
               />
               <TableBody>
                 {filteredData
@@ -806,7 +808,7 @@ class EnhancedTable extends React.Component {
                           {getURLs(n.githubURL)}
                         </TableCell>
                         <TableCell padding="none">
-                        {votesAvailable?<UpVote
+                        {isLoggedIn && votesAvailable?<UpVote
                           votes={n.votes}
                           id={n.id}
                           onUpVote={this.handleUpVote}
@@ -827,7 +829,7 @@ class EnhancedTable extends React.Component {
                 <TableRow>
                   <TablePagination
                     colSpan={6}
-                    count={filteredData.length}
+                    count={filteredData?filteredData.length:0}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     rowsPerPageOptions={rowsPerPageOptions}

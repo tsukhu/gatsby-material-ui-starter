@@ -27,8 +27,6 @@ class UpVote extends React.Component {
     super(props)
     // update original states
     this.state = {
-      count: 0,
-      modifiedCount: 0,
       id: undefined,
       upvoted: false,
       downvoted: false
@@ -38,20 +36,16 @@ class UpVote extends React.Component {
   componentDidMount() {
     this.setState({
       ...this.state,
-      count: this.props.votes,
-      modifiedCount: this.props.votes,
       upvoted: this.props.hasUpVoted,
       downvoted: this.props.hasDownVoted
     })
   }
 
   upvote = () => {
-    const newCount = this.state.count + 1
     this.setState({
       ...this.state,
       upvoted: !this.state.upvoted,
       downvoted: (this.props.hasUpVoted)? true : false,
-      modifiedCount: newCount
     })
     this.props.onUpVote(this.props.id)
   }
@@ -62,7 +56,6 @@ class UpVote extends React.Component {
       ...this.state,
       upvoted: (this.props.hasUpVoted)? true :false,
       downvoted: !this.state.downvoted,
-      modifiedCount: newCount
     })
     this.props.onDownVote(this.props.id)
   }
@@ -81,7 +74,7 @@ class UpVote extends React.Component {
         >
           <ArrowDropUp />
         </IconButton>
-        {this.state.modifiedCount}
+        {this.props.votes}
         <IconButton
           className={classes.button}
           aria-label="Down Vote"
