@@ -23,75 +23,70 @@ const styles = theme => ({
 })
 
 class UpVote extends React.Component {
-
   constructor(props) {
     super(props)
-    this.handleUpVote = this.handleUpVote.bind(this)
-    this.handleDownVote = this.handleDownVote.bind(this)
-  }
-
-  state = {
-    count: 0,
-    baseCount: 0,
-    id: undefined
-  }
-
-  componentWillMount = () => {
-     const { voteCount, id } = this.props
     // update original states
+    this.state = {
+      count: 0,
+      modifiedCount: 0,
+      id: undefined,
+      upvoted: false,
+      downvoted: false
+    }
+  }
+
+  componentDidMount() {
     this.setState({
-      count: voteCount,
-      baseCount: voteCount,
-      id: id
+      ...this.state,
+      count: this.props.votes,
+      modifiedCount: this.props.votes,
+      upvoted: this.props.hasUpVoted,
+      downvoted: this.props.hasDownVoted
     })
   }
 
-  handleUpVote = () => {
-    // Can only increment by one
-    const increment = this.state.count + 1
-    if (increment <= this.state.baseCount + 1) {
-      this.setState(
-        {
-          count: increment
-        },
-        function() {
-          this.props.onVote(this.state.id, 1)
-        }
-      )
-    }
+  upvote = () => {
+    const newCount = this.state.count + 1
+    this.setState({
+      ...this.state,
+      upvoted: !this.state.upvoted,
+      downvoted: (this.props.hasUpVoted)? true : false,
+      modifiedCount: newCount
+    })
+    this.props.onUpVote(this.props.id)
   }
 
-  handleDownVote = () => {
-    // Can only decrement by one
-    const decrement = this.state.count - 1
-    if (decrement >= this.state.baseCount - 1) {
-      this.setState(
-        {
-          count: decrement
-        },
-        function() {
-          this.props.onVote(this.state.id, -1)
-        }
-      )
-    }
+  downvote = () => {
+    const newCount = this.state.count - 1
+    this.setState({
+      ...this.state,
+      upvoted: (this.props.hasUpVoted)? true :false,
+      downvoted: !this.state.downvoted,
+      modifiedCount: newCount
+    })
+    this.props.onDownVote(this.props.id)
   }
 
   render() {
-    const { classes } = this.props
+    let { classes } = this.props
+    let { upvoted, downvoted } = this.state
+
     return (
       <span className={classes.votes}>
         <IconButton
           className={classes.button}
           aria-label="Up Vote"
-          onClick={this.handleUpVote}
+          onClick={this.upvote}
+          disabled={upvoted}
         >
           <ArrowDropUp />
         </IconButton>
-        {this.state.count}
+        {this.state.modifiedCount}
         <IconButton
           className={classes.button}
           aria-label="Down Vote"
-          onClick={this.handleDownVote}
+          onClick={this.downvote}
+          disabled={downvoted}
         >
           <ArrowDropDown />
         </IconButton>

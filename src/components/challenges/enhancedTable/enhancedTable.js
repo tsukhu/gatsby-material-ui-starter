@@ -121,8 +121,12 @@ class EnhancedTable extends React.Component {
       selected: [],
       data: [],
       adminUsers: [],
-      votes: [],
-      voteDisplay: [],
+      upVote: [],
+      upVoteDisplay: [],
+      downVote: [],
+      downVoteDisplay: [],
+      upVoteReceived: false,
+      downVoteReceived: false,
       page: 0,
       rowsPerPage: 15,
       rowsPerPageOptions: [5, 15, 25],
@@ -148,7 +152,8 @@ class EnhancedTable extends React.Component {
     }
     this.dbItems = ref.child('data')
     this.dbAuthItems = ref.child('admin')
-    this.dbVotes = ref.child('vote')
+    this.dbUpVotes = ref.child('vote/upVote')
+    this.dbDownVotes = ref.child('vote/downVote')
   }
 
   componentDidMount() {
@@ -176,6 +181,7 @@ class EnhancedTable extends React.Component {
               () => {
                 isAdmin = this.isAdminUser(user.email)
                 this.setState({
+                  ...this.state,
                   user: user,
                   isAdmin: isAdmin,
                   isLoggedIn: true,
@@ -188,6 +194,7 @@ class EnhancedTable extends React.Component {
         } else {
           isAdmin = this.isAdminUser(user.email)
           this.setState({
+            ...this.state,
             user: user,
             isAdmin: isAdmin,
             isLoggedIn: true,
@@ -197,6 +204,7 @@ class EnhancedTable extends React.Component {
         }
       } else {
         this.setState({
+          ...this.state,
           user: null,
           isAdmin: false,
           isLoggedIn: false,
@@ -220,41 +228,66 @@ class EnhancedTable extends React.Component {
       })
     })
 
-    this.dbVotes.on('value', dataSnapshot => {
+    this.dbUpVotes.on('value', dataSnapshot => {
       var items = []
-      console.log('New Value received')
+      console.log('upvote Value received')
       dataSnapshot.forEach(function(childSnapshot) {
         var item = childSnapshot.val()
         items.push(item)
       })
-      // console.log(items)
 
-      const voteDisplay = []
-      items.forEach(item => {
-        const total = _.reduce(item.votes, (sum, v) => sum + +v.count, 0)
-        voteDisplay.push({
-          id: item.id,
-          total: total
-        })
+      const upVoteTransformed = _.chain(items)
+      .groupBy('id')
+      .map((objs, key) => ({
+        id: isNaN(key)?key:+key,
+        total: _.reduce(objs,(count,v) => count+1,0)
+      })).value()
+
+      this.setState({
+        upVote: items,
+        upVoteDisplay:upVoteTransformed,
+        upVoteReceived: true
+      })
+    })
+
+    this.dbDownVotes.on('value', dataSnapshot => {
+      var items = []
+      console.log('Downvote Value received')
+      dataSnapshot.forEach(function(childSnapshot) {
+        var item = childSnapshot.val()
+        items.push(item)
       })
 
-        const voteData = this.state.data.map(data => {
-          const voteFilter = this.state.voteDisplay.filter(
-            vote => vote.id === data.id
-          )
-          data.voteCount = voteFilter.length > 0 ? voteFilter[0].total : 0
-          return data
-        })
+      const downVoteTransformed = _.chain(items)
+      .groupBy('id')
+      .map((objs, key) => ({
+        id: isNaN(key)?key:+key,
+        total: _.reduce(objs,(count,v) => count+1,0)
+      })).value()
 
-
-      this.setState(
-        {
-          data: voteData,
-          votes: items, // original db values
-          voteDisplay: voteDisplay // transformed display values
-        })
-        
+      this.setState({
+        downVote: items,
+        downVoteDisplay:downVoteTransformed,
+        downVoteReceived: true
+      })
     })
+
+  }
+
+  addVotesToData = () => {
+    const { upVoteDisplay, downVoteDisplay, data} = this.state
+    const mergedVotes = []
+    data.forEach(item => {
+      
+      const upvote = (upVoteDisplay.filter(data => data.id === item.id))[0]
+      const downvote = (downVoteDisplay.filter(data => data.id === item.id))[0]
+        mergedVotes.push({
+          ...item,
+          votes: (parseInt((upvote)?upvote.total:0) - parseInt((downvote)?downvote.total:0))
+        }) 
+    })
+
+    return mergedVotes
   }
 
   componentWillUnmount() {
@@ -536,38 +569,52 @@ class EnhancedTable extends React.Component {
     })
   }
 
-  handleVote = (id, count) => {
-    let votes = this.state.votes.map(item => {
-      if (item.id === id) {
-        let newVoteItem = List(item.votes).toArray()
-        newVoteItem.push({
-          count: count,
+  handleUpVote = (id, count) => {
+    let refVotes = ref.child('vote/upVote')
+
+    if (
+      this.state.upVote.filter(
+        vote => vote.id === id && vote.email === this.state.user.email
+      ).length === 0
+    ) {
+     refVotes
+        .push({
+          id: id,
           email: this.state.user.email
         })
-        //   console.log(newVoteItem)
-        return {
-          id: id,
-          votes: newVoteItem
-        }
-      } else return item
-    })
-
-    if (votes.findIndex(item => item.id === id) === -1) {
-      let newVoteItem = []
-      newVoteItem.push({
-        count: count,
-        email: this.state.user.email
-      })
-      votes.push({
-        id: id,
-        votes: newVoteItem
+        .catch(err => {
+          console.log('Error saving up votes:' + err)
+        })
+    } else {
+      this.setState({
+        showSnackbar: true,
+        snackBarMessage: 'Vote not saved as ,you can up vote or downvote only once'
       })
     }
-    // console.log(votes)
-    this.dbVotes.set(votes).catch(err => {
-      console.log('Error saving votes:' + err)
-    })
-    console.log('Count = ' + count, id)
+  }
+
+  handleDownVote = (id, count) => {
+    let refVotes = ref.child('vote/downVote')
+
+    if (
+      this.state.downVote.filter(
+        vote => vote.id === id && vote.email === this.state.user.email
+      ).length === 0
+    ) {
+      refVotes
+        .push({
+          id: id,
+          email: this.state.user.email
+        })
+        .catch(err => {
+          console.log('Error saving down votes:' + err)
+        })
+    } else {
+      this.setState({
+        showSnackbar: true,
+        snackBarMessage: 'Vote not saved as , you can up vote or downvote only once'
+      })
+    }
   }
 
   applyfilter = item => {
@@ -634,6 +681,8 @@ class EnhancedTable extends React.Component {
       showLogin,
       showHelp,
       voteDisplay,
+      upVoteReceived,
+      downVoteReceived,
       dirty
     } = this.state
     const emptyRows =
@@ -650,8 +699,10 @@ class EnhancedTable extends React.Component {
       />
     ) : null
 
-    const newData = data.filter(item => this.applyfilter(item))
-    // console.log(newData)
+  const newData = (upVoteReceived && downVoteReceived)?
+      this.addVotesToData().filter(item => this.applyfilter(item)):
+        data.filter(item => this.applyfilter(item))
+ //   console.log(newData)
     const getURLs = urlData => {
       const urls = { urlData }
 
@@ -671,6 +722,8 @@ class EnhancedTable extends React.Component {
         : null
     }
     const helpInfo = showHelp ? <HelpInfo /> : null
+
+
     return (
       <div className={classes.root}>
         <ChallengeHeader />
@@ -770,11 +823,14 @@ class EnhancedTable extends React.Component {
                           {getURLs(n.githubURL)}
                         </TableCell>
                         <TableCell padding="none">
+                        {(this.state.upVoteReceived && this.state.downVoteReceived)?
                           <UpVote
-                            voteCount={n.voteCount}
-                            onVote={this.handleVote}
+                            votes={n.votes}
                             id={n.id}
-                          />
+                            onUpVote={this.handleUpVote}
+                            onDownVote={this.handleDownVote}
+                          />:<div></div>
+                        }
                         </TableCell>
                       </TableRow>
                     )
