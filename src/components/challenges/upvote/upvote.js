@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
 import IconButton from 'material-ui/IconButton'
+import Typography from 'material-ui/Typography'
 
 const styles = theme => ({
   button: {
@@ -12,6 +13,7 @@ const styles = theme => ({
   votes: {
     display: 'flex',
     flexDirection: 'column',
+    fontSize: 'small',
     margin: 0,
     padding: 0,
     alignSelf: 'center',
@@ -66,6 +68,9 @@ class UpVote extends React.Component {
 
     return (
       <span className={classes.votes}>
+      <Typography variant="caption">
+      Votes
+      </Typography>
         <IconButton
           className={classes.button}
           aria-label="Up Vote"
