@@ -44,21 +44,21 @@ class UpVote extends React.Component {
   }
 
   upvote = () => {
-    this.setState({
+/*     this.setState({
       ...this.state,
       upvoted: !this.state.upvoted,
       downvoted: (this.props.hasUpVoted)? true : false,
-    })
+    }) */
     this.props.onUpVote(this.props.id)
   }
 
   downvote = () => {
     const newCount = this.state.count - 1
-    this.setState({
+/*     this.setState({
       ...this.state,
       upvoted: (this.props.hasUpVoted)? true :false,
       downvoted: !this.state.downvoted,
-    })
+    }) */
     this.props.onDownVote(this.props.id)
   }
 
