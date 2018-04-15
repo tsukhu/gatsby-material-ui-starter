@@ -555,14 +555,29 @@ class EnhancedTable extends React.Component {
 
   }
 
+  canVote = (vote,id,upVote) => {
+
+    let upVoteCount = this.state.vote.filter(
+      vote => vote.id === id && vote.email === this.state.user.email && vote.type==='upVote'
+    ).length
+
+    let downVoteCount = this.state.vote.filter(
+      vote => vote.id === id && vote.email === this.state.user.email && vote.type==='downVote'
+    ).length
+
+    if (upVote){
+      upVoteCount++;
+    } else {
+      downVoteCount++;
+    }
+    console.log(upVoteCount,downVoteCount,Math.abs(upVoteCount - downVoteCount) <= 1)
+    return Math.abs(upVoteCount - downVoteCount) <= 1
+  }
+
   handleUpVote = (id, count) => {
     let refVotes = ref.child('vote')
     // Check if user has previously upvoted
-    if (
-      this.state.vote.filter(
-        vote => vote.id === id && vote.email === this.state.user.email && vote.type==='upVote'
-      ).length === 0
-    ) {
+    if (this.canVote(this.state.vote,id,true)) {
       refVotes
         .push({
           id: id,
@@ -584,11 +599,7 @@ class EnhancedTable extends React.Component {
   handleDownVote = (id, count) => {
     let refVotes = ref.child('vote')
 
-    if (
-      this.state.vote.filter(
-        vote => vote.id === id && vote.email === this.state.user.email && vote.type==='downVote'
-      ).length === 0
-    ) {
+    if (this.canVote(this.state.vote,id,false)) {
       refVotes
         .push({
           id: id,
