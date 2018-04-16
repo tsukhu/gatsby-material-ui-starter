@@ -114,7 +114,7 @@ const styles = theme => ({
 class EnhancedTable extends React.Component {
   constructor(props, context) {
     super(props, context)
-
+    
     this.state = {
       order: 'asc',
       orderBy: 'name',
@@ -267,6 +267,9 @@ class EnhancedTable extends React.Component {
   }
   componentWillUnmount() {
     this.removeListener()
+    this.dbItems.off()
+    this.dbAuthItems.off()
+    this.dbVotes.off()
   }
 
   isAdminUser = email => {
