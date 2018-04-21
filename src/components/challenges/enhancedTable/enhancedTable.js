@@ -398,17 +398,25 @@ class EnhancedTable extends React.Component {
   }
 
   handleAddClick = event => {
-    const { data } = this.state
+    const { data,orderBy,order } = this.state
     // Create new row
     const newRow = createData(this.state.user.email)
-    const newData = List(data).push(newRow)
+    const newData = List(data).push(newRow).toArray()
 
     // Update data state as well as
     // select newly created row
     // call edit on the row
-    const filteredData = newData.filter(item => this.applyfilter(item))
+    let filteredData = newData.filter(item => this.applyfilter(item))
+
+    filteredData =
+      order === 'desc'
+        ? filteredData.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
+        : filteredData.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1))
+
+
     this.setState(
       {
+        ...this.state,
         data: newData,
         filteredData: filteredData
       },
@@ -463,7 +471,10 @@ class EnhancedTable extends React.Component {
   }
 
   handleFormCancel = event => {
-    this.setState({ editing: false })
+    this.setState({
+      ...this.state,
+      editing: false
+    })
   }
 
   handleLoginClick = event => {
