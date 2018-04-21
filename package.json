@@ -30,6 +30,7 @@
     "material-ui": "next",
     "moment": "^2.20.1",
     "moment-timezone": "^0.5.14",
+    "react-csv": "^1.0.14",
     "react-github-fork-ribbon": "^0.5.1",
     "react-helmet": "^5.2.0",
     "react-html-parser": "^2.0.2",

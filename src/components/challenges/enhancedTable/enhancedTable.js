@@ -393,6 +393,10 @@ class EnhancedTable extends React.Component {
     this.setState({ editing: !editing })
   }
 
+  handleDownloadClick = event => {
+    console.log('Download called')
+  }
+
   handleAddClick = event => {
     const { data } = this.state
     // Create new row
@@ -754,6 +758,7 @@ class EnhancedTable extends React.Component {
             onClickSave={this.handleSaveClick}
             onClickLogout={this.handleLogOutClick}
             onClickHelp={this.handleHelpClick}
+            onClickDownload={this.handleDownloadClick}
             isLoggedIn={isLoggedIn}
             isLoggingIn={isLoggingIn}
             isSaving={isSaving}

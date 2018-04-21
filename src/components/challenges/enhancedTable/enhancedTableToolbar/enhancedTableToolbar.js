@@ -10,6 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add'
 import HelpIcon from '@material-ui/icons/Help'
+import FileDownload from '@material-ui/icons/FileDownload'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
 import { CircularProgress } from 'material-ui/Progress'
@@ -76,6 +77,7 @@ let EnhancedTableToolbar = props => {
     numSelected,
     classes,
     onClickEdit,
+    onClickDownload,
     onClickAdd,
     onClickSearch,
     onClickDelete,
@@ -177,6 +179,11 @@ let EnhancedTableToolbar = props => {
                 </IconButton>
               </Tooltip>
             )}
+            {isLoggedIn === true && (<Tooltip title="Download CSV">
+                <IconButton aria-label="Download" onClick={onClickDownload}>
+                  <FileDownload />
+                </IconButton>
+              </Tooltip>)}
             <Tooltip title="Filter list">
               <IconButton aria-label="Filter list" onClick={onClickSearch}>
                 <FilterListIcon />
