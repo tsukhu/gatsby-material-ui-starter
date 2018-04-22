@@ -18,6 +18,8 @@ import { CSVLink } from 'react-csv'
 import Avatar from 'material-ui/Avatar'
 import Button from 'material-ui/Button'
 import green from 'material-ui/colors/green'
+const moment = require('moment-timezone')
+moment.tz.setDefault('UTC')
 
 const toolbarStyles = theme => ({
   root: {
@@ -95,6 +97,7 @@ let EnhancedTableToolbar = props => {
     isDirty,
     showHelp
   } = props
+  const csvFileName = 'Challenges_'+moment(new Date()).format('DD_MM_YYYY')+'.csv'
 
   const actionButton = isLoggedIn ? (
     <div className={classes.actionButtons}>
@@ -184,7 +187,7 @@ let EnhancedTableToolbar = props => {
             )}
             {isLoggedIn === true && (
               <Tooltip title="Download CSV">
-                <CSVLink data={data}>
+                <CSVLink data={data} filename={csvFileName}>
                   <IconButton aria-label="Download">
                     <FileDownload />
                   </IconButton>
