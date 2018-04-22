@@ -14,7 +14,8 @@ import FileDownload from '@material-ui/icons/FileDownload'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import { lighten } from 'material-ui/styles/colorManipulator'
 import { CircularProgress } from 'material-ui/Progress'
-import Avatar from 'material-ui/Avatar';
+import { CSVLink } from 'react-csv'
+import Avatar from 'material-ui/Avatar'
 import Button from 'material-ui/Button'
 import green from 'material-ui/colors/green'
 
@@ -56,7 +57,7 @@ const toolbarStyles = theme => ({
     flex: '0 0 auto'
   },
   avatar: {
-    margin: 1,
+    margin: 1
   },
   progress: {
     margin: theme.spacing.unit * 2
@@ -73,6 +74,7 @@ const toolbarStyles = theme => ({
 
 let EnhancedTableToolbar = props => {
   const {
+    data,
     user,
     numSelected,
     classes,
@@ -93,6 +95,7 @@ let EnhancedTableToolbar = props => {
     isDirty,
     showHelp
   } = props
+
   const actionButton = isLoggedIn ? (
     <div className={classes.actionButtons}>
       {isDirty && (
@@ -179,11 +182,15 @@ let EnhancedTableToolbar = props => {
                 </IconButton>
               </Tooltip>
             )}
-            {isLoggedIn === true && (<Tooltip title="Download CSV">
-                <IconButton aria-label="Download" onClick={onClickDownload}>
-                  <FileDownload />
-                </IconButton>
-              </Tooltip>)}
+            {isLoggedIn === true && (
+              <Tooltip title="Download CSV">
+                <CSVLink data={data}>
+                  <IconButton aria-label="Download">
+                    <FileDownload />
+                  </IconButton>
+                </CSVLink>
+              </Tooltip>
+            )}
             <Tooltip title="Filter list">
               <IconButton aria-label="Filter list" onClick={onClickSearch}>
                 <FilterListIcon />

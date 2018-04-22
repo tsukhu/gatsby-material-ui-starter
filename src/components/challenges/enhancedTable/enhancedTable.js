@@ -682,6 +682,7 @@ class EnhancedTable extends React.Component {
     const {
       user,
       isAdmin,
+      data,
       filteredData,
       order,
       orderBy,
@@ -778,6 +779,7 @@ class EnhancedTable extends React.Component {
             isDirty={dirty}
             showHelp={showHelp}
             user={user}
+            data={data}
           />
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
