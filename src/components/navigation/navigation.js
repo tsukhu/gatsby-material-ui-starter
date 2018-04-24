@@ -170,18 +170,6 @@ class Navigation extends Component {
               <ListItem
                 button
                 component={Link}
-                to="/ppts/"
-                onClick={this.handleClose}
-                aria-label="Project Slides"
-              >
-                <ListItemIcon>
-                  <Slideshow />
-                </ListItemIcon>
-                <ListItemText primary="Project Slides" />
-              </ListItem>
-              <ListItem
-                button
-                component={Link}
                 to="/about/"
                 onClick={this.handleClose}
                 aria-label="ERS-HCL About"
