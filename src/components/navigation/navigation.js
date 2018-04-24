@@ -169,11 +169,10 @@ class Navigation extends Component {
               </ListItem>
               <ListItem
                 button
-                component={"a"}
-                href="https://ers-hcl.github.io/online-ppts/#/"
+                component={Link}
+                to="/ppts/"
                 onClick={this.handleClose}
                 aria-label="Project Slides"
-                target="_blank"
               >
                 <ListItemIcon>
                   <Slideshow />
