@@ -169,8 +169,8 @@ class Navigation extends Component {
               </ListItem>
               <ListItem
                 button
-                component={Link}
-                to="/online-ppts/#/"
+                component={"a"}
+                href="https://ers-hcl.github.io/online-ppts/#/"
                 onClick={this.handleClose}
                 aria-label="Project Slides"
                 target="_blank"
