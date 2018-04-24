@@ -15,7 +15,7 @@ import Divider from 'material-ui/Divider'
 import { white } from 'material-ui/colors'
 import Home from '@material-ui/icons/Home'
 import Info from '@material-ui/icons/Info'
-import SlideShow from '@material-ui/icons/SlideShow'
+import Slideshow from '@material-ui/icons/Slideshow'
 import AccountBox from '@material-ui/icons/AccountBox'
 import Language from '@material-ui/icons/Language'
 import Bookmark from '@material-ui/icons/Bookmark'
@@ -176,7 +176,7 @@ class Navigation extends Component {
                 target="_blank"
               >
                 <ListItemIcon>
-                  <SlideShow />
+                  <Slideshow />
                 </ListItemIcon>
                 <ListItemText primary="Project Slides" />
               </ListItem>
