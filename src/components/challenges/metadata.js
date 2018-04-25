@@ -11,7 +11,7 @@ export const createData = (
     domain: 'Other',
     status: 'Approval Pending',
     priority: 'Medium',
-    githubURL: null
+    githubURL: ''
   }
 }
 

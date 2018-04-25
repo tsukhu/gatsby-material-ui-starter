@@ -114,7 +114,7 @@ const styles = theme => ({
 class EnhancedTable extends React.Component {
   constructor(props, context) {
     super(props, context)
-    
+
     this.state = {
       order: 'asc',
       orderBy: 'name',
@@ -237,12 +237,12 @@ class EnhancedTable extends React.Component {
           id: isNaN(key) ? key : +key,
           total: _.reduce(
             objs,
-            (count, v) => (v.type === 'upVote' ? count + 1 : count - 1) ,
+            (count, v) => (v.type === 'upVote' ? count + 1 : count - 1),
             0
           )
         }))
         .value()
- 
+
       const { data } = this.state
       const mergedVotes = []
       data.forEach(item => {
@@ -298,8 +298,12 @@ class EnhancedTable extends React.Component {
 
     const filteredData =
       order === 'desc'
-        ? this.state.filteredData.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
-        : this.state.filteredData.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1))
+        ? this.state.filteredData.sort(
+            (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
+          )
+        : this.state.filteredData.sort(
+            (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1)
+          )
 
     this.setState({ filteredData, order, orderBy })
   }
@@ -354,7 +358,7 @@ class EnhancedTable extends React.Component {
   transformRowToForm = currentItem => {
     const formElementsArray = []
     for (let key in currentItem) {
-      if (key !== 'id' && key !=='vote' && key !== 'votes') {
+      if (key !== 'id' && key !== 'vote' && key !== 'votes') {
         let colData = []
 
         colData = getColumnData(this.state.isAdmin).filter(data => {
@@ -377,6 +381,19 @@ class EnhancedTable extends React.Component {
         })
       }
     }
+    console.log(currentItem['githubURL'])
+    if (currentItem['githubURL'] === undefined) {
+      formElementsArray.push({
+        id: 'githubURL',
+        value: '',
+        type: 'text',
+        disabled: false,
+        type: 'text',
+        multiline: true,
+        helperText: 'Comma separated Github URLs',
+        options: []
+      })
+    }
     return formElementsArray
   }
 
@@ -398,10 +415,12 @@ class EnhancedTable extends React.Component {
   }
 
   handleAddClick = event => {
-    const { data,orderBy,order } = this.state
+    const { data, orderBy, order } = this.state
     // Create new row
     const newRow = createData(this.state.user.email)
-    const newData = List(data).push(newRow).toArray()
+    const newData = List(data)
+      .push(newRow)
+      .toArray()
 
     // Update data state as well as
     // select newly created row
@@ -412,7 +431,6 @@ class EnhancedTable extends React.Component {
       order === 'desc'
         ? filteredData.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
         : filteredData.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1))
-
 
     this.setState(
       {
@@ -432,7 +450,13 @@ class EnhancedTable extends React.Component {
 
     const newData = data.filter(item => item.id !== selected[0])
     const filteredData = newData.filter(item => this.applyfilter(item))
-    this.setState({ data: newData, selected: [],  filteredData:filteredData, dirty: true, editing: false })
+    this.setState({
+      data: newData,
+      selected: [],
+      filteredData: filteredData,
+      dirty: true,
+      editing: false
+    })
   }
 
   handleSearchClick = event => {
@@ -444,23 +468,30 @@ class EnhancedTable extends React.Component {
     const { selected, data } = this.state
     // Immutable List
     const newData = List(data)
-   
+
     // Map formData to data list
     newData.map(item => {
       if (item.id === selected[0]) {
         for (let key in item) {
-          if (key !== 'id' && key !=='vote' && key !== 'votes') {
+          if (key !== 'id' && key !== 'vote' && key !== 'votes') {
             const entry = formData.filter(data => data.id === key)
             item[key] = entry[0].value
           } else {
             item
           }
         }
+        // Hack for older bug 
+        if (item['githubURL'] === undefined) {
+          const entry = formData.filter(data => data.id === 'githubURL')
+          item['githubURL'] = entry[0].value
+        }
       } else {
         item
       }
     })
-    const filteredData = newData.toArray().filter(item => this.applyfilter(item))
+    const filteredData = newData
+      .toArray()
+      .filter(item => this.applyfilter(item))
     this.setState({
       editing: false,
       data: newData.toArray(),
@@ -558,44 +589,55 @@ class EnhancedTable extends React.Component {
   }
 
   handleSearchFilter = filter => {
-    this.setState({
-      filterText: filter.text,
-      filterDomain: filter.domain,
-      filterPriority: filter.priority,
-      filterStatus: filter.status
-    }, function(){
-      const newData = this.state.data.filter(item => this.applyfilter(item))
-      this.setState({
-        ...this.state,
-        filteredData: newData
-      })
-    })
-
+    this.setState(
+      {
+        filterText: filter.text,
+        filterDomain: filter.domain,
+        filterPriority: filter.priority,
+        filterStatus: filter.status
+      },
+      function() {
+        const newData = this.state.data.filter(item => this.applyfilter(item))
+        this.setState({
+          ...this.state,
+          filteredData: newData
+        })
+      }
+    )
   }
 
-  canVote = (vote,id,upVote) => {
-
+  canVote = (vote, id, upVote) => {
     let upVoteCount = this.state.vote.filter(
-      vote => vote.id === id && vote.email === this.state.user.email && vote.type==='upVote'
+      vote =>
+        vote.id === id &&
+        vote.email === this.state.user.email &&
+        vote.type === 'upVote'
     ).length
 
     let downVoteCount = this.state.vote.filter(
-      vote => vote.id === id && vote.email === this.state.user.email && vote.type==='downVote'
+      vote =>
+        vote.id === id &&
+        vote.email === this.state.user.email &&
+        vote.type === 'downVote'
     ).length
 
-    if (upVote){
-      upVoteCount++;
+    if (upVote) {
+      upVoteCount++
     } else {
-      downVoteCount++;
+      downVoteCount++
     }
-    console.log(upVoteCount,downVoteCount,Math.abs(upVoteCount - downVoteCount) <= 1)
+    console.log(
+      upVoteCount,
+      downVoteCount,
+      Math.abs(upVoteCount - downVoteCount) <= 1
+    )
     return Math.abs(upVoteCount - downVoteCount) <= 1
   }
 
   handleUpVote = (id, count) => {
     let refVotes = ref.child('vote')
     // Check if user has previously upvoted
-    if (this.canVote(this.state.vote,id,true)) {
+    if (this.canVote(this.state.vote, id, true)) {
       refVotes
         .push({
           id: id,
@@ -608,8 +650,7 @@ class EnhancedTable extends React.Component {
     } else {
       this.setState({
         showSnackbar: true,
-        snackBarMessage:
-          'You can up vote only once per challenge'
+        snackBarMessage: 'You can up vote only once per challenge'
       })
     }
   }
@@ -617,7 +658,7 @@ class EnhancedTable extends React.Component {
   handleDownVote = (id, count) => {
     let refVotes = ref.child('vote')
 
-    if (this.canVote(this.state.vote,id,false)) {
+    if (this.canVote(this.state.vote, id, false)) {
       refVotes
         .push({
           id: id,
@@ -630,8 +671,7 @@ class EnhancedTable extends React.Component {
     } else {
       this.setState({
         showSnackbar: true,
-        snackBarMessage:
-          'You can downvote only once per challenge'
+        snackBarMessage: 'You can downvote only once per challenge'
       })
     }
   }
@@ -676,7 +716,7 @@ class EnhancedTable extends React.Component {
   }
 
   isSelected = id => this.state.selected.indexOf(id) !== -1
-  
+
   render() {
     const { classes } = this.props
     const {
@@ -704,7 +744,8 @@ class EnhancedTable extends React.Component {
       dirty
     } = this.state
     const emptyRows =
-      rowsPerPage - Math.min(rowsPerPage, filteredData.length - page * rowsPerPage)
+      rowsPerPage -
+      Math.min(rowsPerPage, filteredData.length - page * rowsPerPage)
     const snackBar = showSnackbar ? (
       <Snackbar
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
@@ -790,7 +831,7 @@ class EnhancedTable extends React.Component {
                 orderBy={orderBy}
                 onSelectAllClick={this.handleSelectAllClick}
                 onRequestSort={this.handleRequestSort}
-                rowCount={filteredData?filteredData.length:0}
+                rowCount={filteredData ? filteredData.length : 0}
               />
               <TableBody>
                 {filteredData
@@ -840,13 +881,16 @@ class EnhancedTable extends React.Component {
                           {getURLs(n.githubURL)}
                         </TableCell>
                         <TableCell padding="none">
-                        {isLoggedIn && votesAvailable?<UpVote
-                          votes={n.votes}
-                          id={n.id}
-                          onUpVote={this.handleUpVote}
-                          onDownVote={this.handleDownVote}
-                        />:<div></div>}
-                          
+                          {isLoggedIn && votesAvailable ? (
+                            <UpVote
+                              votes={n.votes}
+                              id={n.id}
+                              onUpVote={this.handleUpVote}
+                              onDownVote={this.handleDownVote}
+                            />
+                          ) : (
+                            <div />
+                          )}
                         </TableCell>
                       </TableRow>
                     )
@@ -861,7 +905,7 @@ class EnhancedTable extends React.Component {
                 <TableRow>
                   <TablePagination
                     colSpan={6}
-                    count={filteredData?filteredData.length:0}
+                    count={filteredData ? filteredData.length : 0}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     rowsPerPageOptions={rowsPerPageOptions}
