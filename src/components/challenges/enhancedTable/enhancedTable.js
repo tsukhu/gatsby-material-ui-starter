@@ -779,11 +779,10 @@ class EnhancedTable extends React.Component {
         : null
     }
     const helpInfo = showHelp ? <HelpInfo /> : null
-
+    //  { this.state.isLoading === false && <Reports /> }
     return (
       <div className={classes.root}>
         <ChallengeHeader />
-        { this.state.isLoading === false && <Reports /> }
         {helpInfo}
         {snackBar}
         <Paper className={classes.paper}>

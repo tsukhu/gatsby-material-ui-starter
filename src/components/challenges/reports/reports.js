@@ -15,6 +15,8 @@ import {
   VictoryStack,
   VictoryBar,
   VictoryAxis,
+  VictoryLabel,
+  VictoryTheme,
   VictoryPie
 } from 'victory'
 import { inherit } from 'highlight.js'
@@ -47,57 +49,23 @@ const styles = theme => ({
   root: {
     display: 'flex',
     theme: 'inherit',
-    alignContent: 'center',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    alignContent: 'center'
   },
   paper: {
     margin: 5,
     padding: 10,
-    listStyle: 'none',
     border: '1px solid silver',
-    MsBoxOrient: 'horizontal',
-    display: '-webkit-box',
-    display: '-moz-box',
-    display: '-ms-flexbox',
-    display: '-moz-flex',
-    display: '-webkit-flex',
-    display: 'flex',
-    WebkitFlexWrap: 'wrap',
-    flexWrap: 'wrap',
-    flex: '1 1 auto',
     rounded: true,
     borderRadius: 5,
     shadowRadius: 5,
-    justifyContent: 'center'
-  },
-  card: {
-    margin: theme.spacing.unit,
-    display: 'flex',
-    alignItems: 'stretch',
-    justifyContent: 'flex-start',
-    flex: 1,
-    flexDirection: 'column',
+    WebkitFlexWrap: 'wrap',
     flexWrap: 'wrap',
-    theme: 'inherit',
-    maxWidth: 300,
-    minHeight: 304,
-    borderRadius: 5,
-    shadowRadius: 5,
-    border: '1px grey',
-    boxShadow: '3px 3px 3px rgba(68,68,68,0.6)'
-  },
-  button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
-  },
-  graphWapper: {
-    justifyContent: 'space-between',
-    flexWrap: 'wrap'
+    minHeight: 300,
+    height: 100,
+    width: 100,
+    flex: '1 1 auto'
   },
   subHeader: {
     padding: theme.spacing.unit,
@@ -128,63 +96,57 @@ class Reports extends React.Component {
       <Fade in={true}>
         <div className={classes.root}>
           <Paper className={classes.paper} elevation={2}>
-            <Card className={classes.card}>
-              <CardHeader subheader="Dash 1" />
-
-              <CardContent>
-                <VictoryChart
-                  height={400}
-                  width={400}
-                  domainPadding={{ x: 30, y: 20 }}
-                >
-                  <VictoryStack colorScale={['black', 'blue', 'tomato']}>
-                    {dataset.map((data, i) => {
-                      return <VictoryBar data={data} key={i} />
-                    })}
-                  </VictoryStack>
-                  <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
-                  <VictoryAxis tickFormat={['a', 'b', 'c', 'd', 'e']} />
-                </VictoryChart>
-              </CardContent>
-            </Card>
-            <Card className={classes.card}>
-              <CardHeader subheader="Dash 1" />
-
-              <CardContent>
-                <VictoryChart
-                  height={400}
-                  width={400}
-                  domainPadding={{ x: 30, y: 20 }}
-                >
-                  <VictoryStack colorScale={['black', 'blue', 'tomato']}>
-                    {dataset.map((data, i) => {
-                      return <VictoryBar data={data} key={i} />
-                    })}
-                  </VictoryStack>
-                  <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
-                  <VictoryAxis tickFormat={['a', 'b', 'c', 'd', 'e']} />
-                </VictoryChart>
-              </CardContent>
-            </Card>
-            <Card className={classes.card}>
-              <CardHeader subheader="Dash 1" />
-
-              <CardContent>
-                <VictoryChart
-                  height={400}
-                  width={400}
-                  domainPadding={{ x: 30, y: 20 }}
-                >
-                  <VictoryStack colorScale={['black', 'blue', 'tomato']}>
-                    {dataset.map((data, i) => {
-                      return <VictoryBar data={data} key={i} />
-                    })}
-                  </VictoryStack>
-                  <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
-                  <VictoryAxis tickFormat={['a', 'b', 'c', 'd', 'e']} />
-                </VictoryChart>
-              </CardContent>
-            </Card>           
+            <VictoryChart
+              height={400}
+              width={400}
+              domainPadding={{ x: 30, y: 20 }}
+              theme={VictoryTheme.material}
+            >
+              <VictoryStack colorScale={['black', 'blue', 'tomato']}>
+                {dataset.map((data, i) => {
+                  return <VictoryBar data={data} key={i} />
+                })}
+              </VictoryStack>
+              <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
+              <VictoryAxis tickFormat={['a', 'b', 'c', 'd', 'e']} />
+            </VictoryChart>
+          </Paper>
+          <Paper className={classes.paper} elevation={2}>
+            <svg viewBox="0 0 400 400">
+              <VictoryPie
+                theme={VictoryTheme.material}
+                standalone={false}
+                width={400}
+                height={400}
+                data={[{ x: 1, y: 120 }, { x: 2, y: 150 }, { x: 3, y: 75 }]}
+                innerRadius={68}
+                labelRadius={100}
+                style={{ labels: { fontSize: 20, fill: 'white' } }}
+              />
+              <VictoryLabel
+                textAnchor="middle"
+                style={{ fontSize: 20 }}
+                x={200}
+                y={200}
+                text="Pie!"
+              />
+            </svg>
+          </Paper>
+          <Paper className={classes.paper} elevation={2} />
+          <Paper className={classes.paper} elevation={2}>
+            <VictoryChart
+              height={400}
+              width={400}
+              domainPadding={{ x: 30, y: 20 }}
+            >
+              <VictoryStack colorScale={['black', 'blue', 'tomato']}>
+                {dataset.map((data, i) => {
+                  return <VictoryBar data={data} key={i} />
+                })}
+              </VictoryStack>
+              <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
+              <VictoryAxis tickFormat={['a', 'b', 'c', 'd', 'e']} />
+            </VictoryChart>
           </Paper>
         </div>
       </Fade>
