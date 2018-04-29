@@ -19,7 +19,6 @@ import {
   VictoryTheme,
   VictoryPie
 } from 'victory'
-import { inherit } from 'highlight.js'
 
 const myDataset = [
   [
