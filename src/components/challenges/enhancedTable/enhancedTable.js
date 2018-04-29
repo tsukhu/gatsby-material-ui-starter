@@ -26,6 +26,7 @@ import {
 import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
 import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
 import ChallengeHeader from '../challengeHeader/challengeHeader'
+import Reports from '../reports/reports'
 import MaterialList, {
   ListItem,
   ListItemIcon,
@@ -782,6 +783,7 @@ class EnhancedTable extends React.Component {
     return (
       <div className={classes.root}>
         <ChallengeHeader />
+        { this.state.isLoading === false && <Reports /> }
         {helpInfo}
         {snackBar}
         <Paper className={classes.paper}>
