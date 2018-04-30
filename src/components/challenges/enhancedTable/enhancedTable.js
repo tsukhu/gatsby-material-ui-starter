@@ -382,7 +382,6 @@ class EnhancedTable extends React.Component {
         })
       }
     }
-    console.log(currentItem['githubURL'])
     if (currentItem['githubURL'] === undefined) {
       formElementsArray.push({
         id: 'githubURL',
@@ -760,6 +759,8 @@ class EnhancedTable extends React.Component {
     ) : null
 
     //   console.log(newData)
+
+
     const getURLs = urlData => {
       const urls = { urlData }
 
@@ -779,12 +780,13 @@ class EnhancedTable extends React.Component {
         : null
     }
     const helpInfo = showHelp ? <HelpInfo /> : null
-    //  { this.state.isLoading === false && <Reports /> }
+ 
     return (
       <div className={classes.root}>
         <ChallengeHeader />
         {helpInfo}
         {snackBar}
+        { this.state.isLoading === false && <Reports data={data}/> }
         <Paper className={classes.paper}>
           {this.state.editing === true ? (
             <ChallengeForm
