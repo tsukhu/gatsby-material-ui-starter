@@ -44,6 +44,7 @@ import deepOrange from 'material-ui/colors/deepOrange'
 import blueGrey from 'material-ui/colors/blueGrey'
 import teal from 'material-ui/colors/teal'
 import { get } from 'https'
+import transformToStateReport from '../../../utils/data-transformer'
 import * as _ from 'lodash'
 
 const styles = theme => ({
@@ -382,7 +383,6 @@ class EnhancedTable extends React.Component {
         })
       }
     }
-    console.log(currentItem['githubURL'])
     if (currentItem['githubURL'] === undefined) {
       formElementsArray.push({
         id: 'githubURL',
@@ -760,6 +760,8 @@ class EnhancedTable extends React.Component {
     ) : null
 
     //   console.log(newData)
+
+
     const getURLs = urlData => {
       const urls = { urlData }
 
@@ -779,12 +781,13 @@ class EnhancedTable extends React.Component {
         : null
     }
     const helpInfo = showHelp ? <HelpInfo /> : null
-    //  { this.state.isLoading === false && <Reports /> }
+ 
     return (
       <div className={classes.root}>
         <ChallengeHeader />
         {helpInfo}
         {snackBar}
+        { this.state.isLoading === false && <Reports data={data}/> }
         <Paper className={classes.paper}>
           {this.state.editing === true ? (
             <ChallengeForm

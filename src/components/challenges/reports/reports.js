@@ -16,33 +16,15 @@ import {
   VictoryBar,
   VictoryAxis,
   VictoryLabel,
+  VictoryLegend,
   VictoryTheme,
   VictoryPie
 } from 'victory'
+import PieChart from './pie-chart'
+import BarChart from './bar-chart'
+import StackedBarChart from './stacked-barchart'
+import transformToStateReport from '../../../utils/data-transformer'
 
-const myDataset = [
-  [
-    { x: 'a', y: 1 },
-    { x: 'b', y: 2 },
-    { x: 'c', y: 3 },
-    { x: 'd', y: 2 },
-    { x: 'e', y: 1 }
-  ],
-  [
-    { x: 'a', y: 2 },
-    { x: 'b', y: 3 },
-    { x: 'c', y: 4 },
-    { x: 'd', y: 5 },
-    { x: 'e', y: 5 }
-  ],
-  [
-    { x: 'a', y: 1 },
-    { x: 'b', y: 2 },
-    { x: 'c', y: 3 },
-    { x: 'd', y: 4 },
-    { x: 'e', y: 4 }
-  ]
-]
 
 const styles = theme => ({
   root: {
@@ -74,79 +56,37 @@ const styles = theme => ({
 
 class Reports extends React.Component {
   state = {}
-  // This is an example of a function you might use to transform your data to make 100% data
-  transformData = dataset => {
-    const totals = dataset[0].map((data, i) => {
-      return dataset.reduce((memo, curr) => {
-        return memo + curr[i].y
-      }, 0)
-    })
-    return dataset.map(data => {
-      return data.map((datum, i) => {
-        return { x: datum.x, y: datum.y / totals[i] * 100 }
-      })
-    })
-  }
+  textLabelProvider = d => d.x
+  numberLabelProvider = d => d.y
+  
   render() {
+    
     const { classes } = this.props
-    const dataset = this.transformData(myDataset)
-
     return (
       <Fade in={true}>
         <div className={classes.root}>
+        {this.stackedBar && <Paper className={classes.paper} elevation={2}>
+            <BarChart />
+          </Paper>}
           <Paper className={classes.paper} elevation={2}>
-            <VictoryChart
-              height={400}
-              width={400}
-              domainPadding={{ x: 30, y: 20 }}
-              theme={VictoryTheme.material}
-            >
-              <VictoryStack colorScale={['black', 'blue', 'tomato']}>
-                {dataset.map((data, i) => {
-                  return <VictoryBar data={data} key={i} />
-                })}
-              </VictoryStack>
-              <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
-              <VictoryAxis tickFormat={['a', 'b', 'c', 'd', 'e']} />
-            </VictoryChart>
+            <PieChart
+              title={("Challenges by status").toUpperCase()}
+              data={transformToStateReport(this.props.data,'status')}
+              labelProvider={this.numberLabelProvider}
+              isNumber={true}
+            />
           </Paper>
           <Paper className={classes.paper} elevation={2}>
-            <svg viewBox="0 0 400 400">
-              <VictoryPie
-                theme={VictoryTheme.material}
-                standalone={false}
-                width={400}
-                height={400}
-                data={[{ x: 1, y: 120 }, { x: 2, y: 150 }, { x: 3, y: 75 }]}
-                innerRadius={68}
-                labelRadius={100}
-                style={{ labels: { fontSize: 20, fill: 'white' } }}
-              />
-              <VictoryLabel
-                textAnchor="middle"
-                style={{ fontSize: 20 }}
-                x={200}
-                y={200}
-                text="Pie!"
-              />
-            </svg>
+            <PieChart
+              title={("Challenge by priority").toUpperCase()}
+              data={transformToStateReport(this.props.data,'priority')}
+              labelProvider={this.textLabelProvider}
+              isNumber={false}
+            />
           </Paper>
-          <Paper className={classes.paper} elevation={2} />
-          <Paper className={classes.paper} elevation={2}>
-            <VictoryChart
-              height={400}
-              width={400}
-              domainPadding={{ x: 30, y: 20 }}
-            >
-              <VictoryStack colorScale={['black', 'blue', 'tomato']}>
-                {dataset.map((data, i) => {
-                  return <VictoryBar data={data} key={i} />
-                })}
-              </VictoryStack>
-              <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
-              <VictoryAxis tickFormat={['a', 'b', 'c', 'd', 'e']} />
-            </VictoryChart>
-          </Paper>
+          {this.stackedBar && <Paper className={classes.paper} elevation={2}>
+            <StackedBarChart />
+          </Paper>}
         </div>
       </Fade>
     )
