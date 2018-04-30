@@ -44,7 +44,6 @@ import deepOrange from 'material-ui/colors/deepOrange'
 import blueGrey from 'material-ui/colors/blueGrey'
 import teal from 'material-ui/colors/teal'
 import { get } from 'https'
-import transformToStateReport from '../../../utils/data-transformer'
 import * as _ from 'lodash'
 
 const styles = theme => ({
