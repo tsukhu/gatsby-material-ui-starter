@@ -78,7 +78,7 @@ class Reports extends React.Component {
           </Paper>
           <Paper className={classes.paper} elevation={2}>
             <PieChart
-              title={("Challenge by priority").toUpperCase()}
+              title={("Challenges by priority").toUpperCase()}
               data={transformToStateReport(this.props.data,'priority')}
               labelProvider={this.textLabelProvider}
               isNumber={false}
