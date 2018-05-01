@@ -34,7 +34,7 @@ class StackedBarChart extends React.Component {
     return (
       <VictoryChart height={380} width={400} domainPadding={{ x: 30, y: 20 }}
       animate={{
-        duration: 500
+        duration: 200
       }}
       >
         <VictoryLegend

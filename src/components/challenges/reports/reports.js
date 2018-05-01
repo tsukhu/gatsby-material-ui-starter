@@ -23,7 +23,7 @@ import {
 import PieChart from './pie-chart'
 import BarChart from './bar-chart'
 import StackedBarChart from './stacked-barchart'
-import transformToStateReport from '../../../utils/data-transformer'
+import {transformToStateReport , transformStackReport} from '../../../utils/data-transformer'
 
 const styles = theme => ({
   root: {
@@ -60,6 +60,7 @@ class Reports extends React.Component {
 
   render() {
     const { classes } = this.props
+    console.log(transformStackReport(this.props.data,'priority','status'))
     return (
       <Fade in={true}>
         <div className={classes.root}>
