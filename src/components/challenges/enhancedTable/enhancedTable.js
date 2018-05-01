@@ -260,7 +260,7 @@ class EnhancedTable extends React.Component {
       this.setState({
         ...this.state,
         vote: items,
-        data: data,
+        data: mergedVotes,
         filteredData: newData,
         votesAvailable: true
       })
