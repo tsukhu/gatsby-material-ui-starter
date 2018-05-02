@@ -260,7 +260,7 @@ class EnhancedTable extends React.Component {
       this.setState({
         ...this.state,
         vote: items,
-        data: newData,
+        data: mergedVotes,
         filteredData: newData,
         votesAvailable: true
       })
@@ -702,10 +702,11 @@ class EnhancedTable extends React.Component {
           .includes(this.state.filterStatus.toLowerCase())
       : true
 
-    const isApprovalPendingFiltered = this.state.isLoggedIn
+    const isApprovalPendingFiltered = true
+    /* this.state.isLoggedIn
       ? true
       : !item.status.toLowerCase().includes('Approval Pending'.toLowerCase())
-
+ */
     return (
       isTextFiltered &&
       isDomainFiltered &&
