@@ -250,7 +250,6 @@ class EnhancedTable extends React.Component {
         const vote = voteTransformed.filter(data => data.id === item.id)[0]
         mergedVotes.push({
           ...item,
-          vote: items,
           votes: parseInt(vote ? vote.total : 0)
         })
       })
