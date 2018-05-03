@@ -23,7 +23,11 @@ import {
 import PieChart from './pie-chart'
 import BarChart from './bar-chart'
 import StackedBarChart from './stacked-barchart'
-import {transformToStateReport , transformStackReport} from '../../../utils/data-transformer'
+import {
+  transformToStateReport,
+  transformStatusWisePriorityStackReport,
+  transformPriortyWiseDomainStackReport
+} from '../../../utils/data-transformer'
 
 const styles = theme => ({
   root: {
@@ -54,111 +58,126 @@ const styles = theme => ({
 })
 
 class Reports extends React.Component {
-  state = {}
+  constructor(props, context) {
+    super(props, context)
+
+    this.state = {
+      stackData1: [],
+      pieData1: [],
+      pieData2: [],
+      stackData2: []
+    }
+  }
   textLabelProvider = d => d.x
   numberLabelProvider = d => d.y
 
+  componentDidMount() {
+    const stackData1 = transformPriortyWiseDomainStackReport(this.props.data)
+    const pieData1 = transformToStateReport(this.props.data, 'status')
+    const pieData2 = transformToStateReport(this.props.data, 'priority')
+
+    this.setState({
+      stackData1: stackData1,
+      pieData1: pieData1,
+      pieData2: pieData2,
+      stackData2: []
+    })
+  }
   render() {
     const { classes } = this.props
-    console.log(transformStackReport(this.props.data,'priority','status'))
+    const { stackData1, stackData2, pieData1, pieData2 } = this.state
+
     return (
       <Fade in={true}>
         <div className={classes.root}>
           <Paper className={classes.paper} elevation={2}>
-            <StackedBarChart
-              legendData={[
-                { name: 'HIGH', symbol: { fill: 'green' } },
-                { name: 'MEDIUM', symbol: { fill: 'orange' } },
-                { name: 'LOW', symbol: { fill: 'gold' } }
-              ]}
-              data={[
-                [
-                  { x: 'WebUI', y: 1 },
-                  { x: 'Microservices', y: 2 },
-                  { x: 'Analytics', y: 2 },
-                  { x: 'DevOps', y: 2 },
-                  { x: 'Security', y: 1 },
-                  { x: 'Cloud', y: 2 },
-                  { x: 'Mobility', y: 2 },
-                  { x: 'Other', y: 0 },
-                ],
-                [
-                  { x: 'WebUI', y: 5 },
-                  { x: 'Microservices', y: 5 },
-                  { x: 'Analytics', y: 0 },
-                  { x: 'DevOps', y: 15 },
-                  { x: 'Security', y: 1 },
-                  { x: 'Cloud', y: 2 },
-                  { x: 'Mobility', y: 12 },
-                  { x: 'Other', y: 0 },
-                ],
-                [
-                  { x: 'WebUI', y: 2 },
-                  { x: 'Microservices', y: 12 },
-                  { x: 'Analytics', y: 0 },
-                  { x: 'DevOps', y: 3 },
-                  { x: 'Security', y: 1 },
-                  { x: 'Cloud', y: 1 },
-                  { x: 'Mobility', y: 2 },
-                  { x: 'Other', y: 1 },
-                ]
-              ]}
-              tickFormat={['WebUI', 'Microservices', 'Analytics','DevOps','Security','Cloud','Mobility','Other']}
-              shortenTicks={true}
-              title="DOMAIN WISE STATUS"
-            />
+            {stackData1.length > 0 && (
+              <StackedBarChart
+                legendData={[
+                  { name: 'HIGH', symbol: { fill: 'green' } },
+                  { name: 'MEDIUM', symbol: { fill: 'orange' } },
+                  { name: 'LOW', symbol: { fill: 'gold' } }
+                ]}
+                data={stackData1}
+                tickFormat={[
+                  'Web UI',
+                  'Analytics',
+                  'Microservices',
+                  'Cloud',
+                  'Mobility',
+                  'DevOps',
+                  'Security',
+                  'Other'
+                ]}
+                shortenTicks={true}
+                title="DOMAIN WISE STATUS"
+              />
+            )}
           </Paper>
           <Paper className={classes.paper} elevation={2}>
-            <PieChart
-              title={'Challenges by status'.toUpperCase()}
-              data={transformToStateReport(this.props.data, 'status')}
-              labelProvider={this.numberLabelProvider}
-              isNumber={true}
-            />
+            {pieData1.length > 0 && (
+              <PieChart
+                title={'Challenges by status'.toUpperCase()}
+                data={pieData1}
+                labelProvider={this.numberLabelProvider}
+                isNumber={true}
+              />
+            )}
           </Paper>
           <Paper className={classes.paper} elevation={2}>
-            <PieChart
-              title={'Challenges by priority'.toUpperCase()}
-              data={transformToStateReport(this.props.data, 'priority')}
-              labelProvider={this.textLabelProvider}
-              isNumber={false}
-            />
+            {pieData2.length > 0 && (
+              <PieChart
+                title={'Challenges by priority'.toUpperCase()}
+                data={pieData2}
+                labelProvider={this.textLabelProvider}
+                isNumber={false}
+              />
+            )}
           </Paper>
-          <Paper className={classes.paper} elevation={2}>
-            <StackedBarChart
-              legendData={[
-                { name: 'DONE', symbol: { fill: 'green' } },
-                { name: 'WIP', symbol: { fill: 'orange' } },
-                { name: 'BACKLOG', symbol: { fill: 'gold' } },
-                { name: 'PENDING', symbol: { fill: 'red' } }
-              ]}
-              data={[
-                [
-                  { x: 'High', y: 1 },
-                  { x: 'Medium', y: 7 },
-                  { x: 'Low', y: 5 }
-                ],
-                [
-                  { x: 'High', y: 2 },
-                  { x: 'Medium', y: 10 },
-                  { x: 'Low', y: 3 }
-                ],
-                [
-                  { x: 'High', y: 5 },
-                  { x: 'Medium', y: 15 },
-                  { x: 'Low', y: 25 }
-                ],
-                [
-                  { x: 'High', y: 0 },
-                  { x: 'Medium', y: 2 },
-                  { x: 'Low', y: 1 }
-                ],
-                [{ x: 'High', y: 0 }, { x: 'Medium', y: 0 }, { x: 'Low', y: 0 }]
-              ]}
-              tickFormat={['High', 'Medium', 'Low']}
-              title="PRIORITY WISE STATUS"
-            />
-          </Paper>
+          {false && (
+            <Paper className={classes.paper} elevation={2}>
+              <StackedBarChart
+                legendData={[
+                  { name: 'DONE', symbol: { fill: 'green' } },
+                  { name: 'WIP', symbol: { fill: 'orange' } },
+                  { name: 'BACKLOG', symbol: { fill: 'gold' } },
+                  { name: 'PENDING', symbol: { fill: 'red' } }
+                ]}
+                dataNew={transformStatusWisePriorityStackReport(
+                  this.props.data
+                )}
+                data={[
+                  [
+                    { x: 'High', y: 1 },
+                    { x: 'Medium', y: 7 },
+                    { x: 'Low', y: 5 }
+                  ],
+                  [
+                    { x: 'High', y: 2 },
+                    { x: 'Medium', y: 10 },
+                    { x: 'Low', y: 3 }
+                  ],
+                  [
+                    { x: 'High', y: 5 },
+                    { x: 'Medium', y: 15 },
+                    { x: 'Low', y: 25 }
+                  ],
+                  [
+                    { x: 'High', y: 0 },
+                    { x: 'Medium', y: 2 },
+                    { x: 'Low', y: 1 }
+                  ],
+                  [
+                    { x: 'High', y: 0 },
+                    { x: 'Medium', y: 0 },
+                    { x: 'Low', y: 0 }
+                  ]
+                ]}
+                tickFormat={['High', 'Medium', 'Low']}
+                title="PRIORITY WISE STATUS"
+              />
+            </Paper>
+          )}
         </div>
       </Fade>
     )

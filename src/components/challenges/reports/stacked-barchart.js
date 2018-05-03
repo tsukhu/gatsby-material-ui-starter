@@ -21,13 +21,16 @@ class StackedBarChart extends React.Component {
     })
     return dataset.map(data => {
       return data.map((datum, i) => {
-        return { x: datum.x, y: datum.y / totals[i] * 100 }
+        const percent = totals[i]>1?datum.y / totals[i] * 100:0
+        return { x: datum.x, y: percent }
       })
     })
   }
   /* <VictoryLabel text="PRIORITY STATUS" textAnchor="inherit" x={5} y={5} /> */
   render() {
+  //  console.log(this.props.dataNew,this.props.data)
     const dataset = this.transformData(this.props.data)
+    console.log(dataset)
     const transformTicks = this.props.shortenTicks?this.props.tickFormat.map(
       (datum) => datum.substring(0, 3).toUpperCase()
     ):this.props.tickFormat;

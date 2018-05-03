@@ -121,6 +121,7 @@ class EnhancedTable extends React.Component {
       orderBy: 'name',
       selected: [],
       data: [],
+      reportData: [],
       filteredData: [],
       adminUsers: [],
       vote: [],
@@ -134,7 +135,7 @@ class EnhancedTable extends React.Component {
       isLoggedIn: false,
       isLoggingIn: false, // State: Is Logging in user
       isSaving: false, // State: Saving data
-      isLoading: false, // State : Is Loading data
+      isLoading: true, // State : Is Loading data
       showLogin: false,
       showSnackbar: false,
       snackBarMessage: '',
@@ -219,6 +220,7 @@ class EnhancedTable extends React.Component {
       const sortedItems = items.sort((a, b) => (a.name < b.name ? -1 : 1))
       this.setState({
         data: sortedItems,
+        reportData: sortedItems,
         filteredData: sortedItems,
         isLoading: false
       })
@@ -723,6 +725,7 @@ class EnhancedTable extends React.Component {
       user,
       isAdmin,
       data,
+      reportData,
       filteredData,
       order,
       orderBy,
@@ -786,7 +789,7 @@ class EnhancedTable extends React.Component {
         <ChallengeHeader />
         {helpInfo}
         {snackBar}
-        { this.state.isLoading === false && <Reports data={data}/> }
+        { this.state.isLoading === false && <Reports data={reportData}/> }
         <Paper className={classes.paper}>
           {this.state.editing === true ? (
             <ChallengeForm

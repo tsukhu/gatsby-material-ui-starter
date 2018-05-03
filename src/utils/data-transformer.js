@@ -1,4 +1,4 @@
-const transformToStateReport = (data,groupBy) => {
+const transformToStateReport = (data, groupBy) => {
   const transformedData = _.chain(data)
     .groupBy(groupBy)
     .map((objs, key) => ({
@@ -10,28 +10,74 @@ const transformToStateReport = (data,groupBy) => {
   return transformedData
 }
 
-const transformStackReport = (data,groupBy,stackBy) => {
-  let transformedData = _.chain(data)
-    .groupBy(groupBy)
-   /*  .map((objs, key) => ({
-      x: isNaN(key) ? key : +key,
-      y: _.reduce(objs, (count, v) => count + 1, 0)
-    })) */
+const getDomainList = () => [
+  'Web UI',
+  'Microservices',
+  'Analytics',
+  'DevOps',
+  'Security',
+  'Cloud',
+  'Mobility',
+  'Other'
+]
+
+const transformPriortyWiseDomainStackReport = data => {
+  const report = _(data)
+    .groupBy(f => f.priority)
+    .map(item =>
+      _(item)
+        .groupBy(f => f.domain)
+        .map((objs, key) => ({
+          x: isNaN(key) ? key : +key,
+          y: _.reduce(objs, (count, v) => count + 1, 0)
+        }))
+        .value()
+    )
     .value()
-/*     .map((objs, key) => ({
-      x:  _.map(objs, (obj) => obj.priority),
-      y: _.reduce(objs, (count, v) => count + 1, 0)
-    })) */
+  const domainList = [
+    'Web UI',
+    'Microservices',
+    'Analytics',
+    'DevOps',
+    'Security',
+    'Cloud',
+    'Mobility',
+    'Other'
+  ]
 
-    if (transformedData.undefined) {
-      transformedData = transformedData.undefined
-      .map((objs, key) => ({
-        x:  isNaN(key) ? key : +key,
-        y: _.reduce(objs, (count, v) => count + 1, 0)
-      }))
-    } 
-
-  return transformedData
+  domainList.forEach(domain => {
+    report.forEach(items => {
+      if (items.filter(data => data.x === domain).length === 0) {
+        items.push({
+          x: domain,
+          y: 0
+        })
+      }
+    }
+    )
+  })
+  return report
 }
 
-export default {transformToStateReport ,transformStackReport}
+const transformStatusWisePriorityStackReport = data => {
+  const report = _(data)
+    .groupBy(f => f.status)
+    .map(item =>
+      _(item)
+        .groupBy(f => f.priority)
+        .map((objs, key) => ({
+          x: isNaN(key) ? key : +key,
+          y: _.reduce(objs, (count, v) => count + 1, 0)
+        }))
+        .value()
+    )
+    .value()
+
+  return report
+}
+
+export default {
+  transformToStateReport,
+  transformStatusWisePriorityStackReport,
+  transformPriortyWiseDomainStackReport
+}
