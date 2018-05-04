@@ -10,17 +10,6 @@ const transformToStateReport = (data, groupBy) => {
   return transformedData
 }
 
-const getDomainList = () => [
-  'Web UI',
-  'Microservices',
-  'Analytics',
-  'DevOps',
-  'Security',
-  'Cloud',
-  'Mobility',
-  'Other'
-]
-
 const transformPriortyWiseDomainStackReport = data => {
   const report = _(data)
     .groupBy(f => f.priority)
@@ -53,8 +42,7 @@ const transformPriortyWiseDomainStackReport = data => {
           y: 0
         })
       }
-    }
-    )
+    })
   })
   return report
 }
@@ -72,6 +60,19 @@ const transformStatusWisePriorityStackReport = data => {
         .value()
     )
     .value()
+
+  const statusList = ['High', 'Medium', 'Low']
+
+  statusList.forEach(status => {
+    report.forEach(items => {
+      if (items.filter(data => data.x === status).length === 0) {
+        items.push({
+          x: status,
+          y: 0
+        })
+      }
+    })
+  })
 
   return report
 }

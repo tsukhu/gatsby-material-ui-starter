@@ -97,7 +97,8 @@ let EnhancedTableToolbar = props => {
     isDirty,
     showHelp
   } = props
-  const csvFileName = 'Challenges_'+moment(new Date()).format('DD_MM_YYYY')+'.csv'
+  const csvFileName =
+    'Challenges_' + moment(new Date()).format('DD_MM_YYYY') + '.csv'
 
   const actionButton = isLoggedIn ? (
     <div className={classes.actionButtons}>
@@ -123,13 +124,15 @@ let EnhancedTableToolbar = props => {
   ) : (
     <div className={classes.wrapper}>
       <Tooltip title="Login (New/Existing)">
-        <Button
-          color="primary"
-          disabled={isLoggingIn || isLoading}
-          onClick={onClickLogin}
-        >
-          LOGIN
-        </Button>
+        <div>
+          <Button
+            color="primary"
+            disabled={isLoggingIn || isLoading}
+            onClick={onClickLogin}
+          >
+            LOGIN
+          </Button>
+        </div>
       </Tooltip>
       {isLoggingIn && (
         <CircularProgress size={24} className={classes.buttonProgress} />

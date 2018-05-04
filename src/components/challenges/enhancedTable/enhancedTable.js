@@ -627,11 +627,11 @@ class EnhancedTable extends React.Component {
     } else {
       downVoteCount++
     }
-    console.log(
+/*     console.log(
       upVoteCount,
       downVoteCount,
       Math.abs(upVoteCount - downVoteCount) <= 1
-    )
+    ) */
     return Math.abs(upVoteCount - downVoteCount) <= 1
   }
 
@@ -789,7 +789,7 @@ class EnhancedTable extends React.Component {
         <ChallengeHeader />
         {helpInfo}
         {snackBar}
-        { this.state.isLoading === false && <Reports data={reportData}/> }
+        { this.state.isLoading === false && <Reports data={data}/> }
         <Paper className={classes.paper}>
           {this.state.editing === true ? (
             <ChallengeForm

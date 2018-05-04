@@ -21,24 +21,31 @@ class StackedBarChart extends React.Component {
     })
     return dataset.map(data => {
       return data.map((datum, i) => {
-        const percent = totals[i]>1?datum.y / totals[i] * 100:0
+        const percent = totals[i] > 0 ? datum.y / totals[i] * 100 : 0
         return { x: datum.x, y: percent }
       })
     })
   }
   /* <VictoryLabel text="PRIORITY STATUS" textAnchor="inherit" x={5} y={5} /> */
   render() {
-  //  console.log(this.props.dataNew,this.props.data)
+    //  console.log(this.props.dataNew,this.props.data)
     const dataset = this.transformData(this.props.data)
-    console.log(dataset)
-    const transformTicks = this.props.shortenTicks?this.props.tickFormat.map(
-      (datum) => datum.substring(0, 3).toUpperCase()
-    ):this.props.tickFormat;
+    dataset.map(element => {
+      element.sort(
+        (a, b) => (b.x < a.x ? 1 : -1)
+      )
+    })
+    const transformTicks = this.props.shortenTicks
+      ? this.props.tickFormat.map(datum => datum.substring(0, 3).toUpperCase())
+      : this.props.tickFormat
     return (
-      <VictoryChart height={380} width={400} domainPadding={{ x: 30, y: 20 }}
-      animate={{
-        duration: 200
-      }}
+      <VictoryChart
+        height={380}
+        width={400}
+        domainPadding={{ x: 30, y: 20 }}
+        animate={{
+          duration: 50
+        }}
       >
         <VictoryLegend
           x={60}
@@ -47,7 +54,7 @@ class StackedBarChart extends React.Component {
           centerTitle
           orientation="horizontal"
           gutter={20}
-          style={{ border: { stroke: 'black' },labels: { fontSize: 10 }}}
+          style={{ border: { stroke: 'black' }, labels: { fontSize: 10 } }}
           data={this.props.legendData}
         />
         <VictoryStack colorScale={['green', 'orange', 'gold', 'red']}>
@@ -56,7 +63,7 @@ class StackedBarChart extends React.Component {
           })}
         </VictoryStack>
         <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
-        <VictoryAxis tickFormat={transformTicks} fixLabelOverlap={true}/>
+        <VictoryAxis tickFormat={transformTicks} fixLabelOverlap={true} />
       </VictoryChart>
     )
   }
