@@ -23,8 +23,11 @@ import {
 import PieChart from './pie-chart'
 import BarChart from './bar-chart'
 import StackedBarChart from './stacked-barchart'
-import transformToStateReport from '../../../utils/data-transformer'
-
+import {
+  transformToStateReport,
+  transformStatusWisePriorityStackReport,
+  transformPriortyWiseDomainStackReport
+} from '../../../utils/data-transformer'
 
 const styles = theme => ({
   root: {
@@ -55,38 +58,72 @@ const styles = theme => ({
 })
 
 class Reports extends React.Component {
-  state = {}
+  constructor(props, context) {
+    super(props, context)
+  }
   textLabelProvider = d => d.x
   numberLabelProvider = d => d.y
-  
+
   render() {
-    
     const { classes } = this.props
     return (
       <Fade in={true}>
         <div className={classes.root}>
-        {this.stackedBar && <Paper className={classes.paper} elevation={2}>
-            <BarChart />
-          </Paper>}
+          <Paper className={classes.paper} elevation={2}>
+            <StackedBarChart
+              legendData={[
+                { name: 'HIGH', symbol: { fill: 'gold' } },
+                { name: 'LOW', symbol: { fill: 'green' } },
+                { name: 'MEDIUM', symbol: { fill: 'orange' } }
+              ]}
+              data={transformPriortyWiseDomainStackReport(this.props.data)}
+              tickFormat={[
+                'Web UI',
+                'Analytics',
+                'Microservices',
+                'Cloud',
+                'Mobility',
+                'DevOps',
+                'Security',
+                'Other'
+              ].sort(
+                (a, b) => (b < a ? 1 : -1)
+              )}
+              shortenTicks={true}
+              title="DOMAIN WISE STATUS"
+            />
+          </Paper>
           <Paper className={classes.paper} elevation={2}>
             <PieChart
-              title={("Challenges by status").toUpperCase()}
-              data={transformToStateReport(this.props.data,'status')}
+              title={'Challenges by status'.toUpperCase()}
+              data={transformToStateReport(this.props.data, 'status')}
               labelProvider={this.numberLabelProvider}
               isNumber={true}
             />
           </Paper>
           <Paper className={classes.paper} elevation={2}>
             <PieChart
-              title={("Challenges by priority").toUpperCase()}
-              data={transformToStateReport(this.props.data,'priority')}
+              title={'Challenges by priority'.toUpperCase()}
+              data={transformToStateReport(this.props.data, 'priority')}
               labelProvider={this.textLabelProvider}
               isNumber={false}
             />
           </Paper>
-          {this.stackedBar && <Paper className={classes.paper} elevation={2}>
-            <StackedBarChart />
-          </Paper>}
+          <Paper className={classes.paper} elevation={2}>
+            <StackedBarChart
+              legendData={[
+                { name: 'BACKLOG', symbol: { fill: 'orange' } },
+                { name: 'DONE', symbol: { fill: 'green' } },
+                { name: 'PENDING', symbol: { fill: 'red' } },
+                { name: 'WIP', symbol: { fill: 'gold' } }
+              ]}
+              data={transformStatusWisePriorityStackReport(this.props.data)}
+              tickFormat={['High', 'Medium', 'Low'].sort(
+                (a, b) => (b < a ? 1 : -1)
+              )}
+              title="PRIORITY WISE STATUS"
+            />
+          </Paper>
         </div>
       </Fade>
     )

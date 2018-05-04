@@ -134,7 +134,7 @@ class EnhancedTable extends React.Component {
       isLoggedIn: false,
       isLoggingIn: false, // State: Is Logging in user
       isSaving: false, // State: Saving data
-      isLoading: false, // State : Is Loading data
+      isLoading: true, // State : Is Loading data
       showLogin: false,
       showSnackbar: false,
       snackBarMessage: '',
@@ -625,11 +625,11 @@ class EnhancedTable extends React.Component {
     } else {
       downVoteCount++
     }
-    console.log(
+/*     console.log(
       upVoteCount,
       downVoteCount,
       Math.abs(upVoteCount - downVoteCount) <= 1
-    )
+    ) */
     return Math.abs(upVoteCount - downVoteCount) <= 1
   }
 
