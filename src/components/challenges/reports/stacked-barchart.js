@@ -14,6 +14,12 @@ import PieLabel from './pie-label'
 class StackedBarChart extends React.Component {
   // This is an example of a function you might use to transform your data to make 100% data
   transformData = dataset => {
+
+    dataset.map(element => {
+      element.sort(
+        (a, b) => (b.x < a.x ? 1 : -1)
+      )
+    })
     const totals = dataset[0].map((data, i) => {
       return dataset.reduce((memo, curr) => {
         return memo + curr[i].y
@@ -28,13 +34,7 @@ class StackedBarChart extends React.Component {
   }
   /* <VictoryLabel text="PRIORITY STATUS" textAnchor="inherit" x={5} y={5} /> */
   render() {
-    //  console.log(this.props.dataNew,this.props.data)
     const dataset = this.transformData(this.props.data)
-    dataset.map(element => {
-      element.sort(
-        (a, b) => (b.x < a.x ? 1 : -1)
-      )
-    })
     const transformTicks = this.props.shortenTicks
       ? this.props.tickFormat.map(datum => datum.substring(0, 3).toUpperCase())
       : this.props.tickFormat

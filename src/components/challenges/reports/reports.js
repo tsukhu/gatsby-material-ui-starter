@@ -72,9 +72,9 @@ class Reports extends React.Component {
           <Paper className={classes.paper} elevation={2}>
             <StackedBarChart
               legendData={[
-                { name: 'HIGH', symbol: { fill: 'green' } },
-                { name: 'MEDIUM', symbol: { fill: 'orange' } },
-                { name: 'LOW', symbol: { fill: 'gold' } }
+                { name: 'HIGH', symbol: { fill: 'gold' } },
+                { name: 'LOW', symbol: { fill: 'green' } },
+                { name: 'MEDIUM', symbol: { fill: 'orange' } }
               ]}
               data={transformPriortyWiseDomainStackReport(this.props.data)}
               tickFormat={[
@@ -112,10 +112,10 @@ class Reports extends React.Component {
           <Paper className={classes.paper} elevation={2}>
             <StackedBarChart
               legendData={[
+                { name: 'BACKLOG', symbol: { fill: 'orange' } },
                 { name: 'DONE', symbol: { fill: 'green' } },
-                { name: 'WIP', symbol: { fill: 'orange' } },
-                { name: 'BACKLOG', symbol: { fill: 'gold' } },
-                { name: 'PENDING', symbol: { fill: 'red' } }
+                { name: 'PENDING', symbol: { fill: 'red' } },
+                { name: 'WIP', symbol: { fill: 'gold' } }
               ]}
               data={transformStatusWisePriorityStackReport(this.props.data)}
               tickFormat={['High', 'Medium', 'Low'].sort(

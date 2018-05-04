@@ -1,3 +1,5 @@
+import { List } from 'immutable'
+
 const transformToStateReport = (data, groupBy) => {
   const transformedData = _.chain(data)
     .groupBy(groupBy)

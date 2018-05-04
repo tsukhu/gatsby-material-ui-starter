@@ -121,7 +121,6 @@ class EnhancedTable extends React.Component {
       orderBy: 'name',
       selected: [],
       data: [],
-      reportData: [],
       filteredData: [],
       adminUsers: [],
       vote: [],
@@ -220,7 +219,6 @@ class EnhancedTable extends React.Component {
       const sortedItems = items.sort((a, b) => (a.name < b.name ? -1 : 1))
       this.setState({
         data: sortedItems,
-        reportData: sortedItems,
         filteredData: sortedItems,
         isLoading: false
       })
@@ -725,7 +723,6 @@ class EnhancedTable extends React.Component {
       user,
       isAdmin,
       data,
-      reportData,
       filteredData,
       order,
       orderBy,

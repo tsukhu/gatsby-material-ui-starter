@@ -24,7 +24,7 @@ class PieChart extends React.Component {
           data={this.props.data}
           labelComponent={<PieLabel isNumber={this.props.isNumber} />}
           animate={{
-            duration: 1000
+            duration: 500
           }}
         />
       </VictoryContainer >
