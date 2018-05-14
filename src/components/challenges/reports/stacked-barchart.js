@@ -57,9 +57,14 @@ class StackedBarChart extends React.Component {
           style={{ border: { stroke: 'black' }, labels: { fontSize: 10 } }}
           data={this.props.legendData}
         />
-        <VictoryStack colorScale={['green', 'orange', 'gold', 'red']}>
+        <VictoryStack colorScale={['mediumseagreen', 'orange', '#CCCC00', 'red']}>
           {dataset.map((data, i) => {
-            return <VictoryBar data={data} key={i} />
+            return <VictoryBar 
+            data={data} 
+            key={i} 
+            labels={(d) => (d.y > 0 ? (d.y).toFixed(0):null)}
+            labelComponent={<VictoryLabel dy={30}/>}
+            />
           })}
         </VictoryStack>
         <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
