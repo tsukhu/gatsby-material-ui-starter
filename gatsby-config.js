@@ -54,7 +54,7 @@ module.exports = {
         // Avoids sending pageview hits from custom paths
         exclude: []
       }
-    }, {
+    }/* , {
       resolve: `gatsby-plugin-guess-js`,
       options: {
         GAViewID: `175275642`,
@@ -64,7 +64,7 @@ module.exports = {
           endDate: new Date("2019-5-5")
         }
       }
-    },
+    } */,
     `gatsby-plugin-offline`, {
       resolve: `gatsby-source-github-api`,
       options: {
