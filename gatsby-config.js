@@ -9,14 +9,8 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    // {
-    //   resolve: `gatsby-plugin-google-fonts`,
-    //   options: {
-    //     fonts: [
-    //       `Roboto:300,400,500`
-    //     ]
-    //   }
-    // },
+    // {   resolve: `gatsby-plugin-google-fonts`,   options: {     fonts: [
+    // `Roboto:300,400,500`     ]   } },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -25,8 +19,7 @@ module.exports = {
       }
     },
     `gatsby-transformer-remark`,
-    `gatsby-transformer-excel`,
-    {
+    `gatsby-transformer-excel`, {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'HCL ERS Static Site',
@@ -41,16 +34,14 @@ module.exports = {
             src: '/logos/logo-192.png',
             sizes: '192x192',
             type: 'image/png'
-          },
-          {
+          }, {
             src: '/logos/logo-512.png',
             sizes: '512x512',
             type: 'image/png'
           }
         ]
       }
-    },
-    {
+    }, {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-119197833-1",
@@ -61,11 +52,20 @@ module.exports = {
         // Setting this parameter is also optional
         respectDNT: true,
         // Avoids sending pageview hits from custom paths
-        exclude: [],
-      },
-    },
-    `gatsby-plugin-offline`,
-    {
+        exclude: []
+      }
+    }/* , {
+      resolve: `gatsby-plugin-guess-js`,
+      options: {
+        GAViewID: `175275642`,
+        minimumThreshold: 0.03,
+        period: {
+          startDate: new Date("2018-2-1"),
+          endDate: new Date("2019-5-5")
+        }
+      }
+    } */,
+    `gatsby-plugin-offline`, {
       resolve: `gatsby-source-github-api`,
       options: {
         token: `${process.env.GITHUB_TOKEN}`,
