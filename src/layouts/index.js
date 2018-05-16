@@ -1,11 +1,21 @@
 import 'typeface-roboto'
 import 'babel-polyfill'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
+import { withStyles } from '@material-ui/core/styles'
 import Navigation from '../components/navigation/navigation'
 import withMui from '../components/withMUI/withMUI'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Spinner from '../components/Spinner/Snipper'
 // import styles from './index.module.css';
+
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
+});
+
 class Index extends Component {
   state = {
     loaded: false
@@ -19,7 +29,7 @@ class Index extends Component {
   }
 
   render() {
-    const { children } = this.props
+    const { classes, children } = this.props
     return this.state.loaded ? (
       <div>
         <Helmet
@@ -49,13 +59,17 @@ class Index extends Component {
       </div>
     ) : (
       <div>
-        <Spinner />
+      <CircularProgress size={65} className={classes.progress} thickness={7} />
       </div>
     )
   }
 }
 
-export default withMui(Index)
+Index.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withMui(withStyles(styles)(Index))
 export const query = graphql`
   query LayoutQuery {
     site {
