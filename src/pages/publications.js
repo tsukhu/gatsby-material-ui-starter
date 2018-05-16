@@ -1,15 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 import PublicationCard from '../components/publicationCard/publicationCard'
 import PageHeader from '../components/pageHeader/pageHeader'
-import blueGrey from 'material-ui/colors/blueGrey'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
-import Paper from 'material-ui/Paper'
+import Paper from '@material-ui/core/Paper'
 
 const styles = theme => ({
   paper: {

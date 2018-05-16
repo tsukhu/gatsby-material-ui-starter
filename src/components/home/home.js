@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import BlogPosts from '../blogPosts/blogPosts'
 import RepoList from '../repoList/repoList'
-import Paper from 'material-ui/Paper'
-import blueGrey from 'material-ui/colors/blueGrey'
+import Paper from '@material-ui/core/Paper'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 
 
 const styles = theme => ({

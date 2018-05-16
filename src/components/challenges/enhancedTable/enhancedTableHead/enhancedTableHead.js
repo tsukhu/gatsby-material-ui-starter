@@ -1,15 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import Table, {
-  TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel
-} from 'material-ui/Table'
-import Toolbar from 'material-ui/Toolbar'
-import Checkbox from 'material-ui/Checkbox'
-import Tooltip from 'material-ui/Tooltip'
+import Table from '@material-ui/core/Table'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow  from '@material-ui/core/TableRow'
+import TableSortLabel from '@material-ui/core/TableSortLabel'
+import Toolbar from '@material-ui/core/Toolbar'
+import Checkbox from '@material-ui/core/Checkbox'
+import Tooltip from '@material-ui/core/Tooltip'
 import getColumnData from '../../metadata'
 
 class EnhancedTableHead extends React.Component {

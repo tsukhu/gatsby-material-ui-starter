@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'gatsby-link';
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import PostPagination from './postPagination/postPagination';
 import PageHeader from '../pageHeader/pageHeader';
 import SimpleCard from '../simpleCard/simpleCard';

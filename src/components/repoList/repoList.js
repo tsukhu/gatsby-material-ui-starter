@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 //import styles from './repoList.module.css'
 import ReactTable from 'react-table'
 import BlockContainer from '../blockContainer/blockContainer'
 import 'react-table/react-table.css'
 import ProjectCard from '../projectCard/projectCard'
 import PageHeader from '../pageHeader/pageHeader'
-import Paper from 'material-ui/Paper'
-import blueGrey from 'material-ui/colors/blueGrey'
+import Paper from '@material-ui/core/Paper'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')

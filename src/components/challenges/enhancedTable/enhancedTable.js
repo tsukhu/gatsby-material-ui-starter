@@ -1,20 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import Table, {
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TablePagination,
-  TableRow
-} from 'material-ui/Table'
-import Paper from 'material-ui/Paper'
-import Checkbox from 'material-ui/Checkbox'
+import { withStyles } from '@material-ui/core/styles'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableFooter from '@material-ui/core/TableFooter'
+import TableHead from '@material-ui/core/TableHead'
+import TablePagination from '@material-ui/core/TablePagination'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+import Checkbox from '@material-ui/core/Checkbox'
 import ChallengeForm from '../challengeForm/challengeForm'
 import SearchBox from '../searchBox/searchBox'
 import { List } from 'immutable'
-import Snackbar from 'material-ui/Snackbar'
+import Snackbar from '@material-ui/core/Snackbar'
 import { ref, firebaseAuth } from '../../../utils/firebase'
 import {
   login,
@@ -27,22 +26,21 @@ import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
 import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
 import ChallengeHeader from '../challengeHeader/challengeHeader'
 import Reports from '../reports/reports'
-import MaterialList, {
-  ListItem,
-  ListItemIcon,
-  ListItemText
-} from 'material-ui/List'
+import MaterialList from '@material-ui/core/List'
+import ListItem from '@material-ui/core/List'
+import ListItemIcon from '@material-ui/core/List'
+import ListItemText from '@material-ui/core/List'
 import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData, getAdminUsers } from '../metadata'
-import cyan from 'material-ui/colors/cyan'
-import Chip from 'material-ui/Chip'
+import cyan from '@material-ui/core/colors/cyan'
+import Chip from '@material-ui/core/Chip'
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
-import IconButton from 'material-ui/IconButton'
+import IconButton from '@material-ui/core/IconButton'
 import UpVote from '../upvote/upvote'
-import deepOrange from 'material-ui/colors/deepOrange'
-import blueGrey from 'material-ui/colors/blueGrey'
-import teal from 'material-ui/colors/teal'
+import deepOrange from '@material-ui/core/colors/deepOrange'
+import blueGrey from '@material-ui/core/colors/blueGrey'
+import teal from '@material-ui/core/colors/teal'
 import { get } from 'https'
 import * as _ from 'lodash'
 

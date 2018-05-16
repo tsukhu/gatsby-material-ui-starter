@@ -17,5 +17,5 @@ jobs:
   include:
   - stage: build
     script:
-    - npm install
-    - npm run deploy
+    # - npm install
+    # - npm run deploy
