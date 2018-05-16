@@ -110,7 +110,9 @@ let EnhancedTableToolbar = props => {
             </Button>
           </Tooltip>
           {isSaving && (
-            <CircularProgress size={24} className={classes.buttonProgress} />
+            <div>
+            <CircularProgress size={24} className={classes.progress} thickness={7} />
+            </div>
           )}
         </div>
       )}
@@ -135,12 +137,16 @@ let EnhancedTableToolbar = props => {
         </div>
       </Tooltip>
       {isLoggingIn && (
-        <CircularProgress size={24} className={classes.buttonProgress} />
+        <div>
+        <CircularProgress size={24} className={classes.progress} thickness={7} />
+        </div>
       )}
     </div>
   )
   const dataLoading = isLoading ? (
-    <CircularProgress className={classes.progress} />
+    <div>
+    <CircularProgress size={24} className={classes.progress} thickness={7}/>
+    </div>
   ) : null
   const HelpText = (showHelp ? 'Hide ' : 'Show ') + 'Help'
   return (
