@@ -1,13 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import PageHeader from '../../pageHeader/pageHeader'
-import blue from 'material-ui/colors/blue'
-import Stepper, { Step, StepLabel, StepContent } from 'material-ui/Stepper'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Typography from 'material-ui/Typography'
-import Fade from 'material-ui/transitions/Fade'
+import blue from '@material-ui/core/colors/blue'
+import Stepper from '@material-ui/core/Stepper'
+import Step from '@material-ui/core/Step'
+import StepLabel from '@material-ui/core/StepLabel'
+import StepContent from '@material-ui/core/StepContent'
+import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import Fade from '@material-ui/core/Fade'
 
 const styles = theme => ({
   container: {

@@ -1,12 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import Paper from 'material-ui/Paper'
-import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
-import Avatar from 'material-ui/Avatar'
-import Button from 'material-ui/Button'
-import blueGrey from 'material-ui/colors/blueGrey'
+import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CardHeader from '@material-ui/core/CardHeader'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
+import Avatar from '@material-ui/core/Avatar'
+
+import blueGrey from '@material-ui/core/colors/blueGrey'
 
 const styles = theme => ({
   card: {

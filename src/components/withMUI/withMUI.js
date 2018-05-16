@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import createMuiTheme from 'material-ui/styles/createMuiTheme'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 // import injectTabEventPlugin from 'react-tap-event-plugin'
-import purple from 'material-ui/colors/purple'
-import grey from 'material-ui/colors/grey'
-import cyan from 'material-ui/colors/cyan'
+import purple from '@material-ui/core/colors/purple'
+import grey from '@material-ui/core/colors/grey'
+import cyan from '@material-ui/core/colors/cyan'
 
 // try {
 //   injectTabEventPlugin()
@@ -41,11 +40,9 @@ const withMaterialUI = ComposedComponent => {
         }
       })
       return (
-        <div>
           <MuiThemeProvider theme={muiTheme}>
             <ComposedComponent {...this.props} />
           </MuiThemeProvider>
-        </div>
       )
     }
   }

@@ -1,22 +1,25 @@
 import React from 'react'
-import Chip from 'material-ui/Chip'
+import Chip from '@material-ui/core/Chip'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 import ReactHtmlParser from 'react-html-parser'
 import PageHeader from '../../pageHeader/pageHeader'
-import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton'
-import ListSubheader from 'material-ui/List/ListSubheader';
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardContent from '@material-ui/core/CardContent'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton'
+import ListSubheader from '@material-ui/core/ListSubheader';
 import Star from '@material-ui/icons/Star';
 import Language from '@material-ui/icons/Language';
-import Paper from 'material-ui/Paper'
-import Avatar from 'material-ui/Avatar'
-import indigo from 'material-ui/colors/indigo';
-import green from 'material-ui/colors/green';
-import deepOrange from 'material-ui/colors/deepOrange';
-import blueGrey from 'material-ui/colors/blueGrey'
+import Paper from '@material-ui/core/Paper'
+import Avatar from '@material-ui/core/Avatar'
+import indigo from '@material-ui/core/colors/indigo';
+import green from '@material-ui/core/colors/green';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import blueGrey from '@material-ui/core/colors/blueGrey'
 import { getCorrectTextColor } from '../../../utils/accessibility'
 
 const styles = theme => ({
