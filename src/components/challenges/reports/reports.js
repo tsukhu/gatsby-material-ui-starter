@@ -36,7 +36,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
     theme: 'inherit',
-    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
     alignItems: 'center',
     alignContent: 'center'
   },
@@ -47,12 +47,8 @@ const styles = theme => ({
     rounded: true,
     borderRadius: 5,
     shadowRadius: 5,
-    WebkitFlexWrap: 'wrap',
-    flexWrap: 'wrap',
-    minHeight: 300,
-    height: 100,
     width: 100,
-    flex: '1 1 auto'
+    flex: '1 0 auto'
   },
   subHeader: {
     padding: theme.spacing.unit,
