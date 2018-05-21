@@ -28,7 +28,7 @@ class StackedBarChart extends React.Component {
     return dataset.map(data => {
       return data.map((datum, i) => {
         const percent = totals[i] > 0 ? datum.y / totals[i] * 100 : 0
-        return { x: datum.x, y: percent }
+        return { x: datum.x, y: percent , z: datum.y }
       })
     })
   }
@@ -62,7 +62,7 @@ class StackedBarChart extends React.Component {
             return <VictoryBar 
             data={data} 
             key={i} 
-            labels={(d) => (d.y > 0 ? (d.y).toFixed(0):null)}
+            labels={(d) => (d.y > 0 ? (d.z).toFixed(0):null)}
             labelComponent={<VictoryLabel dy={30}/>}
             />
           })}
