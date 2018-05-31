@@ -12,7 +12,7 @@ sudo: required
 services:
 - docker
 node_js:
-- lts/carbon
+- "lts/*"
 jobs:
   include:
   - stage: build
