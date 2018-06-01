@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
+import Typography from '@material-ui/core/Typography'
 import TableFooter from '@material-ui/core/TableFooter'
 import TableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination'
@@ -13,6 +14,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import ChallengeForm from '../challengeForm/challengeForm'
 import SearchBox from '../searchBox/searchBox'
 import { List } from 'immutable'
+import NativeSelect from '@material-ui/core/NativeSelect'
 import Snackbar from '@material-ui/core/Snackbar'
 import { ref, firebaseAuth } from '../../../utils/firebase'
 import {
@@ -29,6 +31,7 @@ import Reports from '../reports/reports'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import Popover from '@material-ui/core/Popover'
 import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData, getAdminUsers } from '../metadata'
 import cyan from '@material-ui/core/colors/cyan'
@@ -61,6 +64,10 @@ const styles = theme => ({
     margin: theme.spacing.unit,
     color: '#fff',
     backgroundColor: deepOrange[500]
+  },
+  paperPopover: {
+    padding: theme.spacing.unit,
+    maxWidth: 300
   },
   paper: {
     margin: 5,
@@ -101,11 +108,31 @@ const styles = theme => ({
     alignContent: 'middle',
     alignItems: 'middle'
   },
-  gitUrl: {
+  hover: {
     theme: 'inherit',
     '&:hover': {
       backgroundColor: cyan[200]
-    }
+    },
+    cursor: 'pointer'
+  },
+  gitUrl: {
+    fontSize: 12
+  },
+  selectEmpty: {
+    margin: 0,
+    padding: 0,
+    fontSize: 12
+  },
+  smallCell: {
+    maxWidth: 50,
+    alignContent: 'center',
+    alignItems: 'middle'
+  },
+  popover: {
+    pointerEvents: 'none'
+  },
+  popperClose: {
+    pointerEvents: 'none'
   }
 })
 
@@ -114,6 +141,8 @@ class EnhancedTable extends React.Component {
     super(props, context)
 
     this.state = {
+      open: {},
+      anchorEl: null,
       order: 'asc',
       orderBy: 'name',
       selected: [],
@@ -252,9 +281,16 @@ class EnhancedTable extends React.Component {
       })
 
       const newData = mergedVotes.filter(item => this.applyfilter(item))
-
+      //  const open = !!anchorEl;
+      let open = {};
+      // Set all pop overs off
+      newData.map(item => {
+        open[item.id]=false
+      })
+      // console.log(open);
       this.setState({
         ...this.state,
+        open,
         vote: items,
         data: mergedVotes,
         filteredData: newData,
@@ -267,6 +303,18 @@ class EnhancedTable extends React.Component {
     this.dbItems.off()
     this.dbAuthItems.off()
     this.dbVotes.off()
+  }
+
+  handlePopoverOpen = (event,id) => {
+    let { open } = this.state
+    open[id]=true
+    this.setState({ open, anchorEl: event.target })
+  }
+
+  handlePopoverClose = (event,id) => {
+    let { open } = this.state
+    open[id]=false
+    this.setState({ open,anchorEl: null })
   }
 
   isAdminUser = email => {
@@ -476,7 +524,7 @@ class EnhancedTable extends React.Component {
             item
           }
         }
-        // Hack for older bug 
+        // Hack for older bug
         if (item['githubURL'] === undefined) {
           const entry = formData.filter(data => data.id === 'githubURL')
           item['githubURL'] = entry[0].value
@@ -622,11 +670,7 @@ class EnhancedTable extends React.Component {
     } else {
       downVoteCount++
     }
-/*     console.log(
-      upVoteCount,
-      downVoteCount,
-      Math.abs(upVoteCount - downVoteCount) <= 1
-    ) */
+
     return Math.abs(upVoteCount - downVoteCount) <= 1
   }
 
@@ -649,6 +693,10 @@ class EnhancedTable extends React.Component {
         snackBarMessage: 'You can up vote only once per challenge'
       })
     }
+  }
+
+  handleStateChange = event => {
+    console.log(event.target.value)
   }
 
   handleDownVote = (id, count) => {
@@ -717,6 +765,8 @@ class EnhancedTable extends React.Component {
   render() {
     const { classes } = this.props
     const {
+      open,
+      anchorEl,
       user,
       isAdmin,
       data,
@@ -740,6 +790,7 @@ class EnhancedTable extends React.Component {
       votesAvailable,
       dirty
     } = this.state
+
     const emptyRows =
       rowsPerPage -
       Math.min(rowsPerPage, filteredData.length - page * rowsPerPage)
@@ -756,7 +807,21 @@ class EnhancedTable extends React.Component {
     ) : null
 
     //   console.log(newData)
-
+    const stateOptions = option => {
+      return (
+        <NativeSelect
+          value={option}
+          onChange={event => this.handleStateChange(event)}
+          className={classes.selectEmpty}
+          disabled={true}
+        >
+          <option value="None" />
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </NativeSelect>
+      )
+    }
 
     const getURLs = urlData => {
       const urls = { urlData }
@@ -769,21 +834,21 @@ class EnhancedTable extends React.Component {
               href={data}
               target="_blank"
               key={data}
-              className={classes.gitUrl}
+              className={classes.hover}
             >
-              <ListItemText primary={data} />
+              <ListItemText primary={'...'+data.slice(-30)} className={classes.gitUrl} />
             </ListItem>
           ))
         : null
     }
     const helpInfo = showHelp ? <HelpInfo /> : null
- 
+
     return (
       <div className={classes.root}>
         <ChallengeHeader />
         {helpInfo}
         {snackBar}
-        { this.state.isLoading === false && <Reports data={data}/> }
+        {this.state.isLoading === false && <Reports data={data} />}
         <Paper className={classes.paper}>
           {this.state.editing === true ? (
             <ChallengeForm
@@ -864,8 +929,41 @@ class EnhancedTable extends React.Component {
                             onClick={event => this.handleRowClick(event, n.id)}
                           />
                         </TableCell>
-                        <TableCell padding="none">{n.name}</TableCell>
-                        <TableCell padding="none">{n.description}</TableCell>
+                        <TableCell padding="none">{n.name.length > 100?n.name.slice(0,100)+'...':n.name}</TableCell>
+                        <TableCell
+                          padding="none"
+                          onMouseOver={(event, id) =>
+                            this.handlePopoverOpen(event, n.id)
+                          }
+                          onMouseOut={(event, id) =>
+                            this.handlePopoverClose(event, n.id)
+                          }
+                          className={classes.hover}
+                        >
+                          {n.description.length > 100?n.description.slice(0,100)+'...':n.description}
+                          <Popover
+                            className={classes.popover}
+                            classes={{
+                              paper: classes.paperPopover
+                            }}
+                            open={open ? open[n.id]?open[n.id]: false : false}
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                              vertical: 'top',
+                              horizontal: 'left'
+                            }}
+                            transformOrigin={{
+                              vertical: 'bottom',
+                              horizontal: 'left'
+                            }}
+                            onClose={(event, id) =>
+                              this.handlePopoverClose(event, id)
+                            }
+                            disableRestoreFocus
+                          >
+                            <Typography>{n.description}</Typography>
+                          </Popover>
+                        </TableCell>
                         <TableCell padding="none">
                           <a href={mailTo} target="_top">
                             {n.contributor}
@@ -873,9 +971,9 @@ class EnhancedTable extends React.Component {
                         </TableCell>
                         <TableCell padding="none">{n.domain}</TableCell>
                         <TableCell padding="none">{n.status}</TableCell>
-                        <TableCell padding="none">
+                        <TableCell padding="none" className={classes.smallCell}>
                           {prorityChip}
-                          {n.priority}
+                          {stateOptions(n.priority)}
                         </TableCell>
                         <TableCell padding="none">
                           {getURLs(n.githubURL)}

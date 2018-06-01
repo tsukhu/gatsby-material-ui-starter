@@ -43,7 +43,7 @@ const getColumnData = isAdmin => {
       label: 'Description',
       type: 'text',
       multiline: true,
-      helperText: 'Description'
+      helperText: 'Description (Hover for full text)'
     },
     {
       id: 'contributor',
