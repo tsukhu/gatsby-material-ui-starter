@@ -12,69 +12,17 @@ import AddIcon from '@material-ui/icons/Add'
 import HelpIcon from '@material-ui/icons/Help'
 import FileDownload from '@material-ui/icons/FileDownload'
 import FilterListIcon from '@material-ui/icons/FilterList'
-import { lighten } from '@material-ui/core/styles/colorManipulator'
+
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { CSVLink } from 'react-csv'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
-import green from '@material-ui/core/colors/green'
+import { toolbarStyles } from '../../../../style/components/challenges/challenges'
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
-const toolbarStyles = theme => ({
-  root: {
-    paddingRight: theme.spacing.unit
-  },
-  highlight:
-    theme.palette.type === 'light'
-      ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85)
-        }
-      : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark
-        },
-  buttonSuccess: {
-    backgroundColor: green[500],
-    '&:hover': {
-      backgroundColor: green[700]
-    }
-  },
-  spacer: {
-    flex: '1 1 100%'
-  },
-  actions: {
-    flex: '0 0 auto'
-  },
-  actionButtons: {
-    display: 'flex',
-    flex: '0 0 auto'
-  },
-  wrapper: {
-    margin: theme.spacing.unit,
-    position: 'relative'
-  },
-  title: {
-    flex: '0 0 auto'
-  },
-  avatar: {
-    margin: 1
-  },
-  progress: {
-    margin: theme.spacing.unit * 2
-  },
-  buttonProgress: {
-    color: green[500],
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: -12,
-    marginLeft: -12
-  }
-})
 
-let EnhancedTableToolbar = props => {
+let ChallengeTableToolbar = props => {
   const {
     data,
     user,
@@ -220,9 +168,9 @@ let EnhancedTableToolbar = props => {
   )
 }
 
-EnhancedTableToolbar.propTypes = {
+ChallengeTableToolbar.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired
 }
 
-export default withStyles(toolbarStyles)(EnhancedTableToolbar)
+export default withStyles(toolbarStyles)(ChallengeTableToolbar)

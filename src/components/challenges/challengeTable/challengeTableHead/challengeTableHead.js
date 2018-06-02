@@ -10,7 +10,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Tooltip from '@material-ui/core/Tooltip'
 import getColumnData from '../../metadata'
 
-class EnhancedTableHead extends React.Component {
+class ChallengeTableHead extends React.Component {
   createSortHandler = property => event => {
     this.props.onRequestSort(event, property)
   }
@@ -64,7 +64,7 @@ class EnhancedTableHead extends React.Component {
   }
 }
 
-EnhancedTableHead.propTypes = {
+ChallengeTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
   onSelectAllClick: PropTypes.func.isRequired,
@@ -73,4 +73,4 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired
 }
 
-export default EnhancedTableHead
+export default ChallengeTableHead

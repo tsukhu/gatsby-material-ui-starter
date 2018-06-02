@@ -14,40 +14,7 @@ import Select from '@material-ui/core/Select'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import Fade from '@material-ui/core/Fade'
 import Button from '@material-ui/core/Button'
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    backgroundColor: 'white'
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120
-  },
-  paper: {
-    margin: 5,
-    padding: 10,
-    transitionEnabled: true,
-    backgroundColor: blueGrey[50],
-    alignContent: 'center',
-    alignItems: 'center',
-    rounded: true,
-    borderRadius: 5,
-    shadowRadius: 5
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 400
-  },
-  menu: {
-    width: 200
-  },
-  button: {
-    alignItems: 'flex-end'
-  }
-})
+import { challengeFormStyles } from '../../../style/components/challenges/challenges'
 
 const updateObject = (oldObject, updatedProperties) => {
   return {
@@ -172,4 +139,4 @@ ChallengeForm.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(ChallengeForm)
+export default withStyles(challengeFormStyles)(ChallengeForm)

@@ -24,8 +24,8 @@ import {
   loginOauth,
   loginOAuth
 } from '../../../utils/auth'
-import EnhancedTableHead from './enhancedTableHead/enhancedTableHead'
-import EnhancedTableToolbar from './enhancedTableToolbar/enhancedTableToolbar'
+import ChallengeTableHead from './challengeTableHead/challengeTableHead'
+import ChallengeTableToolbar from './challengeTableToolbar/challengeTableToolbar'
 import ChallengeHeader from '../challengeHeader/challengeHeader'
 import Reports from '../reports/reports'
 import ListItem from '@material-ui/core/ListItem'
@@ -34,109 +34,16 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Popover from '@material-ui/core/Popover'
 import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData, getAdminUsers } from '../metadata'
-import cyan from '@material-ui/core/colors/cyan'
 import Chip from '@material-ui/core/Chip'
 import ArrowDropUp from '@material-ui/icons/ArrowDropUp'
 import ArrowDropDown from '@material-ui/icons/ArrowDropDown'
 import IconButton from '@material-ui/core/IconButton'
 import UpVote from '../upvote/upvote'
-import deepOrange from '@material-ui/core/colors/deepOrange'
-import blueGrey from '@material-ui/core/colors/blueGrey'
-import teal from '@material-ui/core/colors/teal'
 import { get } from 'https'
 import * as _ from 'lodash'
+import { challengeTableStyles } from '../../../style/components/challenges/challenges'
 
-const styles = theme => ({
-  root: {
-    marginTop: theme.spacing.unit * 3
-  },
-  chipLow: {
-    margin: theme.spacing.unit,
-    color: '#fff',
-    backgroundColor: blueGrey[500]
-  },
-  chipMedium: {
-    margin: theme.spacing.unit,
-    color: '#fff',
-    backgroundColor: teal[500]
-  },
-  chipHigh: {
-    margin: theme.spacing.unit,
-    color: '#fff',
-    backgroundColor: deepOrange[500]
-  },
-  paperPopover: {
-    padding: theme.spacing.unit,
-    maxWidth: 300
-  },
-  paper: {
-    margin: 5,
-    padding: 10,
-    display: 'block',
-    height: '100%',
-    minHeight: '100vh',
-    transitionEnabled: true,
-    backgroundColor: 'white',
-    alignContent: 'center',
-    alignItems: 'center',
-    rounded: true,
-    borderRadius: 5,
-    shadowRadius: 5
-  },
-  table: {
-    flex: '1 1 auto'
-  },
-  row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default
-    }
-  },
-  tableWrapper: {
-    overflowX: 'auto'
-  },
-  button: {
-    margin: 0
-  },
-  votes: {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: 0,
-    padding: 0,
-    alignSelf: 'center',
-    textAlign: 'center',
-    verticalAlign: 'middle',
-    alignContent: 'middle',
-    alignItems: 'middle'
-  },
-  hover: {
-    theme: 'inherit',
-    '&:hover': {
-      backgroundColor: cyan[200]
-    },
-    cursor: 'pointer'
-  },
-  gitUrl: {
-    fontSize: 12
-  },
-  selectEmpty: {
-    margin: 0,
-    padding: 0,
-    fontSize: 12
-  },
-  smallCell: {
-    maxWidth: 50,
-    alignContent: 'center',
-    alignItems: 'middle'
-  },
-  popover: {
-    pointerEvents: 'none'
-  },
-  popperClose: {
-    pointerEvents: 'none'
-  }
-})
-
-class EnhancedTable extends React.Component {
+class ChallengeTable extends React.Component {
   constructor(props, context) {
     super(props, context)
 
@@ -866,7 +773,7 @@ class EnhancedTable extends React.Component {
               searchStatus={this.state.filterStatus}
             />
           ) : null}
-          <EnhancedTableToolbar
+          <ChallengeTableToolbar
             numSelected={selected.length}
             onClickEdit={this.handleEditClick}
             onClickAdd={this.handleAddClick}
@@ -889,7 +796,7 @@ class EnhancedTable extends React.Component {
           />
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
-              <EnhancedTableHead
+              <ChallengeTableHead
                 numSelected={selected.length}
                 isLoggedIn={isLoggedIn}
                 order={order}
@@ -1026,8 +933,8 @@ class EnhancedTable extends React.Component {
   }
 }
 
-EnhancedTable.propTypes = {
+ChallengeTable.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(EnhancedTable)
+export default withStyles(challengeTableStyles)(ChallengeTable)

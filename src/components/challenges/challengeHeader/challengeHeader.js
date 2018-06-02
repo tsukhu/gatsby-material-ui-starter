@@ -7,54 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-
-const styles = theme => ({
-  paper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    backgroundColor: 'white',
-    margin: 5,
-    padding: 10,
-    transitionEnabled: true,
-    rounded: true,
-    borderRadius: 5,
-    shadowRadius: 5
-  },
-  card: {
-    margin: 5,
-    transitionEnabled: true,
-    flex: '1 1 auto',
-    rounded: true,
-    borderRadius: 5,
-    shadowRadius: 5
-  },
-  media: {
-    maxWidth:'100% !important',
-    height: 'auto',
-    display: 'block'
-  },
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    backgroundColor: 'white'
-  },
-  root: {
-    width: '90%'
-  },
-  button: {
-    marginTop: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  actionsContainer: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  resetContainer: {
-    padding: theme.spacing.unit * 3
-  },
-  subHeader: {
-    padding: theme.spacing.unit
-  }
-})
+import { challengeHeaderStyles } from '../../../style/components/challenges/challenges'
 
 class ChallengeHeader extends React.Component {
   render() {
@@ -82,4 +35,4 @@ ChallengeHeader.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(ChallengeHeader)
+export default withStyles(challengeHeaderStyles)(ChallengeHeader)

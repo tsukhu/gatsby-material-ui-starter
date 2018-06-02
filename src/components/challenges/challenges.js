@@ -4,32 +4,15 @@ import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import PageHeader from '../pageHeader/pageHeader'
-import blueGrey from '@material-ui/core/colors/blueGrey'
-import EnhancedTable from './enhancedTable/enhancedTable'
-
-const styles = theme => ({
-  paper: {
-    margin: 5,
-    padding: 10,
-    display: 'block',
-    height: '100%',
-    minHeight: '100vh',
-    transitionEnabled: true,
-    backgroundColor: blueGrey[50],
-    alignContent: 'center',
-    alignItems: 'center',
-    rounded: true,
-    borderRadius: 5,
-    shadowRadius: 5
-  }
-})
+import ChallengeTable from './challengeTable/challengeTable'
+import { challengesPageStyle } from '../../style/components/challenges/challenges'
 
 function Challenges(props) {
   const { classes } = props
   return (
     <div>
       <Paper className={classes.paper} elevation={4}>
-       <EnhancedTable />
+       <ChallengeTable />
       </Paper>
     </div>
   )
@@ -39,4 +22,4 @@ Challenges.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(Challenges)
+export default withStyles(challengesPageStyle)(Challenges)
