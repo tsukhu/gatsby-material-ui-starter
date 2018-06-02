@@ -2,19 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import { getCorrectTextColor } from '../../utils/accessibility'
-import blueGrey from '@material-ui/core/colors/blueGrey'
-
-const styles = theme => ({
-  pageheader: {
-    paddingTop: 5,
-    margin: 5
-  },
-  subheader: {
-    color: getCorrectTextColor(blueGrey[50]),
-    fontFamily: 'Roboto'
-  }
-})
+import { pageHeaderStyles } from '../../style/components/pageHeader/pageHeader'
 
 const PageHeader = props => {
   const { classes } = props
@@ -31,4 +19,4 @@ PageHeader.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(PageHeader)
+export default withStyles(pageHeaderStyles, { withTheme: true })(PageHeader)
