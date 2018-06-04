@@ -32,6 +32,13 @@ import {
   transformPriortyWiseDomainStackReport
 } from '../../../utils/data-transformer'
 
+const stackColors = [
+  'mediumseagreen',
+  'orange',
+  '#CCCC00',
+  'turquoise'
+];
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -72,9 +79,9 @@ class Reports extends React.Component {
           <Paper className={classes.paper} elevation={2}>
             <StackedBarChart
               legendData={[
-                { name: 'HIGH', symbol: { fill: 'mediumseagreen' } },
-                { name: 'LOW', symbol: { fill: 'orange' } },
-                { name: 'MEDIUM', symbol: { fill: '#CCCC00' } }
+                { name: 'HIGH', symbol: { fill: stackColors[0] } },
+                { name: 'LOW', symbol: { fill:  stackColors[1] } },
+                { name: 'MEDIUM', symbol: { fill:  stackColors[2] } }
               ]}
               data={transformPriortyWiseDomainStackReport(this.props.data)}
               tickFormat={[
@@ -110,10 +117,10 @@ class Reports extends React.Component {
           <Paper className={classes.paper} elevation={2}>
             <StackedBarChart
               legendData={[
-                { name: 'BACKLOG', symbol: { fill: '#CCCC00' } },
-                { name: 'DONE', symbol: { fill: 'mediumseagreen' } },
-                { name: 'PENDING', symbol: { fill: 'red' } },
-                { name: 'WIP', symbol: { fill: 'orange' } }
+                { name: 'PENDING', symbol: { fill: stackColors[0] } },
+                { name: 'BACKLOG', symbol: { fill: stackColors[1] } },
+                { name: 'DONE', symbol: { fill: stackColors[2] } },
+                { name: 'WIP', symbol: { fill: stackColors[3] } }
               ]}
               data={transformStatusWisePriorityStackReport(this.props.data)}
               tickFormat={['High', 'Medium', 'Low'].sort(

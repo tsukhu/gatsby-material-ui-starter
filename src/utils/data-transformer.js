@@ -55,6 +55,7 @@ const transformPriortyWiseDomainStackReport = data => {
 const transformStatusWisePriorityStackReport = data => {
   
   const report = _(data)
+    .sortBy(['status'])
     .groupBy(f => f.status)
     .map(item =>
       _(item)

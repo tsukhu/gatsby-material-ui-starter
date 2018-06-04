@@ -57,7 +57,7 @@ class StackedBarChart extends React.Component {
           style={{ border: { stroke: 'black' }, labels: { fontSize: 10 } }}
           data={this.props.legendData}
         />
-        <VictoryStack colorScale={['mediumseagreen', 'orange', '#CCCC00', 'red']}>
+        <VictoryStack colorScale={['mediumseagreen', 'orange', '#CCCC00', 'turquoise']}>
           {dataset.map((data, i) => {
             return <VictoryBar 
             data={data} 
