@@ -48,6 +48,7 @@ class ChallengeTable extends React.Component {
     super(props, context)
 
     this.state = {
+      addInProgress: false,
       open: {},
       anchorEl: null,
       order: 'asc',
@@ -189,10 +190,10 @@ class ChallengeTable extends React.Component {
 
       const newData = mergedVotes.filter(item => this.applyfilter(item))
       //  const open = !!anchorEl;
-      let open = {};
+      let open = {}
       // Set all pop overs off
       newData.map(item => {
-        open[item.id]=false
+        open[item.id] = false
       })
       // console.log(open);
       this.setState({
@@ -212,16 +213,16 @@ class ChallengeTable extends React.Component {
     this.dbVotes.off()
   }
 
-  handlePopoverOpen = (event,id) => {
+  handlePopoverOpen = (event, id) => {
     let { open } = this.state
-    open[id]=true
+    open[id] = true
     this.setState({ open, anchorEl: event.target })
   }
 
-  handlePopoverClose = (event,id) => {
+  handlePopoverClose = (event, id) => {
     let { open } = this.state
-    open[id]=false
-    this.setState({ open,anchorEl: null })
+    open[id] = false
+    this.setState({ open, anchorEl: null })
   }
 
   isAdminUser = email => {
@@ -387,14 +388,27 @@ class ChallengeTable extends React.Component {
       {
         ...this.state,
         data: newData,
+        addInProgress: true,
         filteredData: filteredData
       },
       function() {
         this.handleRowClick(null, newRow.id)
         this.handleEditClick(null)
+        this.setState({
+          addInProgress: false
+        })
       }
     )
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+
+    if (this.state.addInProgress !== nextState.addInProgress && nextState.addInProgress === true) {
+      return false;
+    }
+    return true;
+  }
+
 
   handleDeleteClick = event => {
     const { selected, data } = this.state
@@ -670,6 +684,7 @@ class ChallengeTable extends React.Component {
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
   render() {
+    // console.log('render')
     const { classes } = this.props
     const {
       open,
@@ -743,7 +758,10 @@ class ChallengeTable extends React.Component {
               key={data}
               className={classes.hover}
             >
-              <ListItemText primary={'...'+data.slice(-30)} className={classes.gitUrl} />
+              <ListItemText
+                primary={'...' + data.slice(-30)}
+                className={classes.gitUrl}
+              />
             </ListItem>
           ))
         : null
@@ -836,7 +854,11 @@ class ChallengeTable extends React.Component {
                             onClick={event => this.handleRowClick(event, n.id)}
                           />
                         </TableCell>
-                        <TableCell padding="none">{n.name.length > 100?n.name.slice(0,100)+'...':n.name}</TableCell>
+                        <TableCell padding="none">
+                          {n.name.length > 100
+                            ? n.name.slice(0, 100) + '...'
+                            : n.name}
+                        </TableCell>
                         <TableCell
                           padding="none"
                           onMouseOver={(event, id) =>
@@ -847,13 +869,17 @@ class ChallengeTable extends React.Component {
                           }
                           className={classes.hover}
                         >
-                          {n.description.length > 100?n.description.slice(0,100)+'...':n.description}
+                          {n.description.length > 100
+                            ? n.description.slice(0, 100) + '...'
+                            : n.description}
                           <Popover
                             className={classes.popover}
                             classes={{
                               paper: classes.paperPopover
                             }}
-                            open={open ? open[n.id]?open[n.id]: false : false}
+                            open={
+                              open ? (open[n.id] ? open[n.id] : false) : false
+                            }
                             anchorEl={anchorEl}
                             anchorOrigin={{
                               vertical: 'top',

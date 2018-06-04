@@ -169,7 +169,7 @@ class SearchBox extends React.Component {
       </FormControl>
     )
     return (
-      <Fade in={true}>
+      <Fade in={true} timeout={100}>
         <Paper className={classes.paper} elevation={4}>
           <PageHeader text="Filter" />
 
