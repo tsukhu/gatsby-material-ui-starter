@@ -65,15 +65,16 @@ class Reports extends React.Component {
 
   render() {
     const { classes } = this.props
+
     return (
       <Fade in={true}>
         <div className={classes.root}>
           <Paper className={classes.paper} elevation={2}>
             <StackedBarChart
               legendData={[
-                { name: 'HIGH', symbol: { fill: 'orange' } },
-                { name: 'LOW', symbol: { fill: '#CCCC00' } },
-                { name: 'MEDIUM', symbol: { fill: 'mediumseagreen' } }
+                { name: 'HIGH', symbol: { fill: 'mediumseagreen' } },
+                { name: 'LOW', symbol: { fill: 'orange' } },
+                { name: 'MEDIUM', symbol: { fill: '#CCCC00' } }
               ]}
               data={transformPriortyWiseDomainStackReport(this.props.data)}
               tickFormat={[
@@ -85,9 +86,7 @@ class Reports extends React.Component {
                 'DevOps',
                 'Security',
                 'Other'
-              ].sort(
-                (a, b) => (b < a ? 1 : -1)
-              )}
+              ].sort((a, b) => (b < a ? 1 : -1))}
               shortenTicks={true}
               title="DOMAIN WISE STATUS"
             />
