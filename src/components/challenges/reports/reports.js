@@ -42,10 +42,7 @@ const stackColors = [
 const styles = theme => ({
   root: {
     display: 'flex',
-    theme: 'inherit',
     flexWrap: 'wrap',
-    alignItems: 'center',
-    alignContent: 'center'
   },
   paper: {
     margin: 5,
@@ -55,6 +52,7 @@ const styles = theme => ({
     borderRadius: 5,
     shadowRadius: 5,
     width: 100,
+    height: 300,
     flex: '1 0 auto'
   },
   subHeader: {
@@ -74,7 +72,7 @@ class Reports extends React.Component {
     const { classes } = this.props
 
     return (
-      <Fade in={true}>
+      <Fade in={true} timeout={50}>
         <div className={classes.root}>
           <Paper className={classes.paper} elevation={2}>
             <StackedBarChart
