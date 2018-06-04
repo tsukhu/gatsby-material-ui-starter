@@ -148,8 +148,7 @@ const challengeTableStyles = theme => ({
     fontSize: 12
   },
   selectEmpty: {
-    margin: 0,
-    padding: 0,
+    marginRight: theme.spacing.unit,
     fontSize: 12
   },
   smallCell: {
@@ -162,6 +161,9 @@ const challengeTableStyles = theme => ({
   },
   popperClose: {
     pointerEvents: 'none'
+  },
+  icon: {
+    margin: theme.spacing.unit,
   }
 })
 

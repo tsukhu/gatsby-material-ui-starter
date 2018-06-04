@@ -1,34 +1,34 @@
-import Checkbox from '@material-ui/core/Checkbox';
-import Paper from '@material-ui/core/Paper';
-import Popover from '@material-ui/core/Popover';
-import Snackbar from '@material-ui/core/Snackbar';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import { List } from 'immutable';
-import * as _ from 'lodash';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { challengeTableStyles } from '../../../style/components/challenges/challenges';
-import { createUser, loginOAuth, logout } from '../../../utils/auth';
-import { firebaseAuth, ref } from '../../../utils/firebase';
-import ChallengeForm from '../challengeForm/challengeForm';
-import ChallengeHeader from '../challengeHeader/challengeHeader';
-import HelpInfo from '../helpInfo/helpInfo';
-import getColumnData, { createData } from '../metadata';
-import Reports from '../reports/reports';
-import SearchBox from '../searchBox/searchBox';
-import UpVote from '../upvote/upvote';
-import ChallengeTableFooter from './challengeTableFooter/challengeTableFooter';
-import ChallengeTableHead from './challengeTableHead/challengeTableHead';
-import ChallengeTableToolbar from './challengeTableToolbar/challengeTableToolbar';
-import PriorityChip from './priorityChip/priorityChip';
-import SelectComponent from './selectComponent/selectComponent';
-import UrlListComponent from './urlListComponent/urlListComponent';
-
+import Checkbox from '@material-ui/core/Checkbox'
+import Paper from '@material-ui/core/Paper'
+import Popover from '@material-ui/core/Popover'
+import Snackbar from '@material-ui/core/Snackbar'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableRow from '@material-ui/core/TableRow'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
+import { List } from 'immutable'
+import * as _ from 'lodash'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { challengeTableStyles } from '../../../style/components/challenges/challenges'
+import { createUser, loginOAuth, logout } from '../../../utils/auth'
+import { firebaseAuth, ref } from '../../../utils/firebase'
+import ChallengeForm from '../challengeForm/challengeForm'
+import ChallengeHeader from '../challengeHeader/challengeHeader'
+import HelpInfo from '../helpInfo/helpInfo'
+import getColumnData, { createData } from '../metadata'
+import Reports from '../reports/reports'
+import SearchBox from '../searchBox/searchBox'
+import UpVote from '../upvote/upvote'
+import ChallengeTableFooter from './challengeTableFooter/challengeTableFooter'
+import ChallengeTableHead from './challengeTableHead/challengeTableHead'
+import ChallengeTableToolbar from './challengeTableToolbar/challengeTableToolbar'
+import PriorityChip from './priorityChip/priorityChip'
+import StatusComponent from './statusComponent/statusComponent'
+import SelectComponent from './selectComponent/selectComponent'
+import UrlListComponent from './urlListComponent/urlListComponent'
 
 class ChallengeTable extends React.Component {
   constructor(props, context) {
@@ -389,13 +389,14 @@ class ChallengeTable extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-
-    if (this.state.addInProgress !== nextState.addInProgress && nextState.addInProgress === true) {
-      return false;
+    if (
+      this.state.addInProgress !== nextState.addInProgress &&
+      nextState.addInProgress === true
+    ) {
+      return false
     }
-    return true;
+    return true
   }
-
 
   handleDeleteClick = event => {
     const { selected, data } = this.state
@@ -603,9 +604,18 @@ class ChallengeTable extends React.Component {
     }
   }
 
-  handleStateChange = (event,id) => {
-    let { data, order, orderBy } = this.state;
-    _.find(data, {id: id}).priority = event.target.value
+  handlePriorityChange = (event, id) => {
+    let { data, order, orderBy } = this.state
+    _.find(data, { id: id }).priority = event.target.value
+    this.setState({
+      data: data,
+      dirty: true
+    })
+  }
+
+  handleStatusChange = (event, id) => {
+    let { data, order, orderBy } = this.state
+    _.find(data, { id: id }).status = event.target.value
     this.setState({
       data: data,
       dirty: true
@@ -782,7 +792,8 @@ class ChallengeTable extends React.Component {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
                     const isSelected = this.isSelected(n.id)
-                    const mailTo = 'mailto:' + n.contributor + '?Subject=' + n.name
+                    const mailTo =
+                      'mailto:' + n.contributor + '?Subject=' + n.name
                     return (
                       <TableRow
                         hover
@@ -806,8 +817,12 @@ class ChallengeTable extends React.Component {
                         </TableCell>
                         <TableCell
                           padding="none"
-                          onMouseOver={(event, id) => this.handlePopoverOpen(event, n.id)}
-                          onMouseOut={(event, id) => this.handlePopoverClose(event, n.id)}
+                          onMouseOver={(event, id) =>
+                            this.handlePopoverOpen(event, n.id)
+                          }
+                          onMouseOut={(event, id) =>
+                            this.handlePopoverClose(event, n.id)
+                          }
                           className={classes.hover}
                         >
                           {n.description.length > 100
@@ -844,22 +859,47 @@ class ChallengeTable extends React.Component {
                           </a>
                         </TableCell>
                         <TableCell padding="none">{n.domain}</TableCell>
-                        <TableCell padding="none">{n.status}</TableCell>
+                        <TableCell padding="none">
+                          
+                        {isLoggedIn && isAdmin ? (<SelectComponent
+                            option={n.status}
+                            onChange={(event, id) =>
+                              this.handleStatusChange(event, n.id)
+                            }
+                            disabled={isLoggedIn && isAdmin}
+                            options={[
+                              {
+                                name: 'Approval Pending',
+                                value: 'Approval Pending'
+                              },
+                              { name: 'Backlog', value: 'Backlog Item' },
+                              { name: 'Done', value: 'Done' },
+                              { name: 'In Progress', value: 'In Progress' }
+                            ]}
+                          /> ) : (
+                            <StatusComponent status={n.status} />
+                          )}
+                        </TableCell>
                         <TableCell padding="none" className={classes.smallCell}>
-                          <PriorityChip priority={n.priority}/>
-                          <SelectComponent 
-                          option={n.priority} 
-                          onChange={(event,id) => this.handleStateChange(event,n.id)} 
-                          disabled={isLoggedIn && isAdmin}
-                          options={[
-                            { name: "High", value: "High"  },
-                            { name: "Medium", value: "Medium"  },
-                            { name: "Low", value: "Low"  },
-                          ]}
-                          />
+                          {isLoggedIn && isAdmin ? (
+                            <SelectComponent
+                              option={n.priority}
+                              onChange={(event, id) =>
+                                this.handlePriorityChange(event, n.id)
+                              }
+                              disabled={isLoggedIn && isAdmin}
+                              options={[
+                                { name: 'High', value: 'High' },
+                                { name: 'Medium', value: 'Medium' },
+                                { name: 'Low', value: 'Low' }
+                              ]}
+                            />
+                          ) : (
+                            <PriorityChip priority={n.priority} />
+                          )}
                         </TableCell>
                         <TableCell padding="none">
-                          <UrlListComponent urls={n.githubURL}/>
+                          <UrlListComponent urls={n.githubURL} />
                         </TableCell>
                         <TableCell padding="none">
                           {isLoggedIn && votesAvailable ? (
@@ -882,13 +922,13 @@ class ChallengeTable extends React.Component {
                   </TableRow>
                 )}
               </TableBody>
-              <ChallengeTableFooter 
-                    filteredData={filteredData}
-                    page={page}
-                    rowsPerPage={rowsPerPage}
-                    rowsPerPageOptions={rowsPerPageOptions}
-                    handleChangePage={this.handleChangePage}
-                    handleChangeRowsPerPage={this.handleChangeRowsPerPage}
+              <ChallengeTableFooter
+                filteredData={filteredData}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                rowsPerPageOptions={rowsPerPageOptions}
+                handleChangePage={this.handleChangePage}
+                handleChangeRowsPerPage={this.handleChangeRowsPerPage}
               />
             </Table>
           </div>
