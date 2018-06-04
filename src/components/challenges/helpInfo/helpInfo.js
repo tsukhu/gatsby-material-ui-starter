@@ -109,7 +109,7 @@ class HelpInfo extends React.Component {
     const { activeStep } = this.state
 
     return (
-      <Fade in={true}>
+      <Fade in={true} timeout={100}>
         <Paper className={classes.paper} elevation={4}>
           <PageHeader text="Help" />
           <Typography variant="body1" className={classes.subHeader}>

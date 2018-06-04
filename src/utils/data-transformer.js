@@ -14,6 +14,7 @@ const transformToStateReport = (data, groupBy) => {
 
 const transformPriortyWiseDomainStackReport = data => {
   const report = _(data)
+    .sortBy(['priority'])
     .groupBy(f => f.priority)
     .map(item =>
       _(item)
@@ -46,11 +47,15 @@ const transformPriortyWiseDomainStackReport = data => {
       }
     })
   })
+
+
   return report
 }
 
 const transformStatusWisePriorityStackReport = data => {
+  
   const report = _(data)
+    .sortBy(['status'])
     .groupBy(f => f.status)
     .map(item =>
       _(item)
@@ -63,6 +68,7 @@ const transformStatusWisePriorityStackReport = data => {
     )
     .value()
 
+  
   const statusList = ['High', 'Medium', 'Low']
 
   statusList.forEach(status => {
@@ -75,7 +81,6 @@ const transformStatusWisePriorityStackReport = data => {
       }
     })
   })
-
   return report
 }
 
