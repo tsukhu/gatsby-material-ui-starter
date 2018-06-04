@@ -79,7 +79,7 @@ class UpVote extends React.Component {
         >
           <ArrowDropUp />
         </IconButton>
-        {this.props.votes}
+        {this.props.votes?this.props.votes:0}
         <IconButton
           className={classes.button}
           aria-label="Down Vote"

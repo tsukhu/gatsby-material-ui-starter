@@ -20,6 +20,9 @@
   }, {
     "displayName" : "vinodmrhcl",
     "email" : "vinodmr@hcl.com"
+  }, {
+    "displayName" : "malhotrav",
+    "email" : "malhotrav@gmail.com"
   } ],
   "data" : [ {
     "contributor" : "tksukhu@gmail.com",
@@ -28,7 +31,7 @@
     "githubURL" : "https://github.com/ERS-HCL/gatsby-demo-app",
     "id" : 11,
     "name" : "Add PWA and Offline support to Gatsby based ers-hcl website",
-    "priority" : "Medium",
+    "priority" : "High",
     "status" : "Done",
     "votes" : 0
   }, {
@@ -363,6 +366,16 @@
     "votes" : 1
   }, {
     "contributor" : "tksukhu@gmail.com",
+    "description" : "Presentation and styling plays an important presenting any idea or POC. Use the standard material-ui kit to create an app (could be anything from a shopping app to a music listing etc.)",
+    "domain" : "Web UI",
+    "githubURL" : "https://github.com/creativetimofficial/material-kit-react ",
+    "id" : "96f864dc-5a8e-4f63-b784-0d9de531c04b",
+    "name" : "Material-ui-kit based React/Angular/Vue webApp",
+    "priority" : "Medium",
+    "status" : "Backlog Item",
+    "votes" : 1
+  }, {
+    "contributor" : "tksukhu@gmail.com",
     "description" : "Micrometer provides abstraction to metrics integration. Think of it as SLF4J , but for metrics\nIt is already built into the RabbitMQ Java Client.By abstracting away and supporting multiple monitoring systems under common semantics, the tool makes switching between different monitoring platforms quite easy\n\nFor SpringBoot 2, Micrometer is autoconfigured by Actuator and OOTB\nIn SpringBoot 1 - it has been backported to Spring 1.5.\n\nCreate a POC on Micrometer integration with Prometheus,Atlas and JMX\n\nReferences: https://www.infoq.com/presentations/micrometer\nhttp://www.baeldung.com/micrometer",
     "domain" : "Microservices",
     "githubURL" : "",
@@ -493,7 +506,7 @@
     "votes" : 1
   }, {
     "contributor" : "tksukhu@gmail.com",
-    "description" : "The ngrx-data library is one way to stay on the ngrx path while radically reducing the \"boilerplate\" necessary to manage entities with ngrx.  https://github.com/johnpapa/angular-ngrx-data  \nThis project requires prior knowledge of Redux and NGRX   \nThe project involves  \n1) A practical experiment using ngrx-data \n2) Review this with using the bare bones version of ngrx-data  \nThe POC **MUST** provide an detailed analysis of what the findings are and if/when will you recommend using ngrx-data",
+    "description" : "The ngrx-data library is one way to stay on the ngrx path while radically reducing the boilerplate necessary to manage entities with ngrx.  https://github.com/johnpapa/angular-ngrx-data  \nThis project requires prior knowledge of Redux and NGRX   \nThe project involves  \n1) A practical experiment using ngrx-data \n2) Review this with using the bare bones version of ngrx-data  \nThe POC **MUST** provide an detailed analysis of what the findings are and if/when will you recommend using ngrx-data",
     "domain" : "Web UI",
     "githubURL" : "",
     "id" : "3949b642-3e01-4a3c-a7a3-093536d238b4",
@@ -1203,6 +1216,26 @@
     "-LCmh4B7WsahnU0Yet9J" : {
       "email" : "tksukhu@gmail.com",
       "id" : "242524e5-8204-4c44-9979-18c80328bc1e",
+      "type" : "upVote"
+    },
+    "-LDp2wws2Pmv_DS3-1d5" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "96f864dc-5a8e-4f63-b784-0d9de531c04b",
+      "type" : "upVote"
+    },
+    "-LDudQBIqIcFnGbAnlZS" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "4dbbe27e-ce1d-4d7c-beea-06ba4e582de7",
+      "type" : "downVote"
+    },
+    "-LDudQOI4nPZqyY_fsGk" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "4dbbe27e-ce1d-4d7c-beea-06ba4e582de7",
+      "type" : "upVote"
+    },
+    "-LE7tTaALy6Au7djBSU9" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "91597fa2-1ab0-46d1-9b3b-cab40c28d368",
       "type" : "upVote"
     },
     "4dbbe27e-ce1d-4d7c-beea-06ba4e582de7" : {
