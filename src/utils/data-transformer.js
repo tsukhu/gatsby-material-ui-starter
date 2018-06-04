@@ -81,7 +81,6 @@ const transformStatusWisePriorityStackReport = data => {
       }
     })
   })
-  console.log(report)
   return report
 }
 

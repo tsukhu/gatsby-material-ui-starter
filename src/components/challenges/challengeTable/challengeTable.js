@@ -606,17 +606,9 @@ class ChallengeTable extends React.Component {
   handleStateChange = (event,id) => {
     let { data, order, orderBy } = this.state;
     _.find(data, {id: id}).priority = event.target.value
-/*     let newData = this.state.data.filter(item => this.applyfilter(item))
-    newData =
-    order === 'desc'
-      ? this.state.filteredData.sort(
-          (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-        )
-      : this.state.filteredData.sort(
-          (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1)
-        ) */
     this.setState({
-      data: data
+      data: data,
+      dirty: true
     })
   }
 
