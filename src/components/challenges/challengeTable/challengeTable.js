@@ -584,6 +584,14 @@ class ChallengeTable extends React.Component {
   }
 
   handleUpVote = (id, count) => {
+    const { isLoggedIn } = this.state
+    if (!isLoggedIn) {
+      this.setState({
+        showSnackbar: true,
+        snackBarMessage: 'You need to log in to vote'
+      })
+      return
+    }
     let refVotes = ref.child('vote')
     // Check if user has previously upvoted
     if (this.canVote(this.state.vote, id, true)) {
@@ -623,6 +631,15 @@ class ChallengeTable extends React.Component {
   }
 
   handleDownVote = (id, count) => {
+    const { isLoggedIn } = this.state
+    if (!isLoggedIn) {
+      this.setState({
+        showSnackbar: true,
+        snackBarMessage: 'You need to log in to vote'
+      })
+      return
+    }
+
     let refVotes = ref.child('vote')
 
     if (this.canVote(this.state.vote, id, false)) {
@@ -902,7 +919,7 @@ class ChallengeTable extends React.Component {
                           <UrlListComponent urls={n.githubURL} />
                         </TableCell>
                         <TableCell padding="none">
-                          {isLoggedIn && votesAvailable ? (
+                          {votesAvailable ? (
                             <UpVote
                               votes={n.votes}
                               id={n.id}

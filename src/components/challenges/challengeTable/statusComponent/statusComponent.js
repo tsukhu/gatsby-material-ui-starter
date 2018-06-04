@@ -1,5 +1,5 @@
 import DoneAll from '@material-ui/icons/DoneAll'
-import PlayListAdd from '@material-ui/icons/PlayListAdd'
+import PlaylistAdd from '@material-ui/icons/PlaylistAdd'
 import Cached from '@material-ui/icons/Cached'
 import Assignment from '@material-ui/icons/Assignment'
 import Tooltip from '@material-ui/core/Tooltip';
@@ -17,7 +17,7 @@ let StatusComponent = props => {
       </Tooltip>
     ) : status === 'Approval Pending' ? (
       <Tooltip  title="Approval Pending">
-      <PlayListAdd className={classes.icon} />
+      <PlaylistAdd className={classes.icon} />
       </Tooltip>
     ) : status === 'Backlog Item' ? (
       <Tooltip title="Backlog Item">
