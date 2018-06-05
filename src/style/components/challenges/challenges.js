@@ -98,6 +98,10 @@ const challengeTableStyles = theme => ({
     padding: theme.spacing.unit,
     maxWidth: 300
   },
+  statusIcon: {
+    alignContent: 'center',
+    alignItems: 'center',
+  },
   paper: {
     margin: 5,
     padding: 10,

@@ -28,7 +28,7 @@ let StatusComponent = props => {
       <Cached className={classes.icon} />
       </Tooltip>
     )
-  return <div className={classes.root}>{svgIcon}</div>
+  return <div className={classes.statusIcon}>{svgIcon}</div>
 }
 
 StatusComponent.propTypes = {

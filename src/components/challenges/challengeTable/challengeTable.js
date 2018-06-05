@@ -30,6 +30,8 @@ import PriorityChip from './priorityChip/priorityChip'
 import StatusComponent from './statusComponent/statusComponent'
 import SelectComponent from './selectComponent/selectComponent'
 import UrlListComponent from './urlListComponent/urlListComponent'
+import Badge from './badge/badge'
+import Contributor from './contributor/contributor'
 
 class ChallengeTable extends React.Component {
   constructor(props, context) {
@@ -867,8 +869,6 @@ class ChallengeTable extends React.Component {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(n => {
                     const isSelected = this.isSelected(n.id)
-                    const mailTo =
-                      'mailto:' + n.contributor + '?Subject=' + n.name
                     return (
                       <TableRow
                         hover
@@ -929,11 +929,9 @@ class ChallengeTable extends React.Component {
                           </Popover>
                         </TableCell>
                         <TableCell padding="none">
-                          <a href={mailTo} target="_top">
-                            {n.contributor}
-                          </a>
+                          <Contributor email={n.contributor} subject={n.name}/>
                         </TableCell>
-                        <TableCell padding="none">{n.domain}</TableCell>
+                        <TableCell padding="none"><Badge text={n.domain} /></TableCell>
                         <TableCell padding="none">
                           {isLoggedIn && isAdmin ? (
                             <SelectComponent
