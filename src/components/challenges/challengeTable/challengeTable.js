@@ -17,7 +17,6 @@ import { createUser, loginOAuth, logout } from '../../../utils/auth'
 import firebase from 'firebase/app'
 import { firebaseAuth, ref } from '../../../utils/firebase'
 import ChallengeForm from '../challengeForm/challengeForm'
-import ChallengeHeader from '../challengeHeader/challengeHeader'
 import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData } from '../metadata'
 import Reports from '../reports/reports'
@@ -810,8 +809,7 @@ class ChallengeTable extends React.Component {
     const helpInfo = showHelp ? <HelpInfo /> : null
 
     return (
-      <div className={classes.root}>
-        <ChallengeHeader />
+      <div className={classes.root}>        
         {helpInfo}
         {snackBar}
         {this.state.isLoading === false && <Reports data={data} />}

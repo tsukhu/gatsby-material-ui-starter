@@ -6,11 +6,13 @@ import Typography from '@material-ui/core/Typography'
 import PageHeader from '../pageHeader/pageHeader'
 import ChallengeTable from './challengeTable/challengeTable'
 import { challengesPageStyle } from '../../style/components/challenges/challenges'
+import ChallengeHeader from './challengeHeader/challengeHeader'
 
 function Challenges(props) {
   const { classes } = props
   return (
     <div>
+      <ChallengeHeader />
       <Paper className={classes.paper} elevation={4}>
        <ChallengeTable />
       </Paper>
