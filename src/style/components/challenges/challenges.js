@@ -185,8 +185,7 @@ const challengeHeaderStyles = theme => ({
   },
   card: {
     margin: 5,
-    transitionEnabled: true,
-    flex: '1 1 auto',
+    padding: 5,
     rounded: true,
     borderRadius: 5,
     shadowRadius: 5,
