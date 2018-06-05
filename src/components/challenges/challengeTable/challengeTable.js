@@ -14,6 +14,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { challengeTableStyles } from '../../../style/components/challenges/challenges'
 import { createUser, loginOAuth, logout } from '../../../utils/auth'
+import firebase from 'firebase/app'
 import { firebaseAuth, ref } from '../../../utils/firebase'
 import ChallengeForm from '../challengeForm/challengeForm'
 import ChallengeHeader from '../challengeHeader/challengeHeader'
@@ -66,8 +67,7 @@ class ChallengeTable extends React.Component {
       filterDomain: null,
       filterPriority: null,
       filterStatus: null,
-      showHelp: false,
-      dirty: false
+      showHelp: false
     }
     this.dbItems = ref.child('data')
     this.dbAuthItems = ref.child('admin')
@@ -153,7 +153,8 @@ class ChallengeTable extends React.Component {
         items.push(item)
       })
 
-      const voteTransformed = _.chain(items)
+      const voteTransformed = _
+        .chain(items)
         .groupBy('id')
         .map((objs, key) => ({
           id: isNaN(key) ? key : +key,
@@ -357,35 +358,28 @@ class ChallengeTable extends React.Component {
     const { data, orderBy, order } = this.state
     // Create new row
     const newRow = createData(this.state.user.email)
-    const newData = List(data)
+
+    firebase
+      .database()
+      .ref()
+      .child('data')
       .push(newRow)
-      .toArray()
-
-    // Update data state as well as
-    // select newly created row
-    // call edit on the row
-    let filteredData = newData.filter(item => this.applyfilter(item))
-
-    filteredData =
-      order === 'desc'
-        ? filteredData.sort((a, b) => (b[orderBy] < a[orderBy] ? -1 : 1))
-        : filteredData.sort((a, b) => (a[orderBy] < b[orderBy] ? -1 : 1))
-
-    this.setState(
-      {
-        ...this.state,
-        data: newData,
-        addInProgress: true,
-        filteredData: filteredData
-      },
-      function() {
+      .catch(err => {
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: 'Failed to save data !!',
+          isSaving: false
+        })
+      })
+      .then(() => {
+        this.setState({
+          showSnackbar: true,
+          snackBarMessage: 'Data saved !!',
+          isSaving: false
+        })
         this.handleRowClick(null, newRow.id)
         this.handleEditClick(null)
-        this.setState({
-          addInProgress: false
-        })
-      }
-    )
+      })
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -400,14 +394,32 @@ class ChallengeTable extends React.Component {
 
   handleDeleteClick = event => {
     const { selected, data } = this.state
+    if (selected[0] === undefined) return
+    const childId = this.findDBKey(selected[0])
 
-    const newData = data.filter(item => item.id !== selected[0])
-    const filteredData = newData.filter(item => this.applyfilter(item))
+    if (childId !== null) {
+      firebase
+        .database()
+        .ref('data/' + childId)
+        .remove()
+        .catch(err => {
+          this.setState({
+            showSnackbar: true,
+            snackBarMessage: 'Failed to delete data !!',
+            isSaving: false
+          })
+        })
+        .then(() =>
+          this.setState({
+            showSnackbar: true,
+            snackBarMessage: 'Data deleted !!',
+            isSaving: false
+          })
+        )
+    }
+
     this.setState({
-      data: newData,
       selected: [],
-      filteredData: filteredData,
-      dirty: true,
       editing: false
     })
   }
@@ -419,44 +431,46 @@ class ChallengeTable extends React.Component {
 
   handleFormSubmit = (event, formData) => {
     const { selected, data } = this.state
-    // Immutable List
-    const newData = List(data)
+    if (selected[0] === undefined) return
+    const currentItem = _.find(data, { id: selected[0] })
+    const childId = this.findDBKey(selected[0])
 
-    // Map formData to data list
-    newData.map(item => {
-      if (item.id === selected[0]) {
-        for (let key in item) {
-          if (key !== 'id' && key !== 'vote' && key !== 'votes') {
-            const entry = formData.filter(data => data.id === key)
-            item[key] = entry[0].value
-          } else {
-            item
-          }
+    if (childId !== null) {
+      // console.log(formData)
+      for (let key in currentItem) {
+        if (key !== 'id' && key !== 'vote' && key !== 'votes') {
+          const entry = formData.filter(data => data.id === key)
+          currentItem[key] = entry[0].value
+        } else {
+          currentItem
         }
-        // Hack for older bug
-        if (item['githubURL'] === undefined) {
-          const entry = formData.filter(data => data.id === 'githubURL')
-          item['githubURL'] = entry[0].value
-        }
-      } else {
-        item
       }
-    })
-    const filteredData = newData
-      .toArray()
-      .filter(item => this.applyfilter(item))
-    this.setState({
-      editing: false,
-      data: newData.toArray(),
-      filteredData: filteredData,
-      selected: [],
-      dirty: true
-    })
+
+      firebase
+        .database()
+        .ref('data/' + childId)
+        .set(currentItem)
+        .catch(err => {
+          this.setState({
+            showSnackbar: true,
+            snackBarMessage: 'Failed to save data !!',
+            isSaving: false
+          })
+        })
+        .then(() =>
+          this.setState({
+            showSnackbar: true,
+            snackBarMessage: 'Data saved !!',
+            isSaving: false,
+            editing: false,
+            selected: []
+          })
+        )
+    }
   }
 
   handleFormCancel = event => {
     this.setState({
-      ...this.state,
       editing: false
     })
   }
@@ -507,6 +521,47 @@ class ChallengeTable extends React.Component {
     logout()
   }
 
+  findDBKey = id => {
+    const { data } = this.state
+    let keys = []
+    ref
+      .child('data')
+      .orderByChild('id')
+      .equalTo(id)
+      .on('value', function(snapshot) {
+        const value = snapshot.val()
+        for (var k in value) keys.push(k)
+      })
+    return keys && keys.length === 1 ? keys[0] : null
+  }
+
+  updateRecord = id => {
+    const { data } = this.state
+    const currentItem = _.find(data, { id: id })
+    const childId = this.findDBKey(id)
+
+    if (childId !== null) {
+      firebase
+        .database()
+        .ref('data/' + childId)
+        .set(currentItem)
+        .catch(err => {
+          this.setState({
+            showSnackbar: true,
+            snackBarMessage: 'Failed to save data !!',
+            isSaving: false
+          })
+        })
+        .then(() =>
+          this.setState({
+            showSnackbar: true,
+            snackBarMessage: 'Data saved !!',
+            isSaving: false
+          })
+        )
+    }
+  }
+
   handleSaveClick = event => {
     this.setState({ isSaving: true })
     ref
@@ -523,8 +578,7 @@ class ChallengeTable extends React.Component {
         this.setState({
           showSnackbar: true,
           snackBarMessage: 'Data saved !!',
-          isSaving: false,
-          dirty: false
+          isSaving: false
         })
       )
   }
@@ -615,19 +669,27 @@ class ChallengeTable extends React.Component {
   handlePriorityChange = (event, id) => {
     let { data, order, orderBy } = this.state
     _.find(data, { id: id }).priority = event.target.value
-    this.setState({
-      data: data,
-      dirty: true
-    })
+    this.setState(
+      {
+        data: data
+      },
+      function() {
+        this.updateRecord(id)
+      }
+    )
   }
 
   handleStatusChange = (event, id) => {
     let { data, order, orderBy } = this.state
     _.find(data, { id: id }).status = event.target.value
-    this.setState({
-      data: data,
-      dirty: true
-    })
+    this.setState(
+      {
+        data: data
+      },
+      function() {
+        this.updateRecord(id)
+      }
+    )
   }
 
   handleDownVote = (id, count) => {
@@ -687,10 +749,7 @@ class ChallengeTable extends React.Component {
       : true
 
     const isApprovalPendingFiltered = true
-    /* this.state.isLoggedIn
-      ? true
-      : !item.status.toLowerCase().includes('Approval Pending'.toLowerCase())
- */
+
     return (
       isTextFiltered &&
       isDomainFiltered &&
@@ -728,8 +787,7 @@ class ChallengeTable extends React.Component {
       snackBarMessage,
       showLogin,
       showHelp,
-      votesAvailable,
-      dirty
+      votesAvailable
     } = this.state
 
     const emptyRows =
@@ -788,7 +846,7 @@ class ChallengeTable extends React.Component {
             isSaving={isSaving}
             isLoading={isLoading}
             isEditable={isEditable}
-            isDirty={dirty}
+            isDirty={false}
             showHelp={showHelp}
             user={user}
             data={data}
@@ -877,23 +935,24 @@ class ChallengeTable extends React.Component {
                         </TableCell>
                         <TableCell padding="none">{n.domain}</TableCell>
                         <TableCell padding="none">
-                          
-                        {isLoggedIn && isAdmin ? (<SelectComponent
-                            option={n.status}
-                            onChange={(event, id) =>
-                              this.handleStatusChange(event, n.id)
-                            }
-                            disabled={isLoggedIn && isAdmin}
-                            options={[
-                              {
-                                name: 'Approval Pending',
-                                value: 'Approval Pending'
-                              },
-                              { name: 'Backlog', value: 'Backlog Item' },
-                              { name: 'Done', value: 'Done' },
-                              { name: 'In Progress', value: 'In Progress' }
-                            ]}
-                          /> ) : (
+                          {isLoggedIn && isAdmin ? (
+                            <SelectComponent
+                              option={n.status}
+                              onChange={(event, id) =>
+                                this.handleStatusChange(event, n.id)
+                              }
+                              disabled={isLoggedIn && isAdmin}
+                              options={[
+                                {
+                                  name: 'Approval Pending',
+                                  value: 'Approval Pending'
+                                },
+                                { name: 'Backlog', value: 'Backlog Item' },
+                                { name: 'Done', value: 'Done' },
+                                { name: 'In Progress', value: 'In Progress' }
+                              ]}
+                            />
+                          ) : (
                             <StatusComponent status={n.status} />
                           )}
                         </TableCell>
