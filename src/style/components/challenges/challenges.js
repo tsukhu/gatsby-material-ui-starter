@@ -13,7 +13,7 @@ const challengesPageStyle = theme => ({
     height: '100%',
     minHeight: '100vh',
     transitionEnabled: true,
-    backgroundColor: blueGrey[50],
+    backgroundColor: teal[200],
     alignContent: 'center',
     alignItems: 'center',
     rounded: true,
@@ -77,7 +77,7 @@ const toolbarStyles = theme => ({
 
 const challengeTableStyles = theme => ({
   root: {
-    marginTop: theme.spacing.unit * 3
+    marginTop: 5
   },
   chipLow: {
     margin: theme.spacing.unit,
@@ -177,7 +177,7 @@ const challengeHeaderStyles = theme => ({
     flexWrap: 'wrap',
     backgroundColor: 'white',
     margin: 5,
-    padding: 10,
+    padding: 5,
     transitionEnabled: true,
     rounded: true,
     borderRadius: 5,
@@ -185,16 +185,14 @@ const challengeHeaderStyles = theme => ({
   },
   card: {
     margin: 5,
-    transitionEnabled: true,
-    flex: '1 1 auto',
+    padding: 5,
     rounded: true,
     borderRadius: 5,
-    shadowRadius: 5
+    shadowRadius: 5,
   },
   media: {
-    maxWidth:'100% !important',
-    height: 'auto',
-    display: 'block'
+    height: 0,
+    paddingTop: '18%'
   },
   container: {
     display: 'flex',

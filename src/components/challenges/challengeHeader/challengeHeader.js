@@ -16,7 +16,11 @@ class ChallengeHeader extends React.Component {
     const paragraphText = `Welcome to ERS GitHub Challenges page, Now you can host your own challenge or pick an Open Source challenge . This is an opportunity to demonstrate proficiency in the Technical problem solving skills as well as  learn new technologies. Select one of the domain specific challenges and create a new git repository for that project. Organize your code within that repo -- when you get to a stopping point, commit and push your code and email a link to your repo to 'opensource@hcl.com'`
     return (
      <Card className={classes.card}>
-          <img src="/Dash.png" alt="Contemplative Reptile"  className={classes.media}/>
+          <CardMedia
+          className={classes.media}
+          image="/Dash.png"
+          title="HCL ERS"
+        />
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
               {headerText}
