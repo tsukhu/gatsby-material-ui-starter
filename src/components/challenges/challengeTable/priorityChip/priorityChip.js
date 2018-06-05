@@ -8,7 +8,7 @@ import { challengeTableStyles } from '../../../../style/components/challenges/ch
 let PriorityChip = props => {
   const { priority, classes } = props
 
-  return priority.toLowerCase() === 'high' ? (
+  const chips =  priority.toLowerCase() === 'high' ? (
     <Tooltip title="High">
       <Chip label="H" className={classes.chipHigh} />
     </Tooltip>
@@ -21,6 +21,7 @@ let PriorityChip = props => {
       <Chip label="L" className={classes.chipLow} />
     </Tooltip>
   )
+  return <div className={classes.statusIcon}>{chips}</div>
 }
 
 PriorityChip.propTypes = {
