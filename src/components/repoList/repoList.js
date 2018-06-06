@@ -9,6 +9,11 @@ import ProjectCard from '../projectCard/projectCard'
 import PageHeader from '../pageHeader/pageHeader'
 import Paper from '@material-ui/core/Paper'
 import blueGrey from '@material-ui/core/colors/blueGrey'
+import { CSVLink } from 'react-csv'
+import Typography from '@material-ui/core/Typography'
+import FileDownload from '@material-ui/icons/FileDownload'
+import IconButton from '@material-ui/core/IconButton'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
@@ -27,6 +32,11 @@ const styles = theme => ({
     rounded: true,
     borderRadius: 5,
     shadowRadius: 5
+  },
+  csv: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    alignSelf: 'flex-start'
   }
 })
 
@@ -77,6 +87,12 @@ class RepoList extends React.Component {
         Cell: props => <span className="number">{props.value}</span> // Custom cell components!
       },
       {
+        Header: 'Created On',
+        maxWidth: 120,
+        accessor: 'createdAt', // String-based value accessors!
+        Cell: props => <span>{moment.utc(props.value).from(buildTime)}</span>
+      },
+      {
         Header: 'Last Push',
         maxWidth: 120,
         accessor: 'pushedAt', // String-based value accessors!
@@ -123,6 +139,7 @@ class RepoList extends React.Component {
         contributors: getContributors(repo.node.collaborators.edges),
         language: getPrimaryLanguage(repo.node.primaryLanguage),
         pushedAt: repo.node.pushedAt,
+        createdAt: repo.node.createdAt,
         descriptionHTML: repo.node.descriptionHTML,
         homepageUrl: repo.node.homepageUrl,
         url: repo.node.url,
@@ -134,9 +151,20 @@ class RepoList extends React.Component {
       +repositories.totalCount +
       ' Repositories as on ' +
       moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z')
+    const csvFileName =
+    'ProjectList_' + moment(new Date()).format('DD_MM_YYYY') + '.csv'
     return (
       <Paper className={classes.paper} elevation={2}>
         <PageHeader text={pageHeader} />
+        <div className={classes.csv}>
+        <Tooltip title="Download CSV">
+                <CSVLink data={reposdata} filename={csvFileName}>
+                  <IconButton aria-label="Download">
+                    <FileDownload />
+                  </IconButton>
+                </CSVLink>
+         </Tooltip>
+         </div>
         <ReactTable
           getProps={(state, rowInfo, column) => {
             return {
