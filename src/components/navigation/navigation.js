@@ -13,6 +13,10 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import Explore from '@material-ui/icons/Explore'
+import ShowChart from '@material-ui/icons/ShowChart'
+import RateReview from '@material-ui/icons/RateReview'
+import DeveloperBoard from '@material-ui/icons/DeveloperBoard'
+import Tooltip from '@material-ui/core/Tooltip'
 import Link from 'gatsby-link'
 import Divider from '@material-ui/core/Divider'
 import { white } from '@material-ui/core/colors'
@@ -88,14 +92,37 @@ class Navigation extends Component {
             >
               {this.props.title.toUpperCase()}
             </Typography>
-            <Button
+            <Tooltip title="Project Listing">
+            <IconButton
               color="inherit"
               component={Link}
-              to="/projects"
+              to="/"
               aria-label="ERS-HCL projects"
             >
-              PROJECTS
-            </Button>
+              <DeveloperBoard />
+            </IconButton>
+            </Tooltip>
+            <Tooltip title="Challenges">
+            <IconButton
+              color="inherit"
+              component={Link}
+              to="/challenges/"
+              aria-label="ERS-HCL challenges"
+            >
+              <RateReview />
+            </IconButton>
+            </Tooltip>
+            <Tooltip title="Global Github Stats">
+            <IconButton
+              color="inherit"
+              component={Link}
+              to="/githubStats/"
+              aria-label="Global Github Stats"
+            >
+              <ShowChart />
+            </IconButton>
+            </Tooltip>
+            <Tooltip title="Github project">
             <IconButton
               href="//github.com/ERS-HCL/gatsby-demo-app"
               target="_blank"
@@ -105,6 +132,7 @@ class Navigation extends Component {
             >
               <GitHubIcon />
             </IconButton>
+            </Tooltip>
           </Toolbar>
         </AppBar>
         <Drawer open={this.state.open} onClose={this.handleToggle}>
@@ -125,14 +153,14 @@ class Navigation extends Component {
               <ListItem
                 button
                 component={Link}
-                to="/projects"
+                to="/blogs"
                 onClick={this.handleClose}
-                aria-label="ERS projects"
+                aria-label="Blogs"
               >
                 <ListItemIcon>
                   <AccountBox />
                 </ListItemIcon>
-                <ListItemText primary="Projects" />
+                <ListItemText primary="Blogs" />
               </ListItem>
               <ListItem
                 button
@@ -166,7 +194,7 @@ class Navigation extends Component {
                 aria-label="All github challenges"
               >
                 <ListItemIcon>
-                  <Explore />
+                  <RateReview />
                 </ListItemIcon>
                 <ListItemText primary="Challenges" />
               </ListItem>
