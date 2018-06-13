@@ -1,5 +1,5 @@
+import 'babel-polyfill';
 import React from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import RepoList from '../components/repoList/repoList';
 
 export default ({ data }) => {
