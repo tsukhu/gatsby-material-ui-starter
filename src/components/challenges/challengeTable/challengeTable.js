@@ -782,6 +782,50 @@ class ChallengeTable extends React.Component {
 
   isSelected = id => this.state.selected.indexOf(id) !== -1
 
+  addPopOverColumn = (id, description, impact, anchorEl, classes) => {
+    const { open } = this.state
+    const popOverText = <div><Typography variant="subheading" gutterBottom>
+    Description
+  </Typography>
+  <Typography variant="body" gutterBottom>
+    {description}
+  </Typography>
+  {impact && <div><Typography variant="subheading" gutterBottom>
+    Business Impact
+  </Typography>
+  <Typography variant="body" gutterBottom>
+    {impact}
+  </Typography></div> }
+  </div>
+    return (
+      <TableCell
+        padding="dense"
+        onMouseOver={event => this.handlePopoverOpen(event, id)}
+        onMouseOut={event => this.handlePopoverClose(event, id)}
+        className={classes.hover}
+      >
+        {description.length > 100 ? description.slice(0, 100) + '...' : description}
+        <Popover
+          className={classes.popover}
+          classes={{paper: classes.paperPopover}}
+          open={open ? (open[id] ? open[id] : false) : false}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'left'
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          onClose={event => this.handlePopoverClose(event, id)}
+          disableRestoreFocus
+        >
+          <Typography>{popOverText}</Typography>
+        </Popover>
+      </TableCell>
+    )
+  }
   render() {
     // console.log('render')
     const { classes } = this.props
@@ -903,50 +947,19 @@ class ChallengeTable extends React.Component {
                             onClick={event => this.handleRowClick(event, n.id)}
                           />
                         </TableCell>
-                        <TableCell padding="none">
+                        <TableCell padding="dense">
                           {n.name.length > 100
                             ? n.name.slice(0, 100) + '...'
                             : n.name}
                         </TableCell>
-                        <TableCell
-                          padding="none"
-                          onMouseOver={(event, id) =>
-                            this.handlePopoverOpen(event, n.id)
-                          }
-                          onMouseOut={(event, id) =>
-                            this.handlePopoverClose(event, n.id)
-                          }
-                          className={classes.hover}
-                        >
-                          {n.description.length > 100
-                            ? n.description.slice(0, 100) + '...'
-                            : n.description}
-                          <Popover
-                            className={classes.popover}
-                            classes={{
-                              paper: classes.paperPopover
-                            }}
-                            open={
-                              open ? (open[n.id] ? open[n.id] : false) : false
-                            }
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                              vertical: 'top',
-                              horizontal: 'left'
-                            }}
-                            transformOrigin={{
-                              vertical: 'bottom',
-                              horizontal: 'left'
-                            }}
-                            onClose={(event, id) =>
-                              this.handlePopoverClose(event, id)
-                            }
-                            disableRestoreFocus
-                          >
-                            <Typography>{n.description}</Typography>
-                          </Popover>
-                        </TableCell>
-                        <TableCell padding="none">{n.impact}</TableCell>
+                        {this.addPopOverColumn(
+                          n.id,
+                          n.description,
+                          n.impact,
+                          anchorEl,
+                          classes
+                        )}
+                        <TableCell padding="dense"> {n.impact && n.impact.length > 100 ? n.impact.slice(0, 100) + '...' : n.impact}</TableCell>
                         <TableCell padding="none">
                           <Contributor email={n.contributor} subject={n.name} />
                         </TableCell>
