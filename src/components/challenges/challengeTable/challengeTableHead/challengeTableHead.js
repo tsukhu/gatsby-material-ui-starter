@@ -23,7 +23,7 @@ class ChallengeTableHead extends React.Component {
       numSelected,
       rowCount
     } = this.props
-
+    
     return (
       <TableHead>
         <TableRow>
@@ -36,6 +36,7 @@ class ChallengeTableHead extends React.Component {
           </TableCell>
           {getColumnData(false).map(column => {
             return (
+              column.visible &&
               <TableCell
                 key={column.id}
                 numeric={column.numeric}
