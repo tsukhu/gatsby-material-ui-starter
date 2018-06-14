@@ -10,19 +10,12 @@ export const createData = (
     contributor,
     domain: 'Other',
     status: 'Approval Pending',
-    priority: 'Medium',
-    githubURL: ''
+    priority: 'None',
+    githubURL: '',
+    updatedBy: '',
+    updatedOn: '',
+    impact: ''
   }
-}
-
-export const getAdminUsers = () => {
-  return [
-    { email: 'tksukhu@gmail.com' , displayName: 'Tarun Sukhu'},
-    { email: 'mot@hcl.com' , displayName: 'suneev'},
-    { email: 'opensource@hcl.com' , displayName: 'HCLERS'},
-    { email: 'vinodmr@hcl.com', displayName:'Vinod Kumar'},
-    { email: 'kumar.s@hcl.com', displayName: 'Kumar S' }
-  ]
 }
 
 const getColumnData = isAdmin => {
@@ -34,6 +27,7 @@ const getColumnData = isAdmin => {
       label: 'Name',
       type: 'text',
       multiline: true,
+      visible: true,
       helperText: 'Challenge Name'
     },
     {
@@ -43,7 +37,18 @@ const getColumnData = isAdmin => {
       label: 'Description',
       type: 'text',
       multiline: true,
+      visible: true,
       helperText: 'Description (Hover for full text)'
+    },
+    {
+      id: 'impact',
+      numeric: false,
+      disablePadding: false,
+      label: 'Impact',
+      type: 'text',
+      multiline: true,
+      visible: true,
+      helperText: 'Business Impact'
     },
     {
       id: 'contributor',
@@ -52,6 +57,7 @@ const getColumnData = isAdmin => {
       label: 'Contributor',
       type: 'email',
       disabled: isAdmin? false:true,
+      visible: true,
       helperText: 'contributor email'
     },
     {
@@ -71,6 +77,7 @@ const getColumnData = isAdmin => {
         { name: 'Mobility', value: 'Mobility' },
         { name: 'Other', value: 'Other' }
       ],
+      visible: true,
       helperText: 'Technology Domain'
     },
     {
@@ -89,6 +96,7 @@ const getColumnData = isAdmin => {
           ]
         : [{ name: 'ApprovalPending', value: 'Approval Pending' }],
       disabled: isAdmin? false:true,
+      visible: true,
       helperText: 'Status'
     },
     {
@@ -103,6 +111,8 @@ const getColumnData = isAdmin => {
         { name: 'Medium', value: 'Medium' },
         { name: 'Low', value: 'Low' }
       ],
+      disabled: isAdmin? false:true,
+      visible: true,
       helperText: 'Priority'
     },
     {
@@ -112,7 +122,28 @@ const getColumnData = isAdmin => {
       label: 'Github URLs',
       type: 'text',
       multiline: true,
+      visible: true,
       helperText: 'Comma separated Github URLs'
+    },
+    {
+      id: 'updatedBy',
+      numeric: false,
+      disablePadding: false,
+      label: 'updatedBy',
+      type: 'text',
+      multiline: false,
+      visible: false,
+      helperText: 'Updated By'
+    },
+    {
+      id: 'updatedOn',
+      numeric: false,
+      disablePadding: false,
+      label: 'updatedOn',
+      type: 'text',
+      multiline: false,
+      visible: false,
+      helperText: 'Updated On'
     }
   ]
 }

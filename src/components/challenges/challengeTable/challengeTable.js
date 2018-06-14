@@ -32,6 +32,9 @@ import UrlListComponent from './urlListComponent/urlListComponent'
 import Badge from './badge/badge'
 import Contributor from './contributor/contributor'
 
+const moment = require('moment-timezone')
+moment.tz.setDefault('UTC')
+
 class ChallengeTable extends React.Component {
   constructor(props, context) {
     super(props, context)
@@ -132,7 +135,7 @@ class ChallengeTable extends React.Component {
 
     this.dbItems.on('value', dataSnapshot => {
       var items = []
-
+      console.log(items)
       dataSnapshot.forEach(function(childSnapshot) {
         const item = childSnapshot.val()
         items.push(item)
@@ -153,7 +156,6 @@ class ChallengeTable extends React.Component {
         const item = childSnapshot.val()
         items.push(item)
       })
-
       const voteTransformed = _
         .chain(items)
         .groupBy('id')
@@ -299,11 +301,12 @@ class ChallengeTable extends React.Component {
 
   transformRowToForm = currentItem => {
     const formElementsArray = []
+    const colsMetaData = getColumnData(this.state.isAdmin)
     for (let key in currentItem) {
       if (key !== 'id' && key !== 'vote' && key !== 'votes') {
         let colData = []
 
-        colData = getColumnData(this.state.isAdmin).filter(data => {
+        colData = colsMetaData.filter(data => {
           return data.id === key
         })
         if (colData === undefined) {
@@ -319,22 +322,29 @@ class ChallengeTable extends React.Component {
           multiline: colData[0].multiline ? colData[0].multiline : false,
           helperText: colData[0].helperText,
           disabled: colData[0].disabled ? colData[0].disabled : false,
+          visible: colData[0].visible ? colData[0].visible : true,
           options: colData[0].options ? colData[0].options : []
         })
       }
     }
-    if (currentItem['githubURL'] === undefined) {
-      formElementsArray.push({
-        id: 'githubURL',
-        value: '',
-        type: 'text',
-        disabled: false,
-        type: 'text',
-        multiline: true,
-        helperText: 'Comma separated Github URLs',
-        options: []
-      })
-    }
+
+    // For new fields which are still not defined
+    // Add them to the form data
+    colsMetaData.map(data => {
+      if (currentItem[data.id] === undefined) {
+        formElementsArray.push({
+          id: data.id,
+          value: '',
+          type: data.type,
+          disabled: data.disabled,
+          visible: data.visible,
+          multiline: data.multiline,
+          helperText: data.helperText,
+          options: data.options
+        })
+      }
+    })
+
     return formElementsArray
   }
 
@@ -435,6 +445,14 @@ class ChallengeTable extends React.Component {
     if (selected[0] === undefined) return
     const currentItem = _.find(data, { id: selected[0] })
     const childId = this.findDBKey(selected[0])
+    const colsMetaData = getColumnData(this.state.isAdmin)
+    // For new fields which are still not defined
+    // Add them to the current item
+    colsMetaData.map(data => {
+      if (currentItem[data.id] === undefined) {
+        currentItem[data.id] = ''
+      }
+    })
 
     if (childId !== null) {
       // console.log(formData)
@@ -446,6 +464,8 @@ class ChallengeTable extends React.Component {
           currentItem
         }
       }
+      currentItem['updatedOn'] = moment().format()
+      currentItem['updatedBy'] = this.state.user.email
 
       firebase
         .database()
@@ -809,7 +829,7 @@ class ChallengeTable extends React.Component {
     const helpInfo = showHelp ? <HelpInfo /> : null
 
     return (
-      <div className={classes.root}>        
+      <div className={classes.root}>
         {helpInfo}
         {snackBar}
         {this.state.isLoading === false && <Reports data={data} />}
@@ -926,10 +946,13 @@ class ChallengeTable extends React.Component {
                             <Typography>{n.description}</Typography>
                           </Popover>
                         </TableCell>
+                        <TableCell padding="none">{n.impact}</TableCell>
                         <TableCell padding="none">
-                          <Contributor email={n.contributor} subject={n.name}/>
+                          <Contributor email={n.contributor} subject={n.name} />
                         </TableCell>
-                        <TableCell padding="none"><Badge text={n.domain} /></TableCell>
+                        <TableCell padding="none">
+                          <Badge text={n.domain} />
+                        </TableCell>
                         <TableCell padding="none">
                           {isLoggedIn && isAdmin ? (
                             <SelectComponent

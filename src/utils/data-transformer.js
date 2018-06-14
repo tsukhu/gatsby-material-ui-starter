@@ -69,7 +69,7 @@ const transformStatusWisePriorityStackReport = data => {
     .value()
 
   
-  const statusList = ['High', 'Medium', 'Low']
+  const statusList = ['High', 'Low', 'Medium', 'None']
 
   statusList.forEach(status => {
     report.forEach(items => {

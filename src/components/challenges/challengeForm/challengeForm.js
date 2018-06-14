@@ -1,27 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
-import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
 import FormControl from '@material-ui/core/FormControl'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import PageHeader from '../../pageHeader/pageHeader'
 import Select from '@material-ui/core/Select'
-import blueGrey from '@material-ui/core/colors/blueGrey'
 import Fade from '@material-ui/core/Fade'
 import Button from '@material-ui/core/Button'
 import { challengeFormStyles } from '../../../style/components/challenges/challenges'
 
-const updateObject = (oldObject, updatedProperties) => {
-  return {
-    ...oldObject,
-    ...updatedProperties
-  }
-}
 
 class ChallengeForm extends React.Component {
   constructor(props) {
@@ -65,6 +54,7 @@ class ChallengeForm extends React.Component {
     const formFields = selectedRow.map(
       field =>
         field.type === 'select' ? (
+          field.visible &&
           <FormControl
             className={classes.formControl}
             key={field.id}
@@ -87,6 +77,7 @@ class ChallengeForm extends React.Component {
             </Select>
           </FormControl>
         ) : (
+          field.visible &&
           <TextField
             id={field.id}
             label={field.id.toUpperCase()}

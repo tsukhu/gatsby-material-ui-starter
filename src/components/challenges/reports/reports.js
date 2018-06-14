@@ -79,7 +79,8 @@ class Reports extends React.Component {
               legendData={[
                 { name: 'HIGH', symbol: { fill: stackColors[0] } },
                 { name: 'LOW', symbol: { fill:  stackColors[1] } },
-                { name: 'MEDIUM', symbol: { fill:  stackColors[2] } }
+                { name: 'MEDIUM', symbol: { fill:  stackColors[2] } },
+                { name: 'NONE', symbol: { fill:  stackColors[3] } }
               ]}
               data={transformPriortyWiseDomainStackReport(this.props.data)}
               tickFormat={[
@@ -121,7 +122,7 @@ class Reports extends React.Component {
                 { name: 'WIP', symbol: { fill: stackColors[3] } }
               ]}
               data={transformStatusWisePriorityStackReport(this.props.data)}
-              tickFormat={['High', 'Medium', 'Low'].sort(
+              tickFormat={['High', 'Medium', 'Low','None'].sort(
                 (a, b) => (b < a ? 1 : -1)
               )}
               title="PRIORITY WISE STATUS"
