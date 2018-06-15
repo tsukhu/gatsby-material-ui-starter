@@ -399,11 +399,11 @@ class ChallengeTable extends React.Component {
     return true
   }
 
-  handleDeleteClick = event => {
-    const { selected, data } = this.state
-    if (selected[0] === undefined) return
+  handleDeleteClick = status => {
+    const { selected } = this.state
+    if (selected[0] === undefined || status !== 'Approval Pending') return
     const childId = this.findDBKey(selected[0])
-
+    
     if (childId !== null) {
       firebase
         .database()
@@ -942,7 +942,7 @@ class ChallengeTable extends React.Component {
                             checked={isSelected}
                             onClick={event => this.handleRowClick(event, n.id,false)}
                           />
-                          {(isEditable && isSelected) && <FloatingActionButtons onClickEdit={this.handleEditClick} onClickDelete={this.handleDeleteClick}/>}
+                          {(isEditable && isSelected) && <FloatingActionButtons onClickEdit={this.handleEditClick} onClickDelete={() => this.handleDeleteClick(n.status)}/>}
                         </TableCell>
                         <TableCell padding="dense">
                           {n.name.length > 100
