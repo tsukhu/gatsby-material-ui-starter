@@ -112,7 +112,6 @@ let ChallengeTableToolbar = props => {
       <div className={classes.spacer} />
       {actionButton}
       <div className={classes.actions}>
-        {isLoggedIn && (
           <div>
             {isLoggedIn === true && (
               <Tooltip title="Add">
@@ -141,7 +140,6 @@ let ChallengeTableToolbar = props => {
               </IconButton>
             </Tooltip>
           </div>
-        )}
       </div>
     </Toolbar>
   )
