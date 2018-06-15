@@ -31,7 +31,7 @@ import SelectComponent from './selectComponent/selectComponent'
 import UrlListComponent from './urlListComponent/urlListComponent'
 import Badge from './badge/badge'
 import Contributor from './contributor/contributor'
-
+import FloatingActionButtons from './floatingActionButtons/floatingActionButtons';
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
@@ -135,7 +135,7 @@ class ChallengeTable extends React.Component {
 
     this.dbItems.on('value', dataSnapshot => {
       var items = []
-      console.log(items)
+    //  console.log(items)
       dataSnapshot.forEach(function(childSnapshot) {
         const item = childSnapshot.val()
         items.push(item)
@@ -258,7 +258,7 @@ class ChallengeTable extends React.Component {
     this.setState({ selected: [] })
   }
 
-  handleRowClick = (event, id) => {
+  handleRowClick = (event, id, newRow) => {
     const { selected, editing, data, isLoggedIn } = this.state
     if (editing || !isLoggedIn) {
       return
@@ -268,7 +268,7 @@ class ChallengeTable extends React.Component {
     const currentItem = data.find(item => item.id === id)
     const isEditable = this.checkEditStatus(currentItem)
 
-    const formElementsArray = this.transformRowToForm(currentItem)
+    const formElementsArray = this.transformRowToForm(currentItem,newRow)
     this.setState({
       selected: newSelected,
       isEditable: isEditable,
@@ -299,7 +299,7 @@ class ChallengeTable extends React.Component {
     }
   }
 
-  transformRowToForm = currentItem => {
+  transformRowToForm = (currentItem, newRow) => {
     const formElementsArray = []
     const colsMetaData = getColumnData(this.state.isAdmin)
     for (let key in currentItem) {
@@ -321,8 +321,8 @@ class ChallengeTable extends React.Component {
           type: colData[0].type,
           multiline: colData[0].multiline ? colData[0].multiline : false,
           helperText: colData[0].helperText,
-          disabled: colData[0].disabled ? colData[0].disabled : false,
-          visible: colData[0].visible ? colData[0].visible : true,
+          disabled: colData[0].disabled ? colData[0].disabled : (key === 'priority' || key === 'status')?newRow:false,
+          visible: colData[0].visible ? colData[0].visible : false,
           options: colData[0].options ? colData[0].options : []
         })
       }
@@ -361,10 +361,6 @@ class ChallengeTable extends React.Component {
     this.setState({ editing: !editing })
   }
 
-  handleDownloadClick = event => {
-    console.log('Download called')
-  }
-
   handleAddClick = event => {
     const { data, orderBy, order } = this.state
     // Create new row
@@ -388,7 +384,7 @@ class ChallengeTable extends React.Component {
           snackBarMessage: 'Data saved !!',
           isSaving: false
         })
-        this.handleRowClick(null, newRow.id)
+        this.handleRowClick(null, newRow.id,true)
         this.handleEditClick(null)
       })
   }
@@ -787,13 +783,13 @@ class ChallengeTable extends React.Component {
     const popOverText = <div><Typography variant="subheading" gutterBottom>
     Description
   </Typography>
-  <Typography variant="body" gutterBottom>
+  <Typography variant="body1" gutterBottom>
     {description}
   </Typography>
   {impact && <div><Typography variant="subheading" gutterBottom>
     Business Impact
   </Typography>
-  <Typography variant="body" gutterBottom>
+  <Typography variant="body1" gutterBottom>
     {impact}
   </Typography></div> }
   </div>
@@ -821,7 +817,7 @@ class ChallengeTable extends React.Component {
           onClose={event => this.handlePopoverClose(event, id)}
           disableRestoreFocus
         >
-          <Typography>{popOverText}</Typography>
+          {popOverText}
         </Popover>
       </TableCell>
     )
@@ -878,9 +874,11 @@ class ChallengeTable extends React.Component {
         {snackBar}
         {this.state.isLoading === false && <Reports data={data} />}
         <Paper className={classes.paper}>
+       
           {this.state.editing === true ? (
             <ChallengeForm
               selectedRow={selectedRow}
+              open={true}
               handleFormCancel={this.handleFormCancel}
               handleFormSubmit={this.handleFormSubmit}
             />
@@ -896,26 +894,24 @@ class ChallengeTable extends React.Component {
           ) : null}
           <ChallengeTableToolbar
             numSelected={selected.length}
-            onClickEdit={this.handleEditClick}
             onClickAdd={this.handleAddClick}
             onClickSearch={this.handleSearchClick}
-            onClickDelete={this.handleDeleteClick}
             onClickLogin={this.handleLoginClick}
             onClickSave={this.handleSaveClick}
             onClickLogout={this.handleLogOutClick}
             onClickHelp={this.handleHelpClick}
-            onClickDownload={this.handleDownloadClick}
             isLoggedIn={isLoggedIn}
             isLoggingIn={isLoggingIn}
             isSaving={isSaving}
             isLoading={isLoading}
-            isEditable={isEditable}
             isDirty={false}
             showHelp={showHelp}
             user={user}
             data={data}
           />
+
           <div className={classes.tableWrapper}>
+
             <Table className={classes.table}>
               <ChallengeTableHead
                 numSelected={selected.length}
@@ -944,8 +940,9 @@ class ChallengeTable extends React.Component {
                         <TableCell padding="checkbox">
                           <Checkbox
                             checked={isSelected}
-                            onClick={event => this.handleRowClick(event, n.id)}
+                            onClick={event => this.handleRowClick(event, n.id,false)}
                           />
+                          {(isEditable && isSelected) && <FloatingActionButtons onClickEdit={this.handleEditClick} onClickDelete={this.handleDeleteClick}/>}
                         </TableCell>
                         <TableCell padding="dense">
                           {n.name.length > 100

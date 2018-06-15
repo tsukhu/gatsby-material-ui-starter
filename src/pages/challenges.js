@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from 'react';
 import Challenges from '../components/challenges/challenges'
 export default ({ data }) => {
