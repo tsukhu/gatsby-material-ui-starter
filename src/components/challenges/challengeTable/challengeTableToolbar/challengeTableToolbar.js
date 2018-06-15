@@ -28,11 +28,8 @@ let ChallengeTableToolbar = props => {
     user,
     numSelected,
     classes,
-    onClickEdit,
-    onClickDownload,
     onClickAdd,
     onClickSearch,
-    onClickDelete,
     onClickLogin,
     onClickSave,
     onClickLogout,
@@ -41,7 +38,6 @@ let ChallengeTableToolbar = props => {
     isLoggingIn,
     isSaving,
     isLoading,
-    isEditable,
     isDirty,
     showHelp
   } = props
@@ -116,24 +112,7 @@ let ChallengeTableToolbar = props => {
       <div className={classes.spacer} />
       {actionButton}
       <div className={classes.actions}>
-        {numSelected > 0 && isLoggedIn === true ? (
-          <div>
-            {isEditable && (
-              <div>
-                <Tooltip title="Edit">
-                  <IconButton aria-label="Edit" onClick={onClickEdit}>
-                    <EditIcon />
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Delete">
-                  <IconButton aria-label="Delete" onClick={onClickDelete}>
-                    <DeleteIcon />
-                  </IconButton>
-                </Tooltip>
-              </div>
-            )}
-          </div>
-        ) : (
+        {isLoggedIn && (
           <div>
             {isLoggedIn === true && (
               <Tooltip title="Add">

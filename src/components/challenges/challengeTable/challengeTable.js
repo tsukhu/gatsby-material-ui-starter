@@ -31,7 +31,7 @@ import SelectComponent from './selectComponent/selectComponent'
 import UrlListComponent from './urlListComponent/urlListComponent'
 import Badge from './badge/badge'
 import Contributor from './contributor/contributor'
-
+import FloatingActionButtons from './floatingActionButtons/floatingActionButtons';
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
@@ -359,10 +359,6 @@ class ChallengeTable extends React.Component {
   handleEditClick = event => {
     const { editing } = this.state
     this.setState({ editing: !editing })
-  }
-
-  handleDownloadClick = event => {
-    console.log('Download called')
   }
 
   handleAddClick = event => {
@@ -787,13 +783,13 @@ class ChallengeTable extends React.Component {
     const popOverText = <div><Typography variant="subheading" gutterBottom>
     Description
   </Typography>
-  <Typography variant="body" gutterBottom>
+  <Typography variant="body1" gutterBottom>
     {description}
   </Typography>
   {impact && <div><Typography variant="subheading" gutterBottom>
     Business Impact
   </Typography>
-  <Typography variant="body" gutterBottom>
+  <Typography variant="body1" gutterBottom>
     {impact}
   </Typography></div> }
   </div>
@@ -821,7 +817,7 @@ class ChallengeTable extends React.Component {
           onClose={event => this.handlePopoverClose(event, id)}
           disableRestoreFocus
         >
-          <Typography>{popOverText}</Typography>
+          {popOverText}
         </Popover>
       </TableCell>
     )
@@ -878,6 +874,7 @@ class ChallengeTable extends React.Component {
         {snackBar}
         {this.state.isLoading === false && <Reports data={data} />}
         <Paper className={classes.paper}>
+       
           {this.state.editing === true ? (
             <ChallengeForm
               selectedRow={selectedRow}
@@ -896,26 +893,24 @@ class ChallengeTable extends React.Component {
           ) : null}
           <ChallengeTableToolbar
             numSelected={selected.length}
-            onClickEdit={this.handleEditClick}
             onClickAdd={this.handleAddClick}
             onClickSearch={this.handleSearchClick}
-            onClickDelete={this.handleDeleteClick}
             onClickLogin={this.handleLoginClick}
             onClickSave={this.handleSaveClick}
             onClickLogout={this.handleLogOutClick}
             onClickHelp={this.handleHelpClick}
-            onClickDownload={this.handleDownloadClick}
             isLoggedIn={isLoggedIn}
             isLoggingIn={isLoggingIn}
             isSaving={isSaving}
             isLoading={isLoading}
-            isEditable={isEditable}
             isDirty={false}
             showHelp={showHelp}
             user={user}
             data={data}
           />
+
           <div className={classes.tableWrapper}>
+
             <Table className={classes.table}>
               <ChallengeTableHead
                 numSelected={selected.length}
@@ -946,6 +941,7 @@ class ChallengeTable extends React.Component {
                             checked={isSelected}
                             onClick={event => this.handleRowClick(event, n.id)}
                           />
+                          {(isEditable && isSelected) && <FloatingActionButtons onClickEdit={this.handleEditClick} onClickDelete={this.handleDeleteClick}/>}
                         </TableCell>
                         <TableCell padding="dense">
                           {n.name.length > 100
