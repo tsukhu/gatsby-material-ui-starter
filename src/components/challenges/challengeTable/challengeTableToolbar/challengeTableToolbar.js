@@ -93,20 +93,19 @@ let ChallengeTableToolbar = props => {
     </div>
   ) : null
   const HelpText = (showHelp ? 'Hide ' : 'Show ') + 'Help'
+  const nChallenges = data?data.length:0;
   return (
     <Toolbar
       className={classNames(classes.root, {
-        [classes.highlight]: numSelected > 0
+        [classes.highlight]: nChallenges > 0
       })}
     >
       <div className={classes.title}>
-        {numSelected > 0 ? (
+        {nChallenges > 0 && (
           <Typography color="inherit" variant="subheading">
-            {numSelected} selected
+            {nChallenges} challenges
           </Typography>
-        ) : (
-          <Typography color="inherit" variant="subheading" />
-        )}
+        ) }
       </div>
       {dataLoading}
       <div className={classes.spacer} />

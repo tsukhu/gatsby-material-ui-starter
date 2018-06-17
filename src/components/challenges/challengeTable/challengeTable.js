@@ -135,16 +135,17 @@ class ChallengeTable extends React.Component {
 
     this.dbItems.on('value', dataSnapshot => {
       var items = []
-    //  console.log(items)
       dataSnapshot.forEach(function(childSnapshot) {
         const item = childSnapshot.val()
         items.push(item)
       })
 
       const sortedItems = items.sort((a, b) => (a.name < b.name ? -1 : 1))
+      const newData = sortedItems.filter(item => this.applyfilter(item))
+
       this.setState({
         data: sortedItems,
-        filteredData: sortedItems,
+        filteredData: newData,
         isLoading: false
       })
     })
