@@ -135,16 +135,17 @@ class ChallengeTable extends React.Component {
 
     this.dbItems.on('value', dataSnapshot => {
       var items = []
-    //  console.log(items)
       dataSnapshot.forEach(function(childSnapshot) {
         const item = childSnapshot.val()
         items.push(item)
       })
 
       const sortedItems = items.sort((a, b) => (a.name < b.name ? -1 : 1))
+      const newData = sortedItems.filter(item => this.applyfilter(item))
+
       this.setState({
         data: sortedItems,
-        filteredData: sortedItems,
+        filteredData: newData,
         isLoading: false
       })
     })
@@ -399,11 +400,11 @@ class ChallengeTable extends React.Component {
     return true
   }
 
-  handleDeleteClick = event => {
-    const { selected, data } = this.state
-    if (selected[0] === undefined) return
+  handleDeleteClick = status => {
+    const { selected } = this.state
+    if (selected[0] === undefined || status !== 'Approval Pending') return
     const childId = this.findDBKey(selected[0])
-
+    
     if (childId !== null) {
       firebase
         .database()
@@ -684,7 +685,7 @@ class ChallengeTable extends React.Component {
   }
 
   handlePriorityChange = (event, id) => {
-    let { data, order, orderBy } = this.state
+    let { data } = this.state
     _.find(data, { id: id }).priority = event.target.value
     this.setState(
       {
@@ -697,7 +698,7 @@ class ChallengeTable extends React.Component {
   }
 
   handleStatusChange = (event, id) => {
-    let { data, order, orderBy } = this.state
+    let { data } = this.state
     _.find(data, { id: id }).status = event.target.value
     this.setState(
       {
@@ -942,7 +943,7 @@ class ChallengeTable extends React.Component {
                             checked={isSelected}
                             onClick={event => this.handleRowClick(event, n.id,false)}
                           />
-                          {(isEditable && isSelected) && <FloatingActionButtons onClickEdit={this.handleEditClick} onClickDelete={this.handleDeleteClick}/>}
+                          {(isEditable && isSelected) && <FloatingActionButtons onClickEdit={this.handleEditClick} onClickDelete={() => this.handleDeleteClick(n.status)}/>}
                         </TableCell>
                         <TableCell padding="dense">
                           {n.name.length > 100
@@ -972,10 +973,10 @@ class ChallengeTable extends React.Component {
                               }
                               disabled={isLoggedIn && isAdmin}
                               options={[
-                                {
+/*                                 {
                                   name: 'Approval Pending',
                                   value: 'Approval Pending'
-                                },
+                                }, */
                                 { name: 'Backlog', value: 'Backlog Item' },
                                 { name: 'Done', value: 'Done' },
                                 { name: 'In Progress', value: 'In Progress' }
