@@ -685,7 +685,7 @@ class ChallengeTable extends React.Component {
   }
 
   handlePriorityChange = (event, id) => {
-    let { data, order, orderBy } = this.state
+    let { data } = this.state
     _.find(data, { id: id }).priority = event.target.value
     this.setState(
       {
@@ -698,7 +698,7 @@ class ChallengeTable extends React.Component {
   }
 
   handleStatusChange = (event, id) => {
-    let { data, order, orderBy } = this.state
+    let { data } = this.state
     _.find(data, { id: id }).status = event.target.value
     this.setState(
       {
@@ -973,10 +973,10 @@ class ChallengeTable extends React.Component {
                               }
                               disabled={isLoggedIn && isAdmin}
                               options={[
-                                {
+/*                                 {
                                   name: 'Approval Pending',
                                   value: 'Approval Pending'
-                                },
+                                }, */
                                 { name: 'Backlog', value: 'Backlog Item' },
                                 { name: 'Done', value: 'Done' },
                                 { name: 'In Progress', value: 'In Progress' }
