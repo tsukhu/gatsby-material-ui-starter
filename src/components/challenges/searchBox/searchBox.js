@@ -4,16 +4,14 @@ import { withStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import SearchIcon from '@material-ui/icons/Search'
-import Typography from '@material-ui/core/Typography'
+import ClearIcon from '@material-ui/icons/Clear'
 import PageHeader from '../../pageHeader/pageHeader'
 import blueGrey from '@material-ui/core/colors/blueGrey'
-import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
 import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Fade from '@material-ui/core/Fade'
 import FormControl from '@material-ui/core/FormControl'
-import FormHelperText from '@material-ui/core/FormHelperText'
 import Select from '@material-ui/core/Select'
 import getColumnData from '../metadata'
 
@@ -26,6 +24,9 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 120
+  },
+  buttonWrapper: {
+    justifyContent: 'flex-end'
   },
   button: {
     margin: theme.spacing.unit
@@ -56,20 +57,15 @@ class SearchBox extends React.Component {
     super(props)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-  state = {
-    text: '',
-    domain: '',
-    priority: '',
-    status: ''
+    this.handleClearSearch = this.handleClearSearch.bind(this)
+    this.state = {
+      text: '',
+      domain: '',
+      priority: '',
+      status: ''
+    }
   }
 
-  componentWillMount() {
-    const { searchText } = this.props
-    this.setState({
-      text: searchText
-    })
-  }
 
   handleSubmit(event) {
     event.preventDefault()
@@ -100,21 +96,37 @@ class SearchBox extends React.Component {
     })
   }
 
+  handleClearSearch = (e) => {
+    const { onClear } = this.props
+    this.setState({
+      text: '',
+      domain: '',
+      priority: '',
+      status: ''
+    }, function () {
+      onClear();
+    })
+  }
+
   render() {
     const {
       classes,
-      handleSearch,
-      searchText,
-      searchDomain,
-      searchPriority,
-      searchStatus
+      onSearch,
+      onClear
     } = this.props
+
+    const {
+      text,
+      domain,
+      priority,
+      status
+    } = this.state;
     const domainSearch = (
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-helper">DOMAIN</InputLabel>
         <Select
           native
-          defaultValue={searchDomain ? searchDomain : 'None'}
+          value={domain ? domain : 'None'}
           onChange={this.handleDomainChange()}
           input={<Input id="age-native-helper" />}
         >
@@ -134,7 +146,7 @@ class SearchBox extends React.Component {
         <InputLabel htmlFor="priority-native-helper">PRIORITY</InputLabel>
         <Select
           native
-          defaultValue={searchPriority ? searchPriority : 'None'}
+          value={priority ? priority : 'None'}
           onChange={this.handlePriorityChange()}
           input={<Input id="priority-native-helper" />}
         >
@@ -154,7 +166,7 @@ class SearchBox extends React.Component {
         <InputLabel htmlFor="status-native-helper">STATUS</InputLabel>
         <Select
           native
-          defaultValue={searchStatus ? searchStatus : 'None'}
+          value={status ? status : 'None'}
           onChange={this.handleStatusChange()}
           input={<Input id="status-native-helper" />}
         >
@@ -179,14 +191,14 @@ class SearchBox extends React.Component {
               autoComplete="on"
               onSubmit={event => {
                 event.preventDefault()
-                handleSearch(this.state)
+                onSearch(this.state)
               }}
             >
               <TextField
                 id="search"
                 label="Filter Text"
                 type="search"
-                defaultValue={searchText}
+                value={text}
                 className={classes.textField}
                 helperText="Search"
                 onChange={this.handleChange('search')}
@@ -195,15 +207,26 @@ class SearchBox extends React.Component {
               {domainSearch}
               {prioritySearch}
               {statusSearch}
+              <div className={classes.buttonWrapper}>
               <Button
                 variant="fab"
                 color="primary"
                 aria-label="search"
                 className={classes.button}
-                onClick={event => handleSearch(this.state)}
+                onClick={() => onSearch(this.state)}
               >
                 <SearchIcon />
               </Button>
+              <Button
+                variant="fab"
+                color="primary"
+                aria-label="clear search"
+                className={classes.button}
+                onClick={(e) => this.handleClearSearch(e)}
+              >
+                <ClearIcon />
+              </Button>
+              </div>
             </form>
           </div>
         </Paper>

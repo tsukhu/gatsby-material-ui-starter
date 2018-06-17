@@ -8,7 +8,6 @@ import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import { List } from 'immutable'
 import * as _ from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -31,7 +30,7 @@ import SelectComponent from './selectComponent/selectComponent'
 import UrlListComponent from './urlListComponent/urlListComponent'
 import Badge from './badge/badge'
 import Contributor from './contributor/contributor'
-import FloatingActionButtons from './floatingActionButtons/floatingActionButtons';
+import FloatingActionButtons from './floatingActionButtons/floatingActionButtons'
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
@@ -269,7 +268,7 @@ class ChallengeTable extends React.Component {
     const currentItem = data.find(item => item.id === id)
     const isEditable = this.checkEditStatus(currentItem)
 
-    const formElementsArray = this.transformRowToForm(currentItem,newRow)
+    const formElementsArray = this.transformRowToForm(currentItem, newRow)
     this.setState({
       selected: newSelected,
       isEditable: isEditable,
@@ -322,7 +321,11 @@ class ChallengeTable extends React.Component {
           type: colData[0].type,
           multiline: colData[0].multiline ? colData[0].multiline : false,
           helperText: colData[0].helperText,
-          disabled: colData[0].disabled ? colData[0].disabled : (key === 'priority' || key === 'status')?newRow:false,
+          disabled: colData[0].disabled
+            ? colData[0].disabled
+            : key === 'priority' || key === 'status'
+              ? newRow
+              : false,
           visible: colData[0].visible ? colData[0].visible : false,
           options: colData[0].options ? colData[0].options : []
         })
@@ -385,7 +388,7 @@ class ChallengeTable extends React.Component {
           snackBarMessage: 'Data saved !!',
           isSaving: false
         })
-        this.handleRowClick(null, newRow.id,true)
+        this.handleRowClick(null, newRow.id, true)
         this.handleEditClick(null)
       })
   }
@@ -404,7 +407,7 @@ class ChallengeTable extends React.Component {
     const { selected } = this.state
     if (selected[0] === undefined || status !== 'Approval Pending') return
     const childId = this.findDBKey(selected[0])
-    
+
     if (childId !== null) {
       firebase
         .database()
@@ -610,7 +613,21 @@ class ChallengeTable extends React.Component {
   }
 
   handleClearFilter = () => {
-    this.setState({ filterText: null })
+    this.setState(
+      {
+        filterText: '',
+        filterDomain: '',
+        filterPriority: '',
+        filterStatus: ''
+      },
+      function() {
+        const newData = this.state.data.filter(item => this.applyfilter(item))
+        this.setState({
+          ...this.state,
+          filteredData: newData
+        })
+      }
+    )
   }
 
   handleSearchFilter = filter => {
@@ -781,19 +798,26 @@ class ChallengeTable extends React.Component {
 
   addPopOverColumn = (id, description, impact, anchorEl, classes) => {
     const { open } = this.state
-    const popOverText = <div><Typography variant="subheading" gutterBottom>
-    Description
-  </Typography>
-  <Typography variant="body1" gutterBottom>
-    {description}
-  </Typography>
-  {impact && <div><Typography variant="subheading" gutterBottom>
-    Business Impact
-  </Typography>
-  <Typography variant="body1" gutterBottom>
-    {impact}
-  </Typography></div> }
-  </div>
+    const popOverText = (
+      <div>
+        <Typography variant="subheading" gutterBottom>
+          Description
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          {description}
+        </Typography>
+        {impact && (
+          <div>
+            <Typography variant="subheading" gutterBottom>
+              Business Impact
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              {impact}
+            </Typography>
+          </div>
+        )}
+      </div>
+    )
     return (
       <TableCell
         padding="dense"
@@ -801,10 +825,12 @@ class ChallengeTable extends React.Component {
         onMouseOut={event => this.handlePopoverClose(event, id)}
         className={classes.hover}
       >
-        {description.length > 100 ? description.slice(0, 100) + '...' : description}
+        {description.length > 100
+          ? description.slice(0, 100) + '...'
+          : description}
         <Popover
           className={classes.popover}
-          classes={{paper: classes.paperPopover}}
+          classes={{ paper: classes.paperPopover }}
           open={open ? (open[id] ? open[id] : false) : false}
           anchorEl={anchorEl}
           anchorOrigin={{
@@ -875,7 +901,6 @@ class ChallengeTable extends React.Component {
         {snackBar}
         {this.state.isLoading === false && <Reports data={data} />}
         <Paper className={classes.paper}>
-       
           {this.state.editing === true ? (
             <ChallengeForm
               selectedRow={selectedRow}
@@ -886,11 +911,8 @@ class ChallengeTable extends React.Component {
           ) : null}
           {this.state.filter === true ? (
             <SearchBox
-              handleSearch={this.handleSearchFilter}
-              searchText={this.state.filterText}
-              searchDomain={this.state.filterDomain}
-              searchPriority={this.state.filterPriority}
-              searchStatus={this.state.filterStatus}
+              onSearch={this.handleSearchFilter}
+              onClear={this.handleClearFilter}
             />
           ) : null}
           <ChallengeTableToolbar
@@ -912,7 +934,6 @@ class ChallengeTable extends React.Component {
           />
 
           <div className={classes.tableWrapper}>
-
             <Table className={classes.table}>
               <ChallengeTableHead
                 numSelected={selected.length}
@@ -941,9 +962,19 @@ class ChallengeTable extends React.Component {
                         <TableCell padding="checkbox">
                           <Checkbox
                             checked={isSelected}
-                            onClick={event => this.handleRowClick(event, n.id,false)}
+                            onClick={event =>
+                              this.handleRowClick(event, n.id, false)
+                            }
                           />
-                          {(isEditable && isSelected) && <FloatingActionButtons onClickEdit={this.handleEditClick} onClickDelete={() => this.handleDeleteClick(n.status)}/>}
+                          {isEditable &&
+                            isSelected && (
+                              <FloatingActionButtons
+                                onClickEdit={this.handleEditClick}
+                                onClickDelete={() =>
+                                  this.handleDeleteClick(n.status)
+                                }
+                              />
+                            )}
                         </TableCell>
                         <TableCell padding="dense">
                           {n.name.length > 100
@@ -957,7 +988,12 @@ class ChallengeTable extends React.Component {
                           anchorEl,
                           classes
                         )}
-                        <TableCell padding="dense"> {n.impact && n.impact.length > 100 ? n.impact.slice(0, 100) + '...' : n.impact}</TableCell>
+                        <TableCell padding="dense">
+                          {' '}
+                          {n.impact && n.impact.length > 100
+                            ? n.impact.slice(0, 100) + '...'
+                            : n.impact}
+                        </TableCell>
                         <TableCell padding="none">
                           <Contributor email={n.contributor} subject={n.name} />
                         </TableCell>
@@ -973,7 +1009,7 @@ class ChallengeTable extends React.Component {
                               }
                               disabled={isLoggedIn && isAdmin}
                               options={[
-/*                                 {
+                                /*                                 {
                                   name: 'Approval Pending',
                                   value: 'Approval Pending'
                                 }, */
