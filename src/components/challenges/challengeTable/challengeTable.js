@@ -138,8 +138,15 @@ class ChallengeTable extends React.Component {
         const item = childSnapshot.val()
         items.push(item)
       })
-
-      const sortedItems = items.sort((a, b) => (a.name < b.name ? -1 : 1))
+      // Sort based on the current order
+      const { order, orderBy } = this.state;
+      const sortedItems =  order === 'desc'
+      ? items.sort(
+          (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
+        )
+      : items.sort(
+          (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1)
+        )
       const newData = sortedItems.filter(item => this.applyfilter(item))
 
       this.setState({
@@ -562,6 +569,10 @@ class ChallengeTable extends React.Component {
     const childId = this.findDBKey(id)
 
     if (childId !== null) {
+      // Add update information
+      currentItem['updatedOn'] = moment().format()
+      currentItem['updatedBy'] = this.state.user.email
+
       firebase
         .database()
         .ref('data/' + childId)
