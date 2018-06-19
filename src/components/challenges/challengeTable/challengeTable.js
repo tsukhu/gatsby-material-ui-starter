@@ -1040,10 +1040,10 @@ class ChallengeTable extends React.Component {
                               }
                               disabled={isLoggedIn && isAdmin}
                               options={[
-                                /*                                 {
+                                {
                                   name: 'Approval Pending',
                                   value: 'Approval Pending'
-                                }, */
+                                },
                                 { name: 'Backlog', value: 'Backlog Item' },
                                 { name: 'Done', value: 'Done' },
                                 { name: 'In Progress', value: 'In Progress' }
