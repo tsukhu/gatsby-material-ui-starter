@@ -27,6 +27,7 @@ let ChallengeTableToolbar = props => {
     data,
     user,
     numSelected,
+    rowCount,
     classes,
     onClickAdd,
     onClickSearch,
@@ -94,6 +95,7 @@ let ChallengeTableToolbar = props => {
   ) : null
   const HelpText = (showHelp ? 'Hide ' : 'Show ') + 'Help'
   const nChallenges = data?data.length:0;
+  const nFilterCount = rowCount?rowCount:0;
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -103,7 +105,7 @@ let ChallengeTableToolbar = props => {
       <div className={classes.title}>
         {nChallenges > 0 && (
           <Typography color="inherit" variant="subheading">
-            {nChallenges} challenges
+            {nFilterCount}/{nChallenges} challenges
           </Typography>
         ) }
       </div>

@@ -1,8 +1,6 @@
 const uuidv4 = require('uuid/v4')
 
-export const createData = (
-  contributor
-) => {
+export const createData = contributor => {
   return {
     id: uuidv4(),
     name: 'A New Challenge',
@@ -56,7 +54,7 @@ const getColumnData = isAdmin => {
       disablePadding: false,
       label: 'Contributor',
       type: 'email',
-      disabled: isAdmin? false:true,
+      disabled: isAdmin ? false : true,
       visible: true,
       helperText: 'contributor email'
     },
@@ -67,7 +65,6 @@ const getColumnData = isAdmin => {
       label: 'Domain',
       type: 'select',
       options: [
-        { name: 'None', value: 'None' },
         { name: 'WebUI', value: 'Web UI' },
         { name: 'Microservices', value: 'Microservices' },
         { name: 'Analytics', value: 'Analytics' },
@@ -88,14 +85,13 @@ const getColumnData = isAdmin => {
       type: 'select',
       options: isAdmin
         ? [
-            { name: 'None', value: 'None' },
             { name: 'ApprovalPending', value: 'Approval Pending' },
             { name: 'Backlog', value: 'Backlog Item' },
             { name: 'In Progress', value: 'In Progress' },
             { name: 'Done', value: 'Done' }
           ]
         : [{ name: 'ApprovalPending', value: 'Approval Pending' }],
-      disabled: isAdmin? false:true,
+      disabled: isAdmin ? false : true,
       visible: true,
       helperText: 'Status'
     },
@@ -111,7 +107,7 @@ const getColumnData = isAdmin => {
         { name: 'Medium', value: 'Medium' },
         { name: 'Low', value: 'Low' }
       ],
-      disabled: isAdmin? false:true,
+      disabled: isAdmin ? false : true,
       visible: true,
       helperText: 'Priority'
     },
