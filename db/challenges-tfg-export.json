@@ -9,7 +9,7 @@
     "displayName" : "HCLERS",
     "email" : "opensource@hcl.com"
   }, {
-    "displayName" : "Vinod Kumar",
+    "displayName" : "vino4all",
     "email" : "vino4all@gmail.com"
   }, {
     "displayName" : "Kumar S",
@@ -30,13 +30,16 @@
   "data" : {
     "0" : {
       "contributor" : "tksukhu@gmail.com",
-      "description" : "Add drop-in support for making a Gatsby site work offline and more resistant to bad network connections using the gatsby plugins for the same. \n\nIt creates a service worker for the site and loads the service worker into the client..",
+      "description" : "Add drop-in support for making a Gatsby site work offline and more resistant to bad network connections using the gatsby plugins for the same. \n\nIt creates a service worker for the site and loads the service worker into the client.",
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/gatsby-demo-app",
       "id" : 11,
-      "name" : "Add PWA and Offline support to Gatsby based ers-hcl website",
+      "impact" : "Faster access to the ers-hcl site",
+      "name" : "Add PWA and Offline support to Gatsby based ers-hcl website.",
       "priority" : "High",
       "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-15T11:10:21Z",
       "votes" : 0
     },
     "1" : {
@@ -200,13 +203,17 @@
     },
     "17" : {
       "contributor" : "ritesh_si@hcl.com",
-      "description" : "Using Data Visualization to improve the data quality is also the need of the hour. Today, organizations have data but how fit the data is for consumption, people do not know. Such as distribution, sample size, reliability of data etc. White papers and prototypes can be useful in these areas.",
+      "description" : "Today, there is a distinct need of Data Quality assessment which is to identify whether a data project can be undertaken. Task here would be to write scripts/ programs which can identify problems ( and possibly propose solutions to improve) and declare whether use cases can be supported or not. Things like skewness. Sampling, sufficiency of data are some of the things which can be thought about.  Ideally a report should be published and shared with the stakeholder who wants the data to be audited.\n\nHigh level outputs are as below:\n\nExecutive Summary\nOutlier\nSkewness\nKurtosis\nCompatible with Machine Learning \nSampling\nProbable use cases\nSampling \nCategory Counts \nNull Counts\n",
       "domain" : "Analytics",
+      "githubURL" : "",
       "id" : "3647ab91-a0d8-4196-82d5-3ce1c1ff845c",
-      "name" : "Data Visualization to improve Data Quality",
-      "priority" : "Low",
+      "impact" : "",
+      "name" : "Data Quality Assessment",
+      "priority" : "High",
       "status" : "Approval Pending",
-      "votes" : 1
+      "updatedBy" : "sinharitesh@gmail.com",
+      "updatedOn" : "2018-06-20T11:02:10Z",
+      "votes" : 2
     },
     "18" : {
       "contributor" : "ritesh_si@hcl.com",
@@ -236,7 +243,7 @@
       "githubURL" : "",
       "id" : 13,
       "name" : "Explore Cypress.io as a Selenium/Protractor alternative ",
-      "priority" : "High",
+      "priority" : "Medium",
       "status" : "Backlog Item",
       "votes" : 1
     },
@@ -247,8 +254,10 @@
       "githubURL" : "",
       "id" : "78f62bc1-48cc-413e-8bfa-251dc86999fc",
       "name" : "Explore Storybook for UI component development - Angular",
-      "priority" : "Low",
+      "priority" : "Medium",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-18T07:05:49Z",
       "votes" : 0
     },
     "22" : {
@@ -367,7 +376,7 @@
       "githubURL" : "https://github.com/ERS-HCL/lombok-springboot-demo",
       "id" : "242524e5-8204-4c44-9979-18c80328bc1e",
       "name" : "Lombok for high developer productivity for Java Developers by 30-40%",
-      "priority" : "High",
+      "priority" : "Medium",
       "status" : "Done",
       "votes" : 1
     },
@@ -421,9 +430,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/microservice-starter/issues/1",
       "id" : 12,
-      "name" : "Microservice Challenge ",
+      "impact" : "",
+      "name" : "Microservice Challenge : Starter",
       "priority" : "Medium",
       "status" : "In Progress",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-06-18T07:39:48Z",
       "votes" : 0
     },
     "38" : {
@@ -432,20 +444,26 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/microservice-starter-grizzly",
       "id" : "788b0744-8ab9-415f-8fc7-0c4e46fa1999",
-      "name" : "Microservice Challenge : Grizzly",
-      "priority" : "Low",
-      "status" : "In Progress",
+      "impact" : "",
+      "name" : "Microservice Challenge : Starter - Grizzly",
+      "priority" : "Medium",
+      "status" : "Done",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-06-18T06:08:12Z",
       "votes" : 0
     },
     "39" : {
       "contributor" : "vinodmr@hcl.com",
-      "description" : "Implement Microservice Starter based on JBoss undertow and add support for •Packaging •Deployment",
+      "description" : "Implement Microservice Starter based on Undertow and add support for •Packaging •Deployment",
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/microservice-starter-jboss",
       "id" : "b2dbafbf-5cc2-479e-a6dc-1d1c046c697d",
-      "name" : "Microservice Challenge : JBoss Undertow ",
+      "impact" : "",
+      "name" : "Microservice Challenge : Starter - Undertow ",
       "priority" : "Medium",
-      "status" : "In Progress",
+      "status" : "Done",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-06-18T07:41:38Z",
       "votes" : 0
     },
     "40" : {
@@ -454,9 +472,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/microservice-starter-jetty",
       "id" : "5519942f-05fc-4d86-adcd-17ce41365e40",
-      "name" : "Microservice Challenge : Jetty ",
+      "impact" : "",
+      "name" : "Microservice Challenge : Starter - Jetty ",
       "priority" : "Medium",
-      "status" : "In Progress",
+      "status" : "Done",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-06-18T07:42:39Z",
       "votes" : 0
     },
     "41" : {
@@ -465,9 +486,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/microservice-starter-netty",
       "id" : "07ce18cb-c47b-430b-96e9-266a70d43a39",
-      "name" : "Microservice Challenge : Netty",
+      "impact" : "",
+      "name" : "Microservice Challenge : Starter - Netty",
       "priority" : "Medium",
-      "status" : "In Progress",
+      "status" : "Done",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-06-18T06:07:46Z",
       "votes" : 0
     },
     "42" : {
@@ -476,9 +500,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/microservice-starter-springboot",
       "id" : "8447632e-8d47-4ab7-8afc-387bd70d6b99",
-      "name" : "Microservice Challenge : Spring Boot",
+      "impact" : "",
+      "name" : "Microservice Challenge : Starter - Spring Boot",
       "priority" : "Medium",
-      "status" : "In Progress",
+      "status" : "Done",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-06-18T06:07:32Z",
       "votes" : 0
     },
     "43" : {
@@ -487,9 +514,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/microservice-starter-tomcat",
       "id" : "ac9f8eda-120e-4b71-be09-7d427c5c17dd",
-      "name" : "Microservice Challenge : Tomcat",
-      "priority" : "Low",
-      "status" : "In Progress",
+      "impact" : "",
+      "name" : "Microservice Challenge : Starter - Tomcat",
+      "priority" : "Medium",
+      "status" : "Done",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-06-18T06:07:17Z",
       "votes" : 0
     },
     "44" : {
@@ -498,9 +528,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/microservice-starter-wildflyswarm",
       "id" : "51cf5572-2d98-44b6-92b0-bf533308f5a1",
-      "name" : "Microservice Challenge : Wildfly Swarm ",
-      "priority" : "Low",
+      "impact" : "",
+      "name" : "Microservice Challenge : Starter - Wildfly Swarm ",
+      "priority" : "Medium",
       "status" : "In Progress",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-06-18T07:42:00Z",
       "votes" : 0
     },
     "45" : {
@@ -575,9 +608,12 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/nx-concert-workspace",
       "id" : "c5d94e4e-cc58-4420-bdff-2bc186707415",
+      "impact" : "Mono repo will help organize larger projects and increase reusability",
       "name" : "Nx based Angular App",
       "priority" : "Medium",
       "status" : "In Progress",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-16T16:36:29Z",
       "votes" : 3
     },
     "52" : {
@@ -685,9 +721,12 @@
       "domain" : "Web UI",
       "githubURL" : "https://goo.gl/BiwCz1",
       "id" : "e5700b7c-ff2d-4c2e-a3c5-13bbcb92304f",
+      "impact" : "",
       "name" : "StensilJS based web components ",
       "priority" : "Medium",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-16T16:34:58Z",
       "votes" : 1
     },
     "62" : {
@@ -858,7 +897,8 @@
       "id" : "16a1305a-a602-46ef-a2c5-0edfa2ead6ee",
       "name" : "React + Bootstrap ",
       "priority" : "Medium",
-      "status" : "Done"
+      "status" : "Done",
+      "votes" : 0
     },
     "-LEsTplXQAH_8d6gU3Ry" : {
       "contributor" : "lavanya-s@hcl.com",
@@ -879,6 +919,80 @@
       "name" : "Create DevOps tools as Helm packages to install as helm charts in Kubernetes environments",
       "priority" : "Low",
       "status" : "Approval Pending"
+    },
+    "-LEyGDHdPQBQ7cH46TSf" : {
+      "contributor" : "arputharajv@hcl.com",
+      "description" : "Build an application to detect any incidents like fire accident, vehicle accident, improper machinery alignment, etc. by analyzing the video frames captured using the mobile camera. Using video processing and Core ML (iOS) and ML Kit (Android).",
+      "domain" : "Mobility",
+      "githubURL" : "",
+      "id" : "e1372488-502b-4cd1-a942-fb5ed2b3a022",
+      "name" : "Incident Detection",
+      "priority" : "High",
+      "status" : "Approval Pending"
+    },
+    "-LEyGfblEj4h43ZG0UuM" : {
+      "contributor" : "arputharajv@hcl.com",
+      "description" : "Build an application to analyze the audio input captured using the mobile device microphone and detect abnormal conditions. This can be applied in the defense to detect Gun Shot, in manufacturing units to identify malfunction of the machinery. Using audio processing and Core ML (iOS) and ML Kit (Android).",
+      "domain" : "Mobility",
+      "githubURL" : "",
+      "id" : "d0bd18b6-992a-4152-a80a-e6431e6930c3",
+      "impact" : "",
+      "name" : "Audio Analysis",
+      "priority" : "High",
+      "status" : "Approval Pending",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-18T04:04:33Z",
+      "votes" : 0
+    },
+    "-LEyGot6gKZ_vAPKvuEU" : {
+      "contributor" : "arputharajv@hcl.com",
+      "description" : "Develop a mobile application to present digital twin, a virtual representation, of a hardware part. For example, in manufacturing, this can minimize the maintenance cost by facilitating predictive maintenance. This can be used in field service and many more. Using video processing and AR Kit (iOS) and AR Core (Android).",
+      "domain" : "Mobility",
+      "githubURL" : "",
+      "id" : "f5cba5b8-c405-4ce8-b7d6-0d2b5fcd1039",
+      "name" : "Digital Twin",
+      "priority" : "High",
+      "status" : "Approval Pending"
+    },
+    "-LFGFl1S1hp6T6yV6lx4" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "While each UI framework comes with its own SSR/Universal library (NextJS , NuxtJS, Angular Universal) , you need to have multiple solutions of SSR for different frameworks. This is where Razzle comes in and takes care of providing a common framework for SSR can supports React, Vue , Angular and more.\nExplore this framework and create a solution where atleast two UI frameworks are used in one SSR app using Razzle.",
+      "domain" : "Web UI",
+      "githubURL" : "https://github.com/jaredpalmer/razzle,https://react-etc.net/entry/razzle-enables-universal-javascript-apps-decoupled-from-frameworks-and-libraries",
+      "id" : "45c3bed0-c863-41fb-9748-61fb3e12b23d",
+      "impact" : "SSR is a key aspect to high performance websites and we need a strategy and approach on this. Razzle can be one of the solutions we can explore and present our POV. Note: The current focus has all been on Client side apps , so this is important",
+      "name" : "Universal JS App using Razzle for React,Vue,Angular",
+      "priority" : "None",
+      "status" : "Approval Pending",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-18T05:04:50Z"
+    },
+    "-LFMb6yNBoc4Nty70X1S" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "CSS in JS is the here to stay and is the modern way of build the next generation React App. It has multiple benefits over separate CSS , including better testability , closer to the code, no global scoping issues, much more performant , DRY , no redundancy.\nStyled Components is one of the leaders in CSS in JS due to the innovation it brings in and the fact it still supports pure CSS within JS.\n\nCreate a POC to demonstrate the same",
+      "domain" : "Web UI",
+      "githubURL" : "https://github.com/ERS-HCL/react-styledcomponents-app,https://gist.github.com/tsukhu/00c86f9993fa262cd3cec4574ddaf5cb",
+      "id" : "2de1f32f-59bd-4b07-b379-dbfaad31069e",
+      "impact" : "We need to have an approach and strategy around CSSinJS for our customers , so that we can propose the same to them. Styled components will help web apps to support high performance , SSR ready applications for React.",
+      "name" : "Styled Components with React (CSS in JS)",
+      "priority" : "Medium",
+      "status" : "In Progress",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-19T11:50:02Z",
+      "votes" : 0
+    },
+    "-LFQRwVDVx1NLh-WexGg" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "Polly.JS is a standalone, framework-agnostic JavaScript library that enables recording, replaying, and stubbing HTTP interactions.\n\nKeeping fixtures and factories in parity with your APIs can be a time consuming process. Polly alleviates this by recording and maintaining actual server responses without foregoing flexibility.",
+      "domain" : "Other",
+      "githubURL" : "https://netflix.github.io/pollyjs/#/",
+      "id" : "778e2158-8a5c-4f68-83bf-51fe5342ef3c",
+      "impact" : "Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.\nUse Polly's client-side server to modify or intercept requests and responses to simulate different application states (e.g. loading, error, etc.).",
+      "name" : "Polly.JS based deterministic testing of the UI",
+      "priority" : "None",
+      "status" : "Approval Pending",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-20T04:32:44Z"
     }
   },
   "vote" : {
@@ -1382,6 +1496,11 @@
     "-LEx8MBUS2Gb2JPhEc9g" : {
       "email" : "sinharitesh@gmail.com",
       "id" : "3647ab91-a0d8-4196-82d5-3ce1c1ff845c",
+      "type" : "upVote"
+    },
+    "-LFQZRsQkE5zk9VOn2VL" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "778e2158-8a5c-4f68-83bf-51fe5342ef3c",
       "type" : "upVote"
     },
     "4dbbe27e-ce1d-4d7c-beea-06ba4e582de7" : {

@@ -1064,7 +1064,8 @@ class ChallengeTable extends React.Component {
                               options={[
                                 { name: 'High', value: 'High' },
                                 { name: 'Medium', value: 'Medium' },
-                                { name: 'Low', value: 'Low' }
+                                { name: 'Low', value: 'Low' },
+                                { name: 'None', value: 'None' },
                               ]}
                             />
                           ) : (
