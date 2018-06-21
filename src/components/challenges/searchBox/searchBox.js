@@ -66,7 +66,6 @@ class SearchBox extends React.Component {
     }
   }
 
-
   handleSubmit(event) {
     event.preventDefault()
     //  console.log('A name was submitted: ' + this.state.searchText)
@@ -80,56 +79,53 @@ class SearchBox extends React.Component {
 
   handleDomainChange = name => event => {
     this.setState({
-      domain: event.target.value === 'None' ? '' : event.target.value
+      domain: event.target.value === 'Not Selected' ? '' : event.target.value
     })
   }
 
   handlePriorityChange = name => event => {
     this.setState({
-      priority: event.target.value === 'None' ? '' : event.target.value
+      priority: event.target.value === 'Not Selected' ? '' : event.target.value
     })
   }
 
   handleStatusChange = name => event => {
     this.setState({
-      status: event.target.value === 'None' ? '' : event.target.value
+      status: event.target.value === 'Not Selected' ? '' : event.target.value
     })
   }
 
-  handleClearSearch = (e) => {
+  handleClearSearch = e => {
     const { onClear } = this.props
-    this.setState({
-      text: '',
-      domain: '',
-      priority: '',
-      status: ''
-    }, function () {
-      onClear();
-    })
+    this.setState(
+      {
+        text: '',
+        domain: '',
+        priority: '',
+        status: ''
+      },
+      function() {
+        onClear()
+      }
+    )
   }
 
   render() {
-    const {
-      classes,
-      onSearch,
-      onClear
-    } = this.props
+    const { classes, onSearch, onClear } = this.props
 
-    const {
-      text,
-      domain,
-      priority,
-      status
-    } = this.state;
+    const { text, domain, priority, status } = this.state
     const domainSearch = (
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-helper">DOMAIN</InputLabel>
         <Select
           native
-          value={domain ? domain : 'None'}
+          value={domain ? domain : 'Not Selected'}
           onChange={this.handleDomainChange()}
           input={<Input id="age-native-helper" />}
         >
+          <option value="Not Selected" key="Not Selected">
+            Not Selected
+          </option>
           {getColumnData(true)
             .filter(data => data.id === 'domain')[0]
             .options.map(option => (
@@ -146,10 +142,13 @@ class SearchBox extends React.Component {
         <InputLabel htmlFor="priority-native-helper">PRIORITY</InputLabel>
         <Select
           native
-          value={priority ? priority : 'None'}
+          value={priority ? priority : 'Not Selected'}
           onChange={this.handlePriorityChange()}
           input={<Input id="priority-native-helper" />}
         >
+          <option value="Not Selected" key="Not Selected">
+            Not Selected
+          </option>
           {getColumnData(true)
             .filter(data => data.id === 'priority')[0]
             .options.map(option => (
@@ -166,10 +165,13 @@ class SearchBox extends React.Component {
         <InputLabel htmlFor="status-native-helper">STATUS</InputLabel>
         <Select
           native
-          value={status ? status : 'None'}
+          value={status ? status : 'Not Selected'}
           onChange={this.handleStatusChange()}
           input={<Input id="status-native-helper" />}
         >
+          <option value="Not Selected" key="Not Selected">
+            Not Selected
+          </option>
           {getColumnData(true)
             .filter(data => data.id === 'status')[0]
             .options.map(option => (
@@ -208,24 +210,24 @@ class SearchBox extends React.Component {
               {prioritySearch}
               {statusSearch}
               <div className={classes.buttonWrapper}>
-              <Button
-                variant="fab"
-                color="primary"
-                aria-label="search"
-                className={classes.button}
-                onClick={() => onSearch(this.state)}
-              >
-                <SearchIcon />
-              </Button>
-              <Button
-                variant="fab"
-                color="primary"
-                aria-label="clear search"
-                className={classes.button}
-                onClick={(e) => this.handleClearSearch(e)}
-              >
-                <ClearIcon />
-              </Button>
+                <Button
+                  variant="fab"
+                  color="primary"
+                  aria-label="search"
+                  className={classes.button}
+                  onClick={() => onSearch(this.state)}
+                >
+                  <SearchIcon />
+                </Button>
+                <Button
+                  variant="fab"
+                  color="primary"
+                  aria-label="clear search"
+                  className={classes.button}
+                  onClick={e => this.handleClearSearch(e)}
+                >
+                  <ClearIcon />
+                </Button>
               </div>
             </form>
           </div>
