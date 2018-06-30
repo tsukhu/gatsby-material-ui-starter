@@ -624,7 +624,9 @@
       "id" : "424449d5-fb70-4168-a13b-2d883f9c5e5f",
       "name" : "PWA using FE of your choice",
       "priority" : "Medium",
-      "status" : "In Progress",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-21T04:29:45Z",
       "votes" : 4
     },
     "53" : {
@@ -993,6 +995,20 @@
       "status" : "Approval Pending",
       "updatedBy" : "tksukhu@gmail.com",
       "updatedOn" : "2018-06-20T04:32:44Z"
+    },
+    "-LFVSzIW8e567uWxyLQD" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "Apollo Server 2.0 RC is out and comes with the next generation features which are tailored the GraphQL server usage patterns and provides more efficient ways of doing errors, logging, connecting to different downstream systems, caching. It also introduces a concept of Data Sources which can cater to downstream REST APIs or Microservices in a more natural way. \n\nUpgrade / Explore and demonstrate the findings in your project",
+      "domain" : "Microservices",
+      "githubURL" : "https://www.apollographql.com/docs/apollo-server/v2/,https://github.com/ERS-HCL/nxplorerjs-microservice-starter ",
+      "id" : "821f0385-5e24-4b36-a5a2-1f85679eb666",
+      "impact" : "Its critical that we upgrade and move towards v2 as most of the GraphQL Ecosystem around Node JS and Apollo (both backend and frontend) are likely to move in the coming months. Otherwise the existing solutions will be obsolete soon.",
+      "name" : "Apollo Server 2.0 Upgrade for Next Generation NodeJS GraphQL Servers ",
+      "priority" : "Medium",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-06-22T20:02:42Z",
+      "votes" : 1
     }
   },
   "vote" : {
@@ -1501,6 +1517,11 @@
     "-LFQZRsQkE5zk9VOn2VL" : {
       "email" : "tksukhu@gmail.com",
       "id" : "778e2158-8a5c-4f68-83bf-51fe5342ef3c",
+      "type" : "upVote"
+    },
+    "-LFVVecjKePw6XF_rcNB" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "821f0385-5e24-4b36-a5a2-1f85679eb666",
       "type" : "upVote"
     },
     "4dbbe27e-ce1d-4d7c-beea-06ba4e582de7" : {

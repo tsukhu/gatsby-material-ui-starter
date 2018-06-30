@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 //import styles from './repoList.module.css'
+import Button from '@material-ui/core/Button'
 import ReactTable from 'react-table'
 import BlockContainer from '../blockContainer/blockContainer'
 import 'react-table/react-table.css'
@@ -13,6 +14,7 @@ import { CSVLink } from 'react-csv'
 import Typography from '@material-ui/core/Typography'
 import FileDownload from '@material-ui/icons/FileDownload'
 import IconButton from '@material-ui/core/IconButton'
+import IconDashboard from '@material-ui/icons/Dashboard'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const moment = require('moment-timezone')
@@ -37,6 +39,13 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'row-reverse',
     alignSelf: 'flex-start'
+  },
+  button: {
+    margin: theme.spacing.unit,
+    fontSize: '.85em'
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit
   }
 })
 
@@ -152,25 +161,41 @@ class RepoList extends React.Component {
       ' Repositories as on ' +
       moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z')
     const csvFileName =
-    'ProjectList_' + moment(new Date()).format('DD_MM_YYYY') + '.csv'
+      'ProjectList_' + moment(new Date()).format('DD_MM_YYYY') + '.csv'
     return (
       <Paper className={classes.paper} elevation={2}>
         <PageHeader text={pageHeader} />
+        {/*         <Typography variant="caption">
+          <a href="#">Full List</a>
+        </Typography> */}
+        <Typography variant="button" gutterBottom>
+          <Button
+            variant="extendedFab"
+            color="secondary"
+            aria-label="fulllist"
+            href="https://affectionate-keller-d4f61b.netlify.com/"
+            target="_blank"
+            className={classes.button}
+          >
+            <IconDashboard className={classes.extendedIcon} />
+            Detailed View
+          </Button>
+        </Typography>
         <div className={classes.csv}>
-        <Tooltip title="Download CSV">
-                <CSVLink data={reposdata} filename={csvFileName}>
-                  <IconButton aria-label="Download">
-                    <FileDownload />
-                  </IconButton>
-                </CSVLink>
-         </Tooltip>
-         </div>
+          <Tooltip title="Download CSV">
+            <CSVLink data={reposdata} filename={csvFileName}>
+              <IconButton aria-label="Download">
+                <FileDownload />
+              </IconButton>
+            </CSVLink>
+          </Tooltip>
+        </div>
         <ReactTable
           getProps={(state, rowInfo, column) => {
             return {
               style: {
                 backgroundColor: 'white',
-                fontFamily: 'Roboto, sans-serif',
+                fontFamily: 'Roboto, sans-serif'
               }
             }
           }}
