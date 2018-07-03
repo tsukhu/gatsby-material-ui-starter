@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 module.exports = {
   siteMetadata: {
     title: `Open Source @HCL-ERS`,
@@ -19,7 +19,8 @@ module.exports = {
       }
     },
     `gatsby-transformer-remark`,
-    `gatsby-transformer-excel`, {
+    `gatsby-transformer-excel`,
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'HCL ERS Static Site',
@@ -34,17 +35,19 @@ module.exports = {
             src: '/logos/logo-192.png',
             sizes: '192x192',
             type: 'image/png'
-          }, {
+          },
+          {
             src: '/logos/logo-512.png',
             sizes: '512x512',
             type: 'image/png'
           }
         ]
       }
-    }, {
+    },
+    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-119197833-1",
+        trackingId: 'UA-119197833-1',
         // Puts tracking script in the head instead of the body
         head: false,
         // Setting this parameter is optional
@@ -54,7 +57,7 @@ module.exports = {
         // Avoids sending pageview hits from custom paths
         exclude: []
       }
-    }/* , {
+    } /* , {
       resolve: `gatsby-plugin-guess-js`,
       options: {
         GAViewID: `175275642`,
@@ -65,7 +68,8 @@ module.exports = {
         }
       }
     } */,
-    `gatsby-plugin-offline`, {
+    `gatsby-plugin-offline`,
+    {
       resolve: `gatsby-source-github-api`,
       options: {
         token: `${process.env.GITHUB_TOKEN}`,
@@ -227,7 +231,9 @@ module.exports = {
                 node {
                   name
                   descriptionHTML
-                  license
+                  licenseInfo{
+                    name
+                  }
                   stargazers(first: 50){
                     totalCount
                   }

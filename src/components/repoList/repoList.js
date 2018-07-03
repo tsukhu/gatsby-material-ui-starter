@@ -153,7 +153,7 @@ class RepoList extends React.Component {
         homepageUrl: repo.node.homepageUrl,
         url: repo.node.url,
         topics: getTopics(repo.node.repositoryTopics.edges),
-        license: repo.node.license
+        license: repo.node.licenseInfo? repo.node.licenseInfo.name:null
       }
     })
     const pageHeader =
