@@ -1,12 +1,12 @@
-import 'babel-polyfill';
-import React from 'react';
-import RepoList from '../components/repoList/repoList';
+import 'babel-polyfill'
+import React from 'react'
+import RepoList from '../components/repoList/repoList'
 
 export default ({ data }) => {
   return (
-    <RepoList githubData={data.allGithubData} buildTime={data.site.buildTime}/>
-  );
-};
+    <RepoList githubData={data.allGithubData} buildTime={data.site.buildTime} />
+  )
+}
 
 export const query = graphql`
   query GithubQuery {
@@ -27,7 +27,9 @@ export const query = graphql`
                   node {
                     name
                     descriptionHTML
-                    license
+                    licenseInfo {
+                      name
+                    }
                     forkCount
                     isFork
                     createdAt
@@ -70,4 +72,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`
