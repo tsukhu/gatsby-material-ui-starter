@@ -70,6 +70,7 @@ class ChallengeTable extends React.Component {
       filterDomain: null,
       filterPriority: null,
       filterStatus: null,
+      filterLatest: false,
       showHelp: false
     }
     this.dbItems = ref.child('data')
@@ -626,7 +627,8 @@ class ChallengeTable extends React.Component {
         filterText: '',
         filterDomain: '',
         filterPriority: '',
-        filterStatus: ''
+        filterStatus: '',
+        filterLatest: false
       },
       function() {
         const newData = this.state.data.filter(item => this.applyfilter(item))
@@ -644,7 +646,8 @@ class ChallengeTable extends React.Component {
         filterText: filter.text,
         filterDomain: filter.domain,
         filterPriority: filter.priority,
-        filterStatus: filter.status
+        filterStatus: filter.status,
+        filterLatest: filter.latest
       },
       function() {
         const newData = this.state.data.filter(item => this.applyfilter(item))
@@ -766,6 +769,10 @@ class ChallengeTable extends React.Component {
   }
 
   applyfilter = item => {
+
+    const isLatestFiltered = this.state.filterLatest
+      ? this.isLatest(item.updatedOn): true
+
     const isTextFiltered = this.state.filterText
       ? item.name.toLowerCase().includes(this.state.filterText.toLowerCase()) ||
         item.description
@@ -794,6 +801,7 @@ class ChallengeTable extends React.Component {
     const isApprovalPendingFiltered = true
 
     return (
+      isLatestFiltered &&
       isTextFiltered &&
       isDomainFiltered &&
       isPriorityFiltered &&
