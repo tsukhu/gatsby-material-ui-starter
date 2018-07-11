@@ -66,7 +66,9 @@ class SearchBox extends React.Component {
       domain: '',
       priority: '',
       status: '',
-      latest: false
+      latest: false,
+      updatedAfter: '',
+      updatedBefore: ''
     }
   }
 
@@ -105,6 +107,18 @@ class SearchBox extends React.Component {
     })
   }
 
+  handleUpdateAfterChange = name => event => {
+    this.setState({
+      updatedAfter: event.target.value
+    })
+  }
+
+  handleUpdateBeforeChange = name => event => {
+    this.setState({
+      updatedBefore: event.target.value
+    })
+  }
+
   handleClearSearch = e => {
     const { onClear } = this.props
     this.setState(
@@ -113,7 +127,9 @@ class SearchBox extends React.Component {
         domain: '',
         priority: '',
         status: '',
-        latest: false
+        latest: false,
+        updatedAfter: '',
+        updatedBefore: ''
       },
       function() {
         onClear()
@@ -124,7 +140,47 @@ class SearchBox extends React.Component {
   render() {
     const { classes, onSearch, onClear } = this.props
 
-    const { text, domain, priority, status, latest } = this.state
+    const {
+      text,
+      domain,
+      priority,
+      status,
+      latest,
+      updatedAfter,
+      updatedBefore
+    } = this.state
+
+    const updatedAfterSearch = (
+      <FormControl className={classes.formControl}>
+        <TextField
+          id="date"
+          label="Updated After"
+          type="date"
+          value={updatedAfter}
+          className={classes.textField}
+          onChange={this.handleUpdateAfterChange()}
+          InputLabelProps={{
+            shrink: true
+          }}
+        />
+      </FormControl>
+    )
+
+    const updatedBeforeSearch = (
+      <FormControl className={classes.formControl}>
+        <TextField
+          id="date"
+          label="Updated Before"
+          type="date"
+          value={updatedBefore}
+          className={classes.textField}
+          onChange={this.handleUpdateBeforeChange()}
+          InputLabelProps={{
+            shrink: true
+          }}
+        />
+      </FormControl>
+    )
 
     const latestSearch = (
       <Tooltip title="Last 7 days">
@@ -239,6 +295,8 @@ class SearchBox extends React.Component {
               {domainSearch}
               {prioritySearch}
               {statusSearch}
+              {/*  {updatedBeforeSearch} */}
+              {updatedAfterSearch}
               {latestSearch}
               <div className={classes.buttonWrapper}>
                 <Button

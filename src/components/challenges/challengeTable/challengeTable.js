@@ -71,6 +71,8 @@ class ChallengeTable extends React.Component {
       filterPriority: null,
       filterStatus: null,
       filterLatest: false,
+      filterUpdatedAfter: null,
+      filterUpdatedBefore: null,
       showHelp: false
     }
     this.dbItems = ref.child('data')
@@ -202,6 +204,7 @@ class ChallengeTable extends React.Component {
       })
     })
   }
+
   componentWillUnmount() {
     this.removeListener()
     this.dbItems.off()
@@ -628,6 +631,8 @@ class ChallengeTable extends React.Component {
         filterDomain: '',
         filterPriority: '',
         filterStatus: '',
+        filterUpdatedAfter: '',
+        filterUpdatedBefore: '',
         filterLatest: false
       },
       function() {
@@ -647,7 +652,9 @@ class ChallengeTable extends React.Component {
         filterDomain: filter.domain,
         filterPriority: filter.priority,
         filterStatus: filter.status,
-        filterLatest: filter.latest
+        filterLatest: filter.latest,
+        filterUpdatedAfter: moment(filter.updatedAfter).format(),
+        filterUpdatedBefore: moment(filter.updatedBefore).format()
       },
       function() {
         const newData = this.state.data.filter(item => this.applyfilter(item))
@@ -769,9 +776,17 @@ class ChallengeTable extends React.Component {
   }
 
   applyfilter = item => {
+    const isUpdatedAfterFilter = this.state.filterUpdatedAfter
+      ? this.isUpdatedAfter(item.updatedOn, this.state.filterUpdatedAfter)
+      : true
+
+    /*     const isUpdatedBeforeFilter = this.state.filterUpdatedBefore
+      ? this.isUpdatedBefore(item.updatedOn, this.state.filterUpdatedBefore)
+      : true */
 
     const isLatestFiltered = this.state.filterLatest
-      ? this.isLatest(item.updatedOn): true
+      ? this.isLatest(item.updatedOn)
+      : true
 
     const isTextFiltered = this.state.filterText
       ? item.name.toLowerCase().includes(this.state.filterText.toLowerCase()) ||
@@ -801,6 +816,8 @@ class ChallengeTable extends React.Component {
     const isApprovalPendingFiltered = true
 
     return (
+      isUpdatedAfterFilter &&
+      //    isUpdatedBeforeFilter &&
       isLatestFiltered &&
       isTextFiltered &&
       isDomainFiltered &&
@@ -874,6 +891,22 @@ class ChallengeTable extends React.Component {
     const now = moment()
     const challengeDate = moment(dateStr)
     return now.diff(challengeDate, 'days') <= 7
+  }
+
+  isUpdatedAfter = (dateStr, dateAfter) => {
+    if (dateStr === undefined) {
+      return false
+    }
+    // console.log(dateStr, dateAfter, moment(dateStr).isAfter(dateAfter))
+    return moment(dateStr).isAfter(dateAfter)
+  }
+
+  isUpdatedBefore = (dateStr, dateBefore) => {
+    if (dateStr === undefined) {
+      return false
+    }
+    console.log(dateStr, dateBefore, moment(dateStr).isAfter(dateBefore))
+    return moment(dateStr).isBefore(dateBefore)
   }
 
   render() {
