@@ -145,8 +145,10 @@
       "githubURL" : "",
       "id" : 9,
       "name" : "CSS-in-JS Emotion / React Sample",
-      "priority" : "High",
+      "priority" : "Low",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-07T03:19:20Z",
       "votes" : 1
     },
     "12" : {
@@ -433,9 +435,9 @@
       "impact" : "",
       "name" : "Microservice Challenge : Starter",
       "priority" : "Medium",
-      "status" : "In Progress",
+      "status" : "Done",
       "updatedBy" : "vinodmr@hcl.com",
-      "updatedOn" : "2018-06-18T07:39:48Z",
+      "updatedOn" : "2018-06-28T05:20:32Z",
       "votes" : 0
     },
     "38" : {
@@ -531,9 +533,9 @@
       "impact" : "",
       "name" : "Microservice Challenge : Starter - Wildfly Swarm ",
       "priority" : "Medium",
-      "status" : "In Progress",
+      "status" : "Done",
       "updatedBy" : "vinodmr@hcl.com",
-      "updatedOn" : "2018-06-18T07:42:00Z",
+      "updatedOn" : "2018-06-26T11:50:39Z",
       "votes" : 0
     },
     "45" : {
@@ -920,7 +922,10 @@
       "id" : "52de1ae0-e785-41ae-b24e-d62e3233ff82",
       "name" : "Create DevOps tools as Helm packages to install as helm charts in Kubernetes environments",
       "priority" : "Low",
-      "status" : "Approval Pending"
+      "status" : "Backlog Item",
+      "updatedBy" : "lavanya-s@hcl.com",
+      "updatedOn" : "2018-07-03T05:00:25Z",
+      "votes" : 0
     },
     "-LEyGDHdPQBQ7cH46TSf" : {
       "contributor" : "arputharajv@hcl.com",
@@ -964,10 +969,11 @@
       "id" : "45c3bed0-c863-41fb-9748-61fb3e12b23d",
       "impact" : "SSR is a key aspect to high performance websites and we need a strategy and approach on this. Razzle can be one of the solutions we can explore and present our POV. Note: The current focus has all been on Client side apps , so this is important",
       "name" : "Universal JS App using Razzle for React,Vue,Angular",
-      "priority" : "None",
-      "status" : "Approval Pending",
+      "priority" : "Medium",
+      "status" : "In Progress",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-06-18T05:04:50Z"
+      "updatedOn" : "2018-06-30T06:49:36Z",
+      "votes" : 0
     },
     "-LFMb6yNBoc4Nty70X1S" : {
       "contributor" : "tksukhu@gmail.com",
@@ -978,9 +984,9 @@
       "impact" : "We need to have an approach and strategy around CSSinJS for our customers , so that we can propose the same to them. Styled components will help web apps to support high performance , SSR ready applications for React.",
       "name" : "Styled Components with React (CSS in JS)",
       "priority" : "Medium",
-      "status" : "In Progress",
+      "status" : "Done",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-06-19T11:50:02Z",
+      "updatedOn" : "2018-07-07T03:18:22Z",
       "votes" : 0
     },
     "-LFQRwVDVx1NLh-WexGg" : {
@@ -1009,6 +1015,33 @@
       "updatedBy" : "tksukhu@gmail.com",
       "updatedOn" : "2018-06-22T20:02:42Z",
       "votes" : 1
+    },
+    "-LG_0AWfNM2TPEmIV1K7" : {
+      "contributor" : "vinodmr@hcl.com",
+      "description" : "Break an existing monolithic application to multiple services",
+      "domain" : "Microservices",
+      "githubURL" : "https://github.com/vinodmrhcl/microservice-migration-btm",
+      "id" : "ea8643ca-d212-4f3d-a34c-718da574bf85",
+      "impact" : "It will help business to quickly migrate their legacy/monolith application to microservice based architecture",
+      "name" : "Microservice Challenge : Migration - Break the Monolith",
+      "priority" : "Medium",
+      "status" : "In Progress",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-07-09T08:25:03Z",
+      "votes" : 0
+    },
+    "-LH7ebanmevp3EdTfHoF" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "While MobX is available for other frameworks like Angular , it is best known in the React context. While the defacto standard for state management has been redux , however due to the extra complexity it adds to the projects it becomes difficult to first of all get started and then make sure the entire team understands how to use it. This is where MobX fits in and provides an alternative way of building a state management solution . Given that it hides a lot of the complexity, adaptability is much higher. Create a project that can demonstrate the basic functionality on this framework in a real life use case.",
+      "domain" : "Web UI",
+      "githubURL" : "https://github.com/ERS-HCL/mobx-react-ts-app,\nhttps://github.com/leighhalliday/easy-mobx-redux-comparison",
+      "id" : "a8935ef3-935b-40df-bf6d-4b8340566a63",
+      "impact" : "When presenting solutions to any customer , this question of using MobX vs Redux will come up. So it is important we have samples to show case both . This will help us convenience the end customer on what options to choose based on the use case.",
+      "name" : "MobX UI State management for React",
+      "priority" : "High",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-11T09:36:27Z"
     }
   },
   "vote" : {

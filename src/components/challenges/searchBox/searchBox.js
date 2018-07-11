@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import Tooltip from '@material-ui/core/Tooltip'
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button'
 import SearchIcon from '@material-ui/icons/Search'
@@ -12,6 +13,8 @@ import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Fade from '@material-ui/core/Fade'
 import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 import Select from '@material-ui/core/Select'
 import getColumnData from '../metadata'
 
@@ -62,7 +65,8 @@ class SearchBox extends React.Component {
       text: '',
       domain: '',
       priority: '',
-      status: ''
+      status: '',
+      latest: false
     }
   }
 
@@ -95,6 +99,12 @@ class SearchBox extends React.Component {
     })
   }
 
+  handleLatestChange = name => event => {
+    this.setState({
+      latest: !this.state.latest
+    })
+  }
+
   handleClearSearch = e => {
     const { onClear } = this.props
     this.setState(
@@ -102,7 +112,8 @@ class SearchBox extends React.Component {
         text: '',
         domain: '',
         priority: '',
-        status: ''
+        status: '',
+        latest: false
       },
       function() {
         onClear()
@@ -113,7 +124,26 @@ class SearchBox extends React.Component {
   render() {
     const { classes, onSearch, onClear } = this.props
 
-    const { text, domain, priority, status } = this.state
+    const { text, domain, priority, status, latest } = this.state
+
+    const latestSearch = (
+      <Tooltip title="Last 7 days">
+        <FormControl className={classes.formControl}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={latest}
+                onChange={this.handleLatestChange()}
+                value="latest"
+                color="primary"
+              />
+            }
+            label="Latest Updates"
+          />
+        </FormControl>
+      </Tooltip>
+    )
+
     const domainSearch = (
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-helper">DOMAIN</InputLabel>
@@ -209,6 +239,7 @@ class SearchBox extends React.Component {
               {domainSearch}
               {prioritySearch}
               {statusSearch}
+              {latestSearch}
               <div className={classes.buttonWrapper}>
                 <Button
                   variant="fab"
