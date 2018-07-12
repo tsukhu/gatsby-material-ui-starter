@@ -295,8 +295,9 @@ class SearchBox extends React.Component {
               {domainSearch}
               {prioritySearch}
               {statusSearch}
-              {/*  {updatedBeforeSearch} */}
+
               {updatedAfterSearch}
+              {updatedBeforeSearch}
               {latestSearch}
               <div className={classes.buttonWrapper}>
                 <Button

@@ -653,8 +653,8 @@ class ChallengeTable extends React.Component {
         filterPriority: filter.priority,
         filterStatus: filter.status,
         filterLatest: filter.latest,
-        filterUpdatedAfter: moment(filter.updatedAfter).format(),
-        filterUpdatedBefore: moment(filter.updatedBefore).format()
+        filterUpdatedAfter: (filter.updatedAfter && filter.updatedAfter !=='')?moment(filter.updatedAfter).format():null,
+        filterUpdatedBefore:(filter.updatedBefore && filter.updatedBefore !=='')?moment(filter.updatedBefore).format():null
       },
       function() {
         const newData = this.state.data.filter(item => this.applyfilter(item))
@@ -780,9 +780,9 @@ class ChallengeTable extends React.Component {
       ? this.isUpdatedAfter(item.updatedOn, this.state.filterUpdatedAfter)
       : true
 
-    /*     const isUpdatedBeforeFilter = this.state.filterUpdatedBefore
+    const isUpdatedBeforeFilter = this.state.filterUpdatedBefore
       ? this.isUpdatedBefore(item.updatedOn, this.state.filterUpdatedBefore)
-      : true */
+      : true
 
     const isLatestFiltered = this.state.filterLatest
       ? this.isLatest(item.updatedOn)
@@ -817,7 +817,7 @@ class ChallengeTable extends React.Component {
 
     return (
       isUpdatedAfterFilter &&
-      //    isUpdatedBeforeFilter &&
+      isUpdatedBeforeFilter &&
       isLatestFiltered &&
       isTextFiltered &&
       isDomainFiltered &&
@@ -897,7 +897,8 @@ class ChallengeTable extends React.Component {
     if (dateStr === undefined) {
       return false
     }
-    // console.log(dateStr, dateAfter, moment(dateStr).isAfter(dateAfter))
+  //  console.log(dateStr, dateAfter, moment(dateStr).isAfter(dateAfter))
+
     return moment(dateStr).isAfter(dateAfter)
   }
 
@@ -905,7 +906,7 @@ class ChallengeTable extends React.Component {
     if (dateStr === undefined) {
       return false
     }
-    console.log(dateStr, dateBefore, moment(dateStr).isAfter(dateBefore))
+  //  console.log(dateStr, dateBefore, moment(dateStr).isBefore(dateBefore))
     return moment(dateStr).isBefore(dateBefore)
   }
 
