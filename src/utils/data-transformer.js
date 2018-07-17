@@ -1,7 +1,8 @@
-import { List } from 'immutable'
+import * as _ from 'lodash'
 
 const transformToStateReport = (data, groupBy) => {
-  const transformedData = _.chain(data)
+  const transformedData = _
+    .chain(data)
     .groupBy(groupBy)
     .map((objs, key) => ({
       x: isNaN(key) ? key : +key,
@@ -48,12 +49,10 @@ const transformPriortyWiseDomainStackReport = data => {
     })
   })
 
-
   return report
 }
 
 const transformStatusWisePriorityStackReport = data => {
-  
   const report = _(data)
     .sortBy(['status'])
     .groupBy(f => f.status)
@@ -68,7 +67,6 @@ const transformStatusWisePriorityStackReport = data => {
     )
     .value()
 
-  
   const statusList = ['High', 'Low', 'Medium', 'None']
 
   statusList.forEach(status => {

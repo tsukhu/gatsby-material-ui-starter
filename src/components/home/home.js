@@ -6,7 +6,6 @@ import RepoList from '../repoList/repoList'
 import Paper from '@material-ui/core/Paper'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 
-
 const styles = theme => ({
   paper: {
     display: 'flex',
@@ -20,7 +19,6 @@ const styles = theme => ({
   }
 })
 class Home extends Component {
-
   state = {
     loaded: true
   }
@@ -35,12 +33,14 @@ class Home extends Component {
     const { classes } = this.props
     return this.state.loaded ? (
       <Paper className={classes.paper} elevation={2}>
-          <BlogPosts
-            totalCount={this.props.blogPosts.totalCount}
-            pathContext={this.props.blogPosts.pathContext}
-          />
-        </Paper>
-    ): <div></div>
+        <BlogPosts
+          totalCount={this.props.blogPosts.totalCount}
+          pageContext={this.props.blogPosts.pageContext}
+        />
+      </Paper>
+    ) : (
+      <div />
+    )
   }
 }
 

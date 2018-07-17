@@ -1,14 +1,19 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
+import Layout from '../components/layout'
 
 export default class extends Component {
-  constructor( props ){
-    super();
-    this.state = { ...props };
+  constructor(props) {
+    super()
+    this.state = { ...props }
   }
-  componentWillMount(){
-    window.location = 'https://ers-hcl.github.io/online-ppts/#/';
+  componentWillMount() {
+    window.location = 'https://ers-hcl.github.io/online-ppts/#/'
   }
-  render(){
-    return (<section>Redirecting...</section>);
+  render() {
+    return (
+      <Layout>
+        <section>Redirecting...</section>
+      </Layout>
+    )
   }
 }
