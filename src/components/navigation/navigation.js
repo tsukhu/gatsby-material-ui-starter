@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from '../../../../../Users/tsukhu/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/prop-types'
+import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'

@@ -1,6 +1,5 @@
 import React from 'react'
 import Home from '../components/home/home'
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import { graphql } from 'gatsby'
 
 export default ({ data, pageContext }) => {

@@ -17,7 +17,7 @@ export const getCorrectTextColor = hex => {
     return parseInt(cutHex(h).substring(4, 6), 16)
   }
   function cutHex(h) {
-    return h.charAt(0) == '#' ? h.substring(1, 7) : h
+    return h.charAt(0) === '#' ? h.substring(1, 7) : h
   }
 
   const cBrightness = (hRed * 299 + hGreen * 587 + hBlue * 114) / 1000

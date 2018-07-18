@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from '../../../../../Users/tsukhu/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/prop-types'
+import PropTypes from 'prop-types'
 import Chip from '@material-ui/core/Chip'
 import { withStyles } from '@material-ui/core/styles'
 import ReactHtmlParser from 'react-html-parser'

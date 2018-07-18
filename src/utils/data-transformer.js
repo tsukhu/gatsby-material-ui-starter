@@ -82,7 +82,7 @@ const transformStatusWisePriorityStackReport = data => {
   return report
 }
 
-export default {
+export {
   transformToStateReport,
   transformStatusWisePriorityStackReport,
   transformPriortyWiseDomainStackReport

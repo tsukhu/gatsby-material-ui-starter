@@ -1,9 +1,8 @@
 import React from 'react'
-import PropTypes from '../../../../../Users/tsukhu/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/prop-types'
+import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-//import styles from './repoList.module.css'
 import Button from '@material-ui/core/Button'
-import ReactTable from '../../../../../Users/tsukhu/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react-table'
+import ReactTable from 'react-table'
 import BlockContainer from '../blockContainer/blockContainer'
 import 'react-table/react-table.css'
 import ProjectCard from '../projectCard/projectCard'
@@ -17,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton'
 import IconDashboard from '@material-ui/icons/Dashboard'
 import Tooltip from '@material-ui/core/Tooltip'
 
-const moment = require('../../../../../Users/tsukhu/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/moment-timezone')
+const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
 const styles = theme => ({
@@ -153,7 +152,7 @@ class RepoList extends React.Component {
         homepageUrl: repo.node.homepageUrl,
         url: repo.node.url,
         topics: getTopics(repo.node.repositoryTopics.edges),
-        license: repo.node.licenseInfo? repo.node.licenseInfo.name:null
+        license: repo.node.licenseInfo ? repo.node.licenseInfo.name : null
       }
     })
     const pageHeader =

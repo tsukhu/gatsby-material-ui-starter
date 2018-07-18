@@ -6,9 +6,7 @@ import Helmet from 'react-helmet'
 import { withStyles } from '@material-ui/core/styles'
 import Navigation from './navigation/navigation'
 import withMui from './withMUI/withMUI'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { StaticQuery, graphql } from 'gatsby'
-import Spinner from './Spinner/Snipper'
 // import styles from './index.module.css';
 
 const styles = theme => ({

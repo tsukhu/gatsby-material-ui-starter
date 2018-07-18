@@ -25,9 +25,10 @@ class ChallengeForm extends React.Component {
   }
 
   componentDidMount() {
-    const { open } = this.props
+    const { open,selectedRow } = this.props
     this.setState({
-      open: open
+      open: open,
+      challengeForm: selectedRow
     })
   }
 
@@ -51,12 +52,12 @@ class ChallengeForm extends React.Component {
     })
   }
 
-  componentWillMount() {
+/*   componentWillMount() {
     const { selectedRow } = this.props
     this.setState({
       challengeForm: selectedRow
     })
-  }
+  } */
 
   render() {
     const {
