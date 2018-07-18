@@ -57,20 +57,5 @@
         "ignore": ["children"]
       }
     ]
-  },
-  "overrides": [
-    {
-      "files": [
-        "packages/**/gatsby-browser.js",
-        "packages/gatsby/cache-dir/**/*"
-      ],
-      "env": {
-        "browser": true
-      },
-      "globals": {
-        "___loader": false,
-        "___emitter": false
-      }
-    }
-  ]
+  }
 }

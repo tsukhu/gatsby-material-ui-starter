@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-// import injectTabEventPlugin from 'react-tap-event-plugin'
 import purple from '@material-ui/core/colors/purple'
 import grey from '@material-ui/core/colors/grey'
 import cyan from '@material-ui/core/colors/cyan'
-
-// try {
-//   injectTabEventPlugin()
-// } catch (e) {
-//   // called once per app lifecycle
-// }
 
 const withMaterialUI = ComposedComponent => {
   class HOC extends Component {
