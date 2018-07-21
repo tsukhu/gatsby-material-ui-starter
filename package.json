@@ -9,11 +9,11 @@
     "deploy": "gatsby build --prefix-paths && gh-pages -r \"https://${GITHUB_TOKEN}@github.com/ERS-HCL/ers-hcl.github.io.git\" -d public -b master"
   },
   "dependencies": {
-    "@material-ui/core": "^1.2.1",
+    "@material-ui/core": "^1.4.0",
     "@material-ui/icons": "^1.1.0",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
-    "dotenv": "^5.0.1",
+    "dotenv": "^6.0.0",
     "firebase": "^5.0.2",
     "gatsby": "^1.9.243",
     "gatsby-link": "^1.6.37",
@@ -39,7 +39,7 @@
     "react-github-fork-ribbon": "^0.5.1",
     "react-helmet": "^5.2.0",
     "react-html-parser": "^2.0.2",
-    "react-responsive": "^4.0.4",
+    "react-responsive": "^5.0.0",
     "react-router-dom": "^4.2.2",
     "react-table": "^6.7.6",
     "react-tap-event-plugin": "^3.0.2",
@@ -53,7 +53,7 @@
   "devDependencies": {
     "gh-pages": "^1.1.0"
   },
-  "version": "1.9.5",
+  "version": "1.9.6",
   "main": "n/a",
   "repository": {
     "type": "git",
