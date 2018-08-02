@@ -83,18 +83,23 @@
       "id" : "5af22bb5-f5e5-432b-87a1-a64167f2511d",
       "name" : "Apollo-link-state based app",
       "priority" : "High",
-      "status" : "In Progress",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-12T08:37:58Z",
       "votes" : 1
     },
     "5" : {
       "contributor" : "tksukhu@gmail.com",
       "description" : "While Typescript is a great transcompiler + Typesafe language should we be considering this over Babel ES6/7 when building React applications. Consider all aspects in building , maintaining and extending performant React applications .. which do you think is better suited ? Prove this via a project which creates a sample app using both these transcompilers and then present your POV..",
       "domain" : "Web UI",
-      "githubURL" : "",
+      "githubURL" : "https://github.com/ERS-HCL/mobx-react-ts-app,\nhttps://github.com/ERS-HCL/react-git-explorer",
       "id" : "7900f04b-75fd-4401-bd77-ee9c4b89e90f",
+      "impact" : "The decision of choosing Typescript over Flow / Babel has implications of cleaner , potentially less compile time errors vs productivity. On a case to case basis decide on what is more applicable",
       "name" : "Babel ES6/7 vs Typescript for React Application",
       "priority" : "High",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-12T08:30:04Z",
       "votes" : 1
     },
     "6" : {
@@ -115,7 +120,9 @@
       "id" : "bf47ff7d-3238-4fec-ae09-63426287517a",
       "name" : "BitSrc based component library",
       "priority" : "High",
-      "status" : "Backlog Item",
+      "status" : "In Progress",
+      "updatedBy" : "kumar.s@hcl.com",
+      "updatedOn" : "2018-07-19T08:46:43Z",
       "votes" : 1
     },
     "8" : {
@@ -229,13 +236,16 @@
     },
     "19" : {
       "contributor" : "lavanya-s@hcl.com",
-      "description" : "Environment Management scripts that can automate the common infra management tasks using shell / python / ansible.",
+      "description" : "Environment Management scripts that can automate the common infra management tasks using shell / python / ansible. Ex: manage tomcat tasks. ",
       "domain" : "DevOps",
-      "githubURL" : "",
+      "githubURL" : "https://github.com/ERS-HCL/ansiblerole-managetomcat",
       "id" : "0a962113-62a1-4407-9381-b05796269a98",
+      "impact" : "reusable templates for common infra tasks. ",
       "name" : "Environment Management automation scripts",
       "priority" : "Medium",
-      "status" : "Backlog Item",
+      "status" : "Done",
+      "updatedBy" : "lavanya-s@hcl.com",
+      "updatedOn" : "2018-07-18T06:58:35Z",
       "votes" : 1
     },
     "20" : {
@@ -313,8 +323,10 @@
       "githubURL" : "",
       "id" : "f6fb1a41-2498-46ac-a14c-a917989ee4e1",
       "name" : "GraphQL LaunchPad + Web App Solution",
-      "priority" : "High",
+      "priority" : "Medium",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-12T08:23:50Z",
       "votes" : 0
     },
     "27" : {
@@ -910,9 +922,13 @@
       "domain" : "DevOps",
       "githubURL" : "",
       "id" : "4f1efa6f-259a-4057-a7ff-4aeb1c52057e",
+      "impact" : "",
       "name" : "Create an auto-remediation workflow in JIRA Service Desk(JSD)",
       "priority" : "Medium",
-      "status" : "Approval Pending"
+      "status" : "Backlog Item",
+      "updatedBy" : "lavanya-s@hcl.com",
+      "updatedOn" : "2018-07-13T09:14:37Z",
+      "votes" : 0
     },
     "-LEsVsBLMqC_fYYNvhN2" : {
       "contributor" : "lavanya-s@hcl.com",
@@ -997,10 +1013,10 @@
       "id" : "778e2158-8a5c-4f68-83bf-51fe5342ef3c",
       "impact" : "Record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests.\nUse Polly's client-side server to modify or intercept requests and responses to simulate different application states (e.g. loading, error, etc.).",
       "name" : "Polly.JS based deterministic testing of the UI",
-      "priority" : "None",
+      "priority" : "Medium",
       "status" : "Approval Pending",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-06-20T04:32:44Z"
+      "updatedOn" : "2018-07-17T08:37:51Z"
     },
     "-LFVSzIW8e567uWxyLQD" : {
       "contributor" : "tksukhu@gmail.com",
@@ -1020,14 +1036,14 @@
       "contributor" : "vinodmr@hcl.com",
       "description" : "Break an existing monolithic application to multiple services",
       "domain" : "Microservices",
-      "githubURL" : "https://github.com/vinodmrhcl/microservice-migration-btm",
+      "githubURL" : "https://github.com/vinodmrhcl/microservice-migration/tree/master/btm",
       "id" : "ea8643ca-d212-4f3d-a34c-718da574bf85",
       "impact" : "It will help business to quickly migrate their legacy/monolith application to microservice based architecture",
       "name" : "Microservice Challenge : Migration - Break the Monolith",
       "priority" : "Medium",
       "status" : "In Progress",
       "updatedBy" : "vinodmr@hcl.com",
-      "updatedOn" : "2018-07-09T08:25:03Z",
+      "updatedOn" : "2018-07-27T07:49:55Z",
       "votes" : 0
     },
     "-LH7ebanmevp3EdTfHoF" : {
@@ -1042,6 +1058,98 @@
       "status" : "Done",
       "updatedBy" : "tksukhu@gmail.com",
       "updatedOn" : "2018-07-11T09:36:27Z"
+    },
+    "-LHCZSpkjUK1o8nf9Ilt" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "While most of our solutions are around Client Side rendering , one area which we are weak or have no experience is server side rendering. \nCreate a sample where you are using server side renderings using Next.JS , UI state management (Redux/Mobx/ Apollo Client) , Styling (Css Modules/ Styled Components) , API based data sources and demonstrate the difference in performance on both SSR and Client side rendering (which means the app should be runnable both as a client app and a server side all) ",
+      "domain" : "Web UI",
+      "githubURL" : "",
+      "id" : "62895dfa-3128-4721-bc10-d78258393af3",
+      "impact" : "For any web based solution for clients requiring server side rendering experience , this will serve as a great show case item as well as be able to use this for any RFP solutions.",
+      "name" : "Server Side Rendering for React",
+      "priority" : "High",
+      "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-12T08:23:17Z"
+    },
+    "-LHCpxB4ZD1_zrIuavfJ" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "While we have many samples for Angular and React, VueJS is something we haven't focused on. Build a complete reference application with state management, pwa, styling. This should be reference app that can be showcased when required. ",
+      "domain" : "Web UI",
+      "githubURL" : "",
+      "id" : "09cfe022-386e-4b37-aace-0afe176e0456",
+      "impact" : "VueJS is the most popular web framework, closely followed by React. We need a complete reference app to showcase our profeciancy. ",
+      "name" : "VueJS reference app",
+      "priority" : "None",
+      "status" : "Approval Pending",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-12T09:39:02Z"
+    },
+    "-LHHt2pW9DPUA5D4cphK" : {
+      "contributor" : "lavanya-s@hcl.com",
+      "description" : "Create ansible, cloud formation templates for automated installation and configuration of Sensu server, sensu client and checks for monitoring server, cloud , containers.",
+      "domain" : "DevOps",
+      "githubURL" : "https://github.com/ERS-HCL/Sensu-CloudFormation",
+      "id" : "af295e06-3f4d-4a77-9bdc-78d99e0d837e",
+      "impact" : "",
+      "name" : "Create Infra as Code templates for automated installation and configuration of Sensu server, sensu client and checks for system, cloud , containers.",
+      "priority" : "High",
+      "status" : "Done",
+      "updatedBy" : "lavanya-s@hcl.com",
+      "updatedOn" : "2018-07-18T06:45:00Z",
+      "votes" : 0
+    },
+    "-LHbMn7WTfd664EpIZ1M" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "mobx-state-tree is a state container that combines the simplicity and ease of mutable data with the traceability of immutable data and the reactiveness and performance of observable data.\n\nIt brings the best of both Redux and Mobx into one framework. Create a POC/Sample app that explores all the features of this framework including async calls, middleware, tests,time travel etc.",
+      "domain" : "Web UI",
+      "githubURL" : "https://github.com/mobxjs/mobx-state-tree",
+      "id" : "d8faf31a-c88e-46e6-94a5-3292ba2cc0a8",
+      "impact" : "MobX State Tree is a very compelling solution which is very powerful yet much simpler to incorporate. This is an important aspect to look as the end customers will ask for the best alternatives to Redux .",
+      "name" : "MobX State Tree - state management solution",
+      "priority" : "High",
+      "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-17T08:37:07Z"
+    },
+    "-LHgmBu7hk1fYCuGutz3" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "Gatsby v2 Beta is out and comes with the latest updates  and performance improvements including upgrade to React 16, Webpack 4, Babel 7. \n\nUpgrade the existing gatsby-demo-app to v2 , so that we can continue to leverage Gatsby and its framework in future as well.",
+      "domain" : "Web UI",
+      "githubURL" : "https://github.com/ERS-HCL/gatsby-demo-app/tree/gatsby2, https://www.gatsbyjs.org/blog/2018-06-16-announcing-gatsby-v2-beta-launch/",
+      "id" : "712b08b2-1060-41df-8a6f-edb5d1813862",
+      "impact" : "\nGatsby v1 is great but moving forward we will need to upgrade to take advantage of the new features and performance improvements. Also moving forward v1 will be deprecated and maintenance will become an issue.",
+      "name" : "Gatsby v2 upgrade for ers-hcl.github.io",
+      "priority" : "Medium",
+      "status" : "In Progress",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-18T09:51:57Z"
+    },
+    "-LHrQEq0L70LbJqbcCCp" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "While Selenium remains a main stay in most larger enterprises , Cypress.io and TestCafe offer much more agile and promising solutions to implement e2e tests.\n\nCreate a POC which covers both Cypress.io and TestCafe . Create a github project and a related white paper on the approach, findings and comparision of the same. (Bonus - If you can also add Selenium to the mix that will make it even more appealing)",
+      "domain" : "Web UI",
+      "githubURL" : "https://medium.com/yld-engineering-blog/evaluating-cypress-and-testcafe-for-end-to-end-testing-fcd0303d2103",
+      "id" : "4f77cbe3-34f2-4504-b5f5-ee9fb80f2e66",
+      "impact" : "While we are spending a lot of focus of the newer web frameworks there is a need to also look at the e2e frameworks. While the percentage of tests we write are the smallest as compared to integration and unit tests, we need to make sure these are very efficient in running, developing and maintaining. This is where non Selenium options have cropped up and we need to have these in our technology porfolio.",
+      "name" : "Cypress.io vs TestCafe",
+      "priority" : "High",
+      "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-07-20T11:26:42Z"
+    },
+    "-LIoJ8U7ZecIo9P56NDD" : {
+      "contributor" : "pjoshi@hcl.com",
+      "description" : "",
+      "domain" : "Analytics",
+      "githubURL" : "",
+      "id" : "61cb475b-bba4-4b19-a116-4749ed377c21",
+      "impact" : "",
+      "name" : "Discovery platform which will discover all systems connected and will monitor those systems with set of metrics",
+      "priority" : "None",
+      "status" : "Approval Pending",
+      "updatedBy" : "pjoshi@hcl.com",
+      "updatedOn" : "2018-08-01T07:09:56Z"
     }
   },
   "vote" : {
@@ -1555,6 +1663,41 @@
     "-LFVVecjKePw6XF_rcNB" : {
       "email" : "tksukhu@gmail.com",
       "id" : "821f0385-5e24-4b36-a5a2-1f85679eb666",
+      "type" : "upVote"
+    },
+    "-LHBDMirfeoD4IDwO93u" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "52de1ae0-e785-41ae-b24e-d62e3233ff82",
+      "type" : "upVote"
+    },
+    "-LHC_jaV_LWc7XSXdv7q" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "62895dfa-3128-4721-bc10-d78258393af3",
+      "type" : "upVote"
+    },
+    "-LHDqlm6BDDj7612tgF5" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "09cfe022-386e-4b37-aace-0afe176e0456",
+      "type" : "upVote"
+    },
+    "-LHbOPrdCKDDk4GJqvdd" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "4f1efa6f-259a-4057-a7ff-4aeb1c52057e",
+      "type" : "upVote"
+    },
+    "-LHbORFsy1q4VdrXXZVL" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "d8faf31a-c88e-46e6-94a5-3292ba2cc0a8",
+      "type" : "upVote"
+    },
+    "-LHgnPrxHc4lPB2R1-Qh" : {
+      "email" : "tksukhu@gmail.com",
+      "id" : "712b08b2-1060-41df-8a6f-edb5d1813862",
+      "type" : "upVote"
+    },
+    "-LIoJe2LOXo_j-XHgYwH" : {
+      "email" : "pjoshi@hcl.com",
+      "id" : "61cb475b-bba4-4b19-a116-4749ed377c21",
       "type" : "upVote"
     },
     "4dbbe27e-ce1d-4d7c-beea-06ba4e582de7" : {
