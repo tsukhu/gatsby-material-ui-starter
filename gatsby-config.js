@@ -225,7 +225,7 @@ module.exports = {
             websiteUrl
             avatarUrl
             name
-            repositories(first: 100, orderBy: {field: STARGAZERS , direction:DESC}) {
+            repositories(first: 100, orderBy: {field: UPDATED_AT , direction:DESC}) {
               totalCount
               edges {
                 node {
