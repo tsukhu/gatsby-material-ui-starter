@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import { Link } from '@reach/router'
 import Button from '@material-ui/core/Button'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'

@@ -6,7 +6,7 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import { Link } from 'gatsby'
+import { Link } from '@reach/router'
 
 const styles = theme => ({
   card: {
@@ -22,7 +22,7 @@ const styles = theme => ({
 /*
  * date,excert,title,url are inputs
  */
-const SimpleCard= (props) => {
+const SimpleCard = props => {
   const { classes } = props
   return (
     <div>
@@ -38,9 +38,12 @@ const SimpleCard= (props) => {
           <Button
             size="small"
             color="primary"
-            component={Link} to={props.url}
+            component={Link}
+            to={props.url}
             aria-label={props.title}
-          >Post Details</Button>
+          >
+            Post Details
+          </Button>
         </CardActions>
       </Card>
     </div>
