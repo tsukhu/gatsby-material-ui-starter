@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import { withStyles } from '@material-ui/core/styles'
 import Navigation from './navigation/navigation'
 import withMui from './withMUI/withMUI'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import { StaticQuery, graphql } from 'gatsby'
 // import styles from './index.module.css';
 
@@ -15,7 +16,7 @@ const styles = theme => ({
 })
 
 class Index extends Component {
-  /*   state = {
+  state = {
     loaded: false
   }
 
@@ -24,11 +25,11 @@ class Index extends Component {
       ...this.state,
       loaded: true
     })
-  } */
+  }
 
   render() {
     const { classes, children } = this.props
-    return (
+    return this.state.loaded ? (
       <StaticQuery
         query={graphql`
           query LayoutQuery {
@@ -73,6 +74,14 @@ class Index extends Component {
           </>
         )}
       />
+    ) : (
+      <div>
+        <CircularProgress
+          size={65}
+          className={classes.progress}
+          thickness={7}
+        />
+      </div>
     )
   }
 }
