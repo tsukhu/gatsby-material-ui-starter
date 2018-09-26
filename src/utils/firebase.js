@@ -23,4 +23,4 @@ if (typeof window !== 'undefined') {
   firebaseAuth = firebase.auth
 }
 
-export { ref, firebaseAuth }
+export { ref, firebaseAuth, database }
