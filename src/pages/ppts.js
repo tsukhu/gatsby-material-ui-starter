@@ -6,7 +6,7 @@ export default class extends Component {
     super()
     this.state = { ...props }
   }
-  componentWillMount() {
+  componentDidMount() {
     window.location = 'https://ers-hcl.github.io/online-ppts/#/'
   }
   render() {

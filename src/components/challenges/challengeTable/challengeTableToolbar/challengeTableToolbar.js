@@ -14,7 +14,7 @@ import CloudDownload from '@material-ui/icons/CloudDownload'
 import FilterListIcon from '@material-ui/icons/FilterList'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { CSVLink } from 'react-csv'
+// import { CSVLink } from 'react-csv'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import { toolbarStyles } from '../../../../style/components/challenges/challenges'
@@ -101,8 +101,9 @@ let ChallengeTableToolbar = props => {
     </div>
   ) : null
   const HelpText = (showHelp ? 'Hide ' : 'Show ') + 'Help'
-  const nChallenges = data?data.length:0;
-  const nFilterCount = rowCount?rowCount:0;
+  const nChallenges = data ? data.length : 0
+  const nFilterCount = rowCount ? rowCount : 0
+  // const CSVLink = require('react-csv')
   return (
     <Toolbar
       className={classNames(classes.root, {
@@ -128,7 +129,7 @@ let ChallengeTableToolbar = props => {
               </IconButton>
             </Tooltip>
           )}
-          {isLoggedIn === true && (
+          {/*           {isLoggedIn === true && (
             <Tooltip title="Download CSV">
               <CSVLink data={data} filename={csvFileName}>
                 <IconButton aria-label="Download">
@@ -136,7 +137,7 @@ let ChallengeTableToolbar = props => {
                 </IconButton>
               </CSVLink>
             </Tooltip>
-          )}
+          )} */}
           <Tooltip title="Filter list">
             <IconButton aria-label="Filter list" onClick={onClickSearch}>
               <FilterListIcon />
