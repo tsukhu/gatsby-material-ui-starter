@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import BlogPosts from '../blogPosts/blogPosts'
-import RepoList from '../repoList/repoList'
+import Layout from '../layout'
 import Paper from '@material-ui/core/Paper'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 
@@ -20,27 +20,18 @@ const styles = theme => ({
   }
 })
 class Home extends Component {
-
-  state = {
-    loaded: true
-  }
-
-  componentDidMount() {
-    this.setState({
-      ...this.state,
-      loaded: true
-    })
-  }
   render() {
     const { classes } = this.props
-    return this.state.loaded ? (
-      <Paper className={classes.paper} elevation={2}>
+    return (
+      <Layout>
+        <Paper className={classes.paper} elevation={2}>
           <BlogPosts
             totalCount={this.props.blogPosts.totalCount}
-            pathContext={this.props.blogPosts.pathContext}
+            pageContext={this.props.blogPosts.pageContext}
           />
         </Paper>
-    ): <div></div>
+      </Layout>
+    )
   }
 }
 

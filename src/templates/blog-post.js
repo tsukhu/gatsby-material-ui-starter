@@ -1,11 +1,11 @@
 import React from 'react'
-import Paper from '@material-ui/core/Paper'
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser'
 import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import Layout from '../components/layout'
+import { graphql } from 'gatsby'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -36,14 +36,14 @@ export default ({ data }) => {
     author = <h4>Author: {post.frontmatter.author}</h4>
   }
   return (
-    <Card className={styles.card}>
-      <CardHeader title={post.frontmatter.title} subheader={author} />
-      <CardContent className={styles.divStyle}>
-      <Typography component="div">
-      { ReactHtmlParser(post.html) }
-      </Typography>
-      </CardContent>
-    </Card>
+    <Layout>
+      <Card className={styles.card}>
+        <CardHeader title={post.frontmatter.title} subheader={author} />
+        <CardContent className={styles.divStyle}>
+          <Typography component="div">{ReactHtmlParser(post.html)}</Typography>
+        </CardContent>
+      </Card>
+    </Layout>
   )
 }
 

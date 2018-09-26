@@ -8,7 +8,7 @@ const dangerColor = '#f44336'
 const successColor = '#4caf50'
 const infoColor = '#00acc1'
 const roseColor = '#e91e63'
-const grayColor = '#999999'
+const grayColor = '#6c757d'
 const violetColor = '	#8a2be2'
 
 const badgeStyle = theme => ({
@@ -45,7 +45,7 @@ const badgeStyle = theme => ({
     backgroundColor: roseColor
   },
   gray: {
-    backgroundColor: '#6c757d'
+    backgroundColor: grayColor
   },
   blue: {
     backgroundColor: violetColor

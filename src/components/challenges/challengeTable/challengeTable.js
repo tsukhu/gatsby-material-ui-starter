@@ -75,6 +75,7 @@ class ChallengeTable extends React.Component {
       filterUpdatedBefore: null,
       showHelp: false
     }
+
     this.dbItems = ref.child('data')
     this.dbAuthItems = ref.child('admin')
     this.dbVotes = ref.child('vote')
@@ -468,8 +469,6 @@ class ChallengeTable extends React.Component {
         if (key !== 'id' && key !== 'vote' && key !== 'votes') {
           const entry = formData.filter(data => data.id === key)
           currentItem[key] = entry[0].value
-        } else {
-          currentItem
         }
       }
       currentItem['updatedOn'] = moment().format()

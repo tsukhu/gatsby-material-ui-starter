@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import Button from '@material-ui/core/Button'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography'
 const styles = theme => ({
   card: {
     alignSelf: 'auto',
-    flex:'1 1 auto',
+    flex: '1 1 auto',
     flexDirection: 'column',
     theme: 'inherit',
     margin: 5,
@@ -42,7 +42,7 @@ const styles = theme => ({
 
 const PostPagination = props => {
   const { classes } = props
-  const pageInfo = 'PAGE ' + '(' + props.index + '/' + +props.pageCount + ')'
+  const pageInfo = 'PAGE (' + props.index + '/' + +props.pageCount + ')'
   const firstElement = !props.isFirstPage ? props.previousUrl : '/'
   const nextElement = !props.isLastPage ? props.nextUrl : '/'
 

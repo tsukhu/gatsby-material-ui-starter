@@ -10,7 +10,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add'
 import HelpIcon from '@material-ui/icons/Help'
-import FileDownload from '@material-ui/icons/FileDownload'
+import CloudDownload from '@material-ui/icons/CloudDownload'
 import FilterListIcon from '@material-ui/icons/FilterList'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -20,7 +20,6 @@ import Button from '@material-ui/core/Button'
 import { toolbarStyles } from '../../../../style/components/challenges/challenges'
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
-
 
 let ChallengeTableToolbar = props => {
   const {
@@ -56,7 +55,11 @@ let ChallengeTableToolbar = props => {
           </Tooltip>
           {isSaving && (
             <div>
-            <CircularProgress size={24} className={classes.progress} thickness={7} />
+              <CircularProgress
+                size={24}
+                className={classes.progress}
+                thickness={7}
+              />
             </div>
           )}
         </div>
@@ -83,14 +86,18 @@ let ChallengeTableToolbar = props => {
       </Tooltip>
       {isLoggingIn && (
         <div>
-        <CircularProgress size={24} className={classes.progress} thickness={7} />
+          <CircularProgress
+            size={24}
+            className={classes.progress}
+            thickness={7}
+          />
         </div>
       )}
     </div>
   )
   const dataLoading = isLoading ? (
     <div>
-    <CircularProgress size={24} className={classes.progress} thickness={7}/>
+      <CircularProgress size={24} className={classes.progress} thickness={7} />
     </div>
   ) : null
   const HelpText = (showHelp ? 'Hide ' : 'Show ') + 'Help'
@@ -107,40 +114,40 @@ let ChallengeTableToolbar = props => {
           <Typography color="inherit" variant="subheading">
             {nFilterCount}/{nChallenges} challenges
           </Typography>
-        ) }
+        )}
       </div>
       {dataLoading}
       <div className={classes.spacer} />
       {actionButton}
       <div className={classes.actions}>
-          <div>
-            {isLoggedIn === true && (
-              <Tooltip title="Add">
-                <IconButton aria-label="Add" onClick={onClickAdd}>
-                  <AddIcon />
+        <div>
+          {isLoggedIn === true && (
+            <Tooltip title="Add">
+              <IconButton aria-label="Add" onClick={onClickAdd}>
+                <AddIcon />
+              </IconButton>
+            </Tooltip>
+          )}
+          {isLoggedIn === true && (
+            <Tooltip title="Download CSV">
+              <CSVLink data={data} filename={csvFileName}>
+                <IconButton aria-label="Download">
+                  <CloudDownload />
                 </IconButton>
-              </Tooltip>
-            )}
-            {isLoggedIn === true && (
-              <Tooltip title="Download CSV">
-                <CSVLink data={data} filename={csvFileName}>
-                  <IconButton aria-label="Download">
-                    <FileDownload />
-                  </IconButton>
-                </CSVLink>
-              </Tooltip>
-            )}
-            <Tooltip title="Filter list">
-              <IconButton aria-label="Filter list" onClick={onClickSearch}>
-                <FilterListIcon />
-              </IconButton>
+              </CSVLink>
             </Tooltip>
-            <Tooltip title={HelpText}>
-              <IconButton aria-label="Help doc" onClick={onClickHelp}>
-                <HelpIcon />
-              </IconButton>
-            </Tooltip>
-          </div>
+          )}
+          <Tooltip title="Filter list">
+            <IconButton aria-label="Filter list" onClick={onClickSearch}>
+              <FilterListIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={HelpText}>
+            <IconButton aria-label="Help doc" onClick={onClickHelp}>
+              <HelpIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
       </div>
     </Toolbar>
   )

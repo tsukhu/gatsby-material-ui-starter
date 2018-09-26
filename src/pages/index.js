@@ -1,10 +1,16 @@
-import 'babel-polyfill'
 import React from 'react'
+import { graphql } from 'gatsby'
 import RepoList from '../components/repoList/repoList'
+import Layout from '../components/layout'
 
 export default ({ data }) => {
   return (
-    <RepoList githubData={data.allGithubData} buildTime={data.site.buildTime} />
+    <Layout>
+      <RepoList
+        githubData={data.allGithubData}
+        buildTime={data.site.buildTime}
+      />
+    </Layout>
   )
 }
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-//import styles from './repoList.module.css'
 import Button from '@material-ui/core/Button'
 import ReactTable from 'react-table'
 import BlockContainer from '../blockContainer/blockContainer'
@@ -12,7 +11,7 @@ import Paper from '@material-ui/core/Paper'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import { CSVLink } from 'react-csv'
 import Typography from '@material-ui/core/Typography'
-import FileDownload from '@material-ui/icons/FileDownload'
+import CloudDownload from '@material-ui/icons/CloudDownload'
 import IconButton from '@material-ui/core/IconButton'
 import IconDashboard from '@material-ui/icons/Dashboard'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -153,7 +152,7 @@ class RepoList extends React.Component {
         homepageUrl: repo.node.homepageUrl,
         url: repo.node.url,
         topics: getTopics(repo.node.repositoryTopics.edges),
-        license: repo.node.licenseInfo? repo.node.licenseInfo.name:null
+        license: repo.node.licenseInfo ? repo.node.licenseInfo.name : null
       }
     })
     const pageHeader =
@@ -185,7 +184,7 @@ class RepoList extends React.Component {
           <Tooltip title="Download CSV">
             <CSVLink data={reposdata} filename={csvFileName}>
               <IconButton aria-label="Download">
-                <FileDownload />
+                <CloudDownload />
               </IconButton>
             </CSVLink>
           </Tooltip>

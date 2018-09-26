@@ -920,15 +920,15 @@
       "contributor" : "lavanya-s@hcl.com",
       "description" : "Create a sample project in JSD for auto-remediation workflow for common IT tickets. Ex:  like Disk space issues, etc. When the tickets are generated from known sources, trigger the workflow to check the ticket type, source, perform auto-investigation and validation and trigger known remediation actions, for the issue.",
       "domain" : "DevOps",
-      "githubURL" : "",
+      "githubURL" : "https://github.com/ERS-HCL/JSD-SREWorkflow",
       "id" : "4f1efa6f-259a-4057-a7ff-4aeb1c52057e",
-      "impact" : "",
+      "impact" : "preconfigured reference workflow for auto-ticketing and auto-remediation based on monitoring, useful for assisted troubleshooting and site reliability",
       "name" : "Create an auto-remediation workflow in JIRA Service Desk(JSD)",
-      "priority" : "Medium",
-      "status" : "Backlog Item",
+      "priority" : "High",
+      "status" : "Done",
       "updatedBy" : "lavanya-s@hcl.com",
-      "updatedOn" : "2018-07-13T09:14:37Z",
-      "votes" : 0
+      "updatedOn" : "2018-08-06T12:56:43Z",
+      "votes" : 1
     },
     "-LEsVsBLMqC_fYYNvhN2" : {
       "contributor" : "lavanya-s@hcl.com",
@@ -1043,7 +1043,7 @@
       "priority" : "Medium",
       "status" : "In Progress",
       "updatedBy" : "vinodmr@hcl.com",
-      "updatedOn" : "2018-07-27T07:49:55Z",
+      "updatedOn" : "2018-08-08T07:45:41Z",
       "votes" : 0
     },
     "-LH7ebanmevp3EdTfHoF" : {
@@ -1150,6 +1150,20 @@
       "status" : "Approval Pending",
       "updatedBy" : "pjoshi@hcl.com",
       "updatedOn" : "2018-08-01T07:09:56Z"
+    },
+    "-LJNQw85UahMJV38U_9h" : {
+      "contributor" : "vinodmr@hcl.com",
+      "description" : "Unite the service using API Gateway and implement inter process communication",
+      "domain" : "Microservices",
+      "githubURL" : "https://github.com/vinodmrhcl/microservice-migration/tree/master/uts",
+      "id" : "1a961963-99ac-4f7b-b865-fc8cad982eb2",
+      "impact" : "It will help business to quickly migrate their legacy/monolith application to microservice based architecture",
+      "name" : "Microservice Challenge : Migration - Unite the Services",
+      "priority" : "Medium",
+      "status" : "In Progress",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-08-29T06:42:05Z",
+      "votes" : 0
     }
   },
   "vote" : {
@@ -1698,6 +1712,21 @@
     "-LIoJe2LOXo_j-XHgYwH" : {
       "email" : "pjoshi@hcl.com",
       "id" : "61cb475b-bba4-4b19-a116-4749ed377c21",
+      "type" : "upVote"
+    },
+    "-LIy4Ti-5UktHpYZFtYB" : {
+      "email" : "jbeginsamuel@gmail.com",
+      "id" : 11,
+      "type" : "upVote"
+    },
+    "-LIy4UEVFM-vAQJTIQz6" : {
+      "email" : "jbeginsamuel@gmail.com",
+      "id" : 11,
+      "type" : "downVote"
+    },
+    "-LIy4UnHAmFXFtEW42V6" : {
+      "email" : "jbeginsamuel@gmail.com",
+      "id" : 11,
       "type" : "upVote"
     },
     "4dbbe27e-ce1d-4d7c-beea-06ba4e582de7" : {

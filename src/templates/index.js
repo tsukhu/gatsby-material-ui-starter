@@ -1,18 +1,18 @@
 import React from 'react'
 import Home from '../components/home/home'
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
+import { graphql } from 'gatsby'
 
-export default ({ data, pathContext }) => {
+export default ({ data, pageContext }) => {
   const content = {
     blogPosts: {
       totalCount: data.allMarkdownRemark.totalCount,
-      pathContext: pathContext
+      pageContext: pageContext
     },
     buildTime: data.site.buildTime
   }
   return (
     <div>
-    <Home {...content} />
+      <Home {...content} />
     </div>
   )
 }
