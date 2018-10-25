@@ -14,11 +14,8 @@ import PieLabel from './pie-label'
 class StackedBarChart extends React.Component {
   // This is an example of a function you might use to transform your data to make 100% data
   transformData = dataset => {
-
     dataset.map(element => {
-      element.sort(
-        (a, b) => (b.x < a.x ? 1 : -1)
-      )
+      element.sort((a, b) => (b.x < a.x ? 1 : -1))
     })
     const totals = dataset[0].map((data, i) => {
       return dataset.reduce((memo, curr) => {
@@ -27,8 +24,8 @@ class StackedBarChart extends React.Component {
     })
     return dataset.map(data => {
       return data.map((datum, i) => {
-        const percent = totals[i] > 0 ? datum.y / totals[i] * 100 : 0
-        return { x: datum.x, y: percent , z: datum.y }
+        const percent = totals[i] > 0 ? (datum.y / totals[i]) * 100 : 0
+        return { x: datum.x, y: percent, z: datum.y }
       })
     })
   }
@@ -57,18 +54,25 @@ class StackedBarChart extends React.Component {
           style={{ border: { stroke: 'black' }, labels: { fontSize: 10 } }}
           data={this.props.legendData}
         />
-        <VictoryStack colorScale={['mediumseagreen', 'orange', '#CCCC00', 'turquoise']}>
+        <VictoryStack
+          colorScale={['mediumseagreen', 'orange', '#CCCC00', 'turquoise']}
+        >
           {dataset.map((data, i) => {
-            return <VictoryBar 
-            data={data} 
-            key={i} 
-            labels={(d) => (d.y > 0 ? (d.z).toFixed(0):null)}
-            labelComponent={<VictoryLabel dy={30}/>}
-            />
+            return (
+              <VictoryBar
+                data={data}
+                key={i}
+                labels={d => (d.y ? d.z.toFixed(0) : null)}
+                labelComponent={<VictoryLabel dy={30} />}
+              />
+            )
           })}
         </VictoryStack>
         <VictoryAxis dependentAxis tickFormat={tick => `${tick}%`} />
-        <VictoryAxis tickFormat={transformTicks} fixLabelOverlap={true} />
+        <VictoryAxis
+          tickFormat={t => t.substring(0, 3).toUpperCase()}
+          fixLabelOverlap={true}
+        />
       </VictoryChart>
     )
   }

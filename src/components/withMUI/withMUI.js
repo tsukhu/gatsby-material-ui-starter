@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import purple from '@material-ui/core/colors/purple'
 import grey from '@material-ui/core/colors/grey'
 import cyan from '@material-ui/core/colors/cyan'
@@ -30,12 +30,15 @@ const withMaterialUI = ComposedComponent => {
         toolbar: {
           titleFontSize: 'small',
           height: 40
+        },
+        typography: {
+          useNextVariants: true
         }
       })
       return (
-          <MuiThemeProvider theme={muiTheme}>
-            <ComposedComponent {...this.props} />
-          </MuiThemeProvider>
+        <MuiThemeProvider theme={muiTheme}>
+          <ComposedComponent {...this.props} />
+        </MuiThemeProvider>
       )
     }
   }

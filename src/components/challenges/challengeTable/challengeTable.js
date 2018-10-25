@@ -832,7 +832,7 @@ class ChallengeTable extends React.Component {
     const { open } = this.state
     const popOverText = (
       <div>
-        <Typography variant="subheading" gutterBottom>
+        <Typography variant="subtitle1" gutterBottom>
           Description
         </Typography>
         <Typography variant="body1" gutterBottom>
@@ -840,7 +840,7 @@ class ChallengeTable extends React.Component {
         </Typography>
         {impact && (
           <div>
-            <Typography variant="subheading" gutterBottom>
+            <Typography variant="subtitle1" gutterBottom>
               Business Impact
             </Typography>
             <Typography variant="body1" gutterBottom>
