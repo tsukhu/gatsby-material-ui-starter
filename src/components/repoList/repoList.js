@@ -9,7 +9,7 @@ import ProjectCard from '../projectCard/projectCard'
 import PageHeader from '../pageHeader/pageHeader'
 import Paper from '@material-ui/core/Paper'
 import blueGrey from '@material-ui/core/colors/blueGrey'
-// import { CSVLink } from 'react-csv'
+import { CSVLink } from 'react-csv'
 import Typography from '@material-ui/core/Typography'
 import CloudDownload from '@material-ui/icons/CloudDownload'
 import IconButton from '@material-ui/core/IconButton'
@@ -161,7 +161,6 @@ class RepoList extends React.Component {
       moment(this.props.buildTime).format('Do MMM YYYY HH:MM A z')
     const csvFileName =
       'ProjectList_' + moment(new Date()).format('DD_MM_YYYY') + '.csv'
-    //  const CSVLink = require('react-csv')
     return (
       <Paper className={classes.paper} elevation={2}>
         <PageHeader text={pageHeader} />
@@ -181,7 +180,7 @@ class RepoList extends React.Component {
             Detailed View
           </Button>
         </Typography>
-        {/*         <div className={classes.csv}>
+        <div className={classes.csv}>
           <Tooltip title="Download CSV">
             <CSVLink data={reposdata} filename={csvFileName}>
               <IconButton aria-label="Download">
@@ -189,7 +188,7 @@ class RepoList extends React.Component {
               </IconButton>
             </CSVLink>
           </Tooltip>
-        </div> */}
+        </div>
         <ReactTable
           getProps={(state, rowInfo, column) => {
             return {
