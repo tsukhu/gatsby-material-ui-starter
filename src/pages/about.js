@@ -1,9 +1,10 @@
-import React from 'react';
-// import styles from './about.module.css';
-import AboutCard from '../components/aboutCard/aboutCard';
+import React from 'react'
+import { graphql } from 'gatsby'
+import Layout from '../components/layout'
+import AboutCard from '../components/aboutCard/aboutCard'
 
 export default ({ data }) => {
-  const org = data.allGithubData.edges[0].node.data.organization;
+  const org = data.allGithubData.edges[0].node.data.organization
   const orgData = {
     description: org.description,
     websiteUrl: org.websiteUrl,
@@ -13,13 +14,13 @@ export default ({ data }) => {
     poweredBy: data.site.siteMetadata.poweredBy,
     contributors: data.site.siteMetadata.contributors,
     githubProject: data.site.siteMetadata.githubProject
-  };
+  }
   return (
-    <div>
+    <Layout>
       <AboutCard data={orgData} />
-      </div>
-  );
-};
+    </Layout>
+  )
+}
 
 export const query = graphql`
   query AboutQuery {
@@ -47,4 +48,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`

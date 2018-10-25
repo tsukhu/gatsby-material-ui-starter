@@ -26,6 +26,9 @@
   }, {
     "displayName" : "sinharitesh",
     "email" : "sinharitesh@gmail.com"
+  }, {
+    "displayName" : "maniappan",
+    "email" : "maniappan@hotmail.com"
   } ],
   "data" : {
     "0" : {
@@ -70,9 +73,12 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/manfredsteyer/angular-microapp,\nhttps://github.com/manfredsteyer/angular-microapp/issues/2 ",
       "id" : "6bed671c-da6f-4918-88c1-0079f3ba0aeb",
+      "impact" : "Web component base architecture is the next major technology required for future projects ",
       "name" : "Angular Elements based Microfrontend",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "In Progress",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:12:17Z",
       "votes" : 1
     },
     "4" : {
@@ -81,11 +87,12 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/gatsby-demo-app,\nhttps://github.com/ERS-HCL/react-git-explorer",
       "id" : "5af22bb5-f5e5-432b-87a1-a64167f2511d",
+      "impact" : "GraphQL based UI integration is a key future technology",
       "name" : "Apollo-link-state based app",
       "priority" : "High",
       "status" : "Done",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-07-12T08:37:58Z",
+      "updatedOn" : "2018-09-30T14:21:44Z",
       "votes" : 1
     },
     "5" : {
@@ -94,12 +101,12 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/mobx-react-ts-app,\nhttps://github.com/ERS-HCL/react-git-explorer",
       "id" : "7900f04b-75fd-4401-bd77-ee9c4b89e90f",
-      "impact" : "The decision of choosing Typescript over Flow / Babel has implications of cleaner , potentially less compile time errors vs productivity. On a case to case basis decide on what is more applicable",
+      "impact" : "The decision of choosing Typescript over Flow / Babel has implications of cleaner , potentially less compile time errors vs productivity. On a case to case basis decide on what is more applicable.",
       "name" : "Babel ES6/7 vs Typescript for React Application",
       "priority" : "High",
       "status" : "Backlog Item",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-07-12T08:30:04Z",
+      "updatedOn" : "2018-09-30T14:22:20Z",
       "votes" : 1
     },
     "6" : {
@@ -119,10 +126,10 @@
       "githubURL" : "",
       "id" : "bf47ff7d-3238-4fec-ae09-63426287517a",
       "name" : "BitSrc based component library",
-      "priority" : "High",
+      "priority" : "Medium",
       "status" : "In Progress",
-      "updatedBy" : "kumar.s@hcl.com",
-      "updatedOn" : "2018-07-19T08:46:43Z",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:22:31Z",
       "votes" : 1
     },
     "8" : {
@@ -184,9 +191,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/spring-graphql-cars",
       "id" : 5,
+      "impact" : "Good reference of building Java based GraphQL implementations\n",
       "name" : "Comprehensive SpringBoot GraphQL Server",
-      "priority" : "Medium",
-      "status" : "In Progress",
+      "priority" : "High",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:23:43Z",
       "votes" : 3
     },
     "15" : {
@@ -254,9 +264,12 @@
       "domain" : "Web UI",
       "githubURL" : "",
       "id" : 13,
+      "impact" : "https://github.com/ERS-HCL/vuex-state-app",
       "name" : "Explore Cypress.io as a Selenium/Protractor alternative ",
-      "priority" : "Medium",
-      "status" : "Backlog Item",
+      "priority" : "High",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:25:08Z",
       "votes" : 1
     },
     "21" : {
@@ -266,10 +279,10 @@
       "githubURL" : "",
       "id" : "78f62bc1-48cc-413e-8bfa-251dc86999fc",
       "name" : "Explore Storybook for UI component development - Angular",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "Backlog Item",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-06-18T07:05:49Z",
+      "updatedOn" : "2018-09-30T14:25:17Z",
       "votes" : 0
     },
     "22" : {
@@ -278,9 +291,12 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/react-snack-app",
       "id" : 4,
+      "impact" : "https://github.com/ERS-HCL/react-mono-repo",
       "name" : "Explore Storybook for UI component development - React",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "In Progress",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:26:18Z",
       "votes" : 1
     },
     "23" : {
@@ -335,9 +351,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/nxplorer-babel/issues/5",
       "id" : 8,
+      "impact" : "Need to invest in serverless solutions. Currently no capability",
       "name" : "GraphQL Serverless support",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:27:43Z",
       "votes" : 1
     },
     "28" : {
@@ -367,9 +386,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/metrics/",
       "id" : "161ca3a5-e49c-41db-beb9-b9ea6c18b0e2",
+      "impact" : "Good show case project for ops dashboard",
       "name" : "K8S enablement to be done for smooth deployment of Microservices",
       "priority" : "High",
       "status" : "In Progress",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:28:17Z",
       "votes" : 2
     },
     "31" : {
@@ -411,20 +433,26 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/to-do-list-angular-material",
       "id" : 2,
+      "impact" : "Material Design system is an important system to have capability in.",
       "name" : "Material Design app using NG",
       "priority" : "Medium",
       "status" : "In Progress",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:29:05Z",
       "votes" : 1
     },
     "35" : {
       "contributor" : "tksukhu@gmail.com",
       "description" : "Presentation and styling plays an important presenting any idea or POC. Use the standard material-ui kit to create an app (could be anything from a shopping app to a music listing etc.)",
       "domain" : "Web UI",
-      "githubURL" : "https://github.com/creativetimofficial/material-kit-react ",
+      "githubURL" : "https://github.com/creativetimofficial/material-kit-react,\nhttps://github.com/ERS-HCL/gatsby-demo-app",
       "id" : "96f864dc-5a8e-4f63-b784-0d9de531c04b",
+      "impact" : "",
       "name" : "Material-ui-kit based React/Angular/Vue webApp",
       "priority" : "Medium",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:30:03Z",
       "votes" : 1
     },
     "36" : {
@@ -434,8 +462,10 @@
       "githubURL" : "",
       "id" : "5b8ac3b1-768d-41ef-be16-62f951794349",
       "name" : "Micrometer for Microservice Monitoring",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:29:29Z",
       "votes" : 1
     },
     "37" : {
@@ -461,9 +491,9 @@
       "impact" : "",
       "name" : "Microservice Challenge : Starter - Grizzly",
       "priority" : "Medium",
-      "status" : "Done",
-      "updatedBy" : "vinodmr@hcl.com",
-      "updatedOn" : "2018-06-18T06:08:12Z",
+      "status" : "In Progress",
+      "updatedBy" : "kumar.s@hcl.com",
+      "updatedOn" : "2018-09-25T06:22:11Z",
       "votes" : 0
     },
     "39" : {
@@ -625,9 +655,9 @@
       "impact" : "Mono repo will help organize larger projects and increase reusability",
       "name" : "Nx based Angular App",
       "priority" : "Medium",
-      "status" : "In Progress",
-      "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-06-16T16:36:29Z",
+      "status" : "Done",
+      "updatedBy" : "kumar.s@hcl.com",
+      "updatedOn" : "2018-09-25T06:04:19Z",
       "votes" : 3
     },
     "52" : {
@@ -682,9 +712,12 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/gatsby-demo-app",
       "id" : "1325a91c-ea5a-49f7-b0a5-ed617ade4b8b",
+      "impact" : "Good show case for material design, react , firebase , oauth, complex data table implementation",
       "name" : "Project Challenge Tracker Data Table ",
       "priority" : "Medium",
       "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:32:20Z",
       "votes" : 1
     },
     "57" : {
@@ -705,8 +738,10 @@
       "githubURL" : "",
       "id" : "d41127ec-8faa-40be-a7ec-3ab24522dfaf",
       "name" : "ReactJS or Angular + PageDraw.io (Rapid UI Development)",
-      "priority" : "Low",
+      "priority" : "Medium",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:32:36Z",
       "votes" : 1
     },
     "59" : {
@@ -718,6 +753,8 @@
       "name" : "Spring 5 Reactive Framework - solve 5 use cases",
       "priority" : "High",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:32:54Z",
       "votes" : 2
     },
     "60" : {
@@ -728,7 +765,9 @@
       "id" : "d8dc3502-0ae8-4d33-b6ac-077d2aa8e4ef",
       "name" : "Static Site for HCL ERS GITHUB",
       "priority" : "Medium",
-      "status" : "Done",
+      "status" : "In Progress",
+      "updatedBy" : "kumar.s@hcl.com",
+      "updatedOn" : "2018-09-25T06:22:15Z",
       "votes" : 1
     },
     "61" : {
@@ -739,10 +778,10 @@
       "id" : "e5700b7c-ff2d-4c2e-a3c5-13bbcb92304f",
       "impact" : "",
       "name" : "StensilJS based web components ",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "Backlog Item",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-06-16T16:34:58Z",
+      "updatedOn" : "2018-09-30T14:33:05Z",
       "votes" : 1
     },
     "62" : {
@@ -760,11 +799,14 @@
       "contributor" : "tksukhu@gmail.com",
       "description" : "This is a server based component which is inspired by the way Facebook uses the BigPipe architecture approach to stream the application fragments in parallel. You need to break you application into fragments or individual micro-frontends and it\n•\tComposes pre-rendered markup on the backend. This is important for SEO and fastens the initial render.\n•\tEnsures a fast Time to First Byte. Tailor requests fragments in parallel and streams them as soon as possible, without blocking the rest of the page.\n•\tEnforces performance budget. This is quite challenging otherwise, because there is no single point where you can control performance.\n•\tFault Tolerance. Render the meaningful output, even if a page fragment has failed or timed out.\no\thttps://github.com/zalando/tailor           \no\thttps://github.com/tsnolan23/tailor-react-spa\nWork on a POC related to getting Angular JS, React , Vue, Angular 6 working",
       "domain" : "Web UI",
-      "githubURL" : "",
+      "githubURL" : "https://github.com/tsukhu/tailor-react-spa",
       "id" : "40c047be-4f4a-4823-871f-fe237bce8610",
+      "impact" : "",
       "name" : "Tailor Microfrontend Framework - POC",
       "priority" : "Medium",
-      "status" : "Backlog Item",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:40:54Z",
       "votes" : 1
     },
     "64" : {
@@ -785,8 +827,10 @@
       "githubURL" : "",
       "id" : "41ae7cdd-8104-4b04-8a3c-a0a30881e4a9",
       "name" : "Test containers for JUnit tests",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:41:03Z",
       "votes" : 1
     },
     "66" : {
@@ -806,8 +850,10 @@
       "githubURL" : "https://github.com/ERS-HCL/react-snack-app",
       "id" : "b218971d-76b4-4da9-83f6-bf89ecab365a",
       "name" : "UI Redux State management based app (React)",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:41:14Z",
       "votes" : 0
     },
     "68" : {
@@ -858,9 +904,12 @@
       "domain" : "Microservices",
       "githubURL" : "https://github.com/ERS-HCL/nxplorerjs-microservice-starter",
       "id" : "223784e3-44e6-4482-ac17-9582dbfee47a",
+      "impact" : "https://github.com/ERS-HCL/trace-demo",
       "name" : "Zipkin Open Tracing Support for nxplorerjs",
       "priority" : "Medium",
-      "status" : "Backlog Item",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:42:24Z",
       "votes" : 2
     },
     "73" : {
@@ -903,6 +952,8 @@
       "name" : "Mono Repo for Large Enterprise Project",
       "priority" : "High",
       "status" : "Backlog Item",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:47:28Z",
       "votes" : 0
     },
     "-LEmmkIZLRMDWyjbU1A-" : {
@@ -911,24 +962,27 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/react-git-explorer",
       "id" : "16a1305a-a602-46ef-a2c5-0edfa2ead6ee",
+      "impact" : "",
       "name" : "React + Bootstrap ",
       "priority" : "Medium",
       "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:31:32Z",
       "votes" : 0
     },
     "-LEsTplXQAH_8d6gU3Ry" : {
       "contributor" : "lavanya-s@hcl.com",
       "description" : "Create a sample project in JSD for auto-remediation workflow for common IT tickets. Ex:  like Disk space issues, etc. When the tickets are generated from known sources, trigger the workflow to check the ticket type, source, perform auto-investigation and validation and trigger known remediation actions, for the issue.",
       "domain" : "DevOps",
-      "githubURL" : "",
+      "githubURL" : "https://github.com/ERS-HCL/JSD-SREWorkflow",
       "id" : "4f1efa6f-259a-4057-a7ff-4aeb1c52057e",
-      "impact" : "",
+      "impact" : "preconfigured reference workflow for auto-ticketing and auto-remediation based on monitoring, useful for assisted troubleshooting and site reliability",
       "name" : "Create an auto-remediation workflow in JIRA Service Desk(JSD)",
-      "priority" : "Medium",
-      "status" : "Backlog Item",
-      "updatedBy" : "lavanya-s@hcl.com",
-      "updatedOn" : "2018-07-13T09:14:37Z",
-      "votes" : 0
+      "priority" : "High",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:46:18Z",
+      "votes" : 1
     },
     "-LEsVsBLMqC_fYYNvhN2" : {
       "contributor" : "lavanya-s@hcl.com",
@@ -937,10 +991,10 @@
       "githubURL" : "",
       "id" : "52de1ae0-e785-41ae-b24e-d62e3233ff82",
       "name" : "Create DevOps tools as Helm packages to install as helm charts in Kubernetes environments",
-      "priority" : "Low",
+      "priority" : "High",
       "status" : "Backlog Item",
-      "updatedBy" : "lavanya-s@hcl.com",
-      "updatedOn" : "2018-07-03T05:00:25Z",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:23:58Z",
       "votes" : 0
     },
     "-LEyGDHdPQBQ7cH46TSf" : {
@@ -1026,10 +1080,10 @@
       "id" : "821f0385-5e24-4b36-a5a2-1f85679eb666",
       "impact" : "Its critical that we upgrade and move towards v2 as most of the GraphQL Ecosystem around Node JS and Apollo (both backend and frontend) are likely to move in the coming months. Otherwise the existing solutions will be obsolete soon.",
       "name" : "Apollo Server 2.0 Upgrade for Next Generation NodeJS GraphQL Servers ",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "Done",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-06-22T20:02:42Z",
+      "updatedOn" : "2018-09-30T14:45:30Z",
       "votes" : 1
     },
     "-LG_0AWfNM2TPEmIV1K7" : {
@@ -1040,10 +1094,10 @@
       "id" : "ea8643ca-d212-4f3d-a34c-718da574bf85",
       "impact" : "It will help business to quickly migrate their legacy/monolith application to microservice based architecture",
       "name" : "Microservice Challenge : Migration - Break the Monolith",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "In Progress",
-      "updatedBy" : "vinodmr@hcl.com",
-      "updatedOn" : "2018-07-27T07:49:55Z",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:29:23Z",
       "votes" : 0
     },
     "-LH7ebanmevp3EdTfHoF" : {
@@ -1057,7 +1111,7 @@
       "priority" : "High",
       "status" : "Done",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-07-11T09:36:27Z"
+      "updatedOn" : "2018-09-30T14:31:17Z"
     },
     "-LHCZSpkjUK1o8nf9Ilt" : {
       "contributor" : "tksukhu@gmail.com",
@@ -1076,14 +1130,14 @@
       "contributor" : "tksukhu@gmail.com",
       "description" : "While we have many samples for Angular and React, VueJS is something we haven't focused on. Build a complete reference application with state management, pwa, styling. This should be reference app that can be showcased when required. ",
       "domain" : "Web UI",
-      "githubURL" : "",
+      "githubURL" : "https://github.com/ERS-HCL/vuex-state-app",
       "id" : "09cfe022-386e-4b37-aace-0afe176e0456",
       "impact" : "VueJS is the most popular web framework, closely followed by React. We need a complete reference app to showcase our profeciancy. ",
       "name" : "VueJS reference app",
-      "priority" : "None",
-      "status" : "Approval Pending",
+      "priority" : "Medium",
+      "status" : "Done",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-07-12T09:39:02Z"
+      "updatedOn" : "2018-09-30T14:42:54Z"
     },
     "-LHHt2pW9DPUA5D4cphK" : {
       "contributor" : "lavanya-s@hcl.com",
@@ -1091,12 +1145,12 @@
       "domain" : "DevOps",
       "githubURL" : "https://github.com/ERS-HCL/Sensu-CloudFormation",
       "id" : "af295e06-3f4d-4a77-9bdc-78d99e0d837e",
-      "impact" : "",
+      "impact" : "Good reference for devOps capability\n",
       "name" : "Create Infra as Code templates for automated installation and configuration of Sensu server, sensu client and checks for system, cloud , containers.",
       "priority" : "High",
       "status" : "Done",
-      "updatedBy" : "lavanya-s@hcl.com",
-      "updatedOn" : "2018-07-18T06:45:00Z",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T14:24:26Z",
       "votes" : 0
     },
     "-LHbMn7WTfd664EpIZ1M" : {
@@ -1110,7 +1164,7 @@
       "priority" : "High",
       "status" : "Backlog Item",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-07-17T08:37:07Z"
+      "updatedOn" : "2018-09-30T14:31:08Z"
     },
     "-LHgmBu7hk1fYCuGutz3" : {
       "contributor" : "tksukhu@gmail.com",
@@ -1118,12 +1172,12 @@
       "domain" : "Web UI",
       "githubURL" : "https://github.com/ERS-HCL/gatsby-demo-app/tree/gatsby2, https://www.gatsbyjs.org/blog/2018-06-16-announcing-gatsby-v2-beta-launch/",
       "id" : "712b08b2-1060-41df-8a6f-edb5d1813862",
-      "impact" : "\nGatsby v1 is great but moving forward we will need to upgrade to take advantage of the new features and performance improvements. Also moving forward v1 will be deprecated and maintenance will become an issue.",
+      "impact" : "\nGatsby v1 is great but moving forward we will need to upgrade to take advantage of the new features and performance improvements. Also moving forward v1 will be deprecated and maintenance will become an issue.\n\nThis is a good showcase for CMS integration with Web UI",
       "name" : "Gatsby v2 upgrade for ers-hcl.github.io",
-      "priority" : "Medium",
+      "priority" : "High",
       "status" : "In Progress",
       "updatedBy" : "tksukhu@gmail.com",
-      "updatedOn" : "2018-07-18T09:51:57Z"
+      "updatedOn" : "2018-09-30T14:27:06Z"
     },
     "-LHrQEq0L70LbJqbcCCp" : {
       "contributor" : "tksukhu@gmail.com",
@@ -1150,6 +1204,74 @@
       "status" : "Approval Pending",
       "updatedBy" : "pjoshi@hcl.com",
       "updatedOn" : "2018-08-01T07:09:56Z"
+    },
+    "-LJNQw85UahMJV38U_9h" : {
+      "contributor" : "vinodmr@hcl.com",
+      "description" : "Unite the service using API Gateway and implement inter process communication",
+      "domain" : "Microservices",
+      "githubURL" : "https://github.com/vinodmrhcl/microservice-migration/tree/master/uts",
+      "id" : "1a961963-99ac-4f7b-b865-fc8cad982eb2",
+      "impact" : "It will help business to quickly migrate their legacy/monolith application to microservice based architecture",
+      "name" : "Microservice Challenge : Migration - Unite the Services",
+      "priority" : "Medium",
+      "status" : "In Progress",
+      "updatedBy" : "vinodmr@hcl.com",
+      "updatedOn" : "2018-08-29T06:42:05Z",
+      "votes" : 0
+    },
+    "-LNf3gLUvsxAq9SS5rWu" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "Test Driven development and integration testing needs for microservices requires to be well planned out , so that we are able to test locally as well as on different deployment environments. Cucumber with Spring Boot provides a good combination to achieve the same. Create a reference implementation which provides all details of how to setup and create Spring Boot integration tests with Cucumber",
+      "domain" : "Microservices",
+      "githubURL" : "https://github.com/ERS-HCL/springboot-cucumber-demo",
+      "id" : "f825c05d-ee19-426c-9bf3-f110a360d321",
+      "impact" : "Cucumber tests in combination with WireMock , Spring Profiles, Swagger and API contracts can be help in reduction of the overall test development effort by ~30-40% (when done in the traditional way) . This is due to the high reusability , productivity and maintainability of these tests. ",
+      "name" : "Microservices Testing using BDD Cucumber",
+      "priority" : "High",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T15:26:45Z"
+    },
+    "-LNf4ljSAsTGNME0faEZ" : {
+      "contributor" : "tksukhu@gmail.com",
+      "description" : "TDD is a critical piece of any microservice development and often team struggle to get started. Create a reference implementation along with the process of implementing the same for Spring Boot based microservices",
+      "domain" : "Microservices",
+      "githubURL" : "https://github.com/ERS-HCL/springboot-tdd",
+      "id" : "92ed8a44-6a4d-427c-8f3d-524edd35c500",
+      "impact" : "TDD is a critical piece of any microservice development and often team struggle to get started. This can help teams implement tests correctly in the first instance itself.",
+      "name" : "TDD Reference implementation for Spring Boot microservices",
+      "priority" : "High",
+      "status" : "Done",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-09-30T15:29:20Z"
+    },
+    "-LNsM-jGY8OCGOPMpNHx" : {
+      "contributor" : "maniappan@hotmail.com",
+      "description" : "Microservices framework to handle high volume of events  more than 1Million per hour or more that is deployment agnostic",
+      "domain" : "Microservices",
+      "githubURL" : "https://github.com/ERS-HCL/lagom-starter",
+      "id" : "d7d3c169-ef3d-435c-b23d-911aed86ba62",
+      "impact" : "This is for a RFP for leading medical device manufacturer valued more than US $20M",
+      "name" : "Workflow solution for high volume of events",
+      "priority" : "High",
+      "status" : "Done",
+      "updatedBy" : "maniappan@hotmail.com",
+      "updatedOn" : "2018-10-04T06:49:38Z",
+      "votes" : 0
+    },
+    "-LNxbvmzKdLM6G8cq53Q" : {
+      "contributor" : "sinharitesh@gmail.com",
+      "description" : "A generic text classification engine",
+      "domain" : "Analytics",
+      "githubURL" : "",
+      "id" : "c4f49b27-7305-43cf-a476-f43df3c1e270",
+      "impact" : "High, Can be applied to multiple use cases",
+      "name" : "NLP - Creating TF-IDF models for Topic Modelling",
+      "priority" : "Medium",
+      "status" : "In Progress",
+      "updatedBy" : "tksukhu@gmail.com",
+      "updatedOn" : "2018-10-04T06:07:20Z",
+      "votes" : 0
     }
   },
   "vote" : {
@@ -1698,6 +1820,21 @@
     "-LIoJe2LOXo_j-XHgYwH" : {
       "email" : "pjoshi@hcl.com",
       "id" : "61cb475b-bba4-4b19-a116-4749ed377c21",
+      "type" : "upVote"
+    },
+    "-LIy4Ti-5UktHpYZFtYB" : {
+      "email" : "jbeginsamuel@gmail.com",
+      "id" : 11,
+      "type" : "upVote"
+    },
+    "-LIy4UEVFM-vAQJTIQz6" : {
+      "email" : "jbeginsamuel@gmail.com",
+      "id" : 11,
+      "type" : "downVote"
+    },
+    "-LIy4UnHAmFXFtEW42V6" : {
+      "email" : "jbeginsamuel@gmail.com",
+      "id" : 11,
       "type" : "upVote"
     },
     "4dbbe27e-ce1d-4d7c-beea-06ba4e582de7" : {

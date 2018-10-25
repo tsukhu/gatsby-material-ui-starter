@@ -17,7 +17,7 @@ import ShowChart from '@material-ui/icons/ShowChart'
 import RateReview from '@material-ui/icons/RateReview'
 import DeveloperBoard from '@material-ui/icons/DeveloperBoard'
 import Tooltip from '@material-ui/core/Tooltip'
-import Link from 'gatsby-link'
+import { Link } from '@reach/router'
 import Divider from '@material-ui/core/Divider'
 import { white } from '@material-ui/core/colors'
 import Home from '@material-ui/icons/Home'
@@ -93,45 +93,45 @@ class Navigation extends Component {
               {this.props.title.toUpperCase()}
             </Typography>
             <Tooltip title="Project Listing">
-            <IconButton
-              color="inherit"
-              component={Link}
-              to="/"
-              aria-label="ERS-HCL projects"
-            >
-              <DeveloperBoard />
-            </IconButton>
+              <IconButton
+                color="inherit"
+                component={Link}
+                to="/"
+                aria-label="ERS-HCL projects"
+              >
+                <DeveloperBoard />
+              </IconButton>
             </Tooltip>
             <Tooltip title="Challenges">
-            <IconButton
-              color="inherit"
-              component={Link}
-              to="/challenges/"
-              aria-label="ERS-HCL challenges"
-            >
-              <RateReview />
-            </IconButton>
+              <IconButton
+                color="inherit"
+                component={Link}
+                to="/challenges/"
+                aria-label="ERS-HCL challenges"
+              >
+                <RateReview />
+              </IconButton>
             </Tooltip>
             <Tooltip title="Global Github Stats">
-            <IconButton
-              color="inherit"
-              component={Link}
-              to="/githubStats/"
-              aria-label="Global Github Stats"
-            >
-              <ShowChart />
-            </IconButton>
+              <IconButton
+                color="inherit"
+                component={Link}
+                to="/githubStats/"
+                aria-label="Global Github Stats"
+              >
+                <ShowChart />
+              </IconButton>
             </Tooltip>
             <Tooltip title="Github project">
-            <IconButton
-              href="//github.com/ERS-HCL/gatsby-demo-app"
-              target="_blank"
-              rel="noopener"
-              color="inherit"
-              aria-label="Github source"
-            >
-              <GitHubIcon />
-            </IconButton>
+              <IconButton
+                href="//github.com/ERS-HCL/gatsby-demo-app"
+                target="_blank"
+                rel="noopener"
+                color="inherit"
+                aria-label="Github source"
+              >
+                <GitHubIcon />
+              </IconButton>
             </Tooltip>
           </Toolbar>
         </AppBar>
@@ -210,7 +210,6 @@ class Navigation extends Component {
                 </ListItemIcon>
                 <ListItemText primary="About" />
               </ListItem>
-
             </List>
           </div>
         </Drawer>

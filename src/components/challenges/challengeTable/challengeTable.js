@@ -13,8 +13,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { challengeTableStyles } from '../../../style/components/challenges/challenges'
 import { createUser, loginOAuth, logout } from '../../../utils/auth'
-import firebase from 'firebase/app'
-import { firebaseAuth, ref } from '../../../utils/firebase'
+// import firebase from 'firebase/app'
+import { firebaseAuth, ref, database } from '../../../utils/firebase'
 import ChallengeForm from '../challengeForm/challengeForm'
 import HelpInfo from '../helpInfo/helpInfo'
 import getColumnData, { createData } from '../metadata'
@@ -75,12 +75,12 @@ class ChallengeTable extends React.Component {
       filterUpdatedBefore: null,
       showHelp: false
     }
-    this.dbItems = ref.child('data')
-    this.dbAuthItems = ref.child('admin')
-    this.dbVotes = ref.child('vote')
   }
 
   componentDidMount() {
+    this.dbItems = ref.child('data')
+    this.dbAuthItems = ref.child('admin')
+    this.dbVotes = ref.child('vote')
     this.removeListener = firebaseAuth().onAuthStateChanged(user => {
       if (user) {
         let isAdmin = false
@@ -163,8 +163,7 @@ class ChallengeTable extends React.Component {
         const item = childSnapshot.val()
         items.push(item)
       })
-      const voteTransformed = _
-        .chain(items)
+      const voteTransformed = _.chain(items)
         .groupBy('id')
         .map((objs, key) => ({
           id: isNaN(key) ? key : +key,
@@ -378,8 +377,7 @@ class ChallengeTable extends React.Component {
     // Create new row
     const newRow = createData(this.state.user.email)
 
-    firebase
-      .database()
+    database
       .ref()
       .child('data')
       .push(newRow)
@@ -417,8 +415,7 @@ class ChallengeTable extends React.Component {
     const childId = this.findDBKey(selected[0])
 
     if (childId !== null) {
-      firebase
-        .database()
+      database
         .ref('data/' + childId)
         .remove()
         .catch(err => {
@@ -468,15 +465,12 @@ class ChallengeTable extends React.Component {
         if (key !== 'id' && key !== 'vote' && key !== 'votes') {
           const entry = formData.filter(data => data.id === key)
           currentItem[key] = entry[0].value
-        } else {
-          currentItem
         }
       }
       currentItem['updatedOn'] = moment().format()
       currentItem['updatedBy'] = this.state.user.email
 
-      firebase
-        .database()
+      database
         .ref('data/' + childId)
         .set(currentItem)
         .catch(err => {
@@ -574,8 +568,7 @@ class ChallengeTable extends React.Component {
       currentItem['updatedOn'] = moment().format()
       currentItem['updatedBy'] = this.state.user.email
 
-      firebase
-        .database()
+      database
         .ref('data/' + childId)
         .set(currentItem)
         .catch(err => {
@@ -653,8 +646,14 @@ class ChallengeTable extends React.Component {
         filterPriority: filter.priority,
         filterStatus: filter.status,
         filterLatest: filter.latest,
-        filterUpdatedAfter: (filter.updatedAfter && filter.updatedAfter !=='')?moment(filter.updatedAfter).format():null,
-        filterUpdatedBefore:(filter.updatedBefore && filter.updatedBefore !=='')?moment(filter.updatedBefore).format():null
+        filterUpdatedAfter:
+          filter.updatedAfter && filter.updatedAfter !== ''
+            ? moment(filter.updatedAfter).format()
+            : null,
+        filterUpdatedBefore:
+          filter.updatedBefore && filter.updatedBefore !== ''
+            ? moment(filter.updatedBefore).format()
+            : null
       },
       function() {
         const newData = this.state.data.filter(item => this.applyfilter(item))
@@ -897,7 +896,7 @@ class ChallengeTable extends React.Component {
     if (dateStr === undefined) {
       return false
     }
-  //  console.log(dateStr, dateAfter, moment(dateStr).isAfter(dateAfter))
+    //  console.log(dateStr, dateAfter, moment(dateStr).isAfter(dateAfter))
 
     return moment(dateStr).isAfter(dateAfter)
   }
@@ -906,7 +905,7 @@ class ChallengeTable extends React.Component {
     if (dateStr === undefined) {
       return false
     }
-  //  console.log(dateStr, dateBefore, moment(dateStr).isBefore(dateBefore))
+    //  console.log(dateStr, dateBefore, moment(dateStr).isBefore(dateBefore))
     return moment(dateStr).isBefore(dateBefore)
   }
 

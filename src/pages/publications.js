@@ -2,14 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import ReactTable from 'react-table'
+import { graphql } from 'gatsby'
 import 'react-table/react-table.css'
 import PublicationCard from '../components/publicationCard/publicationCard'
 import PageHeader from '../components/pageHeader/pageHeader'
 import blueGrey from '@material-ui/core/colors/blueGrey'
+import Layout from '../components/layout'
+import Paper from '@material-ui/core/Paper'
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
-import Paper from '@material-ui/core/Paper'
+
 
 const styles = theme => ({
   paper: {
@@ -29,7 +32,6 @@ const styles = theme => ({
 })
 
 class Publications extends React.Component {
-  
   render() {
     const { classes } = this.props
     const columns = [
@@ -106,44 +108,46 @@ class Publications extends React.Component {
     )
     const pageHeader = 'Publications & Events ' + '(' + +totalCount + ')'
     return (
-      <Paper className={classes.paper} elevation={2}>
-        <PageHeader text={pageHeader} />
-        <ReactTable
-          getProps={(state, rowInfo, column) => {
-            return {
-              style: {
-                backgroundColor: 'white',
-                fontFamily: 'Roboto, sans-serif',
+      <Layout>
+        <Paper className={classes.paper} elevation={2}>
+          <PageHeader text={pageHeader} />
+          <ReactTable
+            getProps={(state, rowInfo, column) => {
+              return {
+                style: {
+                  backgroundColor: 'white',
+                  fontFamily: 'Roboto, sans-serif'
+                }
               }
-            }
-          }}
-          getTheadThProps={(state, rowInfo, column) => {
-            return {
-              style: {
-                fontWeight: 'bold'
+            }}
+            getTheadThProps={(state, rowInfo, column) => {
+              return {
+                style: {
+                  fontWeight: 'bold'
+                }
               }
-            }
-          }}
-          data={reposdata}
-          className="-striped -highlight"
-          columns={columns}
-          defaultPageSize={10}
-          SubComponent={row => {
-            return (
-              <PublicationCard
-                title={row.original.title}
-                author={row.original.author}
-                avatar={row.original.avatar}
-                url={row.original.url}
-                excerpt={row.original.excerpt}
-                domain={row.original.domain}
-                team={row.original.team}
-                category={row.original.category}
-              />
-            )
-          }}
-        />
-      </Paper>
+            }}
+            data={reposdata}
+            className="-striped -highlight"
+            columns={columns}
+            defaultPageSize={10}
+            SubComponent={row => {
+              return (
+                <PublicationCard
+                  title={row.original.title}
+                  author={row.original.author}
+                  avatar={row.original.avatar}
+                  url={row.original.url}
+                  excerpt={row.original.excerpt}
+                  domain={row.original.domain}
+                  team={row.original.team}
+                  category={row.original.category}
+                />
+              )
+            }}
+          />
+        </Paper>
+      </Layout>
     )
   }
 }

@@ -1,6 +1,6 @@
-import firebase from 'firebase/app';
-import 'firebase/database';
-import 'firebase/auth';
+// import firebase from 'firebase/app';
+import 'firebase/database'
+import 'firebase/auth'
 
 const config = {
   apiKey: `${process.env.GATSBY_FIREBASE_API_KEY}`,
@@ -11,8 +11,16 @@ const config = {
   messagingSenderId: `${process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID}`
 }
 
-firebase.initializeApp(config)
+let ref, firebaseAuth, database
 
-export const ref = firebase.database().ref()
+if (typeof window !== 'undefined') {
+  const firebase = require('firebase/app')
+  if (!firebase.apps.length) {
+    firebase.initializeApp(config)
+  }
+  database = firebase.database()
+  ref = firebase.database().ref()
+  firebaseAuth = firebase.auth
+}
 
-export const firebaseAuth = firebase.auth
+export { ref, firebaseAuth, database }

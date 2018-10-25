@@ -1,13 +1,16 @@
 import React from 'react'
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
+import { graphql } from 'gatsby'
 import GithubStats from '../components/githubStats/githubStats'
+import Layout from '../components/layout'
 
 export default ({ data }) => {
   return (
-    <GithubStats
-      githubData={data.allGithubData}
-      buildTime={data.site.buildTime}
-    />
+    <Layout>
+      <GithubStats
+        githubData={data.allGithubData}
+        buildTime={data.site.buildTime}
+      />
+    </Layout>
   )
 }
 
