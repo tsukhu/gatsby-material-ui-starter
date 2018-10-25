@@ -28,7 +28,7 @@ const SimpleCard = props => {
     <div>
       <Card className={classes.card}>
         <CardContent>
-          <Typography variant="headline" component="h2">
+          <Typography variant="h5" component="h2">
             {props.title}
           </Typography>
           <Typography color="textSecondary">{props.date}</Typography>

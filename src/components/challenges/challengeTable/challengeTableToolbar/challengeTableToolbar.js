@@ -109,7 +109,7 @@ let ChallengeTableToolbar = props => {
     >
       <div className={classes.title}>
         {nChallenges > 0 && (
-          <Typography color="inherit" variant="subheading">
+          <Typography color="inherit" variant="subtitle1">
             {nFilterCount}/{nChallenges} challenges
           </Typography>
         )}
