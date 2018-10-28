@@ -20,7 +20,7 @@ class ChallengeHeader extends React.Component {
           title="HCL ERS"
         />
           <CardContent>
-            <Typography gutterBottom variant="headline" component="h2">
+            <Typography gutterBottom variant="h5" component="h2">
               {headerText}
             </Typography>
             <Typography component="p">
