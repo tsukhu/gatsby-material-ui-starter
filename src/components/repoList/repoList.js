@@ -15,14 +15,81 @@ import CloudDownload from '@material-ui/icons/CloudDownload'
 import IconButton from '@material-ui/core/IconButton'
 import IconDashboard from '@material-ui/icons/Dashboard'
 import Tooltip from '@material-ui/core/Tooltip'
+import GridContainer from '../grid/GridContainer'
+import GridItem from '../grid/GridItem'
+import MyButton from '../CustomButtons/Button'
+import Parallax from '../parallax/Parallax'
 
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
+const title = {
+  color: '#3C4858',
+  margin: '1.75rem 0 0.875rem',
+  textDecoration: 'none',
+  fontWeight: '700',
+  fontFamily: `"Roboto", "Times New Roman", serif`
+}
+
+const conatinerFluid = {
+  paddingRight: '15px',
+  paddingLeft: '15px',
+  marginRight: 'auto',
+  marginLeft: 'auto',
+  width: '100%'
+}
+
+const container = {
+  ...conatinerFluid,
+  '@media (min-width: 576px)': {
+    maxWidth: '540px'
+  },
+  '@media (min-width: 768px)': {
+    maxWidth: '720px'
+  },
+  '@media (min-width: 992px)': {
+    maxWidth: '960px'
+  },
+  '@media (min-width: 1200px)': {
+    maxWidth: '1140px'
+  }
+}
+
 const styles = theme => ({
+  container: {
+    zIndex: '12',
+    color: '#FFFFFF',
+    ...container
+  },
+  title: {
+    ...title,
+    display: 'inline-block',
+    position: 'relative',
+    marginTop: '30px',
+    minHeight: '32px',
+    color: '#FFFFFF',
+    textDecoration: 'none',
+    fontFamily: `"Roboto", "Times New Roman", serif`
+  },
+  subtitle: {
+    fontSize: '1rem',
+    maxWidth: '500px',
+    fontFamily: `"Roboto", "Times New Roman", serif`
+  },
+  main: {
+    background: '#FFFFFF',
+    position: 'relative',
+    zIndex: '3'
+  },
+  mainRaised: {
+    margin: '-60px 30px 0px',
+    borderRadius: '6px',
+    boxShadow:
+      '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)'
+  },
   paper: {
-    margin: 5,
-    padding: 10,
+    /*     margin: 5,
+    padding: 10, */
     display: 'block',
     height: '100%',
     minHeight: '100vh',
@@ -162,70 +229,103 @@ class RepoList extends React.Component {
     const csvFileName =
       'ProjectList_' + moment(new Date()).format('DD_MM_YYYY') + '.csv'
     return (
-      <Paper className={classes.paper} elevation={2}>
-        <PageHeader text={pageHeader} />
-        {/*         <Typography variant="caption">
+      <div>
+        <Parallax filter image={require('../../assets/images/home.jpg')}>
+          <div className={classes.container}>
+            <GridContainer>
+              <GridItem xs={12} sm={12} md={6}>
+                <h1 className={classes.title}>
+                  ERS-HCL Open Source Initiative
+                </h1>
+                <h4 className={classes.subtitle}>
+                  {pageHeader}
+                  <br />
+                  The top 100 active projects are listed below.
+                </h4>
+                <h5 className={classes.subtitle}>
+                  <br />
+                  The <b>Detailed View</b> provides all the project listings
+                </h5>
+                <br />
+                <MyButton
+                  color="danger"
+                  size="lg"
+                  href="https://affectionate-keller-d4f61b.netlify.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fas fa-play" />
+                  Detailed View
+                </MyButton>
+              </GridItem>
+            </GridContainer>
+          </div>
+        </Parallax>
+        <Paper className={classes.paper} elevation={2}>
+          {/* <PageHeader text={pageHeader} /> */}
+          {/*         <Typography variant="caption">
           <a href="#">Full List</a>
         </Typography> */}
-        <Typography variant="button" gutterBottom>
-          <Button
-            variant="extendedFab"
-            color="secondary"
-            aria-label="fulllist"
-            href="https://affectionate-keller-d4f61b.netlify.com/"
-            target="_blank"
-            className={classes.button}
-          >
-            <IconDashboard className={classes.extendedIcon} />
-            Detailed View
-          </Button>
-        </Typography>
-        <div className={classes.csv}>
-          <Tooltip title="Download CSV">
-            <CSVLink data={reposdata} filename={csvFileName}>
-              <IconButton aria-label="Download">
-                <CloudDownload />
-              </IconButton>
-            </CSVLink>
-          </Tooltip>
-        </div>
-        <ReactTable
-          getProps={(state, rowInfo, column) => {
-            return {
-              style: {
-                backgroundColor: 'white',
-                fontFamily: 'Roboto, sans-serif'
+          {/*           <Typography variant="button" gutterBottom>
+            <Button
+              variant="extendedFab"
+              color="secondary"
+              aria-label="fulllist"
+              href="https://affectionate-keller-d4f61b.netlify.com/"
+              target="_blank"
+              className={classes.button}
+            >
+              <IconDashboard className={classes.extendedIcon} />
+              Detailed View
+            </Button>
+          </Typography> */}
+          <div className={classes.csv}>
+            <Tooltip title="Download CSV">
+              <CSVLink data={reposdata} filename={csvFileName}>
+                <IconButton aria-label="Download">
+                  <CloudDownload />
+                </IconButton>
+              </CSVLink>
+            </Tooltip>
+          </div>
+          <ReactTable
+            getProps={(state, rowInfo, column) => {
+              return {
+                style: {
+                  backgroundColor: 'white',
+                  fontFamily: 'Roboto, sans-serif'
+                }
               }
-            }
-          }}
-          getTheadThProps={(state, rowInfo, column) => {
-            return {
-              style: {
-                fontWeight: 'bold'
+            }}
+            getTheadThProps={(state, rowInfo, column) => {
+              return {
+                style: {
+                  fontWeight: 'bold'
+                }
               }
-            }
-          }}
-          data={reposdata}
-          className="-striped -highlight"
-          columns={columns}
-          defaultPageSize={20}
-          SubComponent={row => {
-            return (
-              <BlockContainer>
-                <ProjectCard
-                  name={row.original.name}
-                  url={row.original.url}
-                  avatar=""
-                  excerpt={row.original.descriptionHTML}
-                  topics={row.original.topics}
-                  language={row.original.language}
-                  license={row.original.license}
-                />
-              </BlockContainer>
-            )
-          }}
-        />
-      </Paper>
+            }}
+            data={reposdata}
+            className="-striped -highlight"
+            columns={columns}
+            defaultPageSize={20}
+            SubComponent={row => {
+              return (
+                <BlockContainer>
+                  <ProjectCard
+                    name={row.original.name}
+                    url={row.original.url}
+                    avatar=""
+                    excerpt={row.original.descriptionHTML}
+                    topics={row.original.topics}
+                    language={row.original.language}
+                    license={row.original.license}
+                  />
+                </BlockContainer>
+              )
+            }}
+          />
+        </Paper>
+      </div>
     )
   }
 }
