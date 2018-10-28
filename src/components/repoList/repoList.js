@@ -243,10 +243,8 @@ class RepoList extends React.Component {
                   The top 100 active projects are listed below.
                 </h4>
                 <h5 className={classes.subtitle}>
-                  <br />
                   The <b>Detailed View</b> provides all the project listings
                 </h5>
-                <br />
                 <MyButton
                   color="danger"
                   size="lg"
