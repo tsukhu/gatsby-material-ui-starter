@@ -280,7 +280,7 @@ class RepoList extends React.Component {
           <div className={classes.csv}>
             <Tooltip title="Download CSV">
               <CSVLink data={reposdata} filename={csvFileName}>
-                <IconButton aria-label="Download">
+                <IconButton aria-label="Download" color="primary">
                   <CloudDownload />
                 </IconButton>
               </CSVLink>
