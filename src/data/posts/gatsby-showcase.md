@@ -39,7 +39,7 @@ date: '2018-11-04'
 
 ## PROJECT DETAILS
 
-<img src="/project/images/gatsbyjs.png" alt="Gatsby App" max-width="500" max-height="450">
+<img src="/project/images/gatsbyjs.png" alt="Gatsby App" width="500" height="450">
 
 - An React JS application built in an opinionated structure with all infrastructure , performance and production readiness taken care of by GatsbyJS
 - Daily CRON job to pull latest data and publish on GitHub pages https://ers-hcl.github.io/ GITHUB URL: https://github.com/ERS-HCL/gatsby-demo-app
