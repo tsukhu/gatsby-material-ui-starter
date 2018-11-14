@@ -40,7 +40,7 @@ class ChallengeTable extends React.Component {
 
     this.state = {
       addInProgress: false,
-      open: {},
+      open: [],
       anchorEl: null,
       order: 'asc',
       orderBy: 'name',
@@ -187,7 +187,7 @@ class ChallengeTable extends React.Component {
 
       const newData = mergedVotes.filter(item => this.applyfilter(item))
       //  const open = !!anchorEl;
-      let open = {}
+      let open = []
       // Set all pop overs off
       newData.map(item => {
         open[item.id] = false
@@ -212,15 +212,17 @@ class ChallengeTable extends React.Component {
   }
 
   handlePopoverOpen = (event, id) => {
-    let { open } = this.state
-    open[id] = true
-    this.setState({ open, anchorEl: event.target })
+   // let { open } = this.state
+    let items = [...this.state.open];
+    items[id] = true
+    this.setState({ open: items, anchorEl: event.target })
   }
 
   handlePopoverClose = (event, id) => {
-    let { open } = this.state
-    open[id] = false
-    this.setState({ open, anchorEl: null })
+  //  let { open } = this.state
+    let items = [...this.state.open];
+    items[id] = false
+    this.setState({ open: items, anchorEl: null })
   }
 
   isAdminUser = email => {
@@ -863,7 +865,7 @@ class ChallengeTable extends React.Component {
         <Popover
           className={classes.popover}
           classes={{ paper: classes.paperPopover }}
-          open={open ? (open[id] ? open[id] : false) : false}
+          open={open ? (open[id]===true ? true : false) : undefined}
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: 'top',
