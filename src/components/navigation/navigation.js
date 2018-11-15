@@ -18,12 +18,9 @@ import RateReview from '@material-ui/icons/RateReview'
 import DeveloperBoard from '@material-ui/icons/DeveloperBoard'
 import Tooltip from '@material-ui/core/Tooltip'
 import { Link } from '@reach/router'
-import Divider from '@material-ui/core/Divider'
-import { white } from '@material-ui/core/colors'
 import Home from '@material-ui/icons/Home'
 import Info from '@material-ui/icons/Info'
-import Slideshow from '@material-ui/icons/Slideshow'
-import AccountBox from '@material-ui/icons/AccountBox'
+import Apps from '@material-ui/icons/Apps'
 import Language from '@material-ui/icons/Language'
 import Bookmark from '@material-ui/icons/Bookmark'
 
@@ -122,6 +119,16 @@ class Navigation extends Component {
                 <ShowChart />
               </IconButton>
             </Tooltip>
+            <Tooltip title="Project Showcase">
+              <IconButton
+                color="inherit"
+                component={Link}
+                to="/showcase/"
+                aria-label="Project Showcase"
+              >
+                <Apps />
+              </IconButton>
+            </Tooltip>
             <Tooltip title="Github project">
               <IconButton
                 href="//github.com/ERS-HCL/gatsby-demo-app"
@@ -153,14 +160,14 @@ class Navigation extends Component {
               <ListItem
                 button
                 component={Link}
-                to="/blogs"
+                to="/showcase"
                 onClick={this.handleClose}
-                aria-label="Blogs"
+                aria-label="showcase"
               >
                 <ListItemIcon>
-                  <AccountBox />
+                  <Apps />
                 </ListItemIcon>
-                <ListItemText primary="Blogs" />
+                <ListItemText primary="Showcase" />
               </ListItem>
               <ListItem
                 button

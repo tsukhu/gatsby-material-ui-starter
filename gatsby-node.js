@@ -45,7 +45,7 @@ exports.createPages = ({ graphql, actions }) => {
         createPage: createPage,
         pageTemplate: 'src/templates/index.js',
         pageLength: 5, // This is optional and defaults to 10 if not used
-        pathPrefix: 'blogs', // This is optional and defaults to an empty string if not used
+        pathPrefix: 'showcase', // This is optional and defaults to an empty string if not used
         context: {} // This is optional and defaults to an empty object if not used
       })
       result.data.posts.edges.map(({ node }) => {

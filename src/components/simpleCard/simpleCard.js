@@ -9,13 +9,16 @@ import Typography from '@material-ui/core/Typography'
 import { Link } from '@reach/router'
 
 const styles = theme => ({
-  card: {
-    margin: 5,
-    alignContent: 'center',
-    borderRadius: 5,
-    shadowRadius: 5,
-    border: '1px grey',
-    boxShadow: '3px 3px 3px rgba(68,68,68,0.6)'
+  card2: {
+    display: 'flex'
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 1 auto',
+    maxWidth: '300px'
   }
 })
 
@@ -25,28 +28,28 @@ const styles = theme => ({
 const SimpleCard = props => {
   const { classes } = props
   return (
-    <div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography variant="h5" component="h2">
+    <Card className={classes.card2}>
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Typography component="h5" variant="h5">
             {props.title}
           </Typography>
-          <Typography color="textSecondary">{props.date}</Typography>
-          <Typography component="p">{props.excerpt}</Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            {props.date}
+          </Typography>
+          <Typography component="p">
+            {props.excerpt}
+          </Typography>
         </CardContent>
         <CardActions>
-          <Button
-            size="small"
-            color="primary"
-            component={Link}
+          <Button size="small" color="primary" component={Link}
             to={props.url}
-            aria-label={props.title}
-          >
-            Post Details
-          </Button>
+            aria-label={props.title}>
+            DETAILS
+      </Button>
         </CardActions>
-      </Card>
-    </div>
+      </div>
+    </Card>
   )
 }
 
