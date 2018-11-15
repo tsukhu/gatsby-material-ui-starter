@@ -29,6 +29,7 @@ exports.createPages = ({ graphql, actions }) => {
               frontmatter {
                 author
                 title
+                tags
                 date(formatString: "DD MMMM, YYYY")
               }
               fields {

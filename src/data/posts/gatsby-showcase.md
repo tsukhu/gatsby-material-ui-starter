@@ -1,6 +1,7 @@
 ---
 title: GATSBY Hybrid App
 date: '2018-11-04'
+tags: gastbyjs,react,graphql
 ---
 
 ## PROJECT NAME

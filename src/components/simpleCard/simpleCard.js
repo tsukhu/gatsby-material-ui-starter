@@ -7,48 +7,60 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { Link } from '@reach/router'
+import Chip from '@material-ui/core/Chip';
 
 const styles = theme => ({
   card2: {
-    display: 'flex'
-  },
-  details: {
     display: 'flex',
     flexDirection: 'column',
   },
   content: {
     flex: '1 1 auto',
     maxWidth: '300px'
-  }
+  },
+  chip: {
+    margin: theme.spacing.unit,
+    padding: 5,
+    fontSize: '10px'
+  },
 })
 
 /*
  * date,excert,title,url are inputs
  */
 const SimpleCard = props => {
-  const { classes } = props
+  const { classes, tags } = props
+  const tagArray = tags ? tags.split(',') : [];
+  const tagLabels = tagArray.map(tag => (
+    <Chip
+            label={tag.toUpperCase()}
+            color={'primary'}
+            variant={'outlined'}
+            className={classes.chip}
+            key={tag}
+          />
+  ));
   return (
-    <Card className={classes.card2}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {props.title}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            {props.date}
-          </Typography>
-          <Typography component="p">
-            {props.excerpt}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" color="primary" component={Link}
-            to={props.url}
-            aria-label={props.title}>
-            DETAILS
-      </Button>
-        </CardActions>
-      </div>
+    <Card className={classes.card2} key={props.key}>
+      <CardContent className={classes.content}>
+        <Typography component="h5" variant="h5">
+          {props.title}
+        </Typography>
+        <Typography variant="subtitle1" color="textSecondary">
+          {props.date}
+        </Typography>
+{tagLabels}
+        <Typography component="p">
+          {props.excerpt}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" color="primary" component={Link}
+          to={props.url}
+          aria-label={props.title}>
+          DETAILS
+        </Button>
+      </CardActions>
     </Card>
   )
 }

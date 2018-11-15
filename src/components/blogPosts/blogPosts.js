@@ -41,6 +41,18 @@ export class BlogPosts extends Component {
     const isFirstPage = index - 1 === 0
     const isLastPage = index === pageCount
     const pageHeader = 'Showcase (' + this.props.totalCount + ')'
+    const gridContent = group.map(({ node },index) => (
+      <Grid item key={node.id}>
+      <SimpleCard
+                    date={node.frontmatter.date}
+                    excerpt={node.excerpt}
+                    tags={node.frontmatter.tags}
+                    title={node.frontmatter.title}
+                    url={node.fields.slug}
+                    key={index}
+                  />
+      </Grid>
+    ))
     return (
       <div className={classes.card}>
         <PageHeader text={pageHeader.toUpperCase()} />
@@ -55,16 +67,7 @@ export class BlogPosts extends Component {
         <Grid container className={classes.root} spacing={8}>
           <Grid item xs={12}>
             <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-              {group.map(({ node }) => (
-                <Grid key={node.id} item>
-                <SimpleCard
-                              date={node.frontmatter.date}
-                              excerpt={node.excerpt}
-                              title={node.frontmatter.title}
-                              url={node.fields.slug}
-                            />
-                </Grid>
-              ))}
+              {gridContent}
             </Grid>
           </Grid>
         </Grid>
