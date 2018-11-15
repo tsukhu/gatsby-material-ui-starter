@@ -59,6 +59,22 @@ const getColumnData = isAdmin => {
       helperText: 'contributor email'
     },
     {
+      id: 'recommendation',
+      numeric: false,
+      disablePadding: false,
+      label: 'Recommendation',
+      type: 'select',
+      visible: true,
+      options: [
+        { name: 'Showcase', value: 'Showcase Item' },
+        { name: 'Emerging', value: 'Future Relevance' },
+        { name: 'NeedsWork', value: 'Needs to be worked on' },
+        { name: 'Deprecated', value: 'Deprecated' },
+        { name: 'None', value: 'None' }
+      ],
+      helperText: 'Project recommendation'
+    },
+    {
       id: 'domain',
       numeric: false,
       disablePadding: false,

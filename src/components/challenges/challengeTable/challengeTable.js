@@ -343,11 +343,11 @@ class ChallengeTable extends React.Component {
 
     // For new fields which are still not defined
     // Add them to the form data
-    colsMetaData.map(data => {
+    colsMetaData.map((data,index) => {
       if (currentItem[data.id] === undefined) {
         formElementsArray.push({
           id: data.id,
-          value: '',
+          value: data.type=== 'select'?colsMetaData[index].options[0].value:'',
           type: data.type,
           disabled: data.disabled,
           visible: data.visible,
