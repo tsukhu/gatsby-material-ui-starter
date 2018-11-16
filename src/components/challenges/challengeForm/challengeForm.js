@@ -69,7 +69,7 @@ class ChallengeForm extends React.Component {
     const formFields = selectedRow.map(
       field =>
         field.type === 'select'
-          ? field.visible && (
+          ? field.editable && (
               <FormControl
                 className={classes.formControl}
                 key={field.id}
@@ -94,7 +94,7 @@ class ChallengeForm extends React.Component {
                 </Select>
               </FormControl>
             )
-          : field.visible && (
+          : field.editable && (
               <TextField
                 id={field.id}
                 label={field.id.toUpperCase()}

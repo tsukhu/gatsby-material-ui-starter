@@ -82,9 +82,14 @@ const challengeTableStyles = theme => ({
   svg: {
     width: '24px',
     height:'24px',
-    display: 'block',
+    alignItems: 'center',
     margin: 'auto',
     fill: 'OrangeRed'
+  },
+  chipSmall: {
+    margin: theme.spacing.unit / 2,
+    padding: 0,
+    fontSize: '10px'
   },
   chipLow: {
     margin: theme.spacing.unit,

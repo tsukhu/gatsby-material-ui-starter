@@ -1,4 +1,4 @@
-import Checkbox from '@material-ui/core/Checkbox'
+import Chip from '@material-ui/core/Chip'
 import Paper from '@material-ui/core/Paper'
 import Popover from '@material-ui/core/Popover'
 import Snackbar from '@material-ui/core/Snackbar'
@@ -31,6 +31,10 @@ import UrlListComponent from './urlListComponent/urlListComponent'
 import Badge from './badge/badge'
 import Contributor from './contributor/contributor'
 import FloatingActionButtons from './floatingActionButtons/floatingActionButtons'
+import Avatar from '@material-ui/core/Avatar'
+import FaceIcon from '@material-ui/icons/Face'
+import DoneIcon from '@material-ui/icons/Done'
+
 const moment = require('moment-timezone')
 moment.tz.setDefault('UTC')
 
@@ -90,7 +94,7 @@ class ChallengeTable extends React.Component {
           this.dbAuthItems.on('value', dataSnapshot => {
             var items = []
 
-            dataSnapshot.forEach(function(childSnapshot) {
+            dataSnapshot.forEach(function (childSnapshot) {
               var item = childSnapshot.val()
               items.push(item)
             })
@@ -137,7 +141,7 @@ class ChallengeTable extends React.Component {
 
     this.dbItems.on('value', dataSnapshot => {
       var items = []
-      dataSnapshot.forEach(function(childSnapshot) {
+      dataSnapshot.forEach(function (childSnapshot) {
         const item = childSnapshot.val()
         items.push(item)
       })
@@ -159,7 +163,7 @@ class ChallengeTable extends React.Component {
     this.dbVotes.on('value', dataSnapshot => {
       var items = []
 
-      dataSnapshot.forEach(function(childSnapshot) {
+      dataSnapshot.forEach(function (childSnapshot) {
         const item = childSnapshot.val()
         items.push(item)
       })
@@ -212,14 +216,14 @@ class ChallengeTable extends React.Component {
   }
 
   handlePopoverOpen = (event, id) => {
-   // let { open } = this.state
+    // let { open } = this.state
     let items = [...this.state.open];
     items[id] = true
     this.setState({ open: items, anchorEl: event.target })
   }
 
   handlePopoverClose = (event, id) => {
-  //  let { open } = this.state
+    //  let { open } = this.state
     let items = [...this.state.open];
     items[id] = false
     this.setState({ open: items, anchorEl: null })
@@ -252,28 +256,26 @@ class ChallengeTable extends React.Component {
     const filteredData =
       order === 'desc'
         ? this.state.filteredData.sort(
-            (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
-          )
+          (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
+        )
         : this.state.filteredData.sort(
-            (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1)
-          )
+          (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1)
+        )
 
     this.setState({ filteredData, order, orderBy })
   }
 
-  handleSelectAllClick = (event, checked) => {
-    const { editing } = this.state
-    if (editing) return
-    this.setState({ selected: [] })
-  }
 
   handleRowClick = (event, id, newRow) => {
     const { selected, editing, data, isLoggedIn } = this.state
     if (editing || !isLoggedIn) {
       return
     }
-    let newSelected = []
-    if (selected.indexOf(id) !== 0) newSelected.push(id)
+    let newSelected = [...selected];
+    if (selected.indexOf(id) !== 0) {
+      newSelected = [];
+      newSelected.push(id)
+    }
     const currentItem = data.find(item => item.id === id)
     const isEditable = this.checkEditStatus(currentItem)
 
@@ -336,6 +338,7 @@ class ChallengeTable extends React.Component {
               ? newRow
               : false,
           visible: colData[0].visible ? colData[0].visible : false,
+          editable: colData[0].editable ? colData[0].editable : false,
           options: colData[0].options ? colData[0].options : []
         })
       }
@@ -343,14 +346,15 @@ class ChallengeTable extends React.Component {
 
     // For new fields which are still not defined
     // Add them to the form data
-    colsMetaData.map((data,index) => {
+    colsMetaData.map((data, index) => {
       if (currentItem[data.id] === undefined) {
         formElementsArray.push({
           id: data.id,
-          value: data.type=== 'select'?colsMetaData[index].options[0].value:'',
+          value: data.type === 'select' ? colsMetaData[index].options[0].value : '',
           type: data.type,
           disabled: data.disabled,
           visible: data.visible,
+          editable: data.editable,
           multiline: data.multiline,
           helperText: data.helperText,
           options: data.options
@@ -553,7 +557,7 @@ class ChallengeTable extends React.Component {
       .child('data')
       .orderByChild('id')
       .equalTo(id)
-      .on('value', function(snapshot) {
+      .on('value', function (snapshot) {
         const value = snapshot.val()
         for (var k in value) keys.push(k)
       })
@@ -630,7 +634,7 @@ class ChallengeTable extends React.Component {
         filterUpdatedBefore: '',
         filterLatest: false
       },
-      function() {
+      function () {
         const newData = this.state.data.filter(item => this.applyfilter(item))
         this.setState({
           ...this.state,
@@ -657,7 +661,7 @@ class ChallengeTable extends React.Component {
             ? moment(filter.updatedBefore).format()
             : null
       },
-      function() {
+      function () {
         const newData = this.state.data.filter(item => this.applyfilter(item))
         this.setState({
           ...this.state,
@@ -727,7 +731,7 @@ class ChallengeTable extends React.Component {
       {
         data: data
       },
-      function() {
+      function () {
         this.updateRecord(id)
       }
     )
@@ -740,7 +744,7 @@ class ChallengeTable extends React.Component {
       {
         data: data
       },
-      function() {
+      function () {
         this.updateRecord(id)
       }
     )
@@ -791,27 +795,27 @@ class ChallengeTable extends React.Component {
 
     const isTextFiltered = this.state.filterText
       ? item.name.toLowerCase().includes(this.state.filterText.toLowerCase()) ||
-        item.description
-          .toLowerCase()
-          .includes(this.state.filterText.toLowerCase())
+      item.description
+        .toLowerCase()
+        .includes(this.state.filterText.toLowerCase())
       : true
 
     const isDomainFiltered = this.state.filterDomain
       ? item.domain
-          .toLowerCase()
-          .includes(this.state.filterDomain.toLowerCase())
+        .toLowerCase()
+        .includes(this.state.filterDomain.toLowerCase())
       : true
 
     const isPriorityFiltered = this.state.filterPriority
       ? item.priority
-          .toLowerCase()
-          .includes(this.state.filterPriority.toLowerCase())
+        .toLowerCase()
+        .includes(this.state.filterPriority.toLowerCase())
       : true
 
     const isStatusFiltered = this.state.filterStatus
       ? item.status
-          .toLowerCase()
-          .includes(this.state.filterStatus.toLowerCase())
+        .toLowerCase()
+        .includes(this.state.filterStatus.toLowerCase())
       : true
 
     const isApprovalPendingFiltered = true
@@ -865,7 +869,7 @@ class ChallengeTable extends React.Component {
         <Popover
           className={classes.popover}
           classes={{ paper: classes.paperPopover }}
-          open={open ? (open[id]===true ? true : false) : undefined}
+          open={open ? (open[id] === true ? true : false) : undefined}
           anchorEl={anchorEl}
           anchorOrigin={{
             vertical: 'top',
@@ -1009,7 +1013,6 @@ class ChallengeTable extends React.Component {
                 isLoggedIn={isLoggedIn}
                 order={order}
                 orderBy={orderBy}
-                onSelectAllClick={this.handleSelectAllClick}
                 onRequestSort={this.handleRequestSort}
                 rowCount={filteredData ? filteredData.length : 0}
               />
@@ -1027,15 +1030,21 @@ class ChallengeTable extends React.Component {
                         key={n.id}
                         selected={isSelected}
                         className={classes.row}
+                        onClick={event =>
+                          this.handleRowClick(event, n.id, false)
+                        }
                       >
                         <TableCell padding="checkbox">
                           {this.isLatest(n.updatedOn) && newSVG}
-                          <Checkbox
+                          {/*  <Checkbox
                             checked={isSelected}
                             onClick={event =>
                               this.handleRowClick(event, n.id, false)
                             }
-                          />
+                          /> */}
+                          <Badge text={n.domain} className={classes.svg} />
+
+                          <Contributor email={n.contributor} subject={n.name} className={classes.svg} />
                           {isEditable &&
                             isSelected && (
                               <FloatingActionButtons
@@ -1047,6 +1056,9 @@ class ChallengeTable extends React.Component {
                             )}
                         </TableCell>
                         <TableCell padding="dense">
+                        {n.recommendation && (<div><Badge
+                            text={n.recommendation.toUpperCase()}
+                            className={classes.svg} /></div>)}
                           {n.name.length > 100
                             ? n.name.slice(0, 100) + '...'
                             : n.name}
@@ -1064,12 +1076,12 @@ class ChallengeTable extends React.Component {
                             ? n.impact.slice(0, 100) + '...'
                             : n.impact}
                         </TableCell>
-                        <TableCell padding="none">
+                        {/*                         <TableCell padding="none">
                           <Contributor email={n.contributor} subject={n.name} />
                         </TableCell>
                         <TableCell padding="none">
                           <Badge text={n.domain} />
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell padding="none">
                           {isLoggedIn && isAdmin ? (
                             <SelectComponent
@@ -1089,8 +1101,8 @@ class ChallengeTable extends React.Component {
                               ]}
                             />
                           ) : (
-                            <StatusComponent status={n.status} />
-                          )}
+                              <StatusComponent status={n.status} />
+                            )}
                         </TableCell>
                         <TableCell padding="none" className={classes.smallCell}>
                           {isLoggedIn && isAdmin ? (
@@ -1108,8 +1120,8 @@ class ChallengeTable extends React.Component {
                               ]}
                             />
                           ) : (
-                            <PriorityChip priority={n.priority} />
-                          )}
+                              <PriorityChip priority={n.priority} />
+                            )}
                         </TableCell>
                         <TableCell padding="none">
                           <UrlListComponent urls={n.githubURL} />
@@ -1123,8 +1135,8 @@ class ChallengeTable extends React.Component {
                               onDownVote={this.handleDownVote}
                             />
                           ) : (
-                            <div />
-                          )}
+                              <div />
+                            )}
                         </TableCell>
                       </TableRow>
                     )

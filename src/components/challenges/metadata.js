@@ -9,6 +9,7 @@ export const createData = contributor => {
     domain: 'Other',
     status: 'Approval Pending',
     priority: 'None',
+    recommendation: 'None',
     githubURL: '',
     updatedBy: '',
     updatedOn: '',
@@ -16,6 +17,12 @@ export const createData = contributor => {
   }
 }
 
+/**
+ * This is the table and schema meta data used to dynamically render the
+ * edit form with a mapping of the control type and values
+ * Also used to transform the database row to a form row 
+ * @param {*} isAdmin 
+ */
 const getColumnData = isAdmin => {
   return [
     {
@@ -25,7 +32,8 @@ const getColumnData = isAdmin => {
       label: 'Name',
       type: 'text',
       multiline: true,
-      visible: true,
+      visible: true, // for table display
+      editable: true, // for form display
       helperText: 'Challenge Name'
     },
     {
@@ -36,6 +44,7 @@ const getColumnData = isAdmin => {
       type: 'text',
       multiline: true,
       visible: true,
+      editable: true,
       helperText: 'Description (Hover for full text)'
     },
     {
@@ -46,6 +55,7 @@ const getColumnData = isAdmin => {
       type: 'text',
       multiline: true,
       visible: true,
+      editable: true,
       helperText: 'Business Impact'
     },
     {
@@ -55,7 +65,8 @@ const getColumnData = isAdmin => {
       label: 'Contributor',
       type: 'email',
       disabled: isAdmin ? false : true,
-      visible: true,
+      visible: false,
+      editable: true,
       helperText: 'contributor email'
     },
     {
@@ -64,7 +75,8 @@ const getColumnData = isAdmin => {
       disablePadding: false,
       label: 'Recommendation',
       type: 'select',
-      visible: true,
+      visible: false,
+      editable: true,
       options: [
         { name: 'Showcase', value: 'Showcase Item' },
         { name: 'Emerging', value: 'Future Relevance' },
@@ -90,7 +102,8 @@ const getColumnData = isAdmin => {
         { name: 'Mobility', value: 'Mobility' },
         { name: 'Other', value: 'Other' }
       ],
-      visible: true,
+      visible: false,
+      editable: true,
       helperText: 'Technology Domain'
     },
     {
@@ -109,6 +122,7 @@ const getColumnData = isAdmin => {
         : [{ name: 'ApprovalPending', value: 'Approval Pending' }],
       disabled: isAdmin ? false : true,
       visible: true,
+      editable: true,
       helperText: 'Status'
     },
     {
@@ -125,6 +139,7 @@ const getColumnData = isAdmin => {
       ],
       disabled: isAdmin ? false : true,
       visible: true,
+      editable: true,
       helperText: 'Priority'
     },
     {
@@ -135,6 +150,7 @@ const getColumnData = isAdmin => {
       type: 'text',
       multiline: true,
       visible: true,
+      editable: true,
       helperText: 'Comma separated Github URLs'
     },
     {
@@ -145,6 +161,7 @@ const getColumnData = isAdmin => {
       type: 'text',
       multiline: false,
       visible: false,
+      editable: false,
       helperText: 'Updated By'
     },
     {
@@ -155,6 +172,7 @@ const getColumnData = isAdmin => {
       type: 'text',
       multiline: false,
       visible: false,
+      editable: false,
       helperText: 'Updated On'
     }
   ]

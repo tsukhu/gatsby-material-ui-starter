@@ -16,7 +16,7 @@ const domainColor = {
 const Badge = props => {
   const { classes, text } = props
   const formatText = text.replace(/\s+/g, '').toLowerCase()
-  const badgeColor = domainColor[formatText]
+  const badgeColor = domainColor[formatText]?domainColor[formatText]:'success';
   return <span className={classes.badge + ' ' + classes[badgeColor]}>{text}</span>
 }
 

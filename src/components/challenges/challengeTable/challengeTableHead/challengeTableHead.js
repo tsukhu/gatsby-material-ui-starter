@@ -15,7 +15,6 @@ class ChallengeTableHead extends React.Component {
 
   render() {
     const {
-      onSelectAllClick,
       order,
       orderBy,
       numSelected,
@@ -25,13 +24,14 @@ class ChallengeTableHead extends React.Component {
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox">
+{/*           <TableCell padding="checkbox">
             <Checkbox
               checked={numSelected === rowCount && numSelected > 0}
               indeterminate={numSelected > 0 && numSelected < rowCount}
               onChange={onSelectAllClick}
             />
-          </TableCell>
+          </TableCell> */}
+          <TableCell padding="checkbox"></TableCell>
           {getColumnData(false).map(column => {
             return (
               column.visible &&
@@ -66,7 +66,6 @@ class ChallengeTableHead extends React.Component {
 ChallengeTableHead.propTypes = {
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.string.isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired
