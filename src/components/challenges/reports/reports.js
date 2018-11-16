@@ -29,7 +29,9 @@ import StackedBarChart from './stacked-barchart'
 import {
   transformToStateReport,
   transformStatusWisePriorityStackReport,
-  transformPriortyWiseDomainStackReport
+  transformPriortyWiseDomainStackReport,
+  transformStatusWiseDomainStackReport,
+  transformDomainWiseShowCaseNumbersReport
 } from '../../../utils/data-transformer'
 
 const stackColors = [
@@ -51,7 +53,7 @@ const styles = theme => ({
     rounded: true,
     borderRadius: 5,
     shadowRadius: 5,
-    width: 100,
+    width: 300,
     height: 300,
     flex: '1 0 auto'
   },
@@ -127,6 +129,34 @@ class Reports extends React.Component {
               )}
               title="PRIORITY WISE STATUS"
             />
+          </Paper>
+          <Paper className={classes.paper} elevation={2}>
+            <StackedBarChart
+              legendData={[
+                { name: 'PENDING', symbol: { fill: stackColors[0] } },
+                { name: 'BACKLOG', symbol: { fill: stackColors[1] } },
+                { name: 'DONE', symbol: { fill: stackColors[2] } },
+                { name: 'WIP', symbol: { fill: stackColors[3] } }
+              ]}
+              data={transformStatusWiseDomainStackReport(this.props.data)}
+              tickFormat={[
+                'Web UI',
+                'Analytics',
+                'Microservices',
+                'Cloud',
+                'Mobility',
+                'DevOps',
+                'Security',
+                'Other'
+              ].sort((a, b) => (b < a ? 1 : -1))}
+              title="STATUS WISE DOMAIN STATUS"
+            />
+          </Paper>
+          <Paper className={classes.paper} elevation={2}>
+          <BarChart 
+           title="DOMAIN WISE SHOWCASE"
+           data={transformDomainWiseShowCaseNumbersReport(this.props.data)}
+           />
           </Paper>
         </div>
       </Fade>

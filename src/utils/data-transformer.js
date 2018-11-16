@@ -1,5 +1,17 @@
 import * as _ from 'lodash'
 
+
+const domainList = [
+  'Web UI',
+  'Microservices',
+  'Analytics',
+  'DevOps',
+  'Security',
+  'Cloud',
+  'Mobility',
+  'Other'
+]
+
 const transformToStateReport = (data, groupBy) => {
   const transformedData = _
     .chain(data)
@@ -27,16 +39,7 @@ const transformPriortyWiseDomainStackReport = data => {
         .value()
     )
     .value()
-  const domainList = [
-    'Web UI',
-    'Microservices',
-    'Analytics',
-    'DevOps',
-    'Security',
-    'Cloud',
-    'Mobility',
-    'Other'
-  ]
+
 
   domainList.forEach(domain => {
     report.forEach(items => {
@@ -51,6 +54,51 @@ const transformPriortyWiseDomainStackReport = data => {
 
 
   return report
+}
+
+
+const transformStatusWiseDomainStackReport = data => {
+  const report = _(data)
+    .sortBy(['status'])
+    .groupBy(f => f.status)
+    .map(item =>
+      _(item)
+        .groupBy(f => f.domain)
+        .map((objs, key) => ({
+          x: isNaN(key) ? key : +key,
+          y: _.reduce(objs, (count, v) => count + 1, 0)
+        }))
+        .value()
+    )
+    .value()
+
+  domainList.forEach(domain => {
+    report.forEach(items => {
+      if (items.filter(data => data.x === domain).length === 0) {
+        items.push({
+          x: domain,
+          y: 0
+        })
+      }
+    })
+  })
+
+
+  return report
+}
+
+const transformDomainWiseShowCaseNumbersReport = (data) => {
+  const transformedData = _
+    .chain(data)
+    .filter(data => data.recommendation === 'Showcase Item')
+    .groupBy(f => f.domain)
+    .map((objs, key) => ({
+      x: isNaN(key) ? key : +key,
+      y: _.reduce(objs, (count, v) => count + 1, 0)
+    }))
+    .value()
+
+  return transformedData
 }
 
 const transformStatusWisePriorityStackReport = data => {
@@ -86,5 +134,7 @@ const transformStatusWisePriorityStackReport = data => {
 export {
   transformToStateReport,
   transformStatusWisePriorityStackReport,
-  transformPriortyWiseDomainStackReport
+  transformPriortyWiseDomainStackReport,
+  transformStatusWiseDomainStackReport,
+  transformDomainWiseShowCaseNumbersReport
 }
