@@ -31,7 +31,7 @@ class ChallengeTableHead extends React.Component {
               onChange={onSelectAllClick}
             />
           </TableCell> */}
-          <TableCell padding="checkbox"></TableCell>
+          <TableCell padding="dense"></TableCell>
           {getColumnData(false).map(column => {
             return (
               column.visible &&

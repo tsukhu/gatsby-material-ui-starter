@@ -780,6 +780,13 @@ class ChallengeTable extends React.Component {
     }
   }
 
+  emailShortForm = (email) => {
+    if (email === undefined)
+    return
+    const index = email.indexOf('@') > -1 ? email.indexOf('@') : 5
+    return email.substr(0, index);
+  }
+
   applyfilter = item => {
     const isUpdatedAfterFilter = this.state.filterUpdatedAfter
       ? this.isUpdatedAfter(item.updatedOn, this.state.filterUpdatedAfter)
@@ -1044,7 +1051,12 @@ class ChallengeTable extends React.Component {
                           /> */}
                           <Badge text={n.domain} className={classes.svg} />
 
-                          <Contributor email={n.contributor} subject={n.name} className={classes.svg} />
+                         {/*  <Contributor email={n.contributor} subject={n.name} className={classes.svg} /> */}
+                         <div className={classes.spacingTop}>
+                          {n.contributor && <div><b>By: </b>{this.emailShortForm(n.contributor)}</div>}
+                          {n.owner && <div><b>Owner: </b>{n.owner}</div>}
+                          {n.implementor && <div><b>Implementor(s): </b>{n.implementor}</div>}
+                          </div>
                           {isEditable &&
                             isSelected && (
                               <FloatingActionButtons
@@ -1056,7 +1068,7 @@ class ChallengeTable extends React.Component {
                             )}
                         </TableCell>
                         <TableCell padding="dense">
-                        {n.recommendation && (<div><Badge
+                        {n.recommendation && (<div className={classes.spacingBottom}><Badge
                             text={n.recommendation.toUpperCase()}
                             className={classes.svg} /></div>)}
                           {n.name.length > 100

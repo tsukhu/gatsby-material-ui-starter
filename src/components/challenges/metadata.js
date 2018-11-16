@@ -11,6 +11,8 @@ export const createData = contributor => {
     priority: 'None',
     recommendation: 'None',
     githubURL: '',
+    owner: '',
+    implementor: '',
     updatedBy: '',
     updatedOn: '',
     impact: ''
@@ -68,6 +70,26 @@ const getColumnData = isAdmin => {
       visible: false,
       editable: true,
       helperText: 'contributor email'
+    },
+    {
+      id: 'owner',
+      numeric: false,
+      disablePadding: false,
+      label: 'Owner',
+      type: 'text',
+      visible: false,
+      editable: true,
+      helperText: 'Challenge Owner'
+    },
+    {
+      id: 'implementor',
+      numeric: false,
+      disablePadding: false,
+      label: 'implementors',
+      type: 'text',
+      visible: false,
+      editable: true,
+      helperText: 'Challenge Implementor(s)'
     },
     {
       id: 'recommendation',

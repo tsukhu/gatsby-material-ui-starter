@@ -79,6 +79,12 @@ const challengeTableStyles = theme => ({
   root: {
     marginTop: 5
   },
+  spacingTop: {
+    marginTop: 5
+  },
+  spacingBottom: {
+    marginBottom: 5
+  },
   svg: {
     width: '24px',
     height:'24px',
