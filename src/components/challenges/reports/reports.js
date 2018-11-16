@@ -154,7 +154,7 @@ class Reports extends React.Component {
           </Paper>
           <Paper className={classes.paper} elevation={2}>
           <BarChart 
-           title="DOMAIN WISE SHOWCASE"
+           title="DOMAIN WISE SHOWCASE PROJECT COUNT"
            data={transformDomainWiseShowCaseNumbersReport(this.props.data)}
            />
           </Paper>
