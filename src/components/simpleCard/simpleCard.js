@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { Link } from '@reach/router'
@@ -23,22 +24,28 @@ const styles = theme => ({
     padding: 5,
     fontSize: '10px'
   },
+  cover: {
+    width: '100%',
+    height: 150,
+    alignItem: 'center'
+  }
 })
 
 /*
  * date,excert,title,url are inputs
  */
 const SimpleCard = props => {
-  const { classes, tags } = props
+  const { classes, tags, image, author } = props
   const tagArray = tags ? tags.split(',') : [];
+  const imageUrl = image ? image : '/images/placeholder.jpg';
   const tagLabels = tagArray.map(tag => (
     <Chip
-            label={tag.toUpperCase()}
-            color={'primary'}
-            variant={'outlined'}
-            className={classes.chip}
-            key={tag}
-          />
+      label={tag.toUpperCase()}
+      color={'primary'}
+      variant={'outlined'}
+      className={classes.chip}
+      key={tag}
+    />
   ));
   return (
     <Card className={classes.card2} key={props.key}>
@@ -47,12 +54,17 @@ const SimpleCard = props => {
           {props.title}
         </Typography>
         <Typography variant="subtitle1" color="textSecondary">
-          {props.date}
+          {props.author}
         </Typography>
-{tagLabels}
+        {tagLabels}
         <Typography component="p">
           {props.excerpt}
         </Typography>
+        <CardMedia
+          className={classes.cover}
+          image={imageUrl}
+          title={props.title}
+        />
       </CardContent>
       <CardActions>
         <Button size="small" color="primary" component={Link}
@@ -61,6 +73,7 @@ const SimpleCard = props => {
           DETAILS
         </Button>
       </CardActions>
+
     </Card>
   )
 }

@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import PostPagination from './postPagination/postPagination'
 import PageHeader from '../pageHeader/pageHeader'
 import SimpleCard from '../simpleCard/simpleCard'
+import ResponsiveImage from '../responsiveImage/responsiveImage'
 
 
 const styles = theme => ({
@@ -41,44 +42,49 @@ export class BlogPosts extends Component {
     const isFirstPage = index - 1 === 0
     const isLastPage = index === pageCount
     const pageHeader = 'Showcase (' + this.props.totalCount + ')'
-    const gridContent = group.map(({ node },index) => (
+    const gridContent = group.map(({ node }, index) => (
       <Grid item key={node.id}>
-      <SimpleCard
-                    date={node.frontmatter.date}
-                    excerpt={node.excerpt}
-                    tags={node.frontmatter.tags}
-                    title={node.frontmatter.title}
-                    url={node.fields.slug}
-                    key={index}
-                  />
+        <SimpleCard
+          date={node.frontmatter.date}
+          excerpt={node.excerpt}
+          tags={node.frontmatter.tags}
+          image={node.frontmatter.image}
+          title={node.frontmatter.title}
+          author={node.frontmatter.author}
+          url={node.fields.slug}
+          key={index}
+        />
       </Grid>
     ))
     return (
-      <div className={classes.card}>
-        <PageHeader text={pageHeader.toUpperCase()} />
-        <PostPagination
-          index={index}
-          pageCount={pageCount}
-          isFirstPage={isFirstPage}
-          isLastPage={isLastPage}
-          nextUrl={nextUrl}
-          previousUrl={previousUrl}
-        />
-        <Grid container className={classes.root} spacing={8}>
-          <Grid item xs={12}>
-            <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-              {gridContent}
+      <div>
+
+        <div className={classes.card}>
+          <PageHeader text={pageHeader.toUpperCase()} />
+          <PostPagination
+            index={index}
+            pageCount={pageCount}
+            isFirstPage={isFirstPage}
+            isLastPage={isLastPage}
+            nextUrl={nextUrl}
+            previousUrl={previousUrl}
+          />
+          <Grid container className={classes.root} spacing={8}>
+            <Grid item xs={12}>
+              <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
+                {gridContent}
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <PostPagination
-          index={index}
-          pageCount={pageCount}
-          isFirstPage={isFirstPage}
-          isLastPage={isLastPage}
-          nextUrl={nextUrl}
-          previousUrl={previousUrl}
-        />
+          <PostPagination
+            index={index}
+            pageCount={pageCount}
+            isFirstPage={isFirstPage}
+            isLastPage={isLastPage}
+            nextUrl={nextUrl}
+            previousUrl={previousUrl}
+          />
+        </div>
       </div>
     )
   }

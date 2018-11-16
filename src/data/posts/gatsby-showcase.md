@@ -1,7 +1,9 @@
 ---
 title: GATSBY Hybrid App
 date: '2018-11-04'
+author: Tarun Sukhu <tsukhu@hcl.com>
 tags: gastbyjs,react,graphql
+image: /project/images/gatsbyjs.png
 ---
 
 ## PROJECT NAME
