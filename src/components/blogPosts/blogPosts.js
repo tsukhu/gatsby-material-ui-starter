@@ -85,10 +85,10 @@ export class BlogPosts extends Component {
             <img
               src="/images/showcase2.jpg" className={classes.responsive} />
             <Typography component="h4" variant="h4" className={classes.topTeft}>
-          <strong>ERS HCL Open Source</strong>
-        </Typography>
-        <Typography component="h5" variant="h5" className={classes.topTeftTwo}>
-          Projects Showcase
+              <strong>ERS HCL Open Source</strong>
+            </Typography>
+            <Typography component="h5" variant="h5" className={classes.topTeftTwo}>
+              Projects Showcase
         </Typography>
           </div>
           <PageHeader text={pageHeader.toUpperCase()} />
