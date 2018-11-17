@@ -5,17 +5,30 @@ import Grid from '@material-ui/core/Grid'
 import PostPagination from './postPagination/postPagination'
 import PageHeader from '../pageHeader/pageHeader'
 import SimpleCard from '../simpleCard/simpleCard'
-import ResponsiveImage from '../responsiveImage/responsiveImage'
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 
 
 const styles = theme => ({
+  container: {
+    position: 'relative',
+    textAlign: 'center',
+    color: 'black'
+  },
   responsive: {
     width: '100%',
     maxHeight: 400,
     height: 'auto'
+  },
+  topTeft: {
+    position: 'absolute',
+    top: '8px',
+    left: '16px'
+  },
+  topTeftTwo: {
+    position: 'absolute',
+    top: '50px',
+    left: '25px'
   },
   card: {
     alignSelf: 'auto',
@@ -68,8 +81,16 @@ export class BlogPosts extends Component {
       <div>
 
         <div className={classes.card}>
-          <img
-              src="/images/showcase2.jpg" className={classes.responsive}/>
+          <div className={classes.container}>
+            <img
+              src="/images/showcase2.jpg" className={classes.responsive} />
+            <Typography component="h4" variant="h4" className={classes.topTeft}>
+          <strong>ERS HCL Open Source</strong>
+        </Typography>
+        <Typography component="h5" variant="h5" className={classes.topTeftTwo}>
+          Projects Showcase
+        </Typography>
+          </div>
           <PageHeader text={pageHeader.toUpperCase()} />
           <PostPagination
             index={index}
