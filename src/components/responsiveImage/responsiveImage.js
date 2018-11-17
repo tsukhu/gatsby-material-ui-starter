@@ -5,12 +5,12 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
     container: {
-        position: 'relative',
+    //    position: 'relative',
         maxWidth: '100%'
     },
     image: {
         position: 'absolute',
-        top: 0,
+        top: 50,
         right: 0,
         bottom: 0,
         left: 0,
@@ -20,11 +20,10 @@ const styles = theme => ({
 })
 
 const ResponsiveImage = ({ classes, src, width, height }) => {
-    console.log(width)
     return (
         <div style={{ width }} className={classes.container}>
-            <div style={{ paddingBottom: (height / width * 100) + '%' }} />
-            <img src={src} className={classes.image} />
+        <div style={{ paddingBottom: (height / width * 100) + '%' }}/>
+            <img   src={src} className={classes.image} />
         </div>
 
     )

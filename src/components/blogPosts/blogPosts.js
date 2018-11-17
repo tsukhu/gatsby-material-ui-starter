@@ -6,9 +6,17 @@ import PostPagination from './postPagination/postPagination'
 import PageHeader from '../pageHeader/pageHeader'
 import SimpleCard from '../simpleCard/simpleCard'
 import ResponsiveImage from '../responsiveImage/responsiveImage'
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 
 
 const styles = theme => ({
+  responsive: {
+    width: '100%',
+    maxHeight: 400,
+    height: 'auto'
+  },
   card: {
     alignSelf: 'auto',
     flex: '1 1 auto',
@@ -60,6 +68,8 @@ export class BlogPosts extends Component {
       <div>
 
         <div className={classes.card}>
+          <img
+              src="/images/showcase2.jpg" className={classes.responsive}/>
           <PageHeader text={pageHeader.toUpperCase()} />
           <PostPagination
             index={index}
