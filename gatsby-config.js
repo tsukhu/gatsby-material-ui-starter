@@ -1,7 +1,7 @@
 require('dotenv').config()
 module.exports = {
   siteMetadata: {
-    title: `Open Source @ERS-HCL`,
+    title: `OSS @ERS-HCL`,
     maintainedBy: `Maintained by ERS Technology Office`,
     poweredBy: `GatsbyJS`,
     contributors: `Tarun Sukhu<tsukhu@hcl.com>`,
