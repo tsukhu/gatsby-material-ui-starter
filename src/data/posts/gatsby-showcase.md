@@ -4,8 +4,8 @@ date: '2018-11-04'
 author: Tarun Sukhu <tsukhu@hcl.com>
 tags: gastbyjs,react,graphql
 image: /project/images/gatsbyjs.png
+excerpt: GatsbyJS based hybrid app (Prerendered HTML + dynamic content for split second performance). This is based on GatsbyJS,github APIs, Firebase , Material-UI , React 16, Victory Charts
 ---
-
 ## PROJECT NAME
 
 - Gatsby-demo-app

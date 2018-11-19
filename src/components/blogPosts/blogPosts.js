@@ -67,11 +67,11 @@ export class BlogPosts extends Component {
       <Grid item key={node.id}>
         <SimpleCard
           date={node.frontmatter.date}
-          excerpt={node.excerpt}
           tags={node.frontmatter.tags}
           image={node.frontmatter.image}
           title={node.frontmatter.title}
           author={node.frontmatter.author}
+          excerpt={node.frontmatter.excerpt}
           url={node.fields.slug}
           key={index}
         />

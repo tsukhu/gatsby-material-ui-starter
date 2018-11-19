@@ -31,6 +31,7 @@ exports.createPages = ({ graphql, actions }) => {
                 title
                 tags
                 image
+                excerpt
                 date(formatString: "DD MMMM, YYYY")
               }
               fields {
