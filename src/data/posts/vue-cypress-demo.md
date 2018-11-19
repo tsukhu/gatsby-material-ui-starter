@@ -1,8 +1,9 @@
 ---
 title: Cypress Integration with Vue app 
-date: '2018-11-02'
+date: '2018-11-19'
 author: Tarun Sukhu <tsukhu@hcl.com>
 tags: vuex,cypress, integration test
+image: /project/images/Cypress_crud.gif
 excerpt: A reference implementation using Vue and Vuex. It demonstrates the integration with cypress.io for integration testing
 ---
 
