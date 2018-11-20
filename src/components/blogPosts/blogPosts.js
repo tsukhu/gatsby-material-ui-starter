@@ -6,46 +6,7 @@ import PostPagination from './postPagination/postPagination'
 import PageHeader from '../pageHeader/pageHeader'
 import SimpleCard from '../simpleCard/simpleCard'
 import Typography from '@material-ui/core/Typography';
-
-
-
-const styles = theme => ({
-  container: {
-    position: 'relative',
-    textAlign: 'center',
-    color: 'black'
-  },
-  responsive: {
-    width: '100%',
-    maxHeight: 400,
-    height: 'auto'
-  },
-  topTeft: {
-    position: 'absolute',
-    top: '8px',
-    left: '16px'
-  },
-  topTeftTwo: {
-    position: 'absolute',
-    top: '50px',
-    left: '25px'
-  },
-  card: {
-    alignSelf: 'auto',
-    flex: '1 1 auto',
-    height: '100%',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    theme: 'inherit',
-    alignContent: 'center'
-  },
-  root: {
-    padding: theme.spacing.unit * 2,
-  },
-  control: {
-    padding: theme.spacing.unit * 2,
-  }
-})
+import blogPostStyle from '../../style/components/blogPosts/blogPostStyle'
 
 export class BlogPosts extends Component {
   state = {
@@ -126,4 +87,4 @@ BlogPosts.propTypes = {
   theme: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles, { withTheme: true })(BlogPosts)
+export default withStyles(blogPostStyle, { withTheme: true })(BlogPosts)

@@ -4,21 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import BlogPosts from '../blogPosts/blogPosts'
 import Layout from '../layout'
 import Paper from '@material-ui/core/Paper'
-import blueGrey from '@material-ui/core/colors/blueGrey'
+import homeStyle from '../../style/components/Home/homeStyle'
 
-
-const styles = theme => ({
-  paper: {
-    display: 'flex',
-    transitionEnabled: true,
-    backgroundColor: blueGrey[50],
-    alignContent: 'center',
-    alignItems: 'center',
-    borderRadius: 5,
-    shadowRadius: 5,
-    margin: 5
-  }
-})
 class Home extends Component {
   render() {
     const { classes } = this.props
@@ -39,4 +26,4 @@ Home.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(Home)
+export default withStyles(homeStyle, { withTheme: true })(Home)

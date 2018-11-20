@@ -1,6 +1,6 @@
 {
-  "name": "gatsby-demo-app",
-  "description": "Gatsby ERS-HCL site generator",
+  "name": "gatsby-material-ui-starter",
+  "description": "Gatsby Material-UI Starter",
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
@@ -33,12 +33,10 @@
     "moment-timezone": "^0.5.23",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-github-fork-ribbon": "^0.6.0",
     "react-helmet": "^5.2.0",
     "react-html-parser": "^2.0.2",
     "react-responsive": "^6.0.1",
-    "react-router-dom": "^4.3.1",
-    "typeface-roboto": "0.0.54"
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "gh-pages": "^2.0.1",
@@ -48,7 +46,7 @@
   "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ERS-HCL/gatsby-demo-app.git"
+    "url": "git+https://github.com/tsukhu/gatsby-material-ui-starter.git"
   },
   "keywords": [
     "gatsby",
@@ -57,7 +55,7 @@
   ],
   "author": "Tarun Sukhu <tksukhu@gmail.com>",
   "bugs": {
-    "url": "https://github.com/ERS-HCL/gatsby-demo-app/issues"
+    "url": "https://github.com/tsukhu/gatsby-material-ui-starter/issues"
   },
-  "homepage": "https://github.com/ERS-HCL/gatsby-demo-app#readme"
+  "homepage": "https://github.com/tsukhu/gatsby-material-ui-starter#readme"
 }

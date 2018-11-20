@@ -20,11 +20,10 @@ import Typography from '@material-ui/core/Typography'
 export default ({ data }) => {
   return (
     <Layout>
-      <Typography component="h5" variant="h5" >
-        About {data.site.siteMetadata.title}</Typography>
+      <Typography component="h5" variant="h5">
+       {data.site.siteMetadata.title}</Typography>
       <Typography component="p">
-        We're the only site running on your computer dedicated to showing the best
-        photos and videos of pandas eating lots of food.
+        This is a gatsby starter project with material-ui integration
     </Typography>
     </Layout>
   )

@@ -5,14 +5,7 @@ import PropTypes from "prop-types";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Grid from "@material-ui/core/Grid";
-
-const style = {
-  grid: {
-    marginRight: "-15px",
-    marginLeft: "-15px",
-    width: "auto"
-  }
-};
+import gridItemContainerStyle from '../../style/components/GridContainer/GridItemContainerStyle'
 
 function GridContainer({ ...props }) {
   const { classes, children, className, ...rest } = props;
@@ -33,4 +26,4 @@ GridContainer.propTypes = {
   className: PropTypes.string
 };
 
-export default withStyles(style)(GridContainer);
+export default withStyles(gridItemContainerStyle)(GridContainer);

@@ -1,23 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-
-
-const styles = theme => ({
-    container: {
-    //    position: 'relative',
-        maxWidth: '100%'
-    },
-    image: {
-        position: 'absolute',
-        top: 50,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        width: '100%',
-        height: '100%'
-    }
-})
+import responsiveImageStyle from '../../style/components/responsiveImage/responsiveImageStyle'
 
 const ResponsiveImage = ({ classes, src, width, height }) => {
     return (
@@ -33,4 +17,4 @@ ResponsiveImage.propTypes = {
     classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(ResponsiveImage)
+export default withStyles(responsiveImageStyle, { withTheme: true })(ResponsiveImage)
