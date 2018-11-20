@@ -89,34 +89,14 @@ class Navigation extends Component {
             >
               {this.props.title.toUpperCase()}
             </Typography>
-            <Tooltip title="Project Listing">
+            <Tooltip title="Home">
               <IconButton
                 color="inherit"
                 component={Link}
                 to="/"
-                aria-label="ERS-HCL projects"
+                aria-label="Home Page"
               >
                 <DeveloperBoard />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Challenges">
-              <IconButton
-                color="inherit"
-                component={Link}
-                to="/challenges/"
-                aria-label="ERS-HCL challenges"
-              >
-                <RateReview />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Global Github Stats">
-              <IconButton
-                color="inherit"
-                component={Link}
-                to="/githubStats/"
-                aria-label="Global Github Stats"
-              >
-                <ShowChart />
               </IconButton>
             </Tooltip>
             <Tooltip title="Project Showcase">
@@ -127,17 +107,6 @@ class Navigation extends Component {
                 aria-label="Project Showcase"
               >
                 <Apps />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Github project">
-              <IconButton
-                href="//github.com/ERS-HCL/gatsby-demo-app"
-                target="_blank"
-                rel="noopener"
-                color="inherit"
-                aria-label="Github source"
-              >
-                <GitHubIcon />
               </IconButton>
             </Tooltip>
           </Toolbar>
@@ -168,42 +137,6 @@ class Navigation extends Component {
                   <Apps />
                 </ListItemIcon>
                 <ListItemText primary="Showcase" />
-              </ListItem>
-              <ListItem
-                button
-                component={Link}
-                to="/publications/"
-                onClick={this.handleClose}
-                aria-label="ERS-HCL publications"
-              >
-                <ListItemIcon>
-                  <Bookmark />
-                </ListItemIcon>
-                <ListItemText primary="Publications" />
-              </ListItem>
-              <ListItem
-                button
-                component={Link}
-                to="/githubStats/"
-                onClick={this.handleClose}
-                aria-label="All github stats"
-              >
-                <ListItemIcon>
-                  <Language />
-                </ListItemIcon>
-                <ListItemText primary="Github Stats" />
-              </ListItem>
-              <ListItem
-                button
-                component={Link}
-                to="/challenges/"
-                onClick={this.handleClose}
-                aria-label="All github challenges"
-              >
-                <ListItemIcon>
-                  <RateReview />
-                </ListItemIcon>
-                <ListItemText primary="Challenges" />
               </ListItem>
               <ListItem
                 button

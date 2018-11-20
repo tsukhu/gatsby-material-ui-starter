@@ -15,81 +15,26 @@ import 'core-js/es6/weak-map'
 import 'core-js/es6/set'
 import React from 'react'
 import { graphql } from 'gatsby'
-import RepoList from '../components/repoList/repoList'
 import Layout from '../components/layout'
-
+import Typography from '@material-ui/core/Typography'
 export default ({ data }) => {
   return (
     <Layout>
-      <RepoList
-        githubData={data.allGithubData}
-        buildTime={data.site.buildTime}
-      />
+      <Typography component="h5" variant="h5" >
+        About {data.site.siteMetadata.title}</Typography>
+      <Typography component="p">
+        We're the only site running on your computer dedicated to showing the best
+        photos and videos of pandas eating lots of food.
+    </Typography>
     </Layout>
   )
 }
 
 export const query = graphql`
-  query GithubQuery {
+  query {
     site {
-      buildTime
-    }
-    allGithubData {
-      edges {
-        node {
-          data {
-            organization {
-              description
-              websiteUrl
-              avatarUrl
-              repositories {
-                totalCount
-                edges {
-                  node {
-                    name
-                    descriptionHTML
-                    licenseInfo {
-                      name
-                    }
-                    forkCount
-                    isFork
-                    createdAt
-                    updatedAt
-                    pushedAt
-                    homepageUrl
-                    url
-                    repositoryTopics {
-                      edges {
-                        node {
-                          topic {
-                            name
-                          }
-                        }
-                      }
-                    }
-                    collaborators {
-                      edges {
-                        node {
-                          name
-                          login
-                        }
-                      }
-                    }
-                    stargazers {
-                      totalCount
-                    }
-                    isFork
-                    primaryLanguage {
-                      name
-                      color
-                    }
-                    homepageUrl
-                  }
-                }
-              }
-            }
-          }
-        }
+      siteMetadata {
+        title
       }
     }
   }
