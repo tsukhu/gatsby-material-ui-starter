@@ -3,6 +3,8 @@
   "description": "Gatsby Material-UI Starter",
   "license": "MIT",
   "scripts": {
+    "json-server-db": "json-server db/db.json",
+    "json-server-js": "json-server db/generate.js",
     "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
@@ -41,7 +43,9 @@
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
     "gh-pages": "^2.0.1",
+    "json-server": "^0.14.0",
     "null-loader": "^0.1.1"
   },
   "version": "1.0.0",
