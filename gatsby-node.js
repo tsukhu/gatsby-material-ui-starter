@@ -10,7 +10,7 @@ exports.sourceNodes = async ({ actions }) => {
   const { createNode } = actions;
 
   // fetch raw data from the randomuser api
-  const fetchRandomUser = () => axios.get(`https://randomuser.me/api/?results=500`);
+  const fetchRandomUser = () => axios.get(`https://randomuser.me/api/?results=100`);
   // await for results
   const res = await fetchRandomUser();
 

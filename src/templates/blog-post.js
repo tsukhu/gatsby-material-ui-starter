@@ -5,6 +5,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import Layout from '../components/layout'
+import { withStyles } from '@material-ui/core/styles'
 import { graphql } from 'gatsby'
 
 const styles = theme => ({
@@ -29,7 +30,7 @@ const styles = theme => ({
   }
 })
 
-export default ({ data }) => {
+const blogPost = ({ data }) => {
   const post = data.markdownRemark
   let author = null
   if (post.frontmatter.author) {
@@ -47,6 +48,7 @@ export default ({ data }) => {
   )
 }
 
+export default withStyles(styles, { withTheme: true })(blogPost)
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
