@@ -72,6 +72,28 @@ module.exports = {
         }
       }
     } */,
+    {
+      resolve: 'gatsby-source-apiserver',
+      options: {
+        name: 'people',
+        method: 'get',
+        url: 'https://swapi.co/api/people/',
+        auth: false,
+        entityLevel: 'results',
+        typePrefix: '', // must be empty string so it’s not “undefinedPeople”
+      },
+    },
+    {
+      resolve: 'gatsby-source-apiserver',
+      options: {
+        name: 'breeds',
+        method: 'get',
+        url: 'https://dog.ceo/api/breeds/list/all',
+        auth: false,
+        entityLevel: 'message',
+        typePrefix: '', // must be empty string so it’s not “undefinedPeople”
+      },
+    },
     `gatsby-plugin-offline`
   ]
 }

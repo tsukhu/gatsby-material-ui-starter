@@ -17,13 +17,26 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Typography from '@material-ui/core/Typography'
-export default ({ data }) => {
+import Link from 'gatsby-link'
+
+export default ( props ) => {
+  const data = props.data
+  const users = props.data.allRandomUser.edges
+
   return (
     <Layout>
       <Typography component="h5" variant="h5">
        {data.site.siteMetadata.title}</Typography>
-      <Typography component="p">
-        This is a gatsby starter project with material-ui integration
+      <Typography component="h6">
+        {users.map((user, i) => {
+        const userData = user.node;
+        return (
+          <div key={i}>
+            <p>Name: {userData.name.first}</p>
+            <img src={userData.picture.medium} />
+          </div>
+        )
+      })}
     </Typography>
     </Layout>
   )
@@ -34,6 +47,23 @@ export const query = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    allRandomUser {
+      edges {
+        node {
+          gender
+          name {
+            title
+            first
+            last
+          }
+          picture {
+            large
+            medium
+            thumbnail
+          }
+        }
       }
     }
   }
