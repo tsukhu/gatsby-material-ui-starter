@@ -18,22 +18,21 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Avatar from '@material-ui/core/Avatar'
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-  },
-});
+    backgroundColor: theme.palette.background.paper
+  }
+})
 
-const indexPage = (props) => {
+const indexPage = props => {
   const data = props.data
   const users = props.data.allRandomUser.edges
-  const { classes } = props;
+  const { classes } = props
   return (
     <Layout>
       {/*       <Typography component="h5" variant="h5">
@@ -51,10 +50,11 @@ const indexPage = (props) => {
       </Typography> */}
       <div className={classes.root}>
         <Typography component="h5" variant="h5">
-          {data.site.siteMetadata.title}</Typography>
+          {data.site.siteMetadata.title}
+        </Typography>
         <List dense>
           {users.map((user, i) => {
-            const userData = user.node;
+            const userData = user.node
             return (
               <ListItem key={i} button>
                 <Avatar alt="Remy Sharp" src={userData.picture.medium} />

@@ -17,9 +17,11 @@ import simpleCardStyle from '../../style/components/simpleCard/simpleCardStyle'
  */
 const SimpleCard = props => {
   const { classes, tags, image, excerpt } = props
-  const tagArray = tags ? tags.split(',') : [];
-  const imageUrl = image ? image : '/images/placeholder.jpg';
-  const excerptStr = excerpt ? excerpt.slice(0,150)+ "...": 'Click on details for more information'
+  const tagArray = tags ? tags.split(',') : []
+  const imageUrl = image ? image : '/images/placeholder.jpg'
+  const excerptStr = excerpt
+    ? excerpt.slice(0, 150) + '...'
+    : 'Click on details for more information'
   const tagLabels = tagArray.map(tag => (
     <Chip
       label={tag.toUpperCase()}
@@ -28,36 +30,37 @@ const SimpleCard = props => {
       className={classes.chip}
       key={tag}
     />
-  ));
+  ))
   return (
     <Zoom in={true} style={{ transitionDelay: 500 }}>
-    <Card className={classes.card2} key={props.key}>
-      <CardContent className={classes.content}>
-        <Typography component="h5" variant="h5">
-          {props.title}
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary">
-          {props.author}
-        </Typography>
-        {tagLabels}
-        <Typography component="p">
-          {excerptStr}
-        </Typography>
-        <CardMedia
-          className={classes.cover}
-          image={imageUrl}
-          title={props.title}
-        />
-      </CardContent>
-      <CardActions>
-        <Button size="small" color="primary" component={Link}
-          to={props.url}
-          aria-label={props.title}>
-          DETAILS
-        </Button>
-      </CardActions>
-
-    </Card>
+      <Card className={classes.card2} key={props.key}>
+        <CardContent className={classes.content}>
+          <Typography component="h5" variant="h5">
+            {props.title}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            {props.author}
+          </Typography>
+          {tagLabels}
+          <Typography component="p">{excerptStr}</Typography>
+          <CardMedia
+            className={classes.cover}
+            image={imageUrl}
+            title={props.title}
+          />
+        </CardContent>
+        <CardActions>
+          <Button
+            size="small"
+            color="primary"
+            component={Link}
+            to={props.url}
+            aria-label={props.title}
+          >
+            DETAILS
+          </Button>
+        </CardActions>
+      </Card>
     </Zoom>
   )
 }

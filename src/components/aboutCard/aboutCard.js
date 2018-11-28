@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Avatar from '@material-ui/core/Avatar'
-import aboutCardStyle from '../../style/components/aboutCard/aboutCardStyle';
+import aboutCardStyle from '../../style/components/aboutCard/aboutCardStyle'
 
 const AboutCard = props => {
   const { classes } = props
@@ -32,7 +32,7 @@ const AboutCard = props => {
             Powered by: {props.data.poweredBy}
           </Typography>
           <Typography component="p">
-           Contributors: {props.data.contributors}
+            Contributors: {props.data.contributors}
           </Typography>
           <Typography component="p">{props.data.description}</Typography>
         </CardContent>
@@ -41,7 +41,7 @@ const AboutCard = props => {
             href={props.data.githubProject}
             target="_blank"
             size="small"
-            color="primary" 
+            color="primary"
             rel="noopener"
           >
             GITHUB LINK

@@ -8,10 +8,8 @@ const pageHeaderStyles = theme => ({
   },
   subheader: {
     color: getCorrectTextColor(blueGrey[50]),
-    fontFamily: 'Roboto'
+    fontFamily: 'Nunito'
   }
 })
 
-export {
-    pageHeaderStyles
-}
+export { pageHeaderStyles }

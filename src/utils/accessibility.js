@@ -1,5 +1,3 @@
-
-
 export const getCorrectTextColor = hex => {
   const threshold = 130 /* about half of 256. Lower threshold equals more dark text on dark background  */
 
@@ -27,5 +25,3 @@ export const getCorrectTextColor = hex => {
     return '#ffffff'
   }
 }
-
-

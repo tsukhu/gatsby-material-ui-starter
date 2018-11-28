@@ -12,7 +12,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`Roboto:300,400,500`]
+        fonts: [`Roboto:300,400,500`,`Nunito`]
       }
     },
     {
@@ -22,8 +22,9 @@ module.exports = {
         path: `${__dirname}/src/`
       }
     },
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     `gatsby-transformer-remark`,
-    `gatsby-transformer-excel`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -72,7 +73,7 @@ module.exports = {
         }
       }
     } */,
-    {
+/*     {
       resolve: 'gatsby-source-apiserver',
       options: {
         name: 'people',
@@ -93,7 +94,7 @@ module.exports = {
         entityLevel: 'message',
         typePrefix: '', // must be empty string so it’s not “undefinedPeople”
       },
-    },
+    }, */
     `gatsby-plugin-offline`
   ]
 }

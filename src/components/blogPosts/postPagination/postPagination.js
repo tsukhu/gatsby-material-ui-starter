@@ -57,4 +57,6 @@ PostPagination.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(postPaginationStyle, { withTheme: true })(PostPagination)
+export default withStyles(postPaginationStyle, { withTheme: true })(
+  PostPagination
+)

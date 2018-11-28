@@ -68,14 +68,14 @@ class Index extends Component {
         )}
       />
     ) : (
-        <div>
-          <CircularProgress
-            size={65}
-            className={classes.progress}
-            thickness={7}
-          />
-        </div>
-      )
+      <div>
+        <CircularProgress
+          size={65}
+          className={classes.progress}
+          thickness={7}
+        />
+      </div>
+    )
   }
 }
 

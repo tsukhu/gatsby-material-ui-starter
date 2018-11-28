@@ -1,9 +1,9 @@
 const gridItemContainerStyle = {
-    grid: {
-        marginRight: "-15px",
-        marginLeft: "-15px",
-        width: "auto"
-    }
-};
+  grid: {
+    marginRight: '-15px',
+    marginLeft: '-15px',
+    width: 'auto'
+  }
+}
 
-export default gridItemContainerStyle;
+export default gridItemContainerStyle

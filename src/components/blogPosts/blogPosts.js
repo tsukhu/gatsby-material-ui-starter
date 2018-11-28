@@ -5,13 +5,13 @@ import Grid from '@material-ui/core/Grid'
 import PostPagination from './postPagination/postPagination'
 import PageHeader from '../pageHeader/pageHeader'
 import SimpleCard from '../simpleCard/simpleCard'
-import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography'
 import blogPostStyle from '../../style/components/blogPosts/blogPostStyle'
 
 export class BlogPosts extends Component {
   state = {
-    spacing: '40',
-  };
+    spacing: '40'
+  }
 
   render() {
     const { classes, theme } = this.props
@@ -40,17 +40,19 @@ export class BlogPosts extends Component {
     ))
     return (
       <div>
-
         <div className={classes.card}>
           <div className={classes.container}>
-            <img
-              src="/images/showcase2.jpg" className={classes.responsive} />
+            <img src="/images/showcase2.jpg" className={classes.responsive} />
             <Typography component="h4" variant="h4" className={classes.topTeft}>
               <strong>ERS HCL Open Source</strong>
             </Typography>
-            <Typography component="h5" variant="h5" className={classes.topTeftTwo}>
+            <Typography
+              component="h5"
+              variant="h5"
+              className={classes.topTeftTwo}
+            >
               Projects Showcase
-        </Typography>
+            </Typography>
           </div>
           <PageHeader text={pageHeader.toUpperCase()} />
           <PostPagination
@@ -63,7 +65,12 @@ export class BlogPosts extends Component {
           />
           <Grid container className={classes.root} spacing={8}>
             <Grid item xs={12}>
-              <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
+              <Grid
+                container
+                className={classes.demo}
+                justify="center"
+                spacing={Number(spacing)}
+              >
                 {gridContent}
               </Grid>
             </Grid>
@@ -84,7 +91,7 @@ export class BlogPosts extends Component {
 
 BlogPosts.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired
 }
 
 export default withStyles(blogPostStyle, { withTheme: true })(BlogPosts)

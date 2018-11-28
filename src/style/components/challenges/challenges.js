@@ -87,7 +87,7 @@ const challengeTableStyles = theme => ({
   },
   svg: {
     width: '24px',
-    height:'24px',
+    height: '24px',
     alignItems: 'center',
     margin: 'auto',
     fill: 'OrangeRed'
@@ -118,7 +118,7 @@ const challengeTableStyles = theme => ({
   },
   statusIcon: {
     alignContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   paper: {
     margin: 5,
@@ -185,7 +185,7 @@ const challengeTableStyles = theme => ({
     pointerEvents: 'none'
   },
   icon: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   }
 })
 
@@ -206,7 +206,7 @@ const challengeHeaderStyles = theme => ({
     padding: 5,
     rounded: true,
     borderRadius: 5,
-    shadowRadius: 5,
+    shadowRadius: 5
   },
   media: {
     height: 0,
@@ -269,4 +269,10 @@ const challengeFormStyles = theme => ({
   }
 })
 
-export { challengesPageStyle, toolbarStyles, challengeTableStyles, challengeHeaderStyles, challengeFormStyles }
+export {
+  challengesPageStyle,
+  toolbarStyles,
+  challengeTableStyles,
+  challengeHeaderStyles,
+  challengeFormStyles
+}
