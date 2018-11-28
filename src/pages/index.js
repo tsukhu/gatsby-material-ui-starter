@@ -22,6 +22,8 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
+import BublyButton from '../components/bubly/button/button'
+import FacebookSVG from '../components/common/icons/facebookSvg';
 
 const styles = theme => ({
   root: {
@@ -52,6 +54,8 @@ const indexPage = props => {
         <Typography component="h5" variant="h5">
           {data.site.siteMetadata.title}
         </Typography>
+        <BublyButton variant="outlined">product info</BublyButton>
+        <FacebookSVG height="14" width="14"/>
         <List dense>
           {users.map((user, i) => {
             const userData = user.node
