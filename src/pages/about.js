@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layout'
-import AboutCard from '../components/aboutCard/aboutCard'
+import AboutCard from '../components/examples/aboutCard/aboutCard'
 
 export default ({ data }) => {
   const orgData = {

@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Avatar from '@material-ui/core/Avatar'
-import aboutCardStyle from '../../style/components/aboutCard/aboutCardStyle'
+import aboutCardStyle from '../../../style/components/aboutCard/aboutCardStyle'
 
 const AboutCard = props => {
   const { classes } = props

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import { pageHeaderStyles } from '../../style/components/pageHeader/pageHeader'
+import { pageHeaderStyles } from '../../../style/components/pageHeader/pageHeader'
 
 const PageHeader = props => {
   const { classes } = props

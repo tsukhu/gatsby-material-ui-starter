@@ -1,5 +1,5 @@
 import React from 'react'
-import Home from '../components/home/home'
+import Home from '../components/examples/home/home'
 import { graphql } from 'gatsby'
 
 export default ({ data, pageContext }) => {

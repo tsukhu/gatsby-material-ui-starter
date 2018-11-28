@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import responsiveImageStyle from '../../style/components/responsiveImage/responsiveImageStyle'
+import responsiveImageStyle from '../../../style/components/responsiveImage/responsiveImageStyle'
 
 const ResponsiveImage = ({ classes, src, width, height }) => {
   return (

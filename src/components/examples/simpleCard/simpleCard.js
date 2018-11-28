@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography'
 import { Link } from '@reach/router'
 import Chip from '@material-ui/core/Chip'
 import Zoom from '@material-ui/core/Zoom'
-import simpleCardStyle from '../../style/components/simpleCard/simpleCardStyle'
+import simpleCardStyle from '../../../style/components/simpleCard/simpleCardStyle'
 
 /*
  * date,excert,title,url are inputs

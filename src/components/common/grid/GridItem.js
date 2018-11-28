@@ -2,7 +2,7 @@ import React from 'react'
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles'
 import Grid from '@material-ui/core/Grid'
-import gridItemStyle from '../../style/components/GridItem/GridItemStyle'
+import gridItemStyle from '../../../style/components/GridItem/GridItemStyle'
 
 function GridItem({ ...props }) {
   const { classes, children, className, ...rest } = props

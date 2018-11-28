@@ -8,7 +8,7 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
-import postPaginationStyle from '../../../style/components/postPagination/postPaginationStyle'
+import postPaginationStyle from '../../../../style/components/postPagination/postPaginationStyle'
 
 const PostPagination = props => {
   const { classes } = props

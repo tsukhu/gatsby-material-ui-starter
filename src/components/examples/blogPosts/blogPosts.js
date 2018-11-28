@@ -6,7 +6,7 @@ import PostPagination from './postPagination/postPagination'
 import PageHeader from '../pageHeader/pageHeader'
 import SimpleCard from '../simpleCard/simpleCard'
 import Typography from '@material-ui/core/Typography'
-import blogPostStyle from '../../style/components/blogPosts/blogPostStyle'
+import blogPostStyle from '../../../style/components/blogPosts/blogPostStyle'
 
 export class BlogPosts extends Component {
   state = {
