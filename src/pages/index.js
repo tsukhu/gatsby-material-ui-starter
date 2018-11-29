@@ -55,7 +55,7 @@ const indexPage = props => {
         <Typography component="h5" variant="h5">
           {data.site.siteMetadata.title}
         </Typography>
-        <VideoPlay/>
+        <VideoPlay src="https://www.bubly.com/static/videos/bubly-tvc.mp4"/>
         <BublyButton variant="outlined">product info</BublyButton>
         <FacebookSVG height="14" width="14"/>
         <List dense>

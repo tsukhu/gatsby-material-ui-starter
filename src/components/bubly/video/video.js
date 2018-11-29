@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 class VideoPlay extends React.Component {
 
   render() {
@@ -15,7 +16,7 @@ class VideoPlay extends React.Component {
 
 
 VideoPlay.defaultProps = {
-  src: 'https://www.bubly.com/static/videos/bubly-tvc.mp4'
+  src: PropTypes.string
 }
 
 export default VideoPlay

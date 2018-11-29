@@ -10,7 +10,11 @@ This is a Gatsby starter project with material-ui integration
 
 
 - JSON Server - API during development 
-- 
+- Externalized Configuration - Dotenv
+- Linting / Prettier integration
+- StoryBook integration
+- Production related plugins for PWA, Helmet , Analytics 
+
 ## Running in development
 
 `gatsby develop`
