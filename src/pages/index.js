@@ -23,6 +23,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Avatar from '@material-ui/core/Avatar'
 import BublyButton from '../components/bubly/button/button'
+import VideoPlay from '../components/bubly/video/video'
 import FacebookSVG from '../components/common/icons/facebookSvg';
 
 const styles = theme => ({
@@ -54,6 +55,7 @@ const indexPage = props => {
         <Typography component="h5" variant="h5">
           {data.site.siteMetadata.title}
         </Typography>
+        <VideoPlay/>
         <BublyButton variant="outlined">product info</BublyButton>
         <FacebookSVG height="14" width="14"/>
         <List dense>
