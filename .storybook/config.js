@@ -77,6 +77,7 @@ addDecorator(
        * @type {Boolean}
        */
       enableShortcuts: true, // true by default
+      watch: true
     })
   );
   

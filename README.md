@@ -8,6 +8,9 @@ This is a Gatsby starter project with material-ui integration
 - Also added offline support, pulling data from markdown files, seo tags, guessjs , google analytics integration
 - DotEnv for externalized configuration and secrets
 
+
+- JSON Server - API during development 
+- 
 ## Running in development
 
 `gatsby develop`

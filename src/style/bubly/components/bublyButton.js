@@ -1,10 +1,10 @@
 // We can inject some CSS into the DOM.
-const styles = theme => ({
+const styles = (theme) => ({
     root: {
         boxSizing: 'border-box',
         margin: '10px',
         textAlign: 'center',
-        border: '2px solid black',
+        border: '2px solid',
         borderRadius: '20px',
         display: 'inline-block',
         fontSize: '18px',
@@ -13,7 +13,6 @@ const styles = theme => ({
     },
     label: {
         textTransform: 'none',
-        color: 'black',
         transition: 'color .2s ease-in',
         textDecoration: 'none',
     }
